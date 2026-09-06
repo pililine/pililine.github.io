@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="Personal Travel OS — reusable travel knowledge and trip operations"><meta name="generator" content="Astro v7.2.1"><title>Nightly trip control workflow · 指南</title><link rel="stylesheet" href="/_astro/BaseLayout.CqMKQkLe.css"></head><body data-build="60111b599fb8:1" data-section="library"><header class="site-header"><a class="brand" href="/"><span class="brand-mark">PT</span><span><strong>Personal Travel OS</strong><small>旅行知识 · 行程 · 执行</small></span></a><nav aria-label="主导航"><a data-nav="today" href="/">今天</a><a data-nav="trip" href="/">行程</a><a data-nav="actions" href="/">待办</a><a data-nav="library" href="/library" aria-current="page">知识库</a></nav></header><main><nav class="library-trail library-trail-top" aria-label="所在层级"><ol><li><a href="/library">知识库</a></li><li><a href="/library/guides">指南</a></li></ol></nav><header class="reference-header"><div><p class="eyebrow">跨旅行指南</p><h1>Nightly trip control workflow</h1></div><ul class="tags"><li class="tag">trip-control</li><li class="tag">contingency</li><li class="tag">review</li></ul></header><article class="reference-body prose"><p>每晚用一个短控制循环决定第二天，而不是把候选方案预先写成确定时间轴。</p>
+<ol>
+<li>检查天气，决定户外、室内或恢复优先级。</li>
+<li>从 Place 坐标和日期重新计算次日 astronomy；只在运行时使用结果，不把 sunrise、sunset、civil twilight 或衍生摄影窗口写回内容文件。</li>
+<li>如果次日有铁路或机场节点，检查承运人状态、站台或终点信息以及备用方案。</li>
+<li>检查已选场馆的临时闭馆、罢工、预约与器材规则；ResearchFact 仍 pending 时按其 <code>blocks</code> / <code>affects</code> 语义处理。</li>
+<li>对活动、街拍或天气 options，只选择一个可执行分支；未选分支继续保留 trigger、rationale 和 Plan B，不创建 active Session / Operation。</li>
+<li>完成 <code>travel-photo-backup-workflow</code>，并确认下一次低光拍摄后的回程与器材收纳路径。</li>
+</ol>
+<p>Action bucket 继续从 Operations、Facts、Constraints 与 Decision 状态派生；本 Guide 不建立第二套 NOW / NEXT / WAIT 清单。</p>
+</article><nav class="library-trail library-trail-bottom" aria-label="所在层级"><ol><li><a href="/library">知识库</a></li><li><a href="/library/guides">指南</a></li><li><span aria-current="page">Nightly trip control workflow</span></li></ol></nav></main><footer><span>Personal Travel OS</span><span>行程记录来自 canonical，页面只做呈现。</span></footer><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.vUpxpPOr.js"></script></body></html>

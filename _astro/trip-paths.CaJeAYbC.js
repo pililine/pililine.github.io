@@ -1,0 +1,1 @@
+function e(e,t=``){return`/t/${encodeURIComponent(e)}${t}`}function t(t){return e(t,`/today`)}function n(t){return e(t,`/actions`)}export{e as n,t as r,n as t};
