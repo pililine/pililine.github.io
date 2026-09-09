@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.1.0",
-  "generatedAt": "2026-09-06T11:09:49.074Z",
+  "generatedAt": "2026-09-09T10:06:07.840Z",
   "trips": [
     {
       "id": "europe-2026",
@@ -24,12 +24,12 @@
         },
         {
           "id": "europe-2026-accommodation-change-limit",
-          "description": "当前批准路线最多发生 5 次住宿地点变更；超过上限必须先做 Trip Structure Review。第 5 次是 2026-09 Trip Structure Review 审核并由用户批准的一次结构调整，理由见 decision/accommodation-change-limit-five；该批准不构成继续放宽到 6 次或更多的先例。",
+          "description": "当前批准住宿分段允许最多 8 次住宿变更，仍按有效住宿段数减一计数，同城换店计入；超过上限必须重新 review。8 是本次批准上限而非最终必然发生次数，理由见 decision/europe-2026-lodging-segmentation。",
           "assert": {
             "family": "count_limit",
             "subject": "europe-2026",
             "metric": "accommodation_changes",
-            "value": 5,
+            "value": 8,
             "unit": "count"
           },
           "severity": "hard",
@@ -93,7 +93,7 @@
         },
         {
           "id": "europe-2026-bir-hakeim-departure",
-          "description": "2026-10-02 必须在 21:00 完成 Bir-Hakeim 夜间机位离开；21:01 是分钟精度下的严格上界。",
+          "description": "仅当选择执行 2026-10-02 Bir-Hakeim 摄影时，必须在 21:00 完成夜间机位离开；未选择不构成到访或离开义务。21:01 是分钟精度下的严格上界。",
           "assert": {
             "family": "time_before",
             "subject": "operation/2026-10-02-bir-hakeim-departure",
@@ -118,7 +118,7 @@
           "status": "active"
         }
       ],
-      "body_markdown": "Europe 2026 是 Personal Travel OS 的第一个 Trip Instance，也是 Phase 1 架构验收数据集。它不是系统本身；永久地点知识和摄影知识独立存放，并由本次旅行按稳定 ID 引用。\n\n## 输入与边界\n\n本次迁移输入是《欧洲摄影旅行执行手册》，当前基准为 **3A（Cologne baseline，2026-09-04）**，适用于 2026-09-19 至 2026-10-03 的单人、摄影优先、不租车旅行。手册中的 ✅、🟡、🔍 只描述原作者的 source confidence，不直接映射为本系统的 `verified_at` 或确认状态。手册本身是 external input source，不在本 repo 内。\n\n**2026-09-04 结构变更**：一笔已确认且不可更改的科隆住宿使路线由五段重构为六段——Amsterdam 2 晚、Brussels 2 晚、Bruges 1 晚、Ghent 1 晚、Cologne 2 晚、Paris 6 晚。旅行日期边界与巴黎六晚未变，因此重算范围限定在 09-21 至 09-27。理由见 `cologne-two-night-baseline`。\n\n被该变更淘汰但仍被历史 Constraint、ResearchFact 或 DecisionRecord 引用的 Operation 保留为 `cancelled` 而非删除：这样既维持引用完整性与 provenance，又不参与当前路线的派生。\n\n后续任何结构调整仍须用户批准，并同时创建新的 DecisionRecord。\n\n## 路线治理\n\n- `protect-photographic-windows` 是移动时段选择的 canonical rationale；Trip body 不复制第二套铁路小时统计。\n- `bruges-overnight` 是布鲁日过夜的 canonical rationale；其收益不是增加一个城市标签，而是获得日游无法稳定取得的清晨摄影窗口。\n- `brussels-two-night-base` 规定布鲁塞尔是承重的功能性 base，而不再是\"是否多去一个城市\"的可选分支；它 supersede 了 `ghent-brussels-flex-day`。\n- `ghent-cologne-routing-choice` 拥有 09-25 的路线选择；未选中的 fallback 只保留 rationale 与触发条件，不创建 active Operation。\n- `cologne-paris-direct` 拥有 09-27 由换乘改直达的判断，并记录 Bruxelles-Midi 缓冲约束为何是退役而非重定向。\n- `accommodation-change-limit-five` 拥有住宿变更上限由四次提高到五次的治理批准；该批准不构成继续放宽的先例。\n- `timetable-is-a-tool` 规定时间表服务于天气、体力与摄影优先级，不把所有候选方案伪装成 active timeline。\n- `anne-frank-house-optional` 规定票务失败不触发 Trip Structure 变化。\n\n## 只允许派生的总览\n\n住宿夜数、换酒店次数、到访城市数、铁路总时长、最长铁路段、日出、日落、civil dawn/dusk、golden hour 和 blue-hour window 均从 canonical records 与地点坐标在运行时派生，不在这里保存手册统计表的副本。\n\n`accommodation_changes` 由 validator 派生为**有效住宿段数减一**，统计住宿段而非不同城市数；`cancelled` 的住宿不参与该派生。科隆的日落与蓝调窗口比比利时诸城早约二十分钟，这一差异同样是派生结果，由地点坐标决定，不在任何记录中持久化。\n\n## Provenance 状态\n\nCitation recovery 只恢复 source URL，不构成事实复核。当前 Slice 01 恢复出的 ResearchFact 均保持 `pending` 且不含 `verified_at`；未能证明 original URL 的 Part 0 条目继续留在迁移 blocker / conflict 记录中。\n\n## Budget planning envelope\n\n下表迁移 Handbook 的 Trip-specific 预算输入，全部为估算并明确使用 EUR；不含国际机票。它不是已支付账本，也不会创建新的 Budget entity。\n\n| Category | 节省 | 中等 | 舒适 |\n|---|---:|---:|---:|\n| 住宿 | EUR 1,190 | EUR 1,930 | EUR 3,080 |\n| 城际铁路 | EUR 200 | EUR 260 | EUR 360 |\n| 城市公共交通 | EUR 70 | EUR 90 | EUR 110 |\n| 博物馆与门票 | EUR 140 | EUR 215 | EUR 300 |\n| 餐饮 | EUR 600 | EUR 900 | EUR 1,500 |\n| 摄影相关额外交通 | EUR 60 | EUR 110 | EUR 190 |\n| 机场交通 | EUR 20 | EUR 70 | EUR 80 |\n| 杂项 | EUR 70 | EUR 100 | EUR 140 |\n\n节省档仍需满足已批准的住宿位置与安全约束；中等档是 Handbook 的默认 planning scenario；舒适档增加住宿与餐饮余量。分类总计由运行时相加，不在这里持久化第二份合计。具体票价如果属于可变事实，仍由 ResearchFact 与 Operations 管理，而不是从本表覆盖 canonical data。\n\n本表已按 3A baseline 重算。铁路一项显著上升，原因是新增两段跨国区间且城际总时长由约七小时增至约十一小时；摄影相关额外交通上升，原因是 09-21 深夜抵达布鲁塞尔与科隆蓝调后的夜间路程都可能改为叫车。\n\n**住宿一项含一笔已确认的实际支出**，不再全部是估算：科隆两晚为固定金额，三档相同。该金额与尾款、押金保存在 `cologne-two-night-baseline`，因为当前 `Operation` schema 没有承载金额的字段，本表也不是已支付账本。\n\n## Pre-departure control\n\n旅行证件与支付方式核对、器材保险范围、数字资料准备和最终打包分别使用最小 `reference` Operations 驱动 Action。现场购买的本地火车、未选择门票与拍摄时才发生的动作不设置提前行动窗口；跨旅行方法由 Guides 拥有，Trip 不复制完整 checklist。"
+      "body_markdown": "Europe 2026 是 Personal Travel OS 的第一个 Trip Instance，也是 Phase 1 架构验收数据集。它不是系统本身；永久地点知识和摄影知识独立存放，并由本次旅行按稳定 ID 引用。\n\n## 输入与边界\n\n本次迁移输入是《欧洲摄影旅行执行手册》，当前基准为 **3A（Cologne baseline，2026-09-04）**，适用于 2026-09-19 至 2026-10-03 的单人、摄影优先、不租车旅行。手册中的 ✅、🟡、🔍 只描述原作者的 source confidence，不直接映射为本系统的 `verified_at` 或确认状态。手册本身是 external input source，不在本 repo 内。\n\n**2026-09-04 结构变更**：一笔已确认且不可更改的科隆住宿使路线由五段重构为六段——Amsterdam 2 晚、Brussels 2 晚、Bruges 1 晚、Ghent 1 晚、Cologne 2 晚、Paris 6 晚。旅行日期边界与巴黎六晚未变，因此重算范围限定在 09-21 至 09-27。理由见 `cologne-two-night-baseline`。\n\n被该变更淘汰但仍被历史 Constraint、ResearchFact 或 DecisionRecord 引用的 Operation 保留为 `cancelled` 而非删除：这样既维持引用完整性与 provenance，又不参与当前路线的派生。\n\n后续任何结构调整仍须用户批准，并同时创建新的 DecisionRecord。\n\n## 路线治理\n\n- `protect-photographic-windows` 是移动时段选择的 canonical rationale；Trip body 不复制第二套铁路小时统计。\n- `bruges-overnight` 是布鲁日过夜的 canonical rationale；其收益不是增加一个城市标签，而是获得日游无法稳定取得的清晨摄影窗口。\n- `brussels-two-night-base` 规定布鲁塞尔是承重的功能性 base，而不再是\"是否多去一个城市\"的可选分支；它 supersede 了 `ghent-brussels-flex-day`。\n- `ghent-cologne-routing-choice` 拥有 09-25 的路线选择；未选中的 fallback 只保留 rationale 与触发条件，不创建 active Operation。\n- `cologne-paris-direct` 拥有 09-27 由换乘改直达的判断，并记录 Bruxelles-Midi 缓冲约束为何是退役而非重定向。\n- `europe-2026-lodging-segmentation` 拥有当前住宿分段与上限八次的批准；`accommodation-change-limit-five` 已 superseded，保留此前四次提高到五次的历史，不自动授权未来再增加。\n- `timetable-is-a-tool` 规定时间表服务于天气、体力与摄影优先级，不把所有候选方案伪装成 active timeline。\n- `anne-frank-house-optional` 规定票务失败不触发 Trip Structure 变化。\n\n## 只允许派生的总览\n\n住宿夜数、换酒店次数、到访城市数、铁路总时长、最长铁路段、日出、日落、civil dawn/dusk、golden hour 和 blue-hour window 均从 canonical records 与地点坐标在运行时派生，不在这里保存手册统计表的副本。\n\n`accommodation_changes` 由 validator 派生为**有效住宿段数减一**，统计住宿段而非不同城市数；`cancelled` 的住宿不参与该派生。科隆的日落与蓝调窗口比比利时诸城早约二十分钟，这一差异同样是派生结果，由地点坐标决定，不在任何记录中持久化。\n\n## Provenance 状态\n\nCitation recovery 只恢复 source URL，不构成事实复核。当前 Slice 01 恢复出的 ResearchFact 均保持 `pending` 且不含 `verified_at`；未能证明 original URL 的 Part 0 条目继续留在迁移 blocker / conflict 记录中。\n\n## Budget planning envelope\n\n下表迁移 Handbook 的 Trip-specific 预算输入，全部为估算并明确使用 EUR；不含国际机票。它不是已支付账本，也不会创建新的 Budget entity。\n\n| Category | 节省 | 中等 | 舒适 |\n|---|---:|---:|---:|\n| 住宿 | EUR 1,190 | EUR 1,930 | EUR 3,080 |\n| 城际铁路 | EUR 200 | EUR 260 | EUR 360 |\n| 城市公共交通 | EUR 70 | EUR 90 | EUR 110 |\n| 博物馆与门票 | EUR 140 | EUR 215 | EUR 300 |\n| 餐饮 | EUR 600 | EUR 900 | EUR 1,500 |\n| 摄影相关额外交通 | EUR 60 | EUR 110 | EUR 190 |\n| 机场交通 | EUR 20 | EUR 70 | EUR 80 |\n| 杂项 | EUR 70 | EUR 100 | EUR 140 |\n\n节省档仍需满足已批准的住宿位置与安全约束；中等档是 Handbook 的默认 planning scenario；舒适档增加住宿与餐饮余量。分类总计由运行时相加，不在这里持久化第二份合计。具体票价如果属于可变事实，仍由 ResearchFact 与 Operations 管理，而不是从本表覆盖 canonical data。\n\n本表已按 3A baseline 重算。铁路一项显著上升，原因是新增两段跨国区间且城际总时长由约七小时增至约十一小时；摄影相关额外交通上升，原因是 09-21 深夜抵达布鲁塞尔与科隆蓝调后的夜间路程都可能改为叫车。\n\n**住宿一项含一笔已确认的实际支出**，不再全部是估算：科隆两晚为固定金额，三档相同。该金额与尾款、押金保存在 `cologne-two-night-baseline`，因为当前 `Operation` schema 没有承载金额的字段，本表也不是已支付账本。\n\n## Pre-departure control\n\n旅行证件与支付方式核对、器材保险范围、数字资料准备和最终打包分别使用最小 `reference` Operations 驱动 Action。现场购买的本地火车、未选择门票与拍摄时才发生的动作不设置提前行动窗口；跨旅行方法由 Guides 拥有，Trip 不复制完整 checklist。"
     }
   ],
   "tripDays": [
@@ -138,266 +138,273 @@
       ],
       "pacing": "低强度抵达日；入住后停止扩展行程。",
       "risk": "EES 和行李等待时间不确定；所有晚间安排必须可无损取消。",
-      "body_markdown": "这一天没有 active ShootSession，因此不会生成 astronomy 区块。抵达和进城时间分别由 `transport/2026-09-19-arrival-schiphol` 与 `transport/2026-09-19-schiphol-amsterdam-centraal` 提供，TripDay 不复制第二套时刻。\n\n`ees-full-operation-2026` 与 `ees-first-entry-biometrics` 仍为 pending；计划只使用 75 分钟运行缓冲，不把 handbook 对现场排队或临时降级的描述当成已核实事实。今晚不去 De Wallen，也不带全套器材临时外出。"
+      "body_markdown": "这一天没有 active ShootSession，因此不会生成 astronomy 区块。抵达和进城时间分别由 `transport/2026-09-19-arrival-schiphol` 与 `transport/2026-09-19-schiphol-amsterdam-centraal` 提供，TripDay 不复制第二套时刻。\n\n`ees-full-operation-2026` 与 `ees-first-entry-biometrics` 仍为 pending；计划只使用 75 分钟运行缓冲，不把 handbook 对现场排队或临时降级的描述当成已核实事实。今晚不去 De Wallen，也不带全套器材临时外出。\n\n## 本次住宿落实与局部物流\n\n首晚住宿由 `europe-2026-amsterdam-stay-placeholder` 拥有，酒店仍 OPEN，不假定与次晚同一家。机场到 Centraal 的既有交通包络不证明最终酒店接驳已落实；先确定首晚再核实末段，不新增抵达活动。"
     },
     {
       "id": "europe-2026--2026-09-20",
       "trip": "europe-2026",
       "date": "2026-09-20",
-      "title": "阿姆斯特丹周日摄影主日",
+      "title": "阿姆斯特丹运河摄影与街区生活",
       "priorities": [
-        "优先完成周日清晨运河主线",
-        "午间保留 90 分钟休息，不把下午行程挤进恢复时间",
-        "晚间只执行 Reguliersgracht 七桥这一条蓝调主线"
+        "保留清晨运河与 Reguliersgracht 七桥核心",
+        "Jordaan、Nine Streets、运河生活与 café 是主要非摄影体验",
+        "保护正常三餐与午间 90 分钟恢复"
       ],
       "trade_offs": [
-        "博物馆只在已取得时段票后进入计划；Rijksmuseum 与 Van Gogh Museum 不同时创建 active Operation",
-        "NDSM 与 Magere Brug 蓝调只作为 Plan B，不与已选主线并行"
+        "Oostelijk Havengebied 与 Pythonbrug 退出默认执行，永久知识保留",
+        "Rijksmuseum 仅供未来现场明确选择后替换街区生活，不叠加；无票不假定入馆",
+        "不扩展 NDSM 或第二套蓝调机位"
       ],
-      "pacing": "清晨与蓝调两端发力，中午强制恢复，下午保持建筑摄影节奏。",
-      "risk": "自行车道是拍摄站位的主要现场风险；蓝调结束后先离开机位再整理器材。",
-      "body_markdown": "清晨、下午和晚间时间均从 ShootSession 派生。本日策略由 `timetable-is-a-tool` 管理：博物馆票务、NDSM 渡轮和 Magere Brug 蓝调都是可替代项，未被选择前不创建伪确定 Operation / ShootSession。\n\n安妮之家只遵守 `anne-frank-house-optional`：清晨路线可以经过外景，但入馆必须以官方可用票为前提；无票直接放弃，不影响摄影主线。下雨时可把上午替换为已购票的室内场馆，不能因此复制或激活两个互斥方案。"
+      "pacing": "清晨运河核心后坐下早餐；街区生活、午餐、回房恢复、轻量散步、正式晚餐，再执行晚间摄影。",
+      "risk": "酒店位置、场馆票务与天气仍需确认；自行车道不能作为拍摄站位。",
+      "body_markdown": "## 当日节奏\n\n摄影开始时刻仅由当日 ShootSession 拥有。清晨收工后保护 30–45 分钟早餐，再用正常营业时的 Jordaan / Nine Streets 运河街区感受城市生活，允许坐 café、看店铺和不带成片目标的慢走。午餐保护 45–60 分钟；午间回房完整恢复，不能用跨城移动代替。下午不再去东港区串点。\n\n晚间摄影前完成约 60 分钟正式晚餐，收工后直接回酒店。Magere Brug 的短摄影如挤压吃饭便让位；七桥是晚间核心，不追加第二轮蓝调追逐。\n\n## 替换而非叠加\n\n依据 `europe-2026-approved-day-rhythm` 的 U01，Rijksmuseum 不在默认 itinerary；未来只有明确想入馆并落实访问条件，才替换街区生活。同样遵守 `anne-frank-house-optional` 与 `timetable-is-a-tool`，未选择博物馆不生成实例。\n\n## 本次住宿落实与局部物流\n\n清晨起床地点仍取决于首晚 OPEN 住宿，不假定已经住在次晚酒店。今晚住宿见 `europe-2026-amsterdam-renaissance-stay`。两段尚未合并，需为退房、取箱与新店交接留真实余量；提前寄存和房间可用性未核实。午间完整恢复继续受保护，搬箱、通勤与等房不能代替恢复；若交接挤压既有节奏，先报告物流冲突，不自动重排摄影核心。"
     },
     {
       "id": "europe-2026--2026-09-21",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "title": "阿姆斯特丹退房、鹿特丹摄影停留与当日南下布鲁塞尔",
+      "title": "鹿特丹市场午餐与建筑精简，南下布鲁塞尔",
       "priorities": [
-        "上午完成退房并把行李寄存在 Rotterdam Centraal，之后全天不再受行李限制",
-        "用现代建筑、桥梁和几何语言打断连续的历史运河题材",
-        "当日完成南下布鲁塞尔，不折返阿姆斯特丹"
+        "早餐、退房、带箱转场，先解决 Rotterdam 行李承接",
+        "Markthal 是真实午餐与市场体验，Cube Houses 和精简现代建筑是摄影主线",
+        "布鲁塞尔酒店抵达以 21:00 为优选、21:30 为最迟合理 planning target"
       ],
       "trade_offs": [
-        "傍晚拍摄的收尾时间与南下班次互相挤压；两者的具体平衡是执行时决策，不在 canonical 中固定",
-        "Erasmusbrug 北岸与 Rijnhavenbrug 蓝调仍然互斥且仍未选择，任一方都不创建 active session",
-        "周一以建筑外部和公共空间为主，不依赖博物馆开放"
+        "Rijnhaven evening 与完整蓝调追逐退出默认计划",
+        "现代建筑不集齐；寄存或车次余量不足时先砍远端与重复机位",
+        "酒店抵达目标不是 hard Constraint，也不是已确认列车事实"
       ],
-      "pacing": "退房后移动到鹿特丹，中午到下午集中拍建筑节点，傍晚在河岸一带收束，之后取行李南下。",
-      "risk": "行李寄存的关闭时间是当天唯一的单点故障；抵达布鲁塞尔在夜间且携带全部器材，出站后不停留、不整理行李，直接前往住宿。",
-      "body_markdown": "本日承担三件事：结束阿姆斯特丹、完成鹿特丹的建筑摄影、并当晚进入布鲁塞尔。旧 baseline 中它是往返日游，新 baseline 中它是单向转场，因此所有安排都必须容纳\"全部行李已经离开阿姆斯特丹\"这一前提。\n\n## 行李寄存是本日的单点故障\n\n全天行李寄存在 Rotterdam Centraal，而取件发生在傍晚拍摄结束之后。如果寄存点在取件前关闭，本日结构不成立。该确认必须在出发前完成，不能留到当天。\n\n若寄存时段不足以覆盖计划的取件时间，可行的调整是压缩傍晚拍摄、提前取件并搭乘更早一班南下列车。反向做法——拖着行李去傍晚机位——不予采用：三脚架与行李箱同时操作的风险高于它节省的时间。\n\n## 蓝调机位仍未选择\n\n`erasmusbrug-day` 与 `rijnhaven-skyline` 已有白天 session，但傍晚的蓝调机位本身从未正式选择。北岸 Boompjes 与 Rijnhavenbrug 互斥：前者撤退到车站的成本更低，后者能把两个主体收进同一画面。\n\nHandbook 3A 基于撤退成本给出了倾向性建议，但这属于执行层判断，未被批准为 canonical decision。**在正式选择前不创建任何一方的 active ShootSession**，也不因该选择未定而阻塞路线迁移本身。\n\n## 南下班次\n\n`transport/2026-09-21-rotterdam-brussels` 刻意不带具体时刻。当晚的发车时间、所选服务、以及抵达站是 Bruxelles-Central 还是 Bruxelles-Midi，全部取决于当日实际时刻表，属执行时决策。`rotterdam-brussels-eurocity-frequency` 只支持\"当晚可以南下\"这一结构判断，不支持任何具体班次。\n\n抵达站的差别不是便利问题而是安全问题。若所选服务停靠 Bruxelles-Central，环境明显优于 Midi；无论哪一站，夜间纪律相同：不在站外整理行李、不看地图、不接受搭讪，直接前往住宿。"
+      "pacing": "早餐退房→带箱乘车→确认寄存→市场午餐与精简建筑→坐下休息→南下前正式晚餐→取箱→列车→酒店。",
+      "risk": "Rotterdam 寄存可用性、取件时段、实际南下车次、Brussels 到站与酒店接待均未闭环。",
+      "body_markdown": "## 先倒推，再拍摄\n\n列车时刻只由 `transport/2026-09-21-amsterdam-rotterdam` 与 `transport/2026-09-21-rotterdam-brussels` 拥有。上面的酒店抵达目标只属于本日节奏；必须以真实南下班次、取箱办理和酒店末段倒推收工与晚餐，不能从目标编造车次。\n\n出发前早餐、打包和退房；抵达 Rotterdam 后先预算 20–30 分钟存箱办理并留故障余量，不把车站摄影开始当作寄存成功保证。P0 OPEN FACT：具体寄存设施、当日可用性、取件截止和故障退路。未确认时压缩或放弃城市停留并带箱继续南下；不拖箱去桥边拍摄。\n\n## 市场、恢复与收口\n\nMarkthal 午餐与市场体验预算 60–75 分钟；建筑摄影只是这一停留的小部分。Cube Houses 后只保留精简的车站和现代建筑节点，Depot、重复跨河与 Rijnhaven 晚段退出默认排程。午后坐下恢复 30–45 分钟，不用步行代替。\n\n正式晚餐在南下前完成，预算约 60 分钟；之后取箱并留 20–30 分钟办理余量、进站候车，具体位置按已核实车次和寄存点选择。若服务延误，先减少摄影，不把正餐推给未知的深夜酒店抵达。到站后直接完成酒店末段和入住，洗漱后早收口。\n\n`rotterdam-brussels-eurocity-frequency` 仍 pending，只是待核实的服务模式。到站、酒店位置及晚到接待必须确认，不能把既有概括当作执行保证。\n\n## 本次住宿落实与局部物流\n\n起床、退房地点引用 `europe-2026-amsterdam-renaissance-stay`；当晚终点引用 `europe-2026-brussels-stay-placeholder`。新预订身份不证明去车站、到站末段或晚到服务已核实；保持既有酒店抵达 planning targets，按真实承接核对余量，不编造接驳时刻。"
     },
     {
       "id": "europe-2026--2026-09-22",
       "trip": "europe-2026",
       "date": "2026-09-22",
-      "title": "自布鲁塞尔出发的安特卫普无行李日游",
+      "title": "安特卫普文化日游与安全回东岸",
       "priorities": [
-        "把 Antwerpen-Centraal 作为核心建筑拍摄对象而非路过车站",
-        "下午以 Sint-Annatunnel 与 Linkeroever 城市正面光为核心",
-        "19:35 前完成回东岸，安全约束高于蓝调补拍"
+        "车站建筑与 Cathedral interior 构成主要建筑、文化体验",
+        "正式早晚餐必须在过隧道前完成",
+        "Linkeroever 后按既有 Operation 完成回东岸，再收束返程"
       ],
       "trade_offs": [
-        "Grote Markt 蓝调与 Havenhuis 蓝调互斥，本版选择 Grote Markt；Havenhuis 只保留白天踩点",
-        "本日没有安特卫普清晨，Vlaeykensgang 与空的 Grote Markt 是路线重构的已知损失",
-        "车站穹顶在上午是侧光而非正午光柱；若要光柱需在返程动线上补拍，不为此重排全天"
+        "Havenhuis scout 退出默认；MAS 仅为未激活 optional",
+        "不补车站第二次摄影，不以港区串点挤掉教堂内部、午餐或休息",
+        "若返程余量不足，压缩东岸补拍并早收工"
       ],
-      "pacing": "上午抵达后先完成车站深度拍摄，中午到下午推进码头区与港口，傍晚过隧道到左岸，蓝调回东岸收束。",
-      "risk": "一个人背器材不在天黑后穿行 572 米地下通道；当晚还需搭车返回布鲁塞尔，返程末班必须前一晚确认。",
-      "body_markdown": "住宿在布鲁塞尔，因此本日全程无行李。代价是失去清晨，收益是在安特卫普的有效时间约十一小时，长于旧 baseline 中\"下午才抵达\"的安排。\n\n## 19:35 的硬纪律\n\n金色时刻在左岸，蓝调在东岸，中间隔着 Sint-Annatunnel。`operation/2026-09-22-sint-anna-east-bank-return` 与 `europe-2026-sint-anna-east-bank-return` 拥有这条纪律：19:35 前必须完成回东岸。\n\n该纪律在新 baseline 中比旧 baseline 更严格，原因不是隧道本身变了，而是当晚还要搭车返回另一个城市。旧 baseline 中延误只影响回酒店，新 baseline 中延误会连锁到跨城返程。\n\n实得的 Grote Markt 蓝调因此约二十一分钟，短于窗口全长。这是接受隧道纪律的直接代价，不通过推迟出隧道来换取。\n\n## 两项已知损失\n\n安特卫普清晨的两条 session（`grote-markt-morning`、`vlaeykensgang`）已置为 cancelled 并保留记录，用以说明它们是路线重构的已知代价而非遗漏。同类型的\"空的行会屋广场\"画面由次日布鲁塞尔大广场清晨部分补偿，且封闭度更高、更容易拍到无人。\n\nHavenhuis 蓝调没有补偿。它与 Grote Markt 蓝调在同一窗口内互斥，本版只保留白天踩点。\n\n## 返程\n\n`transport/2026-09-22-antwerp-brussels` 是规划包络。比利时国内票价固定、当天购买，但罢工日班次会显著减少，因此当晚的实际末班必须在前一晚确认。从 Grote Markt 步行回车站约二十分钟，走 Meir 主街，出站与进站均朝南或西，避开车站北侧与东侧。"
+      "pacing": "早餐→无行李出发→车站与教堂内部→午餐→坐下恢复→早晚餐→隧道与左岸→已完成回东岸→返程→早睡。",
+      "risk": "教堂当天访问条件与实际返程服务未核实；隧道纪律不因补拍或晚餐延后。",
+      "body_markdown": "## 文化与餐食\n\n行李按下述未决酒店交接方案处理，早餐后无行李赴 Antwerp。Cathedral interior 是主要文化停留，预算 60–90 分钟观看与理解，开放、票务和入内规则仍需核实；外立面摄影 Session 不能代替入馆体验。午餐保护 45–60 分钟，午后另坐下休息 30–45 分钟。\n\n正式早晚餐在进入 Sint-Annatunnel 前完成，约 60 分钟；隧道摄影与 Linkeroever 开始时刻由 Sessions 拥有。MAS 未激活，只有重新选择且不挤掉文化、餐食及返程时才执行。Havenhuis 不再默认踩点。\n\n## 返回完成，不是开始返回\n\n`operation/2026-09-22-sint-anna-east-bank-return.end_time` 与 `europe-2026-sint-anna-east-bank-return` 拥有返回截止，语义是**已完成回东岸**，绝不是到那个时刻才离开西岸。先倒推收器材和穿越余量，不复制第二套截止时刻。\n\n`transport/2026-09-22-antwerp-brussels` 的实际班次仍待确认；吃饭已经完成，东岸核心拍摄后立即收工回站，优先更早的可行返程。返店后只洗漱、必要备份和休息，为次日较晚开始留足睡眠。历史 cancelled 清晨记录继续保留。\n\n## 本次住宿落实与局部物流\n\n本日从 `europe-2026-brussels-stay-placeholder` 退房，今晚入住 `europe-2026-brussels-cardo-stay`；Antwerp day trip 与上述 day-rhythm 不变。\n\n行李方案 UNRESOLVED，用户尚未最终选择 A / B。PRIMARY_LOGISTICS_CANDIDATE = OPTION A：Marriott checkout → 行李留 Marriott（须确认）→ Antwerp → Brussels → Marriott 取箱 → Cardo → check-in。它是优先研究候选，因为对现有上午出发包络增加的前置环节较少，不代表已经可执行。Marriott 退房后寄存 = NOT VERIFIED；Marriott 晚间取件 = NOT VERIFIED；Cardo 晚到 = NOT VERIFIED。\n\nOPTION B 仅作为 fallback：Marriott checkout → Cardo 寄存（须确认）→ Antwerp → Cardo check-in。Cardo 入住前接箱、办理耗时及赴站余量未核实，不假定可提前进房。两种方案都需核实实际移动和取件窗口，不填写确定时刻、不创建已确认服务 Fact。\n\n返城后完成所选方案的取箱／入住并休息；不在 Antwerp 摄影间隙折返搬箱，不以换店为理由改动教堂、晚餐、隧道与左岸安排或安全截止。若实际交接无法兼容现有包络，报告冲突，不能自行删改 itinerary。"
     },
     {
       "id": "europe-2026--2026-09-23",
       "trip": "europe-2026",
       "date": "2026-09-23",
-      "title": "布鲁塞尔清晨与上午，下午转场布鲁日",
+      "title": "布鲁塞尔较晚开始与布鲁日单一晚间核心",
       "priorities": [
-        "用清晨的低人流条件完成 Grand-Place 空场与 Galeries Saint-Hubert",
-        "上午以 Mont des Arts 完成布鲁塞尔唯一的完整白天窗口",
-        "傍晚完成 Rozenhoedkaai、Burg 与 Markt 的连续摄影"
+        "先正常早餐，Grand-Place 较晚开始，不默认清晨闹钟",
+        "退房、寄存、午餐与取箱必须先于转场",
+        "抵达 Bruges 后使用酒店、恢复并吃晚餐，只保留 Rozenhoedkaai 晚间核心"
       ],
       "trade_offs": [
-        "布鲁塞尔只有这一个上午，不为增加场馆数量牺牲下午转场与傍晚蓝调的余量",
-        "07:00 的蓝灰色空场与 08:00 后的塔尖金光是两种画面，时间不足时优先后者",
-        "布鲁日白天只做站位确认，把稀缺条件留给入夜与次日清晨"
+        "不追求大广场空场，廊街允许有人生活的画面",
+        "下午固定踩点与 Burg、Markt 深夜尾段退出默认",
+        "不为新增场馆压缩次晨状态"
       ],
-      "pacing": "清晨与上午在布鲁塞尔单向推进，中午退房转场，下午低强度踩点，晚饭后执行夜间主线。",
-      "risk": "一天跨两个城市且傍晚是核心蓝调；上午超载会直接影响傍晚状态。石板路不平、运河边无护栏，黑暗中注意脚下与三脚架腿。",
-      "body_markdown": "本日结构是\"半天布鲁塞尔 + 半天布鲁日\"，两端都有摄影价值，中间是一次约一小时的转场。\n\n## 布鲁塞尔的唯一白天窗口\n\n昨天全天在安特卫普，明天早上离开布鲁日，因此布鲁塞尔的完整白天时间只有今天上午。定位见 `brussels-two-night-base`：它主要是功能性 base，不应按摄影城市的密度安排。\n\nGrand-Place 四面被行会屋完全围合，九点前几乎无人。晨光要到八点后才越过屋顶打进广场，所以 07:00 与 08:00 拍到的是两种不同的照片。行李在退房后寄存前台，取件后再前往车站。\n\n## 布鲁日的冗余是故意保留的\n\n今晚的 Rozenhoedkaai 蓝调与明早的日出是同一机位的两次机会。这个冗余在旧 baseline 中存在，在新 baseline 中被完整保住，并且变得更重要——本版取消了旧的机动日，布鲁日与根特的蓝调各自只有一次，没有第二天可以补。\n\n住宿位置要求因此比旧 baseline 更严格而非更宽松：步行到 Rozenhoedkaai 十分钟以内，理由见 `bruges-overnight`。\n\n## 转场\n\n`transport/2026-09-23-brussels-bruges` 是规划包络，具体班次当天购买。抵达 Brugge 站后使用 De Lijn 前往 Markt，不拖行李穿越老城。"
+      "pacing": "早餐与中心短线→退房寄存→午餐取箱→转场→酒店与恢复→晚餐→单一晚间核心→酒店。",
+      "risk": "两端酒店的寄存、房间可用时间均需确认；抵达延误时摄影让位于基本恢复。",
+      "body_markdown": "## 较晚开始\n\n不再默认 07:00 开拍；Grand-Place 与廊街的新摄影规划时刻只在 Sessions。先坐下早餐 30–45 分钟，接受街区已经有人，不追逐两套晨光画面。Mont des Arts 只做短停留，不扩充上午目标。\n\n退房后仅在住宿已确认接收时寄存；否则带箱直接衔接车站，减少中心游览。午餐 45–60 分钟后取箱，办理与赴站单独留余量；列车由 `transport/2026-09-23-brussels-bruges` 拥有。\n\n## 酒店是本日中段\n\n到 Bruges 先确认行李接收和入住，再恢复 60 分钟；尚无房间时先找可坐下的稳定停留点，不把拖箱踩点算休息。正式晚餐在晚间摄影前完成，唯一默认核心是 Rozenhoedkaai；收工即回酒店，不接 Burg 或 Markt 夜间尾段。\n\n`bruges-overnight` 的过夜收益与结构不变；其 superseded evidence 导致的 review_required 保留，不以本次节奏更新抹去。\n\n## 本次住宿落实与局部物流\n\n早晨从 `europe-2026-brussels-cardo-stay` 出发并按已确认政策退房；寄存与取件须核实，不默认前台已承诺。`europe-2026-bruges-stay` 仍为 planned + placeholder：当前按 Bruges overnight 规划，具体酒店 OPEN；如果前段明显疲劳，用户保留重新决策权。在新决定前不取消 Bruges、不创建替代路线、不修改次日 Bruges→Ghent，较晚开始和既有 U04 减负继续有效。"
     },
     {
       "id": "europe-2026--2026-09-24",
       "trip": "europe-2026",
       "date": "2026-09-24",
-      "title": "布鲁日清晨路线与转场根特的双摄影窗口日",
+      "title": "布鲁日与根特：保护双摄影窗口及中段恢复",
       "priorities": [
-        "保住布鲁日过夜带来的清晨摄影收益，这是过夜的全部理由",
-        "上午完成 Brugge 到 Gent-Sint-Pieters 的换城并保护器材体力",
-        "傍晚完成 Graslei 立面与圣米歇尔桥城市夜景"
+        "保护布鲁日清晨与根特晚间这一真正的双摄影窗口日",
+        "缩短清晨尾段，为早餐、退房与行李腾出空间",
+        "15:00–16:30 保护完整恢复，正式晚餐在晚间核心前完成"
       ],
       "trade_offs": [
-        "下午的根特室内是第一顺位可砍项；状态不好时直接改为休息，不机械追求场馆数量",
-        "白天路线只为晚间构图和城市理解服务",
-        "15:00 到 16:30 的恢复窗口不可压缩，它是当天两个摄影窗口之间的唯一缓冲"
+        "Jan van Eyckplein、Markt 清晨尾段退出默认，不追求五点集齐",
+        "不新增大型 museum，室内扩展首先让位",
+        "双窗口是重点而非安全例外；真实交通与身体状况仍优先"
       ],
-      "pacing": "清晨在布鲁日单向推进，上午短程转场，下午强制恢复，傍晚集中于根特水岸与三塔构图。",
-      "risk": "全程负荷最高的一天，清晨出门与夜间收工相距约十四小时；Gent-Sint-Pieters 与老城相距约两公里，拖行李必须使用电车。",
-      "body_markdown": "本日包含两个不可移动的摄影窗口——布鲁日日出与根特蓝调——中间是全程最短的一次转场，约二十六分钟。这个组合是新 baseline 把布鲁日排在根特之前的直接理由。\n\n## 清晨路线\n\n`rozenhoedkaai-sunrise`、`groenerei-morning`、`burg-morning`、`jan-van-eyckplein-morning`、`markt-morning` 构成主线。Rozenhoedkaai 与昨晚同一机位，但日出前的蓝调余韵与第一缕光打在钟楼上是完全不同的照片。\n\nMinnewater 与 Begijnhof 只在北区画面已完成且步行余量充足时作为 alternative，未选择的 alternative 不创建 ShootSession。\n\n## 疲劳管理\n\n当天有效时长约十四小时，是全程峰值，且处在 09-21 至 09-25 连续五个高负荷日的中段。已内建的对冲有三项：转场极短、下午强制恢复、下午室内可整段放弃。\n\n不可砍的是布鲁日清晨与根特蓝调。这两项是本日的全部理由，其余安排都可以为它们让路。\n\n## 转场\n\n`transport/2026-09-24-bruges-ghent` 是规划包络，比利时国内票当天购买。抵达 Gent-Sint-Pieters 后必须坐电车进老城，不拖行李步行两公里；这条纪律在 09-25 离开时同样适用。"
+      "pacing": "清晨核心→早餐打包退房→带箱转场→寄存午餐→回房恢复→早晚餐→根特水岸核心→早收口。",
+      "risk": "短铁路段不等于低负荷；Ghent 早到寄存、房间可用性及末段交通仍待确认。",
+      "body_markdown": "## 减尾，不减中段恢复\n\n默认保留 Rozenhoedkaai、Groenerei 与 Burg 的清晨摄影，具体时刻由 Sessions 拥有。收工后早餐 30–45 分钟、打包、退房并前往车站；不再加 Jan van Eyckplein 或 Markt 尾段。Minnewater / Begijnhof 也不自动激活。\n\n`transport/2026-09-24-bruges-ghent` 拥有列车包络。抵达后先确认酒店接箱，带箱末段使用已确认可行的交通；寄存不可用时先解决箱子，不拖箱执行摄影。午餐 45–60 分钟后回房，以上恢复窗口不与吃饭、充电整理或通勤混算；房间不可用时明确寻找坐下恢复的替代。\n\n## 晚间收束\n\n恢复后可在附近短走，正式晚餐约 60 分钟并在 Graslei 与 Sint-Michielsbrug 核心之前完成。收工直接回酒店，为跨国转场准备；不追加大型场馆或夜间尾段。光线窗口从 read-model/astronomy 派生，本日不存计算时刻副本。\n\n## 本次住宿落实与局部物流\n\n晚间住宿身份已落实于 `europe-2026-ghent-stay-placeholder`；从 Bruges 退房后的接箱、房间可用性及车站末段仍须核实。预订不等于提前入房承诺，不能因酒店落实增加活动；双窗口及中段恢复预算不变。"
     },
     {
       "id": "europe-2026--2026-09-25",
       "trip": "europe-2026",
       "date": "2026-09-25",
-      "title": "根特清晨与跨国转场科隆",
+      "title": "根特到科隆：入住、完整恢复与正式早晚餐优先",
       "priorities": [
-        "先完成 Graslei 清晨，再进入转场链路",
-        "在布鲁塞尔的唯一一次跨国换乘保留足够接续余量",
-        "傍晚按科隆自身的光线窗口执行，不沿用比利时的时间习惯"
+        "早餐、退房、车站与跨国接续优先，Graslei morning 仅 conditional",
+        "ARRIVAL → HOTEL / LUGGAGE → FULL REST → EARLY FORMAL DINNER",
+        "完成以上链路后才考虑 Cologne 首晚摄影，之后回酒店"
       ],
       "trade_offs": [
-        "Cathedral 内部不设为本日刚性任务，统一放到 09-26 的完整城市日",
-        "若前一晚出现罢工公告，缩短清晨拍摄换取更大的换乘余量",
-        "抵达与入住之间约一个半小时需要寄存行李，不把这段时间安排成拍摄"
+        "Graslei 仅在睡眠、天气、交通同时支持且重新激活后执行",
+        "入住延迟、疲劳或交通异常时 DINNER + REST 优先于摄影",
+        "Gross St Martin night 退出默认；snack 不等于 dinner"
       ],
-      "pacing": "清晨固定，上午退房与转场，下午入住后强制恢复，傍晚踩点并在早于比利时约二十分钟的窗口内完成蓝调。",
-      "risk": "全程唯一的跨国换乘发生在今天，且当晚必须抵达科隆——住宿已确认且不可退。比利时罢工敞口集中在本日。",
-      "body_markdown": "本日是新 baseline 中风险最高的一天。它同时包含比利时国内段、跨国段，以及当晚在另一个国家办理不可退住宿的入住。\n\n## 路线与退路\n\n已选路线是经布鲁塞尔换乘一次，理由见 `ghent-cologne-routing-choice`：快约三十到五十分钟，班次密度约为备选的七倍。决定性变量不是速度而是接续失败的代价——在已选路线上是等待约一小时，在备选路线上可能是数小时甚至次日。\n\n经安特卫普的直达 ICE 保留为 fallback，**不创建 active Operation**。它的价值在于绕开布鲁塞尔市区车站，因此在 Midi、Nord 或 Central 瘫痪时仍然可用。但该服务每方向每日仅两班，若要启用必须在前一晚就查好当日两个发车时刻。\n\n`europe-2026-brussels-cologne-transfer-buffer-minimum` 拥有换乘余量纪律。它是同站接续语义，与已退役的 Bruxelles-Midi 检票缓冲不是同一件事。\n\n## 光线窗口在今天切换\n\n科隆位于同一时区更东端，日落与民用暮光结束比布鲁日、根特早约二十分钟。按比利时的节奏走会整段错过蓝调。\n\n实际后果有两条：机位站定时间要提前，晚餐必须避开蓝调窗口而不是排在它之前。这条差异在整个科隆段持续有效。\n\n## 住宿\n\n`europe-2026-cologne-stay` 是本次旅行唯一一条 `booked` 的住宿。抵达约在入住时间之前，需要寄存行李。该预订不可退、不可再改，因此即使当天延误，终点仍然必须是科隆——极端情况下接受放弃当晚蓝调，改由 09-26 补。\n\n订单金额、尾款与押金见 `cologne-two-night-baseline`：当前 Operation schema 无法结构化承载这些财务事实。"
+      "pacing": "条件清晨候选→早餐退房→车站与国际转场→午餐方案→QVEST／行李→完整恢复→正式早晚餐→条件摄影→酒店。",
+      "risk": "两段实际车次、换乘站与 QVEST 提前寄存未确认；不可退住宿终点不变。",
+      "body_markdown": "## 转场之前\n\n不设默认清晨摄影闹钟。Graslei 候选记录保留但撤回默认排程；只有睡眠充分、天气适合且不会减少早餐、退房或接续余量时，才重新激活同一 Session。先吃早餐、退房并带箱到站。\n\n`transport/2026-09-25-ghent-cologne` 拥有路线及规划时刻，`europe-2026-brussels-cologne-transfer-buffer-minimum` 拥有接续纪律。具体班次、同站换乘与未选 fallback 继续按 `ghent-cologne-routing-choice` 核实，不能把旧班次频率概括当保证。\n\n午餐预先选好上车前吃或自带足量食物途中吃，预算 45–60 分钟；不依赖未经确认的列车餐饮，也不把一份零食当全天正餐。\n\n## OPTION A：到店之后才谈摄影\n\nTHE QVEST 的入住事实由 `europe-2026-cologne-stay` 拥有。早于可入住时间抵达不等于已确认可以寄存；先联系酒店落实接箱，不能接收时先解决行李和坐下等候。\n\n进房后保护完整 90 分钟恢复，再以约 17:00–18:00 为正式早晚餐 planning target；恢复不包含办理入住、找餐厅或换装备。该时段不是餐厅营业事实、预约、confirmed service time 或 hard Constraint。入住延迟或恢复不足时先完成正餐与恢复，首晚摄影可以取消；不得为赶首晚照片缩短这一链。\n\nHohenzollernbrücke scout 与大教堂外部摄影均只作 conditional 候选，满足酒店、休息、晚餐和交通条件后才重新激活。晚间时刻与光线不在 TripDay 复制；若已错过机会便放弃，不拖后晚餐。Gross St Martin 不再默认夜拍。已确认的酒店日期与不可退状态不变。\n\n## 本次住宿落实与局部物流\n\n早晨住宿与退房记录引用 `europe-2026-ghent-stay-placeholder`；从酒店取箱赴站的末段仍待核实。科隆住宿、既有不可退事实及本日到店后的恢复／晚餐／条件摄影顺序均不变。"
     },
     {
       "id": "europe-2026--2026-09-26",
       "trip": "europe-2026",
       "date": "2026-09-26",
-      "title": "科隆完整摄影日与大教堂唯一窗口",
+      "title": "科隆唯一完整城市日：大教堂文化与莱茵河核心",
       "priorities": [
-        "上午完成大教堂塔楼与内部，这是内部的唯一可行窗口",
-        "下午先在右岸确认长焦压缩的取景，傍晚回到同一机位完成核心画面",
-        "按科隆自身早约二十分钟的窗口安排傍晚，不沿用比利时的节奏"
+        "不设清晨外拍闹钟，早餐后保护 Cathedral interior 真正参观",
+        "午餐、完整恢复与 Brauhaus-style 当地正餐",
+        "只保留一组右岸莱茵河招牌晚间核心"
       ],
       "trade_offs": [
-        "塔楼体力开销大且雨天条件下降，是当日第一顺位可砍项；内部不可砍",
-        "Kranhäuser 在侧光时段已经成立，不再占用蓝调窗口",
-        "户外与室内可在同一天内自由调换顺序，这是全程弹性最大的一天"
+        "塔楼 optional、默认跳过，不把体力消耗当参观完整性",
+        "撤回重复右岸踩点及 Kranhäuser 默认串点，减少往返过桥",
+        "外拍让位于文化体验、晚餐和次日转场准备"
       ],
-      "pacing": "清晨拍空广场，上午集中完成大教堂两项，下午踩点与现代建筑，傍晚在右岸收束。",
-      "risk": "大教堂内部没有备份日；若今日因故关闭，只能改为室内替代并接受损失。右岸在夜深后人流稀少，不单人久留。",
-      "body_markdown": "全程唯一一个不换酒店、不坐长途车的完整城市日，也是整段科隆的核心。\n\n## 内部为什么必须是今天\n\n`koelner-dom-visiting-hours` 记录了推理链：09-27 是周日，内部游客时段 13:30 才开始，而当天上午就要搭乘前往巴黎的国际列车；09-25 是跨国转场日，抵达已在下午且当日重点是入住与傍晚蓝调，未设为刚性任务。因此今天是唯一稳妥窗口，**没有备份日**。\n\n这也意味着如果今天大教堂因活动或维护关闭，没有改期空间，只能改去室内替代并接受损失。该风险已知且被接受。\n\n## 招牌画面\n\n`deutz-rhine-bank-cathedral-bridge` 是科隆最具识别度的单一机位：大教堂、霍亨索伦桥与河面倒影同框，长焦压缩。下午先踩点确认取景范围，傍晚回到同一机位拍摄，避免在蓝调窗口内现场试错——科隆的窗口本来就比比利时短。\n\n蓝调时段桥上仍有持续人流，是较合适的拍摄时间；再晚则不适合单人携带全套器材停留在右岸。\n\n## 弹性\n\n本日是全程雨天弹性最大的一天：塔楼、内部、博物馆属室内，右岸、桥与 Kranhäuser 属户外，两组可以在同一天内自由调换顺序。这一点在本 baseline 中尤其重要——旧 baseline 有两个纯机动日，本版只剩 10-02。"
+      "pacing": "正常早餐→大教堂内部→午餐→恢复→当地正式晚餐→一次右岸核心→回店打包、早睡。",
+      "risk": "大教堂当日访问和票务仍待复查；夜间不在右岸单人久留。",
+      "body_markdown": "这是**科隆唯一完整城市日**，不是全程唯一完整城市日。\n\n早餐保护 30–45 分钟；内部参观以观看空间、文化和历史为目的，摄影仅为其中一部分。`koelner-dom-visiting-hours` 仍 pending，游客票务和临时开放须另核实，不把内部 Session 视为入场凭证。塔楼默认跳过，未来只有明确选择且余量充分才重启。\n\n午餐 45–60 分钟，午后回房恢复 60–90 分钟。Brauhaus-style 正餐作为当地生活体验，安排在晚间核心前，不预选未经核实的餐厅。\n\n右岸招牌画面保留 `deutz-rhine-bank-cathedral-bridge`，取消午后重复踩点和往返过桥。一次赴右岸包含足够站位准备，不抢光线最后一刻。收工回店，整理次日车票、行李与早餐；不续夜景。"
     },
     {
       "id": "europe-2026--2026-09-27",
       "trip": "europe-2026",
       "date": "2026-09-27",
-      "title": "科隆到巴黎直达与巴黎首夜",
+      "title": "科隆到巴黎：抵达缓冲、恢复与条件首夜",
       "priorities": [
-        "完成退房与直达国际列车，全天没有换乘环节",
-        "抵达后先入住与恢复，再进入低强度的首夜拍摄",
-        "傍晚在 Île de la Cité 与 Pont Neuf 一带完成金色与蓝调"
+        "早餐、打包退房与直达列车优先",
+        "Gare du Nord 实际抵达后保留出站、接驳、入住余量",
+        "进房后恢复 60–90 分钟，再决定是否摄影；晚餐与早收口受保护"
       ],
       "trade_offs": [
-        "科隆清晨是可选项，体力不足时直接放弃，本日不因它调整下游安排",
-        "首夜只做轻量踩点，不为\"第一天就出片\"压缩恢复时间",
-        "大教堂内部今日不可能，周日游客时段在出发之后才开始"
+        "首个巴黎摄影与河岸晚段均 conditional，不是不可让位 commitment",
+        "取消接驳与列车到站同时开始的假确定性",
+        "首夜不追加游船或室内馆，不把延误转嫁给恢复"
       ],
-      "pacing": "上午退房与长途，下午入住并保留恢复窗口，傍晚单点推进河岸主线。",
-      "risk": "全程最长的单段列车，但为直达，风险集中在单一班次延误；具体班次仍未购票，周日运行情况必须在购票前确认。",
-      "body_markdown": "旧 baseline 中本日是全程最脆弱的一天——清晨拍完布鲁日、退房、赶本地列车、在检票关闭前完成 Bruxelles-Midi 的国际衔接。新 baseline 中它降级为普通转场日：零换乘，清晨改为可选，抵达巴黎反而更早。\n\n## 结构性变化\n\n`cologne-paris-direct` 记录了这次替换。随之退役的是 `europe-2026-bruxelles-midi-buffer-minimum`：它的语义是 Midi 站内换乘缓冲，而该换乘已不存在，因此整条约束退役而非重定向。\n\n`europe-2026-international-train-reference` 改为指向 `transport/2026-09-27-cologne-paris`。该约束只断言引用存在，不断言已购票——目标 Operation 当前仍为 `unbooked`。\n\n罢工敞口也随之转移：本日是德法直达，不属比利时铁路罢工范围；相应的风险集中到了 09-25。\n\n## 班次仍是候选\n\n`koln-paris-eurostar-direct` 记录现行服务模式，但 09-27 是周日，周日班次常与工作日不同。住宿变更交接文件中的候选班次未购票、也未确认当日运行，因此不写入 canonical。购票前必须单独确认该日运行情况，并记下当天下一班直达作为退路。\n\n申根内部行程的登车截止规则是否与伦敦方向一致尚未核实，见 `eurostar-gate-closing-window`。\n\n## 巴黎段起点\n\n自今日起进入巴黎六晚，日期与星期相对旧 baseline 完全未变，因此全部闭馆日推理继续成立。首夜只安排河岸主线，不追加室内项目。"
+      "pacing": "早餐退房→车站列车→途中午餐→实际到站出站→酒店接驳入住→完整恢复→条件短摄影与晚餐→早睡。",
+      "risk": "直达票、实际到达与酒店末段路线仍未落实；不能保证旧摄影开始包络可用。",
+      "body_markdown": "`transport/2026-09-27-cologne-paris` 拥有直达规划包络，具体运行与票务仍 pending。早餐后完成退房与进站；午餐选择自带食物或上车前用餐，不默认列车供应。\n\n实际抵达 Gare du Nord 后，先预算 30 分钟下车、出站与找接驳位置，拥挤或晚点需追加；不是车门打开就开始下一段交通。`transport/2026-09-27-gare-du-nord-paris-stay` 的时刻待酒店与实际车次落实后填写。\n\n到店办理、行李安置之后，另保护完整恢复窗口。Île de la Cité 首个摄影和 Pont Neuf 均已撤回默认排程；恢复后只在时间、体力与天气允许时选择一组并激活。条件不足直接晚餐、回店，不追赶旧的首拍时刻。正式晚餐约 60 分钟，之后早收口。\n\n## 本次住宿落实与局部物流\n\n当日退房仍由原 `europe-2026-cologne-stay` 拥有；巴黎当晚终点已落实于 `europe-2026-paris-stay-placeholder`。接驳 Operation 引用该住宿，但实际移动、接箱和入房时间仍未核实。先完成到店办理再保护原恢复预算，不把新酒店身份当成原首拍时刻可行的证明。"
     },
     {
       "id": "europe-2026--2026-09-28",
       "trip": "europe-2026",
       "date": "2026-09-28",
-      "title": "巴黎铁塔清晨与 Left Bank 户外日",
+      "title": "巴黎铁塔清晨、左岸慢生活与游船方向",
       "priorities": [
-        "清晨用 Trocadéro 的低人流条件完成铁塔与广场关系",
-        "上午用 Rue de l'Université 与 Avenue de Camoëns 完成长焦街景视角",
-        "下午保持 Île de la Cité、Latin Quarter 与 Saint-Germain 的连续步行和恢复节奏"
+        "Trocadéro 清晨加 Rue de l’Université 一个额外街景视角",
+        "保护三餐、90 分钟酒店恢复与 Left Bank 慢走／café",
+        "Seine cruise 首选本日晚间，未选具体船班"
       ],
       "trade_offs": [
-        "Trocadéro 清晨优先获取空广场与剪影，不假定同时获得正面暖光",
-        "Notre-Dame 内部与 Sainte-Chapelle 取决于票务和队列，不牺牲户外主线"
+        "Avenue de Camoëns 与 Pont Alexandre III 固定链退出默认",
+        "游船只允许 9/29 晚作为预设 fallback，两晚均不合适即可放弃",
+        "不承诺 Eiffel sparkle 或 blue hour，不把游船建立为摄影 Session"
       ],
-      "pacing": "清晨集中摄影，午间回住宿休息；下午以短距离步行串联 Left Bank，不写成必须逐项完成的手工时间轴。",
-      "risk": "Trocadéro 和热门桥梁有扒窃与器材暴露风险；Notre-Dame 预约窗口仍待复查。",
-      "body_markdown": "清晨与傍晚的 Trocadéro 摄影目标不同：本日只执行清晨低人流和逆光轮廓；未来傍晚正面受光属于另一个 ShootSession，不在这里预先创建。Notre-Dame 蓝调与 Pont Alexandre III 蓝调也保持未选 alternative，当天只有明确的白天/傍晚 Sessions 进入派生时间轴。\n\n`notre-dame-free-reservation-window` blocks 最小 reference Operation；Fact 解决后，该 Operation 再按自身 `opens_at` / `act_by` 派生 Action。Sainte-Chapelle 没有可恢复 citation provenance，因此本 slice 不创建会伪装成已知规则的 ticket Fact。"
+      "pacing": "清晨核心→坐下早餐→一个街景视角→午餐→酒店恢复→左岸慢走与咖啡→早晚餐→待落实游船体验。",
+      "risk": "游船 operator、具体 departure、ticket 和天气条件均 TBD；Notre-Dame 入内仍受访问条件制约。",
+      "body_markdown": "摄影时刻由当日 Sessions 拥有。清晨后早餐 30–45 分钟，铁塔额外街景只保留 Rue de l’Université；不再串 Camoëns 和 Alexandre III。午餐 45–60 分钟后回酒店完成恢复，通勤不算恢复。\n\n下午选择 Left Bank 的短距离慢走与坐 café，允许完全不拍照；Notre-Dame 外拍不是固定打卡，已退出默认，入内也须另核实条件。正式早晚餐在船前完成，不假定普通观光船提供正餐。\n\n## Approved experience，尚非已订班次\n\n本日为 Seine cruise 首选晚间，总 planning budget 90–120 分钟，包含赴码头、候船、乘坐与离船；最终按所选服务调整。具体 operator、码头、departure、ticket、可接受天气及临时运行状态均为 OPEN FACT / future booking gap，不写不存在的船班，不制造 booked Operation。选择具体 departure 时，以约 21:30 回到酒店作为 planning target，并为离船与返店留余量；这不是 confirmed timetable、confirmed return、booking、hard Constraint 或 Eiffel sparkle 保证。该目标同样适用于次日 fallback。\n\n唯一预设 fallback 引用次日 TripDay；若两晚都不合适则放弃，不挤入 10/2。船上以观看城市为目的，可手持记录，不承诺命中铁塔闪灯或任何计算光窗。"
     },
     {
       "id": "europe-2026--2026-09-29",
       "trip": "europe-2026",
       "date": "2026-09-29",
-      "title": "蒙马特清晨与歌剧院建筑日",
+      "title": "蒙马特街区与 Garnier 真正参观",
       "priorities": [
-        "在游客与画家聚集前完成蒙马特街巷和高处城市关系",
-        "下午保护 Palais Garnier 建筑内部的预约窗口",
-        "用百货穹顶、屋顶和长廊街组成可抗雨的连续建筑主题"
+        "Montmartre 后坐下早餐，不默认登穹顶",
+        "午餐、恢复与 Garnier 内部文化体验受保护",
+        "晚餐后只留短晚间，游船仅承接前一日 fallback"
       ],
       "trade_offs": [
-        "卢浮宫闭馆且奥赛客流压力高，本日不强塞大型博物馆",
-        "Palais Garnier 观众厅可能因剧院活动关闭，核心收益仍是公共空间与建筑细节"
+        "Sacre-Cœur dome、百货串点和完整 passages 链退出默认",
+        "游船 fallback 与短长廊散步互斥，不同时默认执行",
+        "不加 Orsay 或其他大型馆"
       ],
-      "pacing": "清晨集中步行，午间恢复；下午按已选择的歌剧院、百货与长廊主线执行，不追逐未公布秀场地址。",
-      "risk": "蒙马特坡道与台阶增加体力消耗；Fashion Week 场地和交通影响仍属可变信息。",
-      "body_markdown": "早间主线依次使用 `montmartre-morning-streets` 与 `sacre-coeur-paris-view`；PhotographySpot 保存可复用站位方法，TripDay 只保存本日取舍。Palais Garnier、Galeries Lafayette 与 covered passages 是已选择的下午主线。\n\nPalais Garnier façade 与 Place Vendôme 的蓝调方案保持未选 alternatives，因此不创建对应 ShootSession。Fashion Week 只由 pending Fact 和 reusable Guide 提供复查方法；没有正式选择场次或场地前，不创建秀场外 active Session 或 Operation。"
+      "pacing": "蒙马特短线→坐下早餐→午餐→恢复→Garnier 内部→晚餐→短晚间或已落实的游船 fallback→回店。",
+      "risk": "Garnier 门票与观众厅访问未确认；坡道之后必须真实坐下恢复。",
+      "body_markdown": "摄影开始由 Sessions 拥有，街巷与台阶之后早餐 30–45 分钟，不接穹顶登高。午餐保护 45–60 分钟，午间坐下或回房恢复 60 分钟。\n\nGarnier 以参观剧院空间、理解建筑与文化为主，摄影不能替代参观；`ticket/2026-09-29-palais-garnier` 仍 unbooked，观众厅条件待复查，不能承诺进入。\n\n晚餐约 60 分钟，之后最多短步行。若前一日游船未能落实，本日晚间是唯一预设 fallback，具体条件和预算由 `europe-2026--2026-09-28` 拥有；启用时放弃长廊尾段。两晚都不合适即可放弃。百货、完整 passages 摄影链及未公布秀场均不进入默认。"
     },
     {
       "id": "europe-2026--2026-09-30",
       "trip": "europe-2026",
       "date": "2026-09-30",
-      "title": "Palais-Royal、Marais 与 Louvre 蓝调日",
+      "title": "巴黎较晚开始与 Louvre 主要艺术体验",
       "priorities": [
-        "上午保护 Colonnes de Buren 的几何侧光主题",
-        "下午用 Marais 的广场、拱廊与庭院维持低强度街区摄影",
-        "傍晚按已预约时段进入 Louvre，并保住 Cour Napoléon 金字塔蓝调"
+        "较晚开始，以 Buren 与精简 Marais 街区为主",
+        "市场区域午餐、café 坐下恢复与入馆余量受保护",
+        "Louvre 是主要 art museum experience，保护 120–150 分钟实际观看"
       ],
       "trade_offs": [
-        "连续早起后允许较晚开始，不为增加室内藏品压缩晚间建筑窗口",
-        "Louvre 室内路线只保留建筑与少量重点，不把全馆清单写成强制时间轴"
+        "Carnavalet 退出默认；Marais 不集齐广场、庭院与街巷",
+        "金字塔只作短摄影，不让建筑成片挤压真实观看",
+        "Louvre 票仍 unbooked；10/2 不自动接收未完成清单"
       ],
-      "pacing": "上午单一建筑主题，午间恢复，下午 Marais 短距离步行；Louvre 后直接转入 Cour Napoléon，不追加未选 Fashion Week 场地。",
-      "risk": "Louvre 关闭时间在 Handbook 内存在 C-003，罢工和临时关闭也可能影响入馆；Fashion Week 可能增加周边绕行。",
-      "body_markdown": "TripDay 只保存取舍。具体 Buren、Marais、Louvre 与金字塔执行时刻由 ShootSessions 拥有，票务行动由 `ticket/2026-09-30-louvre` 拥有。\n\nC-003 保持未解决：本日不把 21:00 或 21:45 写成 canonical closing time。当前 19:45 的 Cour Napoléon Session 不依赖选择其中一个冲突值。若 Louvre 临时关闭，10/2 仅作为 Plan B；未经正式选择，不创建第二个 Louvre Session 或 Operation。Fashion Week 也只保留 recheck，不创建未确定秀场地址。跨日博物馆取舍由 `paris-museum-distribution` 统一解释。"
+      "pacing": "早餐与较晚开始→Buren→精简 Marais→市场区域午餐→café 恢复→赴馆与安检→真正看展→短金字塔摄影→晚餐。",
+      "risk": "票务、C-003 closing time、展厅状态与临时中断仍 OPEN；未核实前不保证观看窗口成立。",
+      "body_markdown": "先早餐，不追求补早起。Buren 后仅保留一个 Marais 广场摄影节点，街区慢走随行，不额外激活整条摄影链。市场区域午餐 60 分钟，具体市场与摊位当日可用性待确认；café 另坐下休息 30–45 分钟。\n\n入馆前为移动、队列和安检保留余量，摄影 Session 的开始是规划目标，不是预约证明。票务由 `ticket/2026-09-30-louvre` 拥有，当前 **unbooked，尚未预约**。先落实能支持实际观看预算的票；这是约 2–2.5 hours 的 actual viewing planning budget，不是 confirmed duration；预算不包含交通、排队与金字塔外拍。以少量作品和主题认真观看，不只拍建筑，也不以集齐全馆为目标。\n\n金字塔只作收尾短摄影，之后正式晚餐约 60 分钟。C-003 不在本轮选择关闭时刻；若票务或临时中断使观看预算不成立，保留 P0 待办并减少摄影，不声称已完成 art experience。\n\n`europe-2026-approved-day-rhythm` 记录 U06 对本次体验排序的批准；旧 `paris-museum-distribution` 已 superseded，保留历史判断，不自动安排 Orsay 或占用 10/2 的半天 FLEX。"
     },
     {
       "id": "europe-2026--2026-10-01",
       "trip": "europe-2026",
       "date": "2026-10-01",
-      "title": "Versailles 主线与 Orsay 可选夜场",
+      "title": "凡尔赛宫殿优先与返城恢复",
       "priorities": [
-        "先使用 Versailles gardens 的低人流轴线，再进入 Palace",
-        "用最早 Palace 时段保护 Hall of Mirrors 的空间关系",
-        "下午完成 Trianon estate 后返回 Paris 并强制恢复体力"
+        "出发前早餐，实际抵达、步行与安检余量先于拍摄",
+        "宫殿参观优先，再午餐与花园",
+        "Trianon optional、默认跳过；返 Paris 恢复与晚餐"
       ],
       "trade_offs": [
-        "Musée d'Orsay 夜场有摄影价值，但不以牺牲恢复和后两天体力为代价",
-        "Versailles 临时开放变化优先缩减内部清单，不改变已选 day-trip 主线"
+        "旧早园林和开门即站镜厅的确定性退出默认",
+        "不追求全庄园集齐，坐下休息不被园内移动替代",
+        "不自动接 Orsay；其默认 OFF"
       ],
-      "pacing": "早出发、单向推进 gardens、Palace、Trianon；回 Paris 后保留完整恢复窗口，Orsay 直到正式选择前保持为空。",
-      "risk": "RER C 分支需要现场确认终点；Musical Gardens、票务与 Trianon 访问条件仍需临近复查。",
-      "body_markdown": "Versailles 是已选主线，具体交通、票务和摄影时刻由 Operations 与 ShootSessions 拥有。`paris-museum-distribution` 解释 Louvre、Versailles 与 Orsay 的分配，不在 TripDay 重写完整时间轴。\n\nMusée d'Orsay Thursday evening 仍是体力触发的未选 option：只有返回住宿、休息后仍有稳定体力并再次确认访问条件时才可选。当前没有 Orsay ShootSession 或 Operation；10/2 日间也只是 Plan B，不创建第二套伪确定安排。"
+      "pacing": "早餐→列车→实际到站步行安检→宫殿→午餐→花园与坐下休息→返城→酒店恢复→晚餐。",
+      "risk": "票务、入场时段、安检与园区访问仍需核实；不能把开门时间当成宫内机位到位时间。",
+      "body_markdown": "出发前保护 30–45 分钟早餐并准备途中补水。往返交通由既有 Operations 拥有，具体班次仍是规划；抵达后为步行、安检和队列单独预算至少 30–45 分钟，按实际入场要求增加。\n\n先完成宫殿体验。旧 `versailles-gardens-morning` 与 `hall-of-mirrors` 的固定摄影实例已撤回默认，不承诺到站后立即拍花园或宫殿开门时已在镜厅；宫殿内仍可轻量记录，只有票务与实际入场可行时才重排摄影实例。\n\n午餐 45–60 分钟后花园为主，另坐下休息 30–45 分钟。Trianon 为未激活 optional，不挤掉午餐、花园和返程。`ticket/2026-10-01-versailles` 仍 unbooked，访问范围及园区程序继续由 pending Facts 复查。\n\n返回 Paris 后酒店恢复 60–90 分钟，再正式晚餐；不加 Orsay。取消的是虚假的固定机位到位保证，不是已批准的 Versailles day trip。"
     },
     {
       "id": "europe-2026--2026-10-02",
       "trip": "europe-2026",
       "date": "2026-10-02",
-      "title": "巴黎机动日与凯旋门城市轴线",
+      "title": "巴黎半天 FLEX 与 Arc 核心",
       "priorities": [
-        "前一晚根据天气、体力、漏拍内容和 Fashion Week 变化选择白天用途",
-        "保留 18:00 后凯旋门顶层与 Bir-Hakeim 的已选摄影主线",
-        "在 Bir-Hakeim 环境变空前结束单人夜间器材使用"
+        "至少半天自由时间，不作为所有漏项的回收日",
+        "恢复提前完成，正式早晚餐先于 Arc 出发",
+        "保留 Arc；Bir-Hakeim 低优先 conditional，之后打包早收口"
       ],
       "trade_offs": [
-        "Père-Lachaise、Canal Saint-Martin 与 La Défense 是互斥晨间 options，不并行生成确定时间轴",
-        "Fashion Week 街拍、补拍和 Louvre 受阻后的 Plan B 只有触发后才进入 Trip Instance"
+        "Orsay 默认 OFF，只有未来用户明确想去才重新评估",
+        "Luxembourg 只是就近坐下休息的候选，不是新增打卡",
+        "Louvre fallback、补拍与 Fashion Week 都不能自动吞掉受保护的半天"
       ],
-      "pacing": "白天保持机动并预留 17:00–18:00 恢复；晚间只执行已经选择的两个建筑摄影节点。",
-      "risk": "Fashion Week 地点和天气仍可变化；Bir-Hakeim 夜间人少且较暗，21:00 离开纪律由 Operation 与 hard Constraint 拥有。",
-      "body_markdown": "上午 options：Père-Lachaise 适合安静石雕与光影；Canal Saint-Martin 加 Belleville / Ménilmontant 适合街拍和街头艺术；La Défense 适合现代建筑对比。选择触发条件是前一晚天气、体力与前几日 semantic gap；当前三者均未选择，因此没有对应 ShootSession 或 Operation。\n\n14:00–17:00 同样只保留 Fashion Week 街拍或补拍的 option。若 9/30 Louvre 主线因中断未完成，可把 10/2 作为 Plan B，但只有正式触发后才新增相应实例记录；本日不会预先复制 Louvre timeline。"
+      "pacing": "正常早餐→至少半天 FLEX→午餐→较早回房恢复→早晚餐→Arc→条件短尾段或直接酒店→打包早睡。",
+      "risk": "Arc 票务仍未落实；Bir-Hakeim 条件成立时仍须遵守既有安全截止，不以晚间收尾影响离境准备。",
+      "body_markdown": "早餐 30–45 分钟，上午不预填项目，连同邻近自由活动保护至少半天。午餐 45–60 分钟；午后较早恢复 60–90 分钟，不再把恢复窗口紧贴 Arc 的出发或 Session 开始。先完成约 60 分钟正式早晚餐，再为赴 Arc、入场和安检另留余量。\n\nArc 摄影时刻由 Session 拥有，票务由 `ticket/2026-10-02-arc-de-triomphe` 拥有。Bir-Hakeim 是低优先、未激活 conditional；只有餐食、体力、天气、移动与打包余量都成立才激活，同步恢复其 departure Operation，并保持既有 hard Constraint。否则 Arc 后直接酒店。\n\nLuxembourg 可在附近休息时选用，访问条件仍需确认，不为它扩展路线。Orsay 默认不选；今后用户明确想去才重新评估，不能由天气或疲劳自动触发。晚间整理离境材料、打包并早睡。\n\n## 本次住宿落实与局部物流\n\n本日上午从 `europe-2026-paris-stay-placeholder` 退房，今晚入住 `europe-2026-paris-wallace-stay`。退房、行李交接、新店寄存及入房须单独留余量，实际移动与酒店服务尚未核实，不写固定搬箱时刻。换店办理不计入至少半天 FLEX，通勤或等房不计入恢复；提前落实交接才能兼容原安排，若做不到必须报告，不自动吞掉自由时间或压缩休息。Arc 仍受保护，Bir-Hakeim 仍 conditional，酒店身份不构成重新激活理由。"
     },
     {
       "id": "europe-2026--2026-10-03",
       "trip": "europe-2026",
       "date": "2026-10-03",
-      "title": "最后半天与 Paris 离境",
+      "title": "巴黎离境：行李、恢复与机场完整链路",
       "priorities": [
-        "只在前一晚明确选择后执行一项清晨补拍，不生成多条候选 Session",
-        "10:30–11:00 退房并确认行李寄存，15:30 开始返回取行李",
-        "把 16:30 离开市区作为不可逆硬时间点"
+        "早餐、打包、退房并确认寄存或替代方案",
+        "附近午餐、坐下休息并提前取箱",
+        "机场链优先；实际出境航班信息保持 P0 OPEN FACT"
       ],
       "trade_offs": [
-        "Trocadéro 重拍、Pont Alexandre III、Marais 空街和 Seine 河岸只是候选，不为填满时间轴而全部执行",
-        "最后的购物或补拍必须让位于取行李、机场交通、退税、边境与登机缓冲"
+        "不默认最后一次清晨补拍，不临时回收漏项",
+        "寄存失败就带箱执行安全替代，减少自由活动",
+        "已有市区出发上界不证明航班末段充足；核实后必要时更早出发"
       ],
-      "pacing": "清晨最多一个选择；中午自由活动不远离住宿与返程路径，15:30 后只执行离境链路。",
-      "risk": "行李寄存需在前一日与住宿确认；CDG 行车、出租车费率和 EES 流程都要复查，但均不允许推迟 16:30 市区出发。",
-      "body_markdown": "Handbook 没有选定最后一次清晨的具体机位，所以当前没有 10/3 ShootSession。前一晚若确认某个 semantic gap，再为唯一选中的机位新增实例；没有被选中的建议继续只是 Plan B。\n\n机场出租车的具体价格保持 C-004 pending，不由 TripDay 选择任一说法。CDG Operation 只保存本次离境时间链路，城市级机场安全知识由 `charles-de-gaulle-airport` Place 拥有。"
+      "pacing": "早餐打包→退房与行李承接→附近午餐→坐下休息→提前取箱→机场交通→按真实航班倒推的值机、安检与登机链。",
+      "risk": "未找到实际航班号、起飞时刻、航站楼、值机及登机截止；酒店取件服务也未确认，离境可行性尚未闭环。",
+      "body_markdown": "早餐 30–45 分钟后打包，退房按住宿确认的政策执行。前一日核实寄存接收、取件服务时段和接车位置；不能寄存时先落实可靠替代，否则带箱缩短附近活动，不拖箱去补拍。\n\n午餐在住宿或返程走廊附近保护 45–60 分钟，之后坐下休息 30–45 分钟。**14:30 为返回取箱的更早 planning target**，再留 20–30 分钟取件办理及接车余量；它不是酒店服务事实，也不取代机场交通 Operation 的时刻。\n\n`transport/2026-10-03-paris-cdg` 与 `europe-2026-paris-city-departure` 拥有机场交通和市区出发上界。P0 OPEN FACT：实际航班号、起飞时刻、航站楼、值机／托运截止及登机截止。当前没有可靠航班来源，不能伪建 confirmed Fact 或编造 actual flight time；取得用户订单后再据实倒推，必要时提前出发。\n\n机场晚餐与补水按最终航班链安排，不让吃饭侵占值机和登机。C-004 车费和 EES 仍待复查；城市安全知识继续由 CDG Place 拥有。本日不新增摄影实例。\n\n## 本次住宿落实与局部物流\n\n起床、退房和取箱终点引用 `europe-2026-paris-wallace-stay`；机场 Operation 同步引用该住宿。退房后寄存、取件窗口及接车位置未核实；既有取箱 planning target 和机场出发边界保持不变。酒店更新不确认机场交通耗时、不延长最后一天、不补造实际航班信息。"
     }
   ],
   "places": [
@@ -4436,8 +4443,9 @@
       "time": "19:00",
       "spot": "magere-brug",
       "purpose": "evening-bridge",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U01：晚间只保护七桥核心，重复桥梁摄影让位正式晚餐；作为未激活替代保留。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-20-nine-streets-morning",
@@ -4456,8 +4464,9 @@
       "time": "14:30",
       "spot": "oostelijk-havengebied",
       "purpose": "modern-architecture",
-      "status": "planned",
-      "priority": "high"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U01：东港区退出默认，让位 Jordaan / Nine Streets 运河生活。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-20-pythonbrug-afternoon",
@@ -4466,8 +4475,9 @@
       "time": "16:00",
       "spot": "pythonbrug",
       "purpose": "bridge-geometry",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U01：Pythonbrug 退出默认，不与街区生活叠加。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-20-reguliersgracht-blue-hour",
@@ -4508,14 +4518,15 @@
       "time": "13:15",
       "spot": "depot-boijmans-exterior",
       "purpose": "reflective-architecture",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U02：精简远端节点，为市场体验、恢复、晚餐与取箱南下留余量。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-21-erasmusbrug-day",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "time": "15:00",
+      "time": "15:15",
       "spot": "erasmusbrug-day-crossing",
       "purpose": "bridge-architecture",
       "status": "planned",
@@ -4525,7 +4536,7 @@
       "id": "europe-2026-2026-09-21-kubuswoningen",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "time": "12:45",
+      "time": "14:15",
       "spot": "kubuswoningen",
       "purpose": "geometric-architecture",
       "status": "planned",
@@ -4535,11 +4546,12 @@
       "id": "europe-2026-2026-09-21-markthal",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "time": "12:00",
+      "time": "12:45",
       "spot": "markthal-rotterdam",
       "purpose": "interior-architecture",
       "status": "planned",
-      "priority": "high"
+      "priority": "normal",
+      "notes": "仅记录市场午餐停留中的短建筑摄影；午餐和市场体验由当日 TripDay 拥有，摄影不能挤占实际用餐。"
     },
     {
       "id": "europe-2026-2026-09-21-rijnhaven-evening",
@@ -4548,19 +4560,20 @@
       "time": "19:01",
       "spot": "rijnhaven-skyline",
       "purpose": "evening-skyline",
-      "status": "planned",
-      "priority": "high",
-      "notes": "蓝调机位 A/B 尚未正式选择，因此本 session 在蓝调前结束其确定性。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U02：默认放弃 Rijnhaven evening 与完整蓝调追逐，先完成晚餐、取箱和南下。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-21-rotterdam-centraal-exterior",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "time": "11:30",
+      "time": "12:00",
       "spot": "rotterdam-centraal-exterior",
       "purpose": "station-architecture",
       "status": "planned",
-      "priority": "high"
+      "priority": "high",
+      "notes": "摄影规划开始，必须先完成寄存；如行李办理延误则缩短或跳过，不抢午餐。"
     },
     {
       "id": "europe-2026-2026-09-21-rotterdam-centraal-interior",
@@ -4569,8 +4582,9 @@
       "time": "11:40",
       "spot": "rotterdam-centraal-interior",
       "purpose": "station-interior",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U02：精简重复车站节点，存箱与市场午餐先行。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-22-antwerpen-centraal",
@@ -4589,9 +4603,10 @@
       "date": "2026-09-22",
       "time": "11:15",
       "spot": "cathedral-antwerp-handschoenmarkt",
-      "purpose": "cathedral-evening",
+      "purpose": "cathedral-exterior",
       "status": "planned",
-      "priority": "high"
+      "priority": "high",
+      "notes": "仅拥有外立面摄影；主要 Cathedral interior 文化参观由当日 TripDay 拥有，入内条件待核实。"
     },
     {
       "id": "europe-2026-2026-09-22-grote-markt-blue-hour",
@@ -4602,7 +4617,7 @@
       "purpose": "blue-hour",
       "status": "planned",
       "priority": "critical",
-      "notes": "19:35 离开左岸后经隧道回东岸，实得蓝调约二十一分钟，短于旧 baseline；与港口之家蓝调互斥，本版选择 Grote Markt。"
+      "notes": "必须已经完成回东岸后才执行本机位；返回完成时刻以 operation/2026-09-22-sint-anna-east-bank-return.end_time 与对应 hard Constraint 为准，不是到该时刻才离开西岸。核心短拍后尽早回站。"
     },
     {
       "id": "europe-2026-2026-09-22-grote-markt-morning",
@@ -4622,8 +4637,9 @@
       "time": "14:15",
       "spot": "havenhuis-antwerp-day-scout",
       "purpose": "architecture-scouting",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U03：Havenhuis scout 退出默认，文化体验与晚餐优先。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-22-linkeroever-golden",
@@ -4634,7 +4650,7 @@
       "purpose": "golden-cityscape",
       "status": "planned",
       "priority": "critical",
-      "notes": "19:35 前通过同一隧道回到东岸；完成时刻由 reference Operation 与 hard Constraint 检查。"
+      "notes": "返回完成时刻只由 operation/2026-09-22-sint-anna-east-bank-return 与对应 hard Constraint 拥有；收器材和穿越需提前倒推。"
     },
     {
       "id": "europe-2026-2026-09-22-mas-rooftop",
@@ -4643,18 +4659,20 @@
       "time": "13:30",
       "spot": "mas-antwerp-rooftop",
       "purpose": "city-overview",
-      "status": "planned",
-      "priority": "high"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U03：MAS 改为未激活 optional，只有不挤掉教堂内部、餐食、休息和返程时才重新选择。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-22-sint-annatunnel",
       "trip": "europe-2026",
       "date": "2026-09-22",
-      "time": "16:00",
+      "time": "17:00",
       "spot": "sint-annatunnel",
       "purpose": "tunnel-architecture",
       "status": "planned",
-      "priority": "high"
+      "priority": "high",
+      "notes": "过隧道前先完成正式早晚餐；照片让位于安全穿越和返回完成纪律。"
     },
     {
       "id": "europe-2026-2026-09-22-vlaeykensgang",
@@ -4674,8 +4692,9 @@
       "time": "17:00",
       "spot": "bonifaciusbrug",
       "purpose": "canal-detail",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：抵达恢复优先，晚间只保留一个核心。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-23-bruges-markt-scout",
@@ -4684,8 +4703,9 @@
       "time": "16:00",
       "spot": "bruges-markt",
       "purpose": "architecture-scouting",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：抵达后先酒店、恢复与晚餐，不默认下午踩点链。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-23-burg-night",
@@ -4694,30 +4714,31 @@
       "time": "20:19",
       "spot": "burg-square-bruges",
       "purpose": "civic-night",
-      "status": "planned",
-      "priority": "high"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：撤回深夜尾段，为次日真正保护的双窗口保留睡眠。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-23-galeries-saint-hubert-morning",
       "trip": "europe-2026",
       "date": "2026-09-23",
-      "time": "07:45",
+      "time": "09:45",
       "spot": "galeries-royales-saint-hubert",
       "purpose": "arcade-symmetry",
       "status": "planned",
       "priority": "normal",
-      "notes": "距大广场数十米，衔接成本低。玻璃拱顶使其成为布鲁塞尔唯一可靠的阴雨备份；商店开门前人流最低。"
+      "notes": "承接较晚的大广场短线，允许廊街日常人流；不为无人画面牺牲早餐。"
     },
     {
       "id": "europe-2026-2026-09-23-grand-place-morning",
       "trip": "europe-2026",
       "date": "2026-09-23",
-      "time": "07:00",
+      "time": "09:00",
       "spot": "grand-place-brussels",
-      "purpose": "empty-square-morning",
+      "purpose": "square-architecture",
       "status": "planned",
       "priority": "high",
-      "notes": "广场四面封闭，九点前几乎无人。07:00 起拍到的是蓝灰色空场与建筑轮廓；晨光要到 08:00 后才越过屋顶打进广场。两种画面不同，只能选一个时优先后者。"
+      "notes": "U04 批准较晚开始：先正常早餐，接受有人生活的广场，不保证空场或某一晨光条件。"
     },
     {
       "id": "europe-2026-2026-09-23-markt-night",
@@ -4726,19 +4747,20 @@
       "time": "20:40",
       "spot": "bruges-markt",
       "purpose": "belfry-night",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：撤回深夜尾段，Rozenhoedkaai 收工后回酒店。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-23-mont-des-arts-morning",
       "trip": "europe-2026",
       "date": "2026-09-23",
-      "time": "10:00",
+      "time": "10:30",
       "spot": "mont-des-arts",
       "purpose": "city-overview",
       "status": "planned",
       "priority": "normal",
-      "notes": "自台阶顶部俯瞰市政厅尖塔与下城。这是布鲁塞尔唯一完整白天窗口内的主要目标；当天下午要转场布鲁日，上午不应超载。"
+      "notes": "上午短停留，先保护退房、午餐、取箱与转场，不扩充摄影尾段。"
     },
     {
       "id": "europe-2026-2026-09-23-rozenhoedkaai-blue-hour",
@@ -4788,8 +4810,9 @@
       "time": "08:20",
       "spot": "jan-van-eyckplein",
       "purpose": "architecture",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：削减清晨尾段，为早餐、退房与转场留余量。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-24-markt-morning",
@@ -4798,8 +4821,9 @@
       "time": "08:50",
       "spot": "bruges-markt",
       "purpose": "belfry-morning",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：削减清晨尾段，不压缩早餐与行李办理。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-24-rozenhoedkaai-sunrise",
@@ -4821,7 +4845,7 @@
       "purpose": "three-towers",
       "status": "planned",
       "priority": "critical",
-      "notes": "实算蓝调 19:41–20:14。当日同时包含布鲁日日出与本次蓝调，是全程负荷最高的一天；下午的根特室内是第一顺位可砍项。"
+      "notes": "保护双摄影窗口日的晚间核心；完成恢复与正式晚餐后执行，光线窗口由 astronomy 派生，不持久化实算值。"
     },
     {
       "id": "europe-2026-2026-09-25-graslei-morning",
@@ -4830,9 +4854,9 @@
       "time": "07:00",
       "spot": "graslei-korenlei",
       "purpose": "canal-morning",
-      "status": "planned",
-      "priority": "critical",
-      "notes": "Ghent / Brussels 两个条件分支共享的唯一确定清晨 session。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：conditional，只有睡眠、天气、交通同时支持才重新激活；不设默认早起任务。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-25-gross-st-martin-night",
@@ -4841,9 +4865,9 @@
       "time": "20:00",
       "spot": "gross-st-martin-fischmarkt",
       "purpose": "civic-night",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "蓝调结束后的老城夜景延伸。回酒店约十五分钟步行，是本次唯一一段蓝调后的夜路。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。9/25 OPTION A：夜景尾段退出默认，dinner 与 rest 优先。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-25-hohenzollernbruecke-scout",
@@ -4852,9 +4876,9 @@
       "time": "17:00",
       "spot": "hohenzollernbruecke-love-locks",
       "purpose": "architecture-scouting",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "跨国转场当天的踩点，目的是确认次日右岸同框机位的站位与步行时间，不追求成片。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。9/25 OPTION A：conditional，先完成酒店／行李、完整恢复与正式早晚餐；任一环延迟便放弃。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-25-koelner-dom-blue-hour",
@@ -4863,9 +4887,9 @@
       "time": "19:26",
       "spot": "koelner-dom-exterior",
       "purpose": "cathedral-evening",
-      "status": "planned",
-      "priority": "high",
-      "notes": "科隆蓝调比比利时诸城早约二十分钟结束，实算窗口 19:26–19:59，18:40 前必须站到机位上。当晚晚餐安排在蓝调之后而非之前。第一晚拍较简单的机位，右岸同框留给次日。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。9/25 OPTION A：conditional，酒店、完整恢复、正式早晚餐完成后才可激活；不为摄影推后 dinner。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-26-deutz-rhine-bank-afternoon",
@@ -4874,9 +4898,9 @@
       "time": "13:00",
       "spot": "deutz-rhine-bank-cathedral-bridge",
       "purpose": "architecture-scouting",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "白天先确认长焦压缩的取景范围与站位，避免蓝调时在现场试错。过桥步行约十分钟。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/26 节奏：取消重复跨河踩点，准备并入同一趟晚间核心。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-26-deutz-rhine-bank-blue-hour",
@@ -4887,7 +4911,7 @@
       "purpose": "blue-hour",
       "status": "planned",
       "priority": "critical",
-      "notes": "科隆的招牌画面：大教堂、霍亨索伦桥与河面倒影同框，长焦压缩。实算窗口 19:24–19:57。蓝调时段桥上仍有人流；不在 21:00 之后单人携全套器材留在右岸。"
+      "notes": "保留一组大教堂、桥与河面的招牌画面；一次右岸行程包含站位准备，不额外往返踩点。光线窗口从 astronomy 派生；收工即回店准备次日转场。"
     },
     {
       "id": "europe-2026-2026-09-26-koelner-dom-interior",
@@ -4898,7 +4922,7 @@
       "purpose": "interior-architecture",
       "status": "planned",
       "priority": "high",
-      "notes": "本日是内部的唯一窗口。09-27 是周日，游客时段 13:30 才开始而当天上午就要出发；09-25 是跨国转场日且未设为刚性任务。内部通常禁止三脚架。"
+      "notes": "保留内部摄影计划，但它不是入场预约或全部文化体验。真实参观由当日 TripDay 保护；koelner-dom-visiting-hours 仍 pending，票务与实际访问条件待复查。"
     },
     {
       "id": "europe-2026-2026-09-26-koelner-dom-morning",
@@ -4907,9 +4931,9 @@
       "time": "07:00",
       "spot": "koelner-dom-exterior",
       "purpose": "empty-square-morning",
-      "status": "planned",
-      "priority": "high",
-      "notes": "日出 07:25，广场在此之前几乎无人。仰拍需退到广场外缘，贴近会造成严重透视畸变。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U04：不设置清晨摄影闹钟，不默认外拍；原机位知识保留。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-26-koelner-dom-tower",
@@ -4918,9 +4942,9 @@
       "time": "09:00",
       "spot": "koelner-dom-tower",
       "purpose": "elevated-city-compression",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "533 级无电梯，体力开销大，必须放上午否则影响傍晚蓝调。护栏为网格，用长焦自空隙取景。阴雨天视野与台阶条件都下降，是当日第一顺位可砍项。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/26 节奏：塔楼 optional、默认跳过，只有重新选择并确认体力与访问条件后才激活。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-26-kranhaeuser-afternoon",
@@ -4929,9 +4953,9 @@
       "time": "16:30",
       "spot": "kranhaeuser-rheinauhafen",
       "purpose": "modern-architecture",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "科隆的第二条建筑语言，与大教堂和老城形成对比。侧光时段成立，不需要再占用蓝调。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/26 节奏：削减重复建筑与跨河链，为恢复和当地正式晚餐腾出空间。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-27-ile-de-la-cite-afternoon",
@@ -4940,8 +4964,9 @@
       "time": "16:00",
       "spot": "ile-de-la-cite",
       "purpose": "seine-cityscape",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/27 节奏：首拍 conditional，实际出站、入住及 60–90 分钟恢复优先；旧时刻不再是承诺。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-27-pont-neuf-evening",
@@ -4950,9 +4975,9 @@
       "time": "18:59",
       "spot": "pont-neuf-vert-galant",
       "purpose": "bridge-evening",
-      "status": "planned",
-      "priority": "high",
-      "notes": "第一晚的确定河岸机位；Pont de la Tournelle 蓝调 alternative 不创建 session。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/27 节奏：首夜河岸 conditional，只有恢复、晚餐与天气余量支持才选择一组。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-28-avenue-camoens",
@@ -4961,8 +4986,9 @@
       "time": "10:30",
       "spot": "avenue-camoens-eiffel-view",
       "purpose": "eiffel-framing",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U05：只保留一个额外铁塔街景视角，本固定链退出默认。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-28-notre-dame-exterior",
@@ -4971,9 +4997,9 @@
       "time": "15:00",
       "spot": "notre-dame-paris-exterior",
       "purpose": "cathedral-exterior",
-      "status": "planned",
-      "priority": "high",
-      "notes": "外部拍摄不依赖 pending 的免费时段预约 Fact。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U05：左岸慢走不再承担固定教堂外拍目标；入内访问另按票务条件选择。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-28-pont-alexandre-iii",
@@ -4982,8 +5008,9 @@
       "time": "11:00",
       "spot": "pont-alexandre-iii",
       "purpose": "bridge-architecture",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U05：固定桥梁链退出默认，为 Left Bank 慢生活、恢复与游船留空间。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-28-rue-universite",
@@ -5013,9 +5040,9 @@
       "time": "18:00",
       "spot": "paris-covered-passages",
       "purpose": "covered-passage-architecture",
-      "status": "planned",
-      "priority": "high",
-      "notes": "雨天也能保持建筑主题；Palais Garnier façade / Place Vendôme 蓝调仍是未选 alternatives。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U05：完整长廊摄影链退出默认；仅可短晚间散步，且与游船 fallback 互斥。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-29-galeries-lafayette",
@@ -5024,8 +5051,9 @@
       "time": "16:30",
       "spot": "galeries-lafayette-cupola-rooftop",
       "purpose": "cupola-and-rooftop",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/29 节奏：削减重复穹顶与屋顶串点，保护真正参观、恢复和晚餐。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-29-montmartre-streets",
@@ -5055,8 +5083,9 @@
       "time": "10:30",
       "spot": "sacre-coeur-paris-view",
       "purpose": "elevated-city-compression",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/29 节奏：不默认穹顶登高，早餐、恢复和 Garnier 优先。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-29-sacre-coeur-steps",
@@ -5075,8 +5104,9 @@
       "time": "15:20",
       "spot": "musee-carnavalet-courtyard",
       "purpose": "courtyard-architecture",
-      "status": "planned",
-      "priority": "low"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U06：Carnavalet 默认不选，为 Louvre 实际观看及入场余量让路。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-30-colonnes-de-buren",
@@ -5096,8 +5126,8 @@
       "spot": "louvre-interior-architecture",
       "purpose": "museum-architecture",
       "status": "planned",
-      "priority": "high",
-      "notes": "不把 C-003 的冲突 closing time 写入 Session；Galerie d'Apollon 状态由 pending Fact 复查。"
+      "priority": "normal",
+      "notes": "仅记录真正参观中的建筑摄影意图，不用本 Session 代替艺术观看。观看预算由 TripDay 拥有，ticket/2026-09-30-louvre 仍 unbooked，开始时刻只是待票务落实的规划；C-003 及 Galerie d’Apollon 状态仍待复查。"
     },
     {
       "id": "europe-2026-2026-09-30-louvre-pyramid",
@@ -5107,8 +5137,8 @@
       "spot": "louvre-pyramid-cour-napoleon",
       "purpose": "pyramid-blue-hour",
       "status": "planned",
-      "priority": "critical",
-      "notes": "C-003 未解决；本 Session 不持久化 Louvre closing time 或 blue-hour derived window。"
+      "priority": "normal",
+      "notes": "真正看展之后的短摄影，不能反向压缩观看预算；晚餐仍需完整完成。不持久化 closing time 或 derived light window。"
     },
     {
       "id": "europe-2026-2026-09-30-marais-streets",
@@ -5117,18 +5147,20 @@
       "time": "14:40",
       "spot": "marais-street-architecture",
       "purpose": "historic-street-sequence",
-      "status": "planned",
-      "priority": "normal"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U06：Marais 精简至广场与沿途生活，撤回独立摄影串点，保护午餐、café 与真正看展。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-09-30-place-des-vosges",
       "trip": "europe-2026",
       "date": "2026-09-30",
-      "time": "14:00",
+      "time": "11:30",
       "spot": "place-des-vosges",
       "purpose": "arcade-symmetry",
       "status": "planned",
-      "priority": "normal"
+      "priority": "normal",
+      "notes": "Buren 后的精简 Marais 摄影节点，不追加独立街巷与 Carnavalet 链。"
     },
     {
       "id": "europe-2026-2026-10-01-hall-of-mirrors",
@@ -5137,8 +5169,9 @@
       "time": "09:00",
       "spot": "hall-of-mirrors-versailles",
       "purpose": "palace-interior-axis",
-      "status": "planned",
-      "priority": "high"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 10/1 节奏：撤回开门即站镜厅的固定摄影承诺；宫殿参观仍在 TripDay，落实入场与安检后再选择摄影时刻。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-10-01-trianon-estate",
@@ -5147,9 +5180,9 @@
       "time": "12:30",
       "spot": "trianon-estate",
       "purpose": "palace-landscape-contrast",
-      "status": "planned",
-      "priority": "normal",
-      "notes": "Unindexed Trianon opening claim is not promoted to a verified Fact; confirm access on the official visit plan."
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 10/1 节奏：Trianon optional、默认跳过，午餐、花园、坐下休息与返程优先。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-10-01-versailles-gardens-afternoon",
@@ -5160,7 +5193,7 @@
       "purpose": "grand-canal-axis",
       "status": "planned",
       "priority": "normal",
-      "notes": "Musée d'Orsay remains an unselected option with no ShootSession."
+      "notes": "宫殿、午餐之后的花园短摄影；保留坐下休息和返程余量，不自动接 Trianon 或 Orsay。"
     },
     {
       "id": "europe-2026-2026-10-01-versailles-gardens-morning",
@@ -5169,9 +5202,9 @@
       "time": "08:15",
       "spot": "versailles-grand-perspective",
       "purpose": "quiet-garden-axis",
-      "status": "planned",
-      "priority": "critical",
-      "notes": "不持久化 sunrise 或 derived light window；garden program 由 pending Fact 复查。"
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 10/1 节奏：宫殿优先，撤回到站即到早园林机位的固定假设。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     },
     {
       "id": "europe-2026-2026-10-02-arc-de-triomphe-rooftop",
@@ -5191,9 +5224,9 @@
       "time": "20:15",
       "spot": "pont-de-bir-hakeim",
       "purpose": "bridge-eiffel-night",
-      "status": "planned",
-      "priority": "high",
-      "notes": "The separate departure Operation owns the 21:00 safety cutoff."
+      "status": "cancelled",
+      "priority": "low",
+      "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。U07：low-priority conditional，只有体力、天气、晚餐、交通及打包余量均支持才重新激活，并同步恢复 departure Operation。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。"
     }
   ],
   "researchFacts": [
@@ -5279,14 +5312,16 @@
       "recheck_by": "2026-09-17",
       "confidence": "medium",
       "affects": [
-        "transport/2026-09-24-antwerp-ghent",
-        "transport/2026-09-26-ghent-bruges",
-        "transport/2026-09-27-brugge-bruxelles-midi",
-        "transport/2026-09-27-brussels-paris"
+        "transport/2026-09-21-rotterdam-brussels",
+        "transport/2026-09-22-brussels-antwerp",
+        "transport/2026-09-22-antwerp-brussels",
+        "transport/2026-09-23-brussels-bruges",
+        "transport/2026-09-24-bruges-ghent",
+        "transport/2026-09-25-ghent-cologne"
       ],
-      "impact_if_wrong": "若申报规则不同，基于 8 个工作日回推设定的检查日将失去判别力，需要改用更早或更频繁的运营方复查；但这不改变既定路线，也不解除 Bruxelles-Midi 缓冲约束。",
+      "impact_if_wrong": "若申报规则不同，基于 8 个工作日回推设定的检查日将失去判别力，需要改用更早或更频繁的运营方复查；但这不自动改变既定路线，也不解除当前根特至科隆的接续纪律；旧 Bruxelles-Midi 换乘约束已经退役。",
       "blocks": [],
-      "body_markdown": "本条只记录申报机制本身，不预测是否会发生罢工。规则来自对运营方罢工页面与比利时劳资法解读的汇总检索；当前工作流没有逐字核实运营方页面，因此 `verified_at` 留空、状态保持 `pending`。\n\n可推导的检查时点：8 个工作日回推意味着，任何依法申报、且会影响 2026-09-27 的罢工，最迟应在 2026-09-16 前完成申报。因此 `recheck_by` 设为 2026-09-17 —— 这是能对 9 月 27 日跨国衔接产生判别力的最早合理检查日。覆盖 9 月 24 日行程段的检查应更早一次，约在 2026-09-15。\n\n重要限制，不得简化：**「没有申报」不等于「不会罢工」**。该规则约束的是铁路人员依运输连续性法提出的罢工，不覆盖全国性总罢工、其他工会的行动、基础设施方事件或突发状况。2026 年已多次发生影响 SNCB 的罢工，风险是真实且反复出现的。因此本条只用于把不确定性收窄，不用于给出保证。"
+      "body_markdown": "本条只记录申报机制本身，不预测是否会发生罢工。规则来自对运营方罢工页面与比利时劳资法解读的汇总检索；当前工作流没有逐字核实运营方页面，因此 `verified_at` 留空、状态保持 `pending`。\n\n2026-09-08 consistency correction：affects 改为现行相关交通 ID。旧关联为 transport/2026-09-24-antwerp-ghent、transport/2026-09-26-ghent-bruges、transport/2026-09-27-brugge-bruxelles-midi、transport/2026-09-27-brussels-paris，均因 3A 路线变化 cancelled；在正文保留 provenance，不继续将它们作为当前覆盖。\n\nWEB_VERIFY_REQUIRED：原 recheck_by 与申报回推来自旧路线，未在本轮重算或重新核实；现行较早交通段必须单独提前复查。该日期不证明所有现行日期已被覆盖，也不能以它延后购票前的运营核实。外部 claim、source、status、recheck_by 与 verified_at 均未改动。\n\n重要限制，不得简化：**「没有申报」不等于「不会罢工」**。该规则约束的是铁路人员依运输连续性法提出的罢工，不覆盖全国性总罢工、其他工会的行动、基础设施方事件或突发状况。2026 年已多次发生影响 SNCB 的罢工，风险是真实且反复出现的。因此本条只用于把不确定性收窄，不用于给出保证。"
     },
     {
       "id": "brugge-sunday-timetable",
@@ -5439,9 +5474,9 @@
       "affects": [
         "europe-2026--2026-09-26"
       ],
-      "impact_if_wrong": "若周日时段与记录不同，2026-09-26 作为大教堂内部唯一窗口的排期理由会失效；反之若周六时段更短，当日的塔楼与内部安排需要重排。",
+      "impact_if_wrong": "若周日时段与记录不同，2026-09-26 作为大教堂内部唯一窗口的排期理由会失效；反之若周六时段更短，当日主要内部体验需要重排；塔楼已默认跳过。",
       "blocks": [],
-      "body_markdown": "这条事实驱动一项不可移动的排期：**大教堂内部与塔楼必须在 2026-09-26（周六）完成**。\n\n推理链：2026-09-27 是周日，内部要到 13:30 才对游客开放，而当天上午就要搭乘前往巴黎的国际列车；2026-09-25 是跨国转场日，抵达时间约 13:20 且当日重点是入住与傍晚蓝调，用户已明确不将内部设为该日刚性任务。因此 09-26 是唯一稳妥窗口，没有备份日。\n\n`verified_at` 有意留空：本轮未直接访问官方开放时间页面确认，只建立了 provenance。出发前一周必须复核，并同时确认是否有临时活动导致时段调整。"
+      "body_markdown": "本条只保存待核实的访问规则，不拥有本次必去清单。批准的内部文化体验由 `europe-2026--2026-09-26` 拥有；塔楼 optional、默认跳过，不再由本 Fact 推导为必须完成。\n\n旧排期依据周日内部游客时段与次日离城的关系，但外部规则仍 pending；不能把这个推理当成当日已确认开放或已购票。若规则变化，复查内部体验的执行余量，不自动恢复塔楼。\n\n`verified_at` 有意留空：本轮未直接访问官方开放时间页面确认，只建立了 provenance。出发前一周必须复核，并同时确认是否有临时活动导致时段调整。"
     },
     {
       "id": "koln-paris-eurostar-direct",
@@ -5544,7 +5579,7 @@
       "confidence": "medium",
       "affects": [
         "transport/2026-10-03-paris-cdg",
-        "europe-2026-paris-stay-placeholder"
+        "europe-2026-paris-wallace-stay"
       ],
       "impact_if_wrong": "出发地所属岸区、预约附加费或实际适用价格可能不同；应在仍可确认官方 taxi 或改用其他机场交通时处理，但不改变 16:30 离开市区的硬节点。",
       "blocks": [],
@@ -5562,6 +5597,7 @@
       "confidence": "medium",
       "affects": [
         "europe-2026-paris-stay-placeholder",
+        "europe-2026-paris-wallace-stay",
         "europe-2026--2026-09-29",
         "europe-2026--2026-09-30",
         "europe-2026--2026-10-02"
@@ -5583,9 +5619,9 @@
       "affects": [
         "transport/2026-09-21-rotterdam-brussels"
       ],
-      "impact_if_wrong": "2026-09-21 需要在鹿特丹结束傍晚拍摄后再南下；若夜间班次比预期稀疏，抵达布鲁塞尔的时间会显著推迟，深夜带行李抵达的风险随之上升。",
+      "impact_if_wrong": "实际南下班次、取箱与酒店末段可能无法满足批准的酒店抵达 planning target；应削减摄影并重排当日节奏，不能把服务频率概括当成已确认车次。",
       "blocks": [],
-      "body_markdown": "本条只支持\"当晚可以南下\"这一结构性判断，不支持任何具体发车时刻。是否完整保留鹿特丹的傍晚拍摄、以及搭乘哪一班，仍是执行时决策，不在 canonical 中固定。\n\n两项仍待确认：当日实际班次表；以及所选班次是否停靠 Bruxelles-Central。后者直接影响深夜抵达的车站环境。\n\n`verified_at` 有意留空。"
+      "body_markdown": "本条只支持\"当晚可以南下\"这一结构性判断，不支持任何具体发车时刻。默认不再保留鹿特丹傍晚追逐；具体取舍与酒店抵达 planning target 由 europe-2026--2026-09-21 拥有。搭乘哪一班仍待实际时刻表确认。\n\n两项仍待确认：当日实际班次表；以及所选班次是否停靠 Bruxelles-Central。后者直接影响深夜抵达的车站环境。\n\n`verified_at` 有意留空。"
     },
     {
       "id": "versailles-musical-gardens-2026",
@@ -5627,7 +5663,7 @@
     {
       "id": "accommodation-change-limit-five",
       "title": "经 Trip Structure Review 批准把住宿变更上限提高到五次",
-      "status": "active",
+      "status": "superseded",
       "decision": "europe-2026-accommodation-change-limit 的上限由 4 次提高到 5 次，severity 保持 hard。该批准只适用于当前 baseline，不构成继续放宽的先例。",
       "rationale": "该 constraint 的原始描述本身写明\"超过上限必须先做 Trip Structure Review\"，因此提高上限是在执行它自带的逃生口，而不是绕过它。Trip Structure Review 已完成并由用户批准新 baseline，第五次变更是审核后的结构调整。保持 severity 为 hard 可以确保第六次变更仍会触发同样的审核，护栏强度不因本次例外而下降。",
       "evidence": [],
@@ -5639,7 +5675,7 @@
         "trip-structure",
         "accommodation"
       ],
-      "body_markdown": "## 为什么不选另外两种做法\n\n把 severity 由 hard 降为 soft，会为一次性例外永久削弱护栏；整条退役则直接失去护栏。两者都用永久性代价换取一次性便利。提高数值并保留 hard，是唯一在批准本次例外的同时保住下一次审核的方案。\n\n## 该护栏度量的是什么\n\n`accommodation_changes` 由 validator 派生为**有效住宿段数减一**，统计的是住宿段而非不同城市数。本次两者一致（六段、六城），因此不存在计数歧义。被 tombstone 为 `cancelled` 的安特卫普住宿不参与该派生。\n\n## 明确不被本决策批准的内容\n\n本记录不批准六次或更多的住宿变更。任何进一步增加都必须重新执行 Trip Structure Review 并单独记录，不得以\"上次已经放宽过\"为由自动通过。"
+      "body_markdown": "## 为什么不选另外两种做法\n\n把 severity 由 hard 降为 soft，会为一次性例外永久削弱护栏；整条退役则直接失去护栏。两者都用永久性代价换取一次性便利。提高数值并保留 hard，是唯一在批准本次例外的同时保住下一次审核的方案。\n\n## 该护栏度量的是什么\n\n`accommodation_changes` 由 validator 派生为**有效住宿段数减一**，统计的是住宿段而非不同城市数。本次两者一致（六段、六城），因此不存在计数歧义。被 tombstone 为 `cancelled` 的安特卫普住宿不参与该派生。\n\n## 明确不被本决策批准的内容\n\n本记录不批准六次或更多的住宿变更。任何进一步增加都必须重新执行 Trip Structure Review 并单独记录，不得以\"上次已经放宽过\"为由自动通过。\n\n## 2026-09-09 生命周期协调\n\n本记录由 [Europe 2026 住宿分段批准](/library/decisions/europe-2026-lodging-segmentation) supersede。以上原判断、理由、证据和创建日期保留历史；当前上限与本次批准范围由新记录拥有，不继续并列执行旧上限。"
     },
     {
       "id": "amsterdam-antwerp-train-choice",
@@ -5761,6 +5797,42 @@
       "body_markdown": "## 锚点事实\n\n住宿为 THE QVEST Hideaway，Gereonskloster 12, 50670 Köln，2026-09-25 至 2026-09-27 共两晚，一位成人，订单号 `RV026060/1`，入住 15:00、退房 11:00。该预订**不可退、不可再改**。\n\n金额为总额 EUR 335.58，其中已支付 EUR 328.10，尾款 EUR 7.48；另有 EUR 150 押金。\n\n**这些金额不保存在 Operation 中。** 当前 `Operation` schema 处于冻结状态且为 strict，没有 booking reference、amount、currency、refundable 或 deposit 字段。把金额塞进 `buffer_minutes` 等数值字段会制造语义错误，因此本轮只在 `europe-2026-cologne-stay` 的 `ref` 自由文本中保留订单号与不可退性质，完整财务事实保存在本记录与 2026-09-25 的 TripDay 中。\n\n这构成一个已登记的 schema follow-up：这是本 Trip 第一笔真实预订，也是第一次证明 `Operation` 无法结构化承载预订的财务面。是否为此解冻 schema 属于单独提案，不在本轮执行。\n\n## 由锚点推导出的结构\n\n安特卫普退出住宿序列，改为 09-22 自布鲁塞尔出发的无行李日游；布鲁塞尔由未选分支升为两晚 base；布鲁日日期由 09-26 前移到 09-23，晚数不变；根特由两晚压缩为一晚，保留 09-24 傍晚与 09-25 清晨两个核心窗口；阿姆斯特丹由三晚压缩为两晚，09-21 当天南下不再折返。\n\n住宿段由五段增加到六段，住宿变更次数由四次增加到五次，超出原有规划护栏，处理见 decision/accommodation-change-limit-five。\n\n## 未被本决策批准的内容\n\n本决策批准的是**路线骨架**，不包括执行层选择。具体车次、鹿特丹傍晚蓝调的机位与是否完整保留、以及科隆 → 巴黎的具体班次，全部保持 candidate，未随本决策升级为已批准状态。"
     },
     {
+      "id": "europe-2026-approved-day-rhythm",
+      "title": "Europe 2026 已批准的日节奏与默认执行取舍",
+      "status": "active",
+      "decision": "应用用户于 2026-09-08 明确批准的 U01–U07 与 9/25 dinner OPTION A；餐食、恢复、真实文化体验和转场优先级进入 TripDay，条件摄影不继续作为默认必须执行项。Louvre 为巴黎主要艺术馆体验；Orsay 默认 OFF，只有用户明确重新表达兴趣才重新评估，不由返程体力自动触发。恢复、正餐和较早入住可优先于傍晚摄影。",
+      "rationale": "本次实施权来自用户最终批准，不来自 Recon 建议池。减少重复摄影与连续早起，保护真正观看、正常用餐及后半程恢复；城市顺序、住宿晚数、base city 与旅行日期边界均不改变。",
+      "evidence": [],
+      "judgement_no_external_evidence": true,
+      "created_at": "2026-09-08",
+      "revisit_if": [],
+      "tags": [
+        "europe-2026",
+        "pacing",
+        "conditional-branch",
+        "user-approved"
+      ],
+      "body_markdown": "## 批准范围与唯一 owner\n\n- U01：Amsterdam 以街区／运河生活为主要非摄影体验，museum 只作未来明确替换。\n- U02：Rotterdam 市场午餐与精简建筑，默认放弃傍晚追逐，酒店抵达目标由该日 TripDay 单独拥有。\n- U03：Antwerp 教堂内部、过隧道前正餐，返回纪律是完成回东岸。\n- U04：减少连续早起，保护双窗口核心日；跨国转场清晨及 Cologne morning 不再默认执行。\n- U05：Seine cruise 的首选与唯一 fallback 由相应 TripDays 拥有；班次、票务、天气仍未落实，不生成虚假预约。\n- U06：Louvre 是主要 art museum experience，建筑摄影不能挤掉真实观看；Orsay 默认 OFF。\n- U07：Paris 机动日至少半天 FLEX，Arc 保留、Bir-Hakeim 低优先 conditional；只有用户未来明确想去 Orsay 才重新评估。\n- 9/25 OPTION A：hotel/luggage → full rest → formal early dinner → conditional photography。零食不能替代正式晚餐。\n\n各日餐食、恢复预算和条件由 TripDay 拥有，摄影时间和状态由 ShootSession 拥有，交通／预订由 Operation 拥有；本记录不复制第二套 timeline。\n\n## 现有模型中的最窄退路\n\nSESSION_OPTIONALITY_GAP：现有 planned + low/notes 仍会成为默认可执行项，没有可靠的 active-but-optional 语义。本次将被撤回的默认排程保留原 ID、spot 和历史时刻，以 cancelled 表示**用户撤回这条默认排程**，不是宣称已旅行、未遂或外部服务取消。候选与重新选择条件留在 TripDay；重新激活前必须落实当时条件和摄影时刻。Bir-Hakeim 的 departure Operation 同步撤回，既有安全 Constraint 不删除、不放宽。\n\nSTRUCTURED_EXPRESSION_GAP：三餐、恢复、通用文化体验、游船没有合法的独立执行投影；本次只用 TripDay 内容，不创建伪 reference booking 或 hard Constraint，不宣称 UI 已支持完整 Day Rhythm。\n\n## 与旧治理记录的边界\n\n本记录保存本次已经批准的例外，不重新决定路线。`protect-photographic-windows` 的概括不能把 Rotterdam 傍晚摄影恢复为默认，也不能压过批准的转场正餐与恢复。`paris-museum-distribution` 中旧的 Orsay Thursday evening 触发不再是本次执行指令；本次以 U06/U07 的默认 OFF 为准。2026-09-09 targeted remediation 使用现有 lifecycle 将上述两条旧记录标为 superseded；原判断、理由、证据与创建日期留在旧记录中。本记录是当前执行原则，不再并列执行旧政策。\n\n`bruges-overnight` 的 evidence/revisit_if 不删除，superseded Fact 仍按现有合同派生 review_required；这不撤销已经批准的过夜。\n\n外部 Facts 未在本 session 重新联网核实，不能更新 verified_at。Recon 文档仅为 handoff，不是 implementation authority。"
+    },
+    {
+      "id": "europe-2026-lodging-segmentation",
+      "title": "Europe 2026 当前住宿分段与八次上限批准",
+      "status": "active",
+      "decision": "用户批准 Lodging Preview V2 及 OPTION B，保留当前住宿分段，将 accommodation-change hard limit 从五次调整为八次；超过八次仍须重新 review 与批准。",
+      "rationale": "已订住宿包括同城换酒店，不能按城市去重或修改 validator 来掩盖物流负担。保持既有城市顺序、各城总夜数及旅行日期边界，新增换店成本由对应日的局部物流承担，不改变 U01–U07、Antwerp 或 Cologne day-rhythm。",
+      "evidence": [],
+      "judgement_no_external_evidence": true,
+      "created_at": "2026-09-09",
+      "revisit_if": [],
+      "tags": [
+        "europe-2026",
+        "accommodation",
+        "trip-structure",
+        "user-approved"
+      ],
+      "body_markdown": "## 批准范围与历史\n\n本记录 supersede `accommodation-change-limit-five` 的当前上限政策；旧判断、证据及历史保留，不追写旧批准。此次实施依据用户明确批准，不是外部酒店服务核实。\n\n当前分段由住宿 Operations 派生为九段，model count = 8。计数仍是有效住宿段数减一，同城换店也计入；validator 不修改，Constraint 保持 hard。八次是当前批准上限，不代表最终必然实际搬箱八次。首晚 Amsterdam 仍 OPEN；若最终与次晚构成同一连续住宿并合法合并记录，计数可下降。更多换店不自动获得授权，超过八次必须重新 review。\n\n酒店身份、日期及 booking 状态只由住宿 Operations 拥有，用户已明确报告六项新酒店为有效预订。此记录不补价格、积分、取消条款、房型、早餐或升级结果；原科隆住宿和已有不可退证据不变。\n\n## 未决内容与执行边界\n\nBruges overnight 仍是 flexible current plan，酒店 OPEN；若前段明显疲劳，用户保留重新决策权。在实际新决定之前不取消 Bruges、不创建替代路线、不改次日 Bruges→Ghent。`bruges-overnight` 的历史收益和 evidence/revisit_if 保留，本次不把疲劳复评权写成自动逆转；U04 的疲劳减负不变。\n\n9/22 行李方案未最终选择，A 只是优先核实候选，B 是 fallback；条件与交接链由当日 TripDay 拥有。不创建 confirmed 酒店服务 Fact 或虚假的交通时间。Antwerp itinerary 与安全截止不变。\n\n换店办理、寄存、车站承接、入住与恢复成本由对应 TripDay / Operation 承担。10/2 不以搬箱替代半天 FLEX 或恢复，不因 Wallace 而激活 Bir-Hakeim；其被选择时的安全边界以及次日机场出发边界保持不变。SESSION_OPTIONALITY_GAP 与通用餐食/恢复结构化不在本次范围。"
+    },
+    {
       "id": "ghent-brussels-flex-day",
       "title": "9月25日只保留共同清晨并延后选择 Ghent / Brussels 分支",
       "status": "superseded",
@@ -5804,7 +5876,7 @@
     {
       "id": "paris-museum-distribution",
       "title": "Paris museum distribution protects outdoor photography windows",
-      "status": "active",
+      "status": "superseded",
       "decision": "Keep Louvre on 9/30 and Versailles as the selected 10/1 day trip; Musée d'Orsay remains an optional evening only after the Versailles return and recovery check.",
       "rationale": "The distribution avoids closure-day collisions and protects the irreplaceable Louvre pyramid and Versailles garden photography windows. Treating Orsay as mandatory would turn a recovery-dependent option into a false fixed timeline.",
       "evidence": [
@@ -5826,7 +5898,7 @@
         "museums",
         "conditional-branch"
       ],
-      "body_markdown": "If a referenced Fact becomes `wrong` or `superseded`, the Decision derives to `review_required`; it never automatically reverses or creates an Orsay timeline. Any future selection of Orsay must add its own Trip instance records."
+      "body_markdown": "If a referenced Fact becomes `wrong` or `superseded`, the Decision derives to `review_required`; it never automatically reverses or creates an Orsay timeline. Any future selection of Orsay must add its own Trip instance records.\n\n## 2026-09-09 生命周期协调\n\n本记录已由 [Europe 2026 已批准的日节奏与默认执行取舍](/library/decisions/europe-2026-approved-day-rhythm) 替代。以上 decision、rationale、evidence、created_at 和 revisit_if 保留历史判断，不再作为当前执行政策；此次替代依据用户批准，不宣称重新核实外部 Facts。"
     },
     {
       "id": "paris-skyline-viewpoint-replacement",
@@ -5848,7 +5920,7 @@
     {
       "id": "protect-photographic-windows",
       "title": "城际移动不得消耗核心摄影光线窗口",
-      "status": "active",
+      "status": "superseded",
       "decision": "当前路线把城际移动放在上午至中午，保留傍晚与蓝调摄影窗口；后续迁移不得为了表面行程密度把移动推入核心光线时段。",
       "rationale": "这次路线的成功标准是保住可替代性最低的摄影条件，而不是最大化城市或景点数量。",
       "evidence": [],
@@ -5860,7 +5932,7 @@
         "photography",
         "trip-governance"
       ],
-      "body_markdown": "铁路总时长、最长单段与每日太阳窗口不写入本记录；它们必须由 Operations 与 astronomy 在运行时派生。本记录只拥有取舍原则。"
+      "body_markdown": "铁路总时长、最长单段与每日太阳窗口不写入本记录；它们必须由 Operations 与 astronomy 在运行时派生。本记录只拥有取舍原则。\n\n## 2026-09-09 生命周期协调\n\n本记录已由 [Europe 2026 已批准的日节奏与默认执行取舍](/library/decisions/europe-2026-approved-day-rhythm) 替代。以上 decision、rationale、evidence、created_at 和 revisit_if 保留历史判断，不再作为当前执行政策；此次替代依据用户批准，不宣称重新核实外部 Facts。"
     },
     {
       "id": "timetable-is-a-tool",
@@ -6028,12 +6100,12 @@
     {
       "trip": "europe-2026",
       "id": "europe-2026-accommodation-change-limit",
-      "description": "当前批准路线最多发生 5 次住宿地点变更；超过上限必须先做 Trip Structure Review。第 5 次是 2026-09 Trip Structure Review 审核并由用户批准的一次结构调整，理由见 decision/accommodation-change-limit-five；该批准不构成继续放宽到 6 次或更多的先例。",
+      "description": "当前批准住宿分段允许最多 8 次住宿变更，仍按有效住宿段数减一计数，同城换店计入；超过上限必须重新 review。8 是本次批准上限而非最终必然发生次数，理由见 decision/europe-2026-lodging-segmentation。",
       "assert": {
         "family": "count_limit",
         "subject": "europe-2026",
         "metric": "accommodation_changes",
-        "value": 5,
+        "value": 8,
         "unit": "count"
       },
       "severity": "hard",
@@ -6102,7 +6174,7 @@
     {
       "trip": "europe-2026",
       "id": "europe-2026-bir-hakeim-departure",
-      "description": "2026-10-02 必须在 21:00 完成 Bir-Hakeim 夜间机位离开；21:01 是分钟精度下的严格上界。",
+      "description": "仅当选择执行 2026-10-02 Bir-Hakeim 摄影时，必须在 21:00 完成夜间机位离开；未选择不构成到访或离开义务。21:01 是分钟精度下的严格上界。",
       "assert": {
         "family": "time_before",
         "subject": "operation/2026-10-02-bir-hakeim-departure",
@@ -6130,15 +6202,26 @@
   ],
   "operations": [
     {
+      "id": "europe-2026-amsterdam-renaissance-stay",
+      "type": "accommodation",
+      "trip": "europe-2026",
+      "date": "2026-09-20",
+      "status": "confirmed",
+      "ref": "Renaissance Amsterdam Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
+      "check_in_date": "2026-09-20",
+      "check_out_date": "2026-09-21"
+    },
+    {
       "id": "europe-2026-amsterdam-stay-placeholder",
       "type": "accommodation",
       "trip": "europe-2026",
       "date": "2026-09-19",
       "status": "planned",
-      "ref": "Amsterdam stay — Jordaan or western canal belt preferred; two nights only under the 3A baseline, so 09-20 is the single full photography day; property not selected",
+      "ref": "Amsterdam 首晚住宿 OPEN；酒店未选，不假定与次晚同店。",
       "booking_status": "placeholder",
       "check_in_date": "2026-09-19",
-      "check_out_date": "2026-09-21",
+      "check_out_date": "2026-09-20",
       "opens_at": "2026-08-13",
       "act_by": "2026-09-01"
     },
@@ -6161,7 +6244,7 @@
       "trip": "europe-2026",
       "date": "2026-09-23",
       "status": "planned",
-      "ref": "Bruges stay — old-town access near Rozenhoedkaai required; property not selected",
+      "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
       "booking_status": "placeholder",
       "check_in_date": "2026-09-23",
       "check_out_date": "2026-09-24",
@@ -6169,17 +6252,26 @@
       "act_by": "2026-09-01"
     },
     {
+      "id": "europe-2026-brussels-cardo-stay",
+      "type": "accommodation",
+      "trip": "europe-2026",
+      "date": "2026-09-22",
+      "status": "confirmed",
+      "ref": "Cardo Brussels, Autograph Collection — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
+      "check_in_date": "2026-09-22",
+      "check_out_date": "2026-09-23"
+    },
+    {
       "id": "europe-2026-brussels-stay-placeholder",
       "type": "accommodation",
       "trip": "europe-2026",
       "date": "2026-09-21",
-      "status": "planned",
-      "ref": "Brussels stay — walking distance to Bruxelles-Central required; arrival on 09-21 is late in the evening, so 24-hour reception or a confirmed late check-in process must be verified before booking; Bruxelles-Midi surroundings excluded; property not selected",
-      "booking_status": "placeholder",
+      "status": "confirmed",
+      "ref": "Brussels Marriott Hotel Grand Place — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
       "check_in_date": "2026-09-21",
-      "check_out_date": "2026-09-23",
-      "opens_at": "2026-09-04",
-      "act_by": "2026-09-08"
+      "check_out_date": "2026-09-22"
     },
     {
       "id": "europe-2026-cologne-stay",
@@ -6197,26 +6289,33 @@
       "type": "accommodation",
       "trip": "europe-2026",
       "date": "2026-09-24",
-      "status": "planned",
-      "ref": "Ghent stay — old-town core near Graslei required; a single night under the 3A baseline leaves no location tolerance, since both the evening and the following morning happen within 500 m of Sint-Michielsbrug; property not selected",
-      "booking_status": "placeholder",
+      "status": "confirmed",
+      "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
       "check_in_date": "2026-09-24",
-      "check_out_date": "2026-09-25",
-      "opens_at": "2026-08-01",
-      "act_by": "2026-09-01"
+      "check_out_date": "2026-09-25"
     },
     {
       "id": "europe-2026-paris-stay-placeholder",
       "type": "accommodation",
       "trip": "europe-2026",
       "date": "2026-09-27",
-      "status": "planned",
-      "ref": "Paris stay — Latin Quarter or Saint-Germain preferred; property not selected",
-      "booking_status": "placeholder",
+      "status": "confirmed",
+      "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
       "check_in_date": "2026-09-27",
-      "check_out_date": "2026-10-03",
-      "opens_at": "2026-08-01",
-      "act_by": "2026-09-01"
+      "check_out_date": "2026-10-02"
+    },
+    {
+      "id": "europe-2026-paris-wallace-stay",
+      "type": "accommodation",
+      "trip": "europe-2026",
+      "date": "2026-10-02",
+      "status": "confirmed",
+      "ref": "Hôtel Wallace, a member of Design Hotels — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+      "booking_status": "booked",
+      "check_in_date": "2026-10-02",
+      "check_out_date": "2026-10-03"
     },
     {
       "id": "operation/2026-09-19-digital-equipment-readiness",
@@ -6273,8 +6372,8 @@
       "type": "reference",
       "trip": "europe-2026",
       "date": "2026-10-02",
-      "status": "planned",
-      "ref": "Finish packing equipment and leave the Bir-Hakeim night location by 21:00",
+      "status": "cancelled",
+      "ref": "Default execution withdrawn with the conditional Bir-Hakeim session under decision/europe-2026-approved-day-rhythm; historical start/end preserve the safety envelope. Reactivate only together with that session after selection; the existing hard Constraint remains the safety bound, not a reason to visit.",
       "start_time": "20:50",
       "end_time": "21:00"
     },
@@ -6415,9 +6514,7 @@
       "trip": "europe-2026",
       "date": "2026-09-22",
       "status": "planned",
-      "ref": "Antwerpen-Centraal → Bruxelles-Central, day-trip return after the Grote Markt blue hour; confirm the actual last service the evening before, since strike days reduce frequency",
-      "start_time": "21:30",
-      "end_time": "22:30",
+      "ref": "Antwerpen-Centraal → Bruxelles-Central day-trip return; choose an earlier feasible service after the short east-bank core, with dinner already completed; exact service and station-to-hotel leg remain unconfirmed, not a guaranteed late return envelope",
       "from": "antwerpen-centraal",
       "to": "bruxelles-central",
       "booking_status": "unbooked"
@@ -6555,9 +6652,7 @@
       "trip": "europe-2026",
       "date": "2026-09-27",
       "status": "planned",
-      "ref": "Gare du Nord → Paris accommodation transfer",
-      "start_time": "14:30",
-      "end_time": "15:15",
+      "ref": "Gare du Nord → europe-2026-paris-stay-placeholder；实际到站、下车与出站之后再接驳。住宿身份和日期见 accommodation Operation；路线、移动时间及房间可用条件未核实，抵达恢复由 TripDay 拥有。",
       "from": "gare-du-nord",
       "to": "paris",
       "booking_status": "unbooked"
@@ -6594,7 +6689,7 @@
       "trip": "europe-2026",
       "date": "2026-10-03",
       "status": "planned",
-      "ref": "Paris accommodation → Charles de Gaulle Airport official taxi or reviewed fallback; C-004 fare remains pending",
+      "ref": "europe-2026-paris-wallace-stay → Charles de Gaulle Airport official taxi or reviewed fallback；住宿身份见 accommodation Operation；取件、接车与实际交通条件未核实，既有时刻是规划包络而非新确认的交通事实；C-004 fare remains pending。",
       "start_time": "16:30",
       "end_time": "18:15",
       "from": "paris",

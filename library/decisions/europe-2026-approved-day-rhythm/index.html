@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="Personal Travel OS — reusable travel knowledge and trip operations"><meta name="generator" content="Astro v7.2.1"><title>Europe 2026 已批准的日节奏与默认执行取舍 · 判断记录</title><link rel="stylesheet" href="/_astro/BaseLayout.DnBfe4Ho.css"></head><body data-build="542273503db1:1" data-section="library"><header class="site-header"><a class="brand" href="/"><span class="brand-mark">PT</span><span><strong>Personal Travel OS</strong><small>旅行知识 · 行程 · 执行</small></span></a><nav aria-label="主导航"><a data-nav="today" href="/">今天</a><a data-nav="trip" href="/">行程</a><a data-nav="actions" href="/">待办</a><a data-nav="library" href="/library" aria-current="page">知识库</a></nav></header><main><nav class="library-trail library-trail-top" aria-label="所在层级"><ol><li><a href="/library">知识库</a></li><li><a href="/library/decisions">判断记录</a></li></ol></nav><header class="reference-header"><div><p class="eyebrow">跨旅行知识库</p><h1>Europe 2026 已批准的日节奏与默认执行取舍</h1><p class="lede">这条判断不属于某一次旅行；每一天只通过稳定 ID 引用它。</p></div><div class="reference-type"><span>判断状态</span><strong>生效中</strong><span>创建时间 2026-09-08</span></div></header><section class="decision-summary"><article class="card"><p class="eyebrow">判断</p><p>应用用户于 2026-09-08 明确批准的 U01–U07 与 9/25 dinner OPTION A；餐食、恢复、真实文化体验和转场优先级进入 TripDay，条件摄影不继续作为默认必须执行项。Louvre 为巴黎主要艺术馆体验；Orsay 默认 OFF，只有用户明确重新表达兴趣才重新评估，不由返程体力自动触发。恢复、正餐和较早入住可优先于傍晚摄影。</p></article><article class="card"><p class="eyebrow">理由</p><p>本次实施权来自用户最终批准，不来自 Recon 建议池。减少重复摄影与连续早起，保护真正观看、正常用餐及后半程恢复；城市顺序、住宿晚数、base city 与旅行日期边界均不改变。</p></article><article class="card"><p class="eyebrow">依据</p><p>没有外部依据，属于判断</p></article><article class="card"><p class="eyebrow">需要重新评估的条件</p><p>没有触发条件</p></article></section><article class="reference-body prose"><h2 id="批准范围与唯一-owner">批准范围与唯一 owner</h2>
+<ul>
+<li>U01：Amsterdam 以街区／运河生活为主要非摄影体验，museum 只作未来明确替换。</li>
+<li>U02：Rotterdam 市场午餐与精简建筑，默认放弃傍晚追逐，酒店抵达目标由该日 TripDay 单独拥有。</li>
+<li>U03：Antwerp 教堂内部、过隧道前正餐，返回纪律是完成回东岸。</li>
+<li>U04：减少连续早起，保护双窗口核心日；跨国转场清晨及 Cologne morning 不再默认执行。</li>
+<li>U05：Seine cruise 的首选与唯一 fallback 由相应 TripDays 拥有；班次、票务、天气仍未落实，不生成虚假预约。</li>
+<li>U06：Louvre 是主要 art museum experience，建筑摄影不能挤掉真实观看；Orsay 默认 OFF。</li>
+<li>U07：Paris 机动日至少半天 FLEX，Arc 保留、Bir-Hakeim 低优先 conditional；只有用户未来明确想去 Orsay 才重新评估。</li>
+<li>9/25 OPTION A：hotel/luggage → full rest → formal early dinner → conditional photography。零食不能替代正式晚餐。</li>
+</ul>
+<p>各日餐食、恢复预算和条件由 TripDay 拥有，摄影时间和状态由 ShootSession 拥有，交通／预订由 Operation 拥有；本记录不复制第二套 timeline。</p>
+<h2 id="现有模型中的最窄退路">现有模型中的最窄退路</h2>
+<p>SESSION_OPTIONALITY_GAP：现有 planned + low/notes 仍会成为默认可执行项，没有可靠的 active-but-optional 语义。本次将被撤回的默认排程保留原 ID、spot 和历史时刻，以 cancelled 表示<strong>用户撤回这条默认排程</strong>，不是宣称已旅行、未遂或外部服务取消。候选与重新选择条件留在 TripDay；重新激活前必须落实当时条件和摄影时刻。Bir-Hakeim 的 departure Operation 同步撤回，既有安全 Constraint 不删除、不放宽。</p>
+<p>STRUCTURED_EXPRESSION_GAP：三餐、恢复、通用文化体验、游船没有合法的独立执行投影；本次只用 TripDay 内容，不创建伪 reference booking 或 hard Constraint，不宣称 UI 已支持完整 Day Rhythm。</p>
+<h2 id="与旧治理记录的边界">与旧治理记录的边界</h2>
+<p>本记录保存本次已经批准的例外，不重新决定路线。<code>protect-photographic-windows</code> 的概括不能把 Rotterdam 傍晚摄影恢复为默认，也不能压过批准的转场正餐与恢复。<code>paris-museum-distribution</code> 中旧的 Orsay Thursday evening 触发不再是本次执行指令；本次以 U06/U07 的默认 OFF 为准。2026-09-09 targeted remediation 使用现有 lifecycle 将上述两条旧记录标为 superseded；原判断、理由、证据与创建日期留在旧记录中。本记录是当前执行原则，不再并列执行旧政策。</p>
+<p><code>bruges-overnight</code> 的 evidence/revisit_if 不删除，superseded Fact 仍按现有合同派生 review_required；这不撤销已经批准的过夜。</p>
+<p>外部 Facts 未在本 session 重新联网核实，不能更新 verified_at。Recon 文档仅为 handoff，不是 implementation authority。</p>
+</article><nav class="library-trail library-trail-bottom" aria-label="所在层级"><ol><li><a href="/library">知识库</a></li><li><a href="/library/decisions">判断记录</a></li><li><span aria-current="page">Europe 2026 已批准的日节奏与默认执行取舍</span></li></ol></nav></main><footer><span>Personal Travel OS</span><span>行程记录来自 canonical，页面只做呈现。</span></footer><script type="module" src="/_astro/BaseLayout.astro_astro_type_script_index_0_lang.vUpxpPOr.js"></script></body></html>
