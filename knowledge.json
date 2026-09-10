@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.1.0",
-  "generatedAt": "2026-09-09T10:06:07.840Z",
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-09-10T01:45:01.805Z",
   "trips": [
     {
       "id": "europe-2026",
@@ -160,6 +160,487 @@
       "body_markdown": "## 当日节奏\n\n摄影开始时刻仅由当日 ShootSession 拥有。清晨收工后保护 30–45 分钟早餐，再用正常营业时的 Jordaan / Nine Streets 运河街区感受城市生活，允许坐 café、看店铺和不带成片目标的慢走。午餐保护 45–60 分钟；午间回房完整恢复，不能用跨城移动代替。下午不再去东港区串点。\n\n晚间摄影前完成约 60 分钟正式晚餐，收工后直接回酒店。Magere Brug 的短摄影如挤压吃饭便让位；七桥是晚间核心，不追加第二轮蓝调追逐。\n\n## 替换而非叠加\n\n依据 `europe-2026-approved-day-rhythm` 的 U01，Rijksmuseum 不在默认 itinerary；未来只有明确想入馆并落实访问条件，才替换街区生活。同样遵守 `anne-frank-house-optional` 与 `timetable-is-a-tool`，未选择博物馆不生成实例。\n\n## 本次住宿落实与局部物流\n\n清晨起床地点仍取决于首晚 OPEN 住宿，不假定已经住在次晚酒店。今晚住宿见 `europe-2026-amsterdam-renaissance-stay`。两段尚未合并，需为退房、取箱与新店交接留真实余量；提前寄存和房间可用性未核实。午间完整恢复继续受保护，搬箱、通勤与等房不能代替恢复；若交接挤压既有节奏，先报告物流冲突，不自动重排摄影核心。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "坐下早餐",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          },
+          {
+            "id": "pack",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "prepare"
+            },
+            "title": "早餐后打包",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "checkout-policy",
+                "question": "退房政策与办理耗时待落实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "办理退房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          },
+          {
+            "id": "station-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "operation",
+                "id": "europe-2026-amsterdam-renaissance-stay"
+              },
+              {
+                "type": "operation",
+                "id": "transport/2026-09-21-amsterdam-rotterdam"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "station-access",
+                "question": "酒店至车站末段耗时待核实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "move"
+            },
+            "title": "带箱赴站",
+            "at": {
+              "type": "place",
+              "id": "amsterdam-centraal"
+            }
+          },
+          {
+            "id": "train-rotterdam",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "kind": "operation",
+            "operation_id": "transport/2026-09-21-amsterdam-rotterdam"
+          },
+          {
+            "id": "luggage-drop",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "storage",
+                "question": "具体寄存设施、可用性、取件窗口及故障退路待落实；未确认时压缩或放弃城市停留，带箱继续南下，不拖箱去桥边摄影。"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-drop"
+            },
+            "title": "先办理行李寄存",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 20,
+              "max_minutes": 30,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "rotterdam-centraal"
+            }
+          },
+          {
+            "id": "storage-buffer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "buffer",
+                "question": "故障余量预算待明确"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "存箱故障余量"
+          },
+          {
+            "id": "rotterdam-centraal-exterior",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-21-rotterdam-centraal-exterior"
+          },
+          {
+            "id": "market-lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "Markthal 正式午餐与市场体验",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 75,
+              "protected": true
+            },
+            "photography_refs": [
+              "europe-2026-2026-09-21-markthal"
+            ]
+          },
+          {
+            "id": "kubuswoningen",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-21-kubuswoningen"
+          },
+          {
+            "id": "erasmusbrug-day",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-21-erasmusbrug-day"
+          },
+          {
+            "id": "de-rotterdam",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-21-de-rotterdam"
+          },
+          {
+            "id": "seated-recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "独立坐下恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式晚餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "luggage-pickup",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "collection",
+                "question": "取件窗口及办理余量待落实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-pickup"
+            },
+            "title": "晚餐后取箱",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 20,
+              "max_minutes": 30,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "rotterdam-centraal"
+            }
+          },
+          {
+            "id": "boarding-buffer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "operation",
+                "id": "transport/2026-09-21-rotterdam-brussels"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "取箱后进站候车"
+          },
+          {
+            "id": "train-brussels",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "fact",
+                "id": "rotterdam-brussels-eurocity-frequency"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-21-rotterdam-brussels"
+          },
+          {
+            "id": "hotel-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "last-mile",
+                "question": "实际到站与酒店末段待落实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "move"
+            },
+            "title": "到站后前往今晚酒店",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          },
+          {
+            "id": "hotel-arrival",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "arrive"
+            },
+            "title": "到达今晚住宿",
+            "target": {
+              "boundary": "start",
+              "preferred": "21:00",
+              "latest": "21:30"
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "late-arrival",
+                "question": "晚到接待与入房流程待核实；预订确认不表示已入住"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "办理入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "洗漱、当天结束",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-21",
       "trip": "europe-2026",
       "date": "2026-09-21",
@@ -167,7 +648,7 @@
       "priorities": [
         "早餐、退房、带箱转场，先解决 Rotterdam 行李承接",
         "Markthal 是真实午餐与市场体验，Cube Houses 和精简现代建筑是摄影主线",
-        "布鲁塞尔酒店抵达以 21:00 为优选、21:30 为最迟合理 planning target"
+        "保护南下与酒店收口；抵达规划目标见执行步骤"
       ],
       "trade_offs": [
         "Rijnhaven evening 与完整蓝调追逐退出默认计划",
@@ -176,7 +657,7 @@
       ],
       "pacing": "早餐退房→带箱乘车→确认寄存→市场午餐与精简建筑→坐下休息→南下前正式晚餐→取箱→列车→酒店。",
       "risk": "Rotterdam 寄存可用性、取件时段、实际南下车次、Brussels 到站与酒店接待均未闭环。",
-      "body_markdown": "## 先倒推，再拍摄\n\n列车时刻只由 `transport/2026-09-21-amsterdam-rotterdam` 与 `transport/2026-09-21-rotterdam-brussels` 拥有。上面的酒店抵达目标只属于本日节奏；必须以真实南下班次、取箱办理和酒店末段倒推收工与晚餐，不能从目标编造车次。\n\n出发前早餐、打包和退房；抵达 Rotterdam 后先预算 20–30 分钟存箱办理并留故障余量，不把车站摄影开始当作寄存成功保证。P0 OPEN FACT：具体寄存设施、当日可用性、取件截止和故障退路。未确认时压缩或放弃城市停留并带箱继续南下；不拖箱去桥边拍摄。\n\n## 市场、恢复与收口\n\nMarkthal 午餐与市场体验预算 60–75 分钟；建筑摄影只是这一停留的小部分。Cube Houses 后只保留精简的车站和现代建筑节点，Depot、重复跨河与 Rijnhaven 晚段退出默认排程。午后坐下恢复 30–45 分钟，不用步行代替。\n\n正式晚餐在南下前完成，预算约 60 分钟；之后取箱并留 20–30 分钟办理余量、进站候车，具体位置按已核实车次和寄存点选择。若服务延误，先减少摄影，不把正餐推给未知的深夜酒店抵达。到站后直接完成酒店末段和入住，洗漱后早收口。\n\n`rotterdam-brussels-eurocity-frequency` 仍 pending，只是待核实的服务模式。到站、酒店位置及晚到接待必须确认，不能把既有概括当作执行保证。\n\n## 本次住宿落实与局部物流\n\n起床、退房地点引用 `europe-2026-amsterdam-renaissance-stay`；当晚终点引用 `europe-2026-brussels-stay-placeholder`。新预订身份不证明去车站、到站末段或晚到服务已核实；保持既有酒店抵达 planning targets，按真实承接核对余量，不编造接驳时刻。"
+      "body_markdown": "## 先倒推，再拍摄\n\n列车时刻只由 `transport/2026-09-21-amsterdam-rotterdam` 与 `transport/2026-09-21-rotterdam-brussels` 拥有。上面的酒店抵达目标只属于本日节奏；必须以真实南下班次、取箱办理和酒店末段倒推收工与晚餐，不能从目标编造车次。\n\n出发前早餐、打包和退房；抵达 Rotterdam 后先预算 执行步骤规定的存箱办理时间并留故障余量，不把车站摄影开始当作寄存成功保证。P0 OPEN FACT：具体寄存设施、当日可用性、取件截止和故障退路。未确认时压缩或放弃城市停留并带箱继续南下；不拖箱去桥边拍摄。\n\n## 市场、恢复与收口\n\nMarkthal 午餐与市场体验预算见执行步骤；建筑摄影只是这一停留的小部分。Cube Houses 后只保留精简的车站和现代建筑节点，Depot、重复跨河与 Rijnhaven 晚段退出默认排程。午后坐下恢复，预算见执行步骤，不用步行代替。\n\n正式晚餐在南下前完成，预算见执行步骤；之后取箱并留执行步骤规定的办理余量、进站候车，具体位置按已核实车次和寄存点选择。若服务延误，先减少摄影，不把正餐推给未知的深夜酒店抵达。到站后直接完成酒店末段和入住，洗漱后早收口。\n\n`rotterdam-brussels-eurocity-frequency` 仍 pending，只是待核实的服务模式。到站、酒店位置及晚到接待必须确认，不能把既有概括当作执行保证。\n\n## 本次住宿落实与局部物流\n\n起床、退房地点引用 `europe-2026-amsterdam-renaissance-stay`；当晚终点引用 `europe-2026-brussels-stay-placeholder`。新预订身份不证明去车站、到站末段或晚到服务已核实；保持既有酒店抵达 planning targets，按真实承接核对余量，不编造接驳时刻。"
     },
     {
       "id": "europe-2026--2026-09-22",
@@ -293,13 +774,260 @@
       "body_markdown": "`transport/2026-09-27-cologne-paris` 拥有直达规划包络，具体运行与票务仍 pending。早餐后完成退房与进站；午餐选择自带食物或上车前用餐，不默认列车供应。\n\n实际抵达 Gare du Nord 后，先预算 30 分钟下车、出站与找接驳位置，拥挤或晚点需追加；不是车门打开就开始下一段交通。`transport/2026-09-27-gare-du-nord-paris-stay` 的时刻待酒店与实际车次落实后填写。\n\n到店办理、行李安置之后，另保护完整恢复窗口。Île de la Cité 首个摄影和 Pont Neuf 均已撤回默认排程；恢复后只在时间、体力与天气允许时选择一组并激活。条件不足直接晚餐、回店，不追赶旧的首拍时刻。正式晚餐约 60 分钟，之后早收口。\n\n## 本次住宿落实与局部物流\n\n当日退房仍由原 `europe-2026-cologne-stay` 拥有；巴黎当晚终点已落实于 `europe-2026-paris-stay-placeholder`。接驳 Operation 引用该住宿，但实际移动、接箱和入房时间仍未核实。先完成到店办理再保护原恢复预算，不把新酒店身份当成原首拍时刻可行的证明。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "trocadero-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-28-trocadero-morning"
+          },
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "坐下早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "rue-universite",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-28-rue-universite"
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "hotel-recovery-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "return"
+            },
+            "title": "回酒店恢复",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "独立酒店恢复，通勤不计入",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 90,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "left-bank",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Left Bank 慢走与坐 café，允许不拍照",
+            "at": {
+              "type": "place",
+              "id": "paris"
+            }
+          },
+          {
+            "id": "early-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式晚餐"
+          },
+          {
+            "id": "cruise",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "service",
+                "question": "具体 operator、码头、departure、ticket、天气与运行状态待落实；总预算包含赴码头、候船、乘坐与离船，不承诺闪灯或返程。"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Seine cruise 城市体验",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 90,
+              "max_minutes": 120,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "paris"
+            }
+          },
+          {
+            "id": "hotel-return",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "return"
+            },
+            "title": "返回今晚酒店",
+            "target": {
+              "boundary": "end",
+              "latest": "21:30"
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "当天结束",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-28",
       "trip": "europe-2026",
       "date": "2026-09-28",
       "title": "巴黎铁塔清晨、左岸慢生活与游船方向",
       "priorities": [
         "Trocadéro 清晨加 Rue de l’Université 一个额外街景视角",
-        "保护三餐、90 分钟酒店恢复与 Left Bank 慢走／café",
+        "保护三餐、独立酒店恢复与 Left Bank 慢走／café",
         "Seine cruise 首选本日晚间，未选具体船班"
       ],
       "trade_offs": [
@@ -309,7 +1037,7 @@
       ],
       "pacing": "清晨核心→坐下早餐→一个街景视角→午餐→酒店恢复→左岸慢走与咖啡→早晚餐→待落实游船体验。",
       "risk": "游船 operator、具体 departure、ticket 和天气条件均 TBD；Notre-Dame 入内仍受访问条件制约。",
-      "body_markdown": "摄影时刻由当日 Sessions 拥有。清晨后早餐 30–45 分钟，铁塔额外街景只保留 Rue de l’Université；不再串 Camoëns 和 Alexandre III。午餐 45–60 分钟后回酒店完成恢复，通勤不算恢复。\n\n下午选择 Left Bank 的短距离慢走与坐 café，允许完全不拍照；Notre-Dame 外拍不是固定打卡，已退出默认，入内也须另核实条件。正式早晚餐在船前完成，不假定普通观光船提供正餐。\n\n## Approved experience，尚非已订班次\n\n本日为 Seine cruise 首选晚间，总 planning budget 90–120 分钟，包含赴码头、候船、乘坐与离船；最终按所选服务调整。具体 operator、码头、departure、ticket、可接受天气及临时运行状态均为 OPEN FACT / future booking gap，不写不存在的船班，不制造 booked Operation。选择具体 departure 时，以约 21:30 回到酒店作为 planning target，并为离船与返店留余量；这不是 confirmed timetable、confirmed return、booking、hard Constraint 或 Eiffel sparkle 保证。该目标同样适用于次日 fallback。\n\n唯一预设 fallback 引用次日 TripDay；若两晚都不合适则放弃，不挤入 10/2。船上以观看城市为目的，可手持记录，不承诺命中铁塔闪灯或任何计算光窗。"
+      "body_markdown": "摄影时刻由当日 Sessions 拥有。清晨后早餐预算见执行步骤，铁塔额外街景只保留 Rue de l’Université；不再串 Camoëns 和 Alexandre III。按执行步骤完成午餐后回酒店完成恢复，通勤不算恢复。\n\n下午选择 Left Bank 的短距离慢走与坐 café，允许完全不拍照；Notre-Dame 外拍不是固定打卡，已退出默认，入内也须另核实条件。正式早晚餐在船前完成，不假定普通观光船提供正餐。\n\n## Approved experience，尚非已订班次\n\n本日为 Seine cruise 首选晚间，总 planning budget 见执行步骤，包含赴码头、候船、乘坐与离船；最终按所选服务调整。具体 operator、码头、departure、ticket、可接受天气及临时运行状态均为 OPEN FACT / future booking gap，不写不存在的船班，不制造 booked Operation。选择具体 departure 时，以 hotel-return 执行步骤的返店 planning target 选班，并为离船与返店留余量；这不是 confirmed timetable、confirmed return、booking、hard Constraint 或 Eiffel sparkle 保证。该目标同样适用于次日 fallback。\n\n唯一预设 fallback 引用次日 TripDay；若两晚都不合适则放弃，不挤入 10/2。船上以观看城市为目的，可手持记录，不承诺命中铁塔闪灯或任何计算光窗。"
     },
     {
       "id": "europe-2026--2026-09-29",
@@ -369,6 +1097,398 @@
       "body_markdown": "出发前保护 30–45 分钟早餐并准备途中补水。往返交通由既有 Operations 拥有，具体班次仍是规划；抵达后为步行、安检和队列单独预算至少 30–45 分钟，按实际入场要求增加。\n\n先完成宫殿体验。旧 `versailles-gardens-morning` 与 `hall-of-mirrors` 的固定摄影实例已撤回默认，不承诺到站后立即拍花园或宫殿开门时已在镜厅；宫殿内仍可轻量记录，只有票务与实际入场可行时才重排摄影实例。\n\n午餐 45–60 分钟后花园为主，另坐下休息 30–45 分钟。Trianon 为未激活 optional，不挤掉午餐、花园和返程。`ticket/2026-10-01-versailles` 仍 unbooked，访问范围及园区程序继续由 pending Facts 复查。\n\n返回 Paris 后酒店恢复 60–90 分钟，再正式晚餐；不加 Orsay。取消的是虚假的固定机位到位保证，不是已批准的 Versailles day trip。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "坐下早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "checkout",
+                "question": "退房政策与办理窗口待落实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "办理退房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "hotel-transfer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "operation",
+                "id": "europe-2026-paris-stay-placeholder"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "transfer",
+                "question": "实际移动、行李交接与新店寄存服务待落实；搬箱不计 FLEX"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "move"
+            },
+            "title": "带箱转往新酒店",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "hotel-arrival",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "arrive"
+            },
+            "title": "到达新酒店",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "luggage-drop",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "storage",
+                "question": "新店是否可提前接收行李、取件方式待核实，不承诺服务"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-drop"
+            },
+            "title": "新店行李交接／寄存",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "flex",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "flex",
+                "question": "换店办理不能抵扣自由时间；服务未落实时可行性仍 OPEN，不自动压缩"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "flex"
+            },
+            "title": "受保护的至少半天 FLEX",
+            "budget": {
+              "kind": "half-day",
+              "protected": true
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "room-ready",
+                "question": "实际入房时间未核实；等房不计恢复，预订确认不表示入住已完成"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "办理入住与入房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "独立回房恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "early-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式晚餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "arc-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "operation",
+                "id": "ticket/2026-10-02-arc-de-triomphe"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "赴 Arc、入场与安检余量"
+          },
+          {
+            "id": "arc-de-triomphe-rooftop",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "operation",
+                "id": "ticket/2026-10-02-arc-de-triomphe"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-10-02-arc-de-triomphe-rooftop"
+          },
+          {
+            "id": "pont-de-bir-hakeim",
+            "selection": {
+              "mode": "candidate",
+              "when": "低优先 conditional，当前未激活；仅餐食、体力、天气、移动及打包余量均成立后另行选择，同时恢复 Session 与 departure；既有安全 Constraint 继续适用。"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "constraint",
+                "id": "europe-2026-bir-hakeim-departure"
+              },
+              {
+                "type": "operation",
+                "id": "operation/2026-10-02-bir-hakeim-departure"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-10-02-pont-de-bir-hakeim"
+          },
+          {
+            "id": "hotel-return",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "return"
+            },
+            "title": "Arc 后默认直接返回酒店",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "整理离境材料、打包、早睡",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-10-02",
       "trip": "europe-2026",
       "date": "2026-10-02",
@@ -385,7 +1505,7 @@
       ],
       "pacing": "正常早餐→至少半天 FLEX→午餐→较早回房恢复→早晚餐→Arc→条件短尾段或直接酒店→打包早睡。",
       "risk": "Arc 票务仍未落实；Bir-Hakeim 条件成立时仍须遵守既有安全截止，不以晚间收尾影响离境准备。",
-      "body_markdown": "早餐 30–45 分钟，上午不预填项目，连同邻近自由活动保护至少半天。午餐 45–60 分钟；午后较早恢复 60–90 分钟，不再把恢复窗口紧贴 Arc 的出发或 Session 开始。先完成约 60 分钟正式早晚餐，再为赴 Arc、入场和安检另留余量。\n\nArc 摄影时刻由 Session 拥有，票务由 `ticket/2026-10-02-arc-de-triomphe` 拥有。Bir-Hakeim 是低优先、未激活 conditional；只有餐食、体力、天气、移动与打包余量都成立才激活，同步恢复其 departure Operation，并保持既有 hard Constraint。否则 Arc 后直接酒店。\n\nLuxembourg 可在附近休息时选用，访问条件仍需确认，不为它扩展路线。Orsay 默认不选；今后用户明确想去才重新评估，不能由天气或疲劳自动触发。晚间整理离境材料、打包并早睡。\n\n## 本次住宿落实与局部物流\n\n本日上午从 `europe-2026-paris-stay-placeholder` 退房，今晚入住 `europe-2026-paris-wallace-stay`。退房、行李交接、新店寄存及入房须单独留余量，实际移动与酒店服务尚未核实，不写固定搬箱时刻。换店办理不计入至少半天 FLEX，通勤或等房不计入恢复；提前落实交接才能兼容原安排，若做不到必须报告，不自动吞掉自由时间或压缩休息。Arc 仍受保护，Bir-Hakeim 仍 conditional，酒店身份不构成重新激活理由。"
+      "body_markdown": "早餐预算见执行步骤，上午不预填项目，连同邻近自由活动保护至少半天。午餐预算见执行步骤；午后较早恢复，预算见执行步骤，不再把恢复窗口紧贴 Arc 的出发或 Session 开始。先完成执行步骤预算下的正式早晚餐，再为赴 Arc、入场和安检另留余量。\n\nArc 摄影时刻由 Session 拥有，票务由 `ticket/2026-10-02-arc-de-triomphe` 拥有。Bir-Hakeim 是低优先、未激活 conditional；只有餐食、体力、天气、移动与打包余量都成立才激活，同步恢复其 departure Operation，并保持既有 hard Constraint。否则 Arc 后直接酒店。\n\nLuxembourg 可在附近休息时选用，访问条件仍需确认，不为它扩展路线。Orsay 默认不选；今后用户明确想去才重新评估，不能由天气或疲劳自动触发。晚间整理离境材料、打包并早睡。\n\n## 本次住宿落实与局部物流\n\n本日上午从 `europe-2026-paris-stay-placeholder` 退房，今晚入住 `europe-2026-paris-wallace-stay`。退房、行李交接、新店寄存及入房须单独留余量，实际移动与酒店服务尚未核实，不写固定搬箱时刻。换店办理不计入至少半天 FLEX，通勤或等房不计入恢复；提前落实交接才能兼容原安排，若做不到必须报告，不自动吞掉自由时间或压缩休息。Arc 仍受保护，Bir-Hakeim 仍 conditional，酒店身份不构成重新激活理由。"
     },
     {
       "id": "europe-2026--2026-10-03",
