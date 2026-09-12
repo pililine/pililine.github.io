@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-11T01:38:29.913Z",
+  "generatedAt": "2026-09-12T18:43:27.263Z",
   "trips": [
     {
       "id": "europe-2026",
@@ -6914,7 +6914,7 @@
         "accommodation",
         "cologne"
       ],
-      "body_markdown": "## 锚点事实\n\n住宿为 THE QVEST Hideaway，Gereonskloster 12, 50670 Köln，2026-09-25 至 2026-09-27 共两晚，一位成人，订单号 `RV026060/1`，入住 15:00、退房 11:00。该预订**不可退、不可再改**。\n\n金额为总额 EUR 335.58，其中已支付 EUR 328.10，尾款 EUR 7.48；另有 EUR 150 押金。\n\n**这些金额不保存在 Operation 中。** 当前 `Operation` schema 处于冻结状态且为 strict，没有 booking reference、amount、currency、refundable 或 deposit 字段。把金额塞进 `buffer_minutes` 等数值字段会制造语义错误，因此本轮只在 `europe-2026-cologne-stay` 的 `ref` 自由文本中保留订单号与不可退性质，完整财务事实保存在本记录与 2026-09-25 的 TripDay 中。\n\n这构成一个已登记的 schema follow-up：这是本 Trip 第一笔真实预订，也是第一次证明 `Operation` 无法结构化承载预订的财务面。是否为此解冻 schema 属于单独提案，不在本轮执行。\n\n## 由锚点推导出的结构\n\n安特卫普退出住宿序列，改为 09-22 自布鲁塞尔出发的无行李日游；布鲁塞尔由未选分支升为两晚 base；布鲁日日期由 09-26 前移到 09-23，晚数不变；根特由两晚压缩为一晚，保留 09-24 傍晚与 09-25 清晨两个核心窗口；阿姆斯特丹由三晚压缩为两晚，09-21 当天南下不再折返。\n\n住宿段由五段增加到六段，住宿变更次数由四次增加到五次，超出原有规划护栏，处理见 decision/accommodation-change-limit-five。\n\n## 未被本决策批准的内容\n\n本决策批准的是**路线骨架**，不包括执行层选择。具体车次、鹿特丹傍晚蓝调的机位与是否完整保留、以及科隆 → 巴黎的具体班次，全部保持 candidate，未随本决策升级为已批准状态。"
+      "body_markdown": "## 锚点事实\n\n住宿为 THE QVEST Hideaway，Gereonskloster 12, 50670 Köln，2026-09-25 至 2026-09-27 共两晚，一位成人，入住 15:00、退房 11:00。该预订**不可退、不可再改**。订单号属于私密预订凭证，不保存在 canonical，需要时从预订邮件或酒店确认函查阅。\n\n房费绝大部分已在预订时支付，入住时仍有少量尾款需要结清；酒店另会在入住时收取押金／预授权。精确金额属于私密财务信息，不保存在 canonical，需要时从预订邮件或酒店确认函查阅。执行上只需记住两点：抵达时要准备结清尾款，以及信用卡需留出押金额度。\n\n**财务面不保存在 Operation 中。** 当前 `Operation` schema 处于冻结状态且为 strict，没有 booking reference、amount、currency、refundable 或 deposit 字段。把金额塞进 `buffer_minutes` 等数值字段会制造语义错误，因此 `europe-2026-cologne-stay` 的 `ref` 自由文本只保留不可退性质。\n\n订单号与精确金额同属私密预订凭证，不进入 canonical，因此也不会出现在 export、read-model、rendered HTML 或离线分享文件中。canonical 只保留执行时真正需要的语义：已确认、不可退、入住与退房时刻、尾款待结清、押金需预留。\n\n这构成一个已登记的 schema follow-up：这是本 Trip 第一笔真实预订，也是第一次证明 `Operation` 无法结构化承载预订的财务面。是否为此解冻 schema 属于单独提案，不在本轮执行。\n\n## 由锚点推导出的结构\n\n安特卫普退出住宿序列，改为 09-22 自布鲁塞尔出发的无行李日游；布鲁塞尔由未选分支升为两晚 base；布鲁日日期由 09-26 前移到 09-23，晚数不变；根特由两晚压缩为一晚，保留 09-24 傍晚与 09-25 清晨两个核心窗口；阿姆斯特丹由三晚压缩为两晚，09-21 当天南下不再折返。\n\n住宿段由五段增加到六段，住宿变更次数由四次增加到五次，超出原有规划护栏，处理见 decision/accommodation-change-limit-five。\n\n## 未被本决策批准的内容\n\n本决策批准的是**路线骨架**，不包括执行层选择。具体车次、鹿特丹傍晚蓝调的机位与是否完整保留、以及科隆 → 巴黎的具体班次，全部保持 candidate，未随本决策升级为已批准状态。"
     },
     {
       "id": "europe-2026-approved-day-rhythm",
@@ -7399,7 +7399,7 @@
       "trip": "europe-2026",
       "date": "2026-09-25",
       "status": "confirmed",
-      "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+      "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
       "booking_status": "booked",
       "check_in_date": "2026-09-25",
       "check_out_date": "2026-09-27"

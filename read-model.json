@@ -1,8 +1,8 @@
 {
   "readModelVersion": "2.0",
-  "contentHash": "9d05dc0a204aa57aae595d769fd1b9b8f0b22c74d436ed41bd5fb0e5aa0e8df2",
+  "contentHash": "1ee04929001325008d83660a88e4af004f9af9d133e9fe0b8ab17771fca636d3",
   "meta": {
-    "generatedAt": "2026-09-11T01:38:54.342Z"
+    "generatedAt": "2026-09-12T18:43:27.735Z"
   },
   "trips": [
     {
@@ -4015,7 +4015,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -4028,7 +4028,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -4326,7 +4326,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -4341,7 +4341,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -4588,7 +4588,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -4601,7 +4601,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "confirmed",
-                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+                  "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
                   "check_out_date": "2026-09-27"
@@ -8141,7 +8141,7 @@
           "id": "europe-2026-cologne-stay",
           "trip": "europe-2026",
           "type": "accommodation",
-          "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — booking reference RV026060/1; confirmed, non-refundable and final; check-in 15:00, check-out 11:00; monetary amounts and deposit are not representable in the frozen Operation schema and are held in decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
+          "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
           "date": "2026-09-25",
           "status": "confirmed",
           "booking_status": "booked",
