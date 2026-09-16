@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-12T18:43:27.263Z",
+  "generatedAt": "2026-09-16T03:41:27.640Z",
   "trips": [
     {
       "id": "europe-2026",
@@ -141,6 +141,397 @@
       "body_markdown": "这一天没有 active ShootSession，因此不会生成 astronomy 区块。抵达和进城时间分别由 `transport/2026-09-19-arrival-schiphol` 与 `transport/2026-09-19-schiphol-amsterdam-centraal` 提供，TripDay 不复制第二套时刻。\n\n`ees-full-operation-2026` 与 `ees-first-entry-biometrics` 仍为 pending；计划只使用 75 分钟运行缓冲，不把 handbook 对现场排队或临时降级的描述当成已核实事实。今晚不去 De Wallen，也不带全套器材临时外出。\n\n## 本次住宿落实与局部物流\n\n首晚住宿由 `europe-2026-amsterdam-stay-placeholder` 拥有，酒店仍 OPEN，不假定与次晚同一家。机场到 Centraal 的既有交通包络不证明最终酒店接驳已落实；先确定首晚再核实末段，不新增抵达活动。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "brouwersgracht-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "brouwersgracht-prinsengracht"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-20-brouwersgracht-morning"
+          },
+          {
+            "id": "westerkerk-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "westerkerk"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-20-westerkerk-morning"
+          },
+          {
+            "id": "nine-streets-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "de-negen-straatjes"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-20-nine-streets-morning"
+          },
+          {
+            "id": "gouden-bocht-scout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "gouden-bocht"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-20-gouden-bocht-scout"
+          },
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "清晨收工后的长早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "canal-morning-walk",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "fact",
+                "id": "amsterdam-sunday-market-and-retail"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "sunday",
+                "question": "今天是周日：Albert Cuyp 闭市、Noordermarkt 无常规集市、多数商店 12:00 后才开门"
+              },
+              {
+                "id": "why",
+                "question": "所以上午不承担「正常营业时的街区商业生活」，那一段移到 12:00 之后"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "沿运河慢走：不追商店、不设目标、允许坐着"
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "open",
+                "question": "首晚酒店仍未选定，不假定与今晚同一家"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "从首晚住宿退房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-stay-placeholder"
+            }
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "handoff",
+                "question": "退房、取箱与新店交接需要真实余量；提前寄存与房间可用性未核实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "办理今晚住宿入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          },
+          {
+            "id": "neighbourhood-life",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "jordaan"
+              },
+              {
+                "type": "place",
+                "id": "de-negen-straatjes"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "timing",
+                "question": "商店进入正常状态之后才进；街区慢走、独立小店、看人看运河"
+              },
+              {
+                "id": "brown-cafe",
+                "question": "期间明确坐下一次 brown café 三十到四十五分钟；’t Papeneiland 与 ’t Smalle 是候选，不要求集邮"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Jordaan 与 Nine Streets 街区生活（12:00 之后）",
+            "at": {
+              "type": "place",
+              "id": "jordaan"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "not-transfer",
+                "question": "跨城移动、搬行李与找餐厅都不能代替它"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "午间回房完整恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 90,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          },
+          {
+            "id": "rijsttafel-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "booking",
+                "question": "候选方向 Blauw、Kantjil & de Tijger、Sampurna；需提前订位并确认周日营业与蓝调时间兼容"
+              },
+              {
+                "id": "why",
+                "question": "这是阿姆斯特丹最有历史层次的一餐，也是今天唯一需要提前落实的一餐"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "印尼 rijsttafel 晚餐：荷印历史在今天餐桌上的具体形式",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "reguliersgracht-blue-hour",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "reguliersgracht-seven-bridges"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "core",
+                "question": "晚间核心；晚餐不能压缩它，也不追第二轮蓝调"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-20-reguliersgracht-blue-hour"
+          },
+          {
+            "id": "jenever",
+            "selection": {
+              "mode": "candidate",
+              "when": "蓝调收工后仍有体力、路线顺路且营业时间成立；20:45 前结束，累了直接回酒店"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "venue",
+                "question": "Wynand Fockink（Pijlsteeg，Dam 附近）为候选：1679 年至今的杜松子酒品鉴室，按传统没有椅子"
+              },
+              {
+                "id": "next-day",
+                "question": "次日是带箱转场的重日，这一杯不是任务"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "蓝调之后一杯 jenever（站着喝，一杯）",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": false
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店，结束一天",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-amsterdam-renaissance-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-20",
       "trip": "europe-2026",
       "date": "2026-09-20",
@@ -660,6 +1051,437 @@
       "body_markdown": "## 先倒推，再拍摄\n\n列车时刻只由 `transport/2026-09-21-amsterdam-rotterdam` 与 `transport/2026-09-21-rotterdam-brussels` 拥有。上面的酒店抵达目标只属于本日节奏；必须以真实南下班次、取箱办理和酒店末段倒推收工与晚餐，不能从目标编造车次。\n\n出发前早餐、打包和退房；抵达 Rotterdam 后先预算 执行步骤规定的存箱办理时间并留故障余量，不把车站摄影开始当作寄存成功保证。P0 OPEN FACT：具体寄存设施、当日可用性、取件截止和故障退路。未确认时压缩或放弃城市停留并带箱继续南下；不拖箱去桥边拍摄。\n\n## 市场、恢复与收口\n\nMarkthal 午餐与市场体验预算见执行步骤；建筑摄影只是这一停留的小部分。Cube Houses 后只保留精简的车站和现代建筑节点，Depot、重复跨河与 Rijnhaven 晚段退出默认排程。午后坐下恢复，预算见执行步骤，不用步行代替。\n\n正式晚餐在南下前完成，预算见执行步骤；之后取箱并留执行步骤规定的办理余量、进站候车，具体位置按已核实车次和寄存点选择。若服务延误，先减少摄影，不把正餐推给未知的深夜酒店抵达。到站后直接完成酒店末段和入住，洗漱后早收口。\n\n`rotterdam-brussels-eurocity-frequency` 仍 pending，只是待核实的服务模式。到站、酒店位置及晚到接待必须确认，不能把既有概括当作执行保证。\n\n## 本次住宿落实与局部物流\n\n起床、退房地点引用 `europe-2026-amsterdam-renaissance-stay`；当晚终点引用 `europe-2026-brussels-stay-placeholder`。新预订身份不证明去车站、到站末段或晚到服务已核实；保持既有酒店抵达 planning targets，按真实承接核对余量，不编造接驳时刻。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "早餐后无行李出发",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "luggage",
+                "question": "方案 A（留 Marriott，返程取箱）为主选，方案 B（先寄 Cardo）为备选；两者的寄存、取件与晚到接待均未核实"
+              },
+              {
+                "id": "no-detour",
+                "question": "不在安特卫普的摄影间隙折返搬箱；换店不能成为改动教堂、晚餐、隧道或安全截止的理由"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "退房，行李按未决交接方案处理",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-stay-placeholder"
+            }
+          },
+          {
+            "id": "train-antwerp",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-22-brussels-antwerp"
+          },
+          {
+            "id": "antwerpen-centraal",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "antwerpen-centraal"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-22-antwerpen-centraal"
+          },
+          {
+            "id": "cathedral-antwerp",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "cathedral-antwerp"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-22-cathedral-antwerp"
+          },
+          {
+            "id": "cathedral-interior",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "cathedral-antwerp"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "access",
+                "question": "开放时间、票务与入内规则仍需当日核实；外立面摄影不能代替入馆体验"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "大教堂内部文化停留：看空间、理解建筑与历史",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "cathedral-antwerp"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "afternoon-rest",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "午后坐下休息",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "aimless-walk",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "deliberate",
+                "question": "这段时间是刻意留白的；MAS 未激活，Havenhuis 不再踩点，也不补车站第二次摄影"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "没有 landmark 目标的历史中心慢行"
+          },
+          {
+            "id": "bolleke-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "grote-markt-antwerp"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "identity",
+                "question": "bolleke 是安特卫普非常地方化的说法，与布鲁塞尔的 lambic、根特的啤酒之夜不是同一件事"
+              },
+              {
+                "id": "venue",
+                "question": "Grote Markt 一带的老式咖啡馆即可，不指定名店，一杯就够"
+              },
+              {
+                "id": "free-time",
+                "question": "这一杯没有从任何地方抢时间 —— 它用的是原先提前到左岸后的低价值等待"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式早晚餐：carbonnade flamande 与 frites，配一杯 De Koninck bolleke",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "18:00"
+            },
+            "at": {
+              "type": "place",
+              "id": "grote-markt-antwerp"
+            }
+          },
+          {
+            "id": "sint-annatunnel",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "sint-annatunnel"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "experience",
+                "question": "步行穿越 Scheldt 本身就是体验：城市基础设施、历史工程与两岸关系，不需要再加景点"
+              },
+              {
+                "id": "rebalance",
+                "question": "过河时刻由 17:00 后移至 18:15，金光窗口一分钟不变，安全截止一分钟不放宽"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-22-sint-annatunnel"
+          },
+          {
+            "id": "linkeroever-golden",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "linkeroever-antwerp"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "window",
+                "question": "到位后留足构图时间；真正可用的金光约从 19:00 开始"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-22-linkeroever-golden"
+          },
+          {
+            "id": "east-bank-return",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "constraint",
+                "id": "europe-2026-sint-anna-east-bank-return"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "semantics",
+                "question": "19:35 的含义是「已经完成回到东岸」，不是「到那个时刻才离开西岸」；要从它倒推收器材与穿越余量"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "operation/2026-09-22-sint-anna-east-bank-return"
+          },
+          {
+            "id": "grote-markt-blue-hour",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "grote-markt-antwerp"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-22-grote-markt-blue-hour"
+          },
+          {
+            "id": "train-brussels",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "earlier",
+                "question": "饭已经吃过，东岸核心拍摄后立即收工回站，优先更早的可行返程"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-22-antwerp-brussels"
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "late-arrival",
+                "question": "Cardo 晚到接待与入房流程未核实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "返城后完成取箱与新店入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-cardo-stay"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "只洗漱、必要备份与休息，为次日较晚开始留足睡眠",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-cardo-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-22",
       "trip": "europe-2026",
       "date": "2026-09-22",
@@ -679,6 +1501,396 @@
       "body_markdown": "## 文化与餐食\n\n行李按下述未决酒店交接方案处理，早餐后无行李赴 Antwerp。Cathedral interior 是主要文化停留，预算 60–90 分钟观看与理解，开放、票务和入内规则仍需核实；外立面摄影 Session 不能代替入馆体验。午餐保护 45–60 分钟，午后另坐下休息 30–45 分钟。\n\n正式早晚餐在进入 Sint-Annatunnel 前完成，约 60 分钟；隧道摄影与 Linkeroever 开始时刻由 Sessions 拥有。MAS 未激活，只有重新选择且不挤掉文化、餐食及返程时才执行。Havenhuis 不再默认踩点。\n\n## 返回完成，不是开始返回\n\n`operation/2026-09-22-sint-anna-east-bank-return.end_time` 与 `europe-2026-sint-anna-east-bank-return` 拥有返回截止，语义是**已完成回东岸**，绝不是到那个时刻才离开西岸。先倒推收器材和穿越余量，不复制第二套截止时刻。\n\n`transport/2026-09-22-antwerp-brussels` 的实际班次仍待确认；吃饭已经完成，东岸核心拍摄后立即收工回站，优先更早的可行返程。返店后只洗漱、必要备份和休息，为次日较晚开始留足睡眠。历史 cancelled 清晨记录继续保留。\n\n## 本次住宿落实与局部物流\n\n本日从 `europe-2026-brussels-stay-placeholder` 退房，今晚入住 `europe-2026-brussels-cardo-stay`；Antwerp day trip 与上述 day-rhythm 不变。\n\n行李方案 UNRESOLVED，用户尚未最终选择 A / B。PRIMARY_LOGISTICS_CANDIDATE = OPTION A：Marriott checkout → 行李留 Marriott（须确认）→ Antwerp → Brussels → Marriott 取箱 → Cardo → check-in。它是优先研究候选，因为对现有上午出发包络增加的前置环节较少，不代表已经可执行。Marriott 退房后寄存 = NOT VERIFIED；Marriott 晚间取件 = NOT VERIFIED；Cardo 晚到 = NOT VERIFIED。\n\nOPTION B 仅作为 fallback：Marriott checkout → Cardo 寄存（须确认）→ Antwerp → Cardo check-in。Cardo 入住前接箱、办理耗时及赴站余量未核实，不假定可提前进房。两种方案都需核实实际移动和取件窗口，不填写确定时刻、不创建已确认服务 Fact。\n\n返城后完成所选方案的取箱／入住并休息；不在 Antwerp 摄影间隙折返搬箱，不以换店为理由改动教堂、晚餐、隧道与左岸安排或安全截止。若实际交接无法兼容现有包络，报告冲突，不能自行删改 itinerary。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "先坐下早餐，不默认清晨闹钟",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-cardo-stay"
+            }
+          },
+          {
+            "id": "grand-place-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "grand-place-brussels"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "crowd",
+                "question": "不追求大广场空场，接受街区已经有人"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-23-grand-place-morning"
+          },
+          {
+            "id": "galeries-saint-hubert-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "galeries-royales-saint-hubert"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-23-galeries-saint-hubert-morning"
+          },
+          {
+            "id": "mont-des-arts-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "mont-des-arts"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "short",
+                "question": "只做短停留，不扩充上午目标"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-23-mont-des-arts-morning"
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "storage",
+                "question": "只在住宿已确认接收时寄存；否则带箱直接衔接车站并相应减少中心游览"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "按已确认政策退房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-cardo-stay"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "luggage-pickup",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-pickup"
+            },
+            "title": "午餐后取箱，办理与赴站另留余量",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-brussels-cardo-stay"
+            }
+          },
+          {
+            "id": "train-bruges",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "decision",
+                "id": "bruges-overnight"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-23-brussels-bruges"
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "open",
+                "question": "布鲁日酒店仍未选定；寄存与入住条件待落实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "抵达布鲁日，确认行李接收并办理入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-bruges-stay"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "substitute",
+                "question": "房间不可用时先找一个可以真正坐下的稳定停留点"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "到店后恢复；拖箱踩点不算休息",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-bruges-stay"
+            }
+          },
+          {
+            "id": "slow-walk",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "why",
+                "question": "这是今天刻意保留的留白，不用来补拍"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "一段没有 landmark 目标的慢行或坐下"
+          },
+          {
+            "id": "dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "local",
+                "question": "青口薯条或啤酒炖菜是最不会出错的组合；避开 Markt 广场正面的旅游餐厅"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式晚餐，在晚间摄影之前完成",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "rozenhoedkaai-blue-hour",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "rozenhoedkaai"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "only-core",
+                "question": "今天唯一的晚间核心；收工即回酒店，不接 Burg 或 Markt 夜间尾段"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-23-rozenhoedkaai-blue-hour"
+          },
+          {
+            "id": "wednesday-beer",
+            "selection": {
+              "mode": "candidate",
+              "when": "蓝调收工后体力允许且就在回酒店的路上；上限一杯并在 21:30 前结束"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "fact",
+                "id": "belgian-beer-venues-wednesday-closures"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "closed",
+                "question": "’t Brugs Beertje 与 Le Trappiste 周三闭店；Cantillon 周三闭馆；De Halve Maan 导览 11:00–16:00 与今明两天都不兼容"
+              },
+              {
+                "id": "no-third",
+                "question": "不为「必须完成布鲁日啤酒」去找第三家 —— 重心本来就在根特"
+              },
+              {
+                "id": "next-morning",
+                "question": "次日 07:05 的日出是全程最早，这是全程最不该动的一晚"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "一杯周三营业的就近啤酒（一杯，21:30 前结束）",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": false
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店，为次日最早的清晨留足睡眠",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-bruges-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-23",
       "trip": "europe-2026",
       "date": "2026-09-23",
@@ -698,6 +1910,408 @@
       "body_markdown": "## 较晚开始\n\n不再默认 07:00 开拍；Grand-Place 与廊街的新摄影规划时刻只在 Sessions。先坐下早餐 30–45 分钟，接受街区已经有人，不追逐两套晨光画面。Mont des Arts 只做短停留，不扩充上午目标。\n\n退房后仅在住宿已确认接收时寄存；否则带箱直接衔接车站，减少中心游览。午餐 45–60 分钟后取箱，办理与赴站单独留余量；列车由 `transport/2026-09-23-brussels-bruges` 拥有。\n\n## 酒店是本日中段\n\n到 Bruges 先确认行李接收和入住，再恢复 60 分钟；尚无房间时先找可坐下的稳定停留点，不把拖箱踩点算休息。正式晚餐在晚间摄影前完成，唯一默认核心是 Rozenhoedkaai；收工即回酒店，不接 Burg 或 Markt 夜间尾段。\n\n`bruges-overnight` 的过夜收益与结构不变；其 superseded evidence 导致的 review_required 保留，不以本次节奏更新抹去。\n\n## 本次住宿落实与局部物流\n\n早晨从 `europe-2026-brussels-cardo-stay` 出发并按已确认政策退房；寄存与取件须核实，不默认前台已承诺。`europe-2026-bruges-stay` 仍为 planned + placeholder：当前按 Bruges overnight 规划，具体酒店 OPEN；如果前段明显疲劳，用户保留重新决策权。在新决定前不取消 Bruges、不创建替代路线、不修改次日 Bruges→Ghent，较晚开始和既有 U04 减负继续有效。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "rozenhoedkaai-sunrise",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "rozenhoedkaai"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "earliest",
+                "question": "全程最早的一个摄影时刻，也是布鲁日过夜的主要收益"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-24-rozenhoedkaai-sunrise"
+          },
+          {
+            "id": "groenerei-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "groenerei"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-24-groenerei-morning"
+          },
+          {
+            "id": "burg-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "burg-square-bruges"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "tail",
+                "question": "Jan van Eyckplein 与 Markt 的清晨尾段保持撤回，不追求五点集齐"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-24-burg-morning"
+          },
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "清晨收工后坐下早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "打包、退房并带箱赴站",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-bruges-stay"
+            }
+          },
+          {
+            "id": "train-ghent",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "tram",
+                "question": "带箱从 Gent-Sint-Pieters 到老城需要乘电车；短铁路段不等于低负荷"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-24-bruges-ghent"
+          },
+          {
+            "id": "luggage-drop",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "storage",
+                "question": "寄存不可用时先解决箱子，不拖箱执行摄影"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-drop"
+            },
+            "title": "抵达后先确认酒店接箱",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "room",
+                "question": "预订不等于提前入房承诺；房间不可用时明确寻找可坐下恢复的替代"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "办理入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "protect",
+                "question": "这是全程最需要被保护的一段休息；不与吃饭、充电整理或通勤混算"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "15:00–16:30 完整恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 90,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "target": {
+              "boundary": "start",
+              "preferred": "15:00"
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          },
+          {
+            "id": "early-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "identity",
+                "question": "今晚的身份是啤酒，不是餐厅；早晚餐就近解决即可"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式早晚餐，必须在 18:58 之前完成",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "18:45"
+            }
+          },
+          {
+            "id": "graslei-evening",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "graslei-korenlei"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-24-graslei-evening"
+          },
+          {
+            "id": "sint-michielsbrug-blue-hour",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "sint-michielsbrug"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-24-sint-michielsbrug-blue-hour"
+          },
+          {
+            "id": "ghent-beer-evening",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "graslei-korenlei"
+              },
+              {
+                "type": "place",
+                "id": "patershol"
+              },
+              {
+                "type": "fact",
+                "id": "ghent-beer-venues-thursday"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "venue",
+                "question": "Waterhuis aan de Bierkant 与 De Dulle Griet 为候选，当日营业与是否需要排队待确认"
+              },
+              {
+                "id": "cutoff",
+                "question": "22:00 与两杯上限是规划上界，不是营业事实；理由是保护次日 Ghent → Köln 的跨国转场链"
+              },
+              {
+                "id": "zero-cost",
+                "question": "住宿在 Korenlei 10，正对当晚两个机位 —— 这一晚不需要从任何地方拿走时间"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Ghent 啤酒之夜：一家为主，1–2 杯，22:00 结束",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 100,
+              "protected": false
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "22:00"
+            },
+            "at": {
+              "type": "place",
+              "id": "graslei-korenlei"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "bedtime",
+                "question": "今晚的实际就寝时间是次日冰球分支的前置条件之一"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "步行回酒店；就寝目标不晚于 22:30",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-24",
       "trip": "europe-2026",
       "date": "2026-09-24",
@@ -717,6 +2331,291 @@
       "body_markdown": "## 减尾，不减中段恢复\n\n默认保留 Rozenhoedkaai、Groenerei 与 Burg 的清晨摄影，具体时刻由 Sessions 拥有。收工后早餐 30–45 分钟、打包、退房并前往车站；不再加 Jan van Eyckplein 或 Markt 尾段。Minnewater / Begijnhof 也不自动激活。\n\n`transport/2026-09-24-bruges-ghent` 拥有列车包络。抵达后先确认酒店接箱，带箱末段使用已确认可行的交通；寄存不可用时先解决箱子，不拖箱执行摄影。午餐 45–60 分钟后回房，以上恢复窗口不与吃饭、充电整理或通勤混算；房间不可用时明确寻找坐下恢复的替代。\n\n## 晚间收束\n\n恢复后可在附近短走，正式晚餐约 60 分钟并在 Graslei 与 Sint-Michielsbrug 核心之前完成。收工直接回酒店，为跨国转场准备；不追加大型场馆或夜间尾段。光线窗口从 read-model/astronomy 派生，本日不存计算时刻副本。\n\n## 本次住宿落实与局部物流\n\n晚间住宿身份已落实于 `europe-2026-ghent-stay-placeholder`；从 Bruges 退房后的接箱、房间可用性及车站末段仍须核实。预订不等于提前入房承诺，不能因酒店落实增加活动；双窗口及中段恢复预算不变。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "早餐，不设默认清晨摄影闹钟",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "last-mile",
+                "question": "从酒店取箱赴站的末段仍待核实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "退房并带箱赴站",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-ghent-stay-placeholder"
+            }
+          },
+          {
+            "id": "train-cologne",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "constraint",
+                "id": "europe-2026-brussels-cologne-transfer-buffer-minimum"
+              },
+              {
+                "type": "fact",
+                "id": "ghent-cologne-routing-via-brussels"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-25-ghent-cologne"
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "catering",
+                "question": "不依赖未经确认的列车餐饮；一份零食不等于全天正餐"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "上车前用餐或自带足量食物在途中吃",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "early-arrival",
+                "question": "13:20 到站早于 15:00 可入住时间；先联系酒店落实接箱，不能接收时先解决行李并坐下等候"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "抵达科隆，办理入住",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "进房后完整恢复，办理入住与找餐厅不计入",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 90,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "early-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "planning-target",
+                "question": "17:00–17:45 是规划目标，不是餐厅营业事实、预约或确认的服务时间"
+              },
+              {
+                "id": "no-drink",
+                "question": "今晚不安排额外的酒类体验；正式的 Kölsch 体验在次日"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式早晚餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "target": {
+              "boundary": "start",
+              "preferred": "17:00"
+            }
+          },
+          {
+            "id": "koelner-haie-match",
+            "selection": {
+              "mode": "candidate",
+              "when": "转场正常、入住已完成、90 分钟恢复已真正完成、前一晚实际就寝不晚于 22:30，且已提前购票；任一条不成立即跳过"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "lanxess-arena"
+              },
+              {
+                "type": "fact",
+                "id": "koelner-haie-2026-09-25-fixture"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "ticket",
+                "question": "主场常有一万五千人以上，必须提前购票；未购票不视为可执行"
+              },
+              {
+                "id": "safety",
+                "question": "散场约 22:00，霍亨索伦桥人流集中；单人夜间携带器材按既有城市安全知识处理"
+              },
+              {
+                "id": "priority",
+                "question": "晚餐与休息永远优先于这场球；跳过不补偿，次日也不补"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Kölner Haie – Eisbären Berlin（19:30 开球，18:00 入场，LANXESS arena）",
+            "at": {
+              "type": "place",
+              "id": "lanxess-arena"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "cancelled",
+                "question": "三条已撤回的夜间摄影保持撤回，不因为晚上空着而重新激活"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店，结束一天",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-25",
       "trip": "europe-2026",
       "date": "2026-09-25",
@@ -736,6 +2635,260 @@
       "body_markdown": "## 转场之前\n\n不设默认清晨摄影闹钟。Graslei 候选记录保留但撤回默认排程；只有睡眠充分、天气适合且不会减少早餐、退房或接续余量时，才重新激活同一 Session。先吃早餐、退房并带箱到站。\n\n`transport/2026-09-25-ghent-cologne` 拥有路线及规划时刻，`europe-2026-brussels-cologne-transfer-buffer-minimum` 拥有接续纪律。具体班次、同站换乘与未选 fallback 继续按 `ghent-cologne-routing-choice` 核实，不能把旧班次频率概括当保证。\n\n午餐预先选好上车前吃或自带足量食物途中吃，预算 45–60 分钟；不依赖未经确认的列车餐饮，也不把一份零食当全天正餐。\n\n## OPTION A：到店之后才谈摄影\n\nTHE QVEST 的入住事实由 `europe-2026-cologne-stay` 拥有。早于可入住时间抵达不等于已确认可以寄存；先联系酒店落实接箱，不能接收时先解决行李和坐下等候。\n\n进房后保护完整 90 分钟恢复，再以约 17:00–18:00 为正式早晚餐 planning target；恢复不包含办理入住、找餐厅或换装备。该时段不是餐厅营业事实、预约、confirmed service time 或 hard Constraint。入住延迟或恢复不足时先完成正餐与恢复，首晚摄影可以取消；不得为赶首晚照片缩短这一链。\n\nHohenzollernbrücke scout 与大教堂外部摄影均只作 conditional 候选，满足酒店、休息、晚餐和交通条件后才重新激活。晚间时刻与光线不在 TripDay 复制；若已错过机会便放弃，不拖后晚餐。Gross St Martin 不再默认夜拍。已确认的酒店日期与不可退状态不变。\n\n## 本次住宿落实与局部物流\n\n早晨住宿与退房记录引用 `europe-2026-ghent-stay-placeholder`；从酒店取箱赴站的末段仍待核实。科隆住宿、既有不可退事实及本日到店后的恢复／晚餐／条件摄影顺序均不变。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "正常早餐，不设清晨外拍闹钟",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "koelner-dom-interior",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "koelner-dom"
+              },
+              {
+                "type": "fact",
+                "id": "koelner-dom-visiting-hours"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "access",
+                "question": "当日游客时段、票务与礼拜安排待核实；摄影时刻不是入场凭证"
+              },
+              {
+                "id": "tower",
+                "question": "塔楼默认跳过，不把体力消耗当成参观的完整性"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-26-koelner-dom-interior"
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "回房独立恢复，通勤与办理不计入",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "belgisches-viertel",
+            "selection": {
+              "mode": "candidate",
+              "when": "恢复已完成且天气与体力允许；住宿半径内步行可达，不占用晚餐或右岸余量"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "scope",
+                "question": "周六的街区气氛本身即为内容，不设目标清单，不新增商户 Place"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Belgisches Viertel 街区步行与一杯咖啡"
+          },
+          {
+            "id": "brauhaus-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "fact",
+                "id": "cologne-brauhaus-kolsch-service"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "venue",
+                "question": "Päffgen 等原址酿造老店为候选文本，不预选未经核实的餐厅，也不生成商户 Place"
+              },
+              {
+                "id": "service",
+                "question": "杯垫盖住杯口是唯一的停止信号；1–3 小杯即可，不做品牌清单"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "Brauhaus 早晚餐：Kölsch、Stange 与 Köbes 服务文化",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "19:00"
+            }
+          },
+          {
+            "id": "rhine-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "deutz-rhine-bank"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "approach",
+                "question": "一次赴右岸即包含足够站位准备，不抢光线最后一刻"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "前往右岸，留出站位准备"
+          },
+          {
+            "id": "deutz-rhine-bank-blue-hour",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "deutz-rhine-bank"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-26-deutz-rhine-bank-blue-hour"
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "safety",
+                "question": "夜间不在右岸单人久留，不续夜景"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回店整理次日车票与行李，早睡",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-26",
       "trip": "europe-2026",
       "date": "2026-09-26",
@@ -755,6 +2908,311 @@
       "body_markdown": "这是**科隆唯一完整城市日**，不是全程唯一完整城市日。\n\n早餐保护 30–45 分钟；内部参观以观看空间、文化和历史为目的，摄影仅为其中一部分。`koelner-dom-visiting-hours` 仍 pending，游客票务和临时开放须另核实，不把内部 Session 视为入场凭证。塔楼默认跳过，未来只有明确选择且余量充分才重启。\n\n午餐 45–60 分钟，午后回房恢复 60–90 分钟。Brauhaus-style 正餐作为当地生活体验，安排在晚间核心前，不预选未经核实的餐厅。\n\n右岸招牌画面保留 `deutz-rhine-bank-cathedral-bridge`，取消午后重复踩点和往返过桥。一次赴右岸包含足够站位准备，不抢光线最后一刻。收工回店，整理次日车票、行李与早餐；不续夜景。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "早餐，并准备途中午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "打包退房，带箱进站",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-cologne-stay"
+            }
+          },
+          {
+            "id": "train-paris",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "decision",
+                "id": "cologne-paris-direct"
+              },
+              {
+                "type": "fact",
+                "id": "koln-paris-eurostar-direct"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "sunday",
+                "question": "直达服务的周日运行须在购票前确认"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-27-cologne-paris"
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "catering",
+                "question": "不默认列车供应"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "途中午餐：自带食物或上车前用餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "station-exit",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "gare-du-nord"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "crowding",
+                "question": "拥挤或晚点须追加；不是车门打开就开始下一段交通"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "到站后下车、出站与寻找接驳位置",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 30,
+              "protected": true
+            }
+          },
+          {
+            "id": "hotel-transfer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-09-27-gare-du-nord-paris-stay"
+          },
+          {
+            "id": "checkin",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "last-mile",
+                "question": "实际移动、接箱与入房时间仍未核实"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkin"
+            },
+            "title": "到店办理入住，安置行李",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "进房后完整恢复；通勤与办理不计入",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "butte-aux-cailles-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "butte-aux-cailles"
+              },
+              {
+                "type": "fact",
+                "id": "butte-aux-cailles-sunday-evening"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "walk",
+                "question": "距住宿步行约十二至十五分钟，全程地面步行，不需要地铁；吃完沿原路走回"
+              },
+              {
+                "id": "camera",
+                "question": "今晚摄影降级为一机一镜或手机，也可以完全不拍"
+              },
+              {
+                "id": "next-morning",
+                "question": "次日 07:00 要到 Trocadéro，所以今晚 21:30 前结束"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "Butte-aux-Cailles 街区晚餐：步行往返，不预约，不跨城",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "21:30"
+            },
+            "at": {
+              "type": "place",
+              "id": "butte-aux-cailles"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "cancelled",
+                "question": "Île de la Cité 与 Pont Neuf 的首夜摄影保持撤回，不追赶旧时刻"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店，早收口",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-27",
       "trip": "europe-2026",
       "date": "2026-09-27",
@@ -826,6 +3284,14 @@
             },
             "protected": true,
             "context_refs": [
+              {
+                "type": "place",
+                "id": "les-invalides"
+              },
+              {
+                "type": "place",
+                "id": "place-de-la-concorde"
+              },
               {
                 "type": "decision",
                 "id": "europe-2026-approved-day-rhythm"
@@ -902,6 +3368,10 @@
             },
             "protected": true,
             "context_refs": [
+              {
+                "type": "place",
+                "id": "pantheon-paris"
+              },
               {
                 "type": "decision",
                 "id": "europe-2026-approved-day-rhythm"
@@ -1040,6 +3510,310 @@
       "body_markdown": "摄影时刻由当日 Sessions 拥有。清晨后早餐预算见执行步骤，铁塔额外街景只保留 Rue de l’Université；不再串 Camoëns 和 Alexandre III。按执行步骤完成午餐后回酒店完成恢复，通勤不算恢复。\n\n下午选择 Left Bank 的短距离慢走与坐 café，允许完全不拍照；Notre-Dame 外拍不是固定打卡，已退出默认，入内也须另核实条件。正式早晚餐在船前完成，不假定普通观光船提供正餐。\n\n## Approved experience，尚非已订班次\n\n本日为 Seine cruise 首选晚间，总 planning budget 见执行步骤，包含赴码头、候船、乘坐与离船；最终按所选服务调整。具体 operator、码头、departure、ticket、可接受天气及临时运行状态均为 OPEN FACT / future booking gap，不写不存在的船班，不制造 booked Operation。选择具体 departure 时，以 hotel-return 执行步骤的返店 planning target 选班，并为离船与返店留余量；这不是 confirmed timetable、confirmed return、booking、hard Constraint 或 Eiffel sparkle 保证。该目标同样适用于次日 fallback。\n\n唯一预设 fallback 引用次日 TripDay；若两晚都不合适则放弃，不挤入 10/2。船上以观看城市为目的，可手持记录，不承诺命中铁塔闪灯或任何计算光窗。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "montmartre-streets",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "montmartre"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-29-montmartre-streets"
+          },
+          {
+            "id": "sacre-coeur-steps",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "sacre-coeur-paris"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "dome",
+                "question": "只保留台阶与街区视角，不默认登穹顶"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-29-sacre-coeur-steps"
+          },
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "坡道之后坐下早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "fashion-week-exhibition",
+            "selection": {
+              "mode": "candidate",
+              "when": "从蒙马特下来到午餐之间仍有余量且体力允许；免费、不需预约，累了直接跳过"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "fact",
+                "id": "paris-fashion-week-ss27-calendar"
+              },
+              {
+                "type": "place",
+                "id": "galeries-lafayette-haussmann"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "context",
+                "question": "时装周期间 Boulevard Haussmann 一带是橱窗与人群最集中的地方；这一段本身就是内容"
+              },
+              {
+                "id": "no-cost",
+                "question": "它不占用受保护的恢复时间，也不占用 Garnier 的时间"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Pas à Pas 免费鞋履展（Printemps Haussmann 穹顶下，距 Garnier 约 400 m）",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": false
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "正式午餐，在歌剧院一带解决",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "location",
+                "question": "行程本来就允许「坐下或回房」；就近坐下省下约 50 分钟往返地铁，恢复时长一分钟不减"
+              },
+              {
+                "id": "real-rest",
+                "question": "它必须是真的坐着休息，不是继续逛"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "独立坐下恢复；就近即可，不需要回酒店",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "palais-garnier-interior",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "palais-garnier"
+              },
+              {
+                "type": "fact",
+                "id": "palais-garnier-auditorium-access"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "auditorium",
+                "question": "观众厅可能因排练或技术工作关闭，参观票不保证进入；订票时须逐字确认当日情况"
+              },
+              {
+                "id": "visit-first",
+                "question": "以参观剧院空间与理解建筑为主，摄影不能代替参观"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-29-palais-garnier-interior"
+          },
+          {
+            "id": "early-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "galerie-vivienne"
+              },
+              {
+                "type": "place",
+                "id": "passage-des-panoramas"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "route",
+                "question": "Galerie Vivienne 与 Passage des Panoramas 都在步行十分钟内，两条十九世纪玻璃顶长廊本身值得走一遍"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "正式晚餐前移，在 Garnier 周边解决",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "target": {
+              "boundary": "end",
+              "latest": "18:30"
+            }
+          },
+          {
+            "id": "manon-palais-garnier",
+            "selection": {
+              "mode": "candidate",
+              "when": "官方票务确有 EUR 35–71 档库存并已购票；不追明显高于官方价格的二手票"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "palais-garnier"
+              },
+              {
+                "type": "fact",
+                "id": "manon-palais-garnier-2026-autumn"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "inventory",
+                "question": "官方 resale 近期显示 0 张，秋季场次不在当时开售批次内；需持续关注官方渠道"
+              },
+              {
+                "id": "fallback",
+                "question": "取不到票则回到正式晚餐加短步行，不产生行程债务，也不顺延到 10-01"
+              },
+              {
+                "id": "same-room",
+                "question": "白天看空的大厅、晚上看它活起来 —— 这是本日体验的全部理由"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "L'Histoire de Manon（19:30 开演，约 2 小时 45 分，Palais Garnier）",
+            "at": {
+              "type": "place",
+              "id": "palais-garnier"
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "cruise",
+                "question": "游船备选已从本晚移除；游船只在 09-28 尝试一次"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "演出或短步行之后一次性回酒店",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-29",
       "trip": "europe-2026",
       "date": "2026-09-29",
@@ -1059,6 +3833,335 @@
       "body_markdown": "摄影开始由 Sessions 拥有，街巷与台阶之后早餐 30–45 分钟，不接穹顶登高。午餐保护 45–60 分钟，午间坐下或回房恢复 60 分钟。\n\nGarnier 以参观剧院空间、理解建筑与文化为主，摄影不能替代参观；`ticket/2026-09-29-palais-garnier` 仍 unbooked，观众厅条件待复查，不能承诺进入。\n\n晚餐约 60 分钟，之后最多短步行。若前一日游船未能落实，本日晚间是唯一预设 fallback，具体条件和预算由 `europe-2026--2026-09-28` 拥有；启用时放弃长廊尾段。两晚都不合适即可放弃。百货、完整 passages 摄影链及未公布秀场均不进入默认。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "早餐，较晚开始，不追求补早起",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "colonnes-de-buren",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "colonnes-de-buren"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-30-colonnes-de-buren"
+          },
+          {
+            "id": "place-des-vosges",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "place-des-vosges"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "scope",
+                "question": "Buren 之后只保留一个马莱广场摄影节点，街区慢走随行，不额外激活整条摄影链"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-30-place-des-vosges"
+          },
+          {
+            "id": "market-lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "marche-des-enfants-rouges"
+              },
+              {
+                "type": "fact",
+                "id": "marche-enfants-rouges-hours"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "main-meal",
+                "question": "这是今天的主餐；晚餐在金字塔蓝调之后，会很晚而且要轻"
+              },
+              {
+                "id": "no-stall",
+                "question": "不指定摊位，到了看什么好吃就吃什么"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "Marché des Enfants Rouges 市场午餐（不锁定摊位）",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 60,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "marche-des-enfants-rouges"
+            }
+          },
+          {
+            "id": "cafe-recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "咖啡馆坐下恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "fondation-hcb",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "fondation-henri-cartier-bresson"
+              },
+              {
+                "type": "fact",
+                "id": "moriyama-fondation-hcb-2026"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "replace",
+                "question": "这是替换而不是叠加：从原本泛泛的马莱慢走里扣掉等量时间，今天不因此变得更满"
+              },
+              {
+                "id": "hours",
+                "question": "11:00 开门、18:20 末次入场，这两条锁死了今天唯一可行的顺序"
+              },
+              {
+                "id": "fashion-week",
+                "question": "马莱一带时装周期间 showroom 与 pop-up 密集；放慢一点看橱窗即可，不加行程"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Fondation Henri Cartier-Bresson · Daido Moriyama 展",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 75,
+              "protected": false
+            },
+            "at": {
+              "type": "place",
+              "id": "fondation-henri-cartier-bresson"
+            }
+          },
+          {
+            "id": "louvre-access",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "musee-du-louvre"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "not-a-booking",
+                "question": "摄影时刻的开始是规划目标，不是预约证明"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "赴卢浮宫、排队与安检余量"
+          },
+          {
+            "id": "louvre-interior",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "musee-du-louvre"
+              },
+              {
+                "type": "operation",
+                "id": "ticket/2026-09-30-louvre"
+              },
+              {
+                "type": "fact",
+                "id": "louvre-wednesday-late-opening-2026"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "viewing",
+                "question": "实际观看预算约 120–150 分钟，不含交通、排队与金字塔外拍；以少量作品和主题认真观看"
+              },
+              {
+                "id": "ticket",
+                "question": "官方定时票尚未开放到这一天，不是售罄；放票后须落实一张能支持该观看预算的时段"
+              },
+              {
+                "id": "wednesday",
+                "question": "周三开至 21:00、末次入场 20:00；若该事实不成立，16:00 入馆的整个安排需要重新复核"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-30-louvre-interior"
+          },
+          {
+            "id": "louvre-pyramid",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "louvre-pyramid-cour-napoleon"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "short",
+                "question": "金字塔只作收尾短摄影，不让建筑成片挤压真实观看"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-30-louvre-pyramid"
+          },
+          {
+            "id": "late-dinner",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "wine",
+                "question": "可在此顺路完成一次自然酒吧或 cave à manger —— 顺路的第二好优于跨城的最好，不为自然酒横穿巴黎"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "dinner"
+            },
+            "title": "一区 / 二区轻食晚餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": false
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店；次日 07:20 的 RER C 需要今晚不晚睡",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-09-30",
       "trip": "europe-2026",
       "date": "2026-09-30",
@@ -1078,6 +4181,369 @@
       "body_markdown": "先早餐，不追求补早起。Buren 后仅保留一个 Marais 广场摄影节点，街区慢走随行，不额外激活整条摄影链。市场区域午餐 60 分钟，具体市场与摊位当日可用性待确认；café 另坐下休息 30–45 分钟。\n\n入馆前为移动、队列和安检保留余量，摄影 Session 的开始是规划目标，不是预约证明。票务由 `ticket/2026-09-30-louvre` 拥有，当前 **unbooked，尚未预约**。先落实能支持实际观看预算的票；这是约 2–2.5 hours 的 actual viewing planning budget，不是 confirmed duration；预算不包含交通、排队与金字塔外拍。以少量作品和主题认真观看，不只拍建筑，也不以集齐全馆为目标。\n\n金字塔只作收尾短摄影，之后正式晚餐约 60 分钟。C-003 不在本轮选择关闭时刻；若票务或临时中断使观看预算不成立，保留 P0 待办并减少摄影，不声称已完成 art experience。\n\n`europe-2026-approved-day-rhythm` 记录 U06 对本次体验排序的批准；旧 `paris-museum-distribution` 已 superseded，保留历史判断，不自动安排 Orsay 或占用 10/2 的半天 FLEX。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "出发前早餐，并准备途中补水",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "train-versailles",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-10-01-paris-versailles"
+          },
+          {
+            "id": "arrival-buffer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "versailles-chateau-rive-gauche"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "entry",
+                "question": "按实际入场要求追加；开门时间不等于宫内机位到位时间"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "到站后步行、安检与排队余量",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "palace",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "chateau-de-versailles"
+              },
+              {
+                "type": "operation",
+                "id": "ticket/2026-10-01-versailles"
+              },
+              {
+                "type": "fact",
+                "id": "versailles-passport-2026"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "anchor",
+                "question": "09:00 是今天唯一固定的时刻，一切围绕它倒推"
+              },
+              {
+                "id": "photography",
+                "question": "宫内可轻量记录，但不承诺任何固定机位；原先的清晨花园与镜厅固定摄影已撤回，不恢复"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "宫殿参观：Grand Apartments 与 Galerie des Glaces（09:00 定时入场，已购票）",
+            "target": {
+              "boundary": "start",
+              "preferred": "09:00"
+            },
+            "at": {
+              "type": "place",
+              "id": "chateau-de-versailles"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "简单坐下的午餐，不追 destination dining",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "trianon-estate",
+            "selection": {
+              "mode": "candidate",
+              "when": "午餐后时间、体力与恢复需求都允许；不挤掉午餐、花园时段或 15:30 返程"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "grand-trianon"
+              },
+              {
+                "type": "place",
+                "id": "petit-trianon"
+              },
+              {
+                "type": "place",
+                "id": "hameau-de-la-reine"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "not-a-checklist",
+                "question": "Passport 覆盖它并不等于今天必须去；走到中午还有余力就去，累了就不去"
+              },
+              {
+                "id": "coppola",
+                "question": "Petit Trianon 的 Sofia Coppola 展只作顺路 optional，不为它单独安排时间块"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Trianon 庄园（Grand Trianon、Petit Trianon、Queen’s Hamlet）"
+          },
+          {
+            "id": "versailles-gardens-afternoon",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "versailles-grand-perspective"
+              },
+              {
+                "type": "fact",
+                "id": "versailles-musical-gardens-2026"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "musical-gardens",
+                "question": "当天为 Musical Gardens 日：花园与特别开放的 bosquets 中伴随巴洛克音乐散步，不包含喷泉水景表演"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-10-01-versailles-gardens-afternoon"
+          },
+          {
+            "id": "seated-rest",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "园内坐下休息；园内移动不能代替休息",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "train-paris",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "no-lingering",
+                "question": "不因为 Musical Gardens、展览或摄影把返程拖后"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-10-01-versailles-paris"
+          },
+          {
+            "id": "hotel-recovery",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "hard",
+                "question": "这一段是硬性保护；晚上的葡萄酒之所以限定在就近，全部理由就是保住它"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "回城后酒店恢复",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          },
+          {
+            "id": "french-wine-night",
+            "selection": {
+              "mode": "candidate",
+              "when": "回城后 60–90 分钟恢复已完成；场所位于 6 区或 14 区就近，约 20:30 结束"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "venue",
+                "question": "具体场所与是否需要订位待确认；时装周期间订位更紧"
+              },
+              {
+                "id": "radius",
+                "question": "不得为 1 区的正式品鉴牺牲回城恢复窗口"
+              },
+              {
+                "id": "meal",
+                "question": "wine bar 的熟食拼盘即可当晚餐，不另外安排正餐；不安排第二个夜间活动"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "法国葡萄酒之夜：一次有人带的小型品鉴，或就近 wine bar 按产区 3–4 杯",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": false
+            }
+          },
+          {
+            "id": "day-close",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "orsay",
+                "question": "奥赛保持默认关闭，不由体力或天气自动触发"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "回酒店，结束一天",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-stay-placeholder"
+            }
+          }
+        ]
+      },
       "id": "europe-2026--2026-10-01",
       "trip": "europe-2026",
       "date": "2026-10-01",
@@ -1407,6 +4873,14 @@
             "protected": true,
             "context_refs": [
               {
+                "type": "place",
+                "id": "champs-elysees"
+              },
+              {
+                "type": "place",
+                "id": "place-de-la-concorde"
+              },
+              {
                 "type": "decision",
                 "id": "europe-2026-approved-day-rhythm"
               },
@@ -1508,6 +4982,324 @@
       "body_markdown": "早餐预算见执行步骤，上午不预填项目，连同邻近自由活动保护至少半天。午餐预算见执行步骤；午后较早恢复，预算见执行步骤，不再把恢复窗口紧贴 Arc 的出发或 Session 开始。先完成执行步骤预算下的正式早晚餐，再为赴 Arc、入场和安检另留余量。\n\nArc 摄影时刻由 Session 拥有，票务由 `ticket/2026-10-02-arc-de-triomphe` 拥有。Bir-Hakeim 是低优先、未激活 conditional；只有餐食、体力、天气、移动与打包余量都成立才激活，同步恢复其 departure Operation，并保持既有 hard Constraint。否则 Arc 后直接酒店。\n\nLuxembourg 可在附近休息时选用，访问条件仍需确认，不为它扩展路线。Orsay 默认不选；今后用户明确想去才重新评估，不能由天气或疲劳自动触发。晚间整理离境材料、打包并早睡。\n\n## 本次住宿落实与局部物流\n\n本日上午从 `europe-2026-paris-stay-placeholder` 退房，今晚入住 `europe-2026-paris-wallace-stay`。退房、行李交接、新店寄存及入房须单独留余量，实际移动与酒店服务尚未核实，不写固定搬箱时刻。换店办理不计入至少半天 FLEX，通勤或等房不计入恢复；提前落实交接才能兼容原安排，若做不到必须报告，不自动吞掉自由时间或压缩休息。Arc 仍受保护，Bir-Hakeim 仍 conditional，酒店身份不构成重新激活理由。"
     },
     {
+      "execution": {
+        "steps": [
+          {
+            "id": "breakfast",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "breakfast"
+            },
+            "title": "早餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "pack",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "prepare"
+            },
+            "title": "早餐后打包",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "checkout",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "storage",
+                "question": "退房后寄存接收、取件服务时段与接车位置须前一日核实；不能寄存时先落实可靠替代"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "checkout"
+            },
+            "title": "按住宿政策办理退房",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "saxe-breteuil-market",
+            "selection": {
+              "mode": "candidate",
+              "when": "以最终航班链倒推后仍有余量；且睡眠充足、打包完成、天气与交通正常；任一条件不成立即整体放弃"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "place",
+                "id": "marche-saxe-breteuil"
+              },
+              {
+                "type": "fact",
+                "id": "marche-saxe-breteuil-hours"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "flight",
+                "question": "实际航班号、起飞时刻、值机与登机截止仍为待确认事实，市场时段不能反过来决定出发时间"
+              },
+              {
+                "id": "cancel",
+                "question": "放弃不产生遗憾，也不安排任何补偿；摄影为纪录式，手机或一机一镜，没有任务"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Marché Saxe-Breteuil 周六早市：在摊位买、站着吃，正对铁塔轴线",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 75,
+              "protected": false
+            },
+            "at": {
+              "type": "place",
+              "id": "marche-saxe-breteuil"
+            }
+          },
+          {
+            "id": "lunch",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "meal",
+              "slot": "lunch"
+            },
+            "title": "住宿或返程走廊附近午餐",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 45,
+              "max_minutes": 60,
+              "protected": true
+            }
+          },
+          {
+            "id": "seated-rest",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "recovery"
+            },
+            "title": "坐下休息",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            }
+          },
+          {
+            "id": "room-sweep",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "sweep",
+                "question": "这一步单独列出，是因为它最容易被赶时间吃掉"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "prepare"
+            },
+            "title": "最后一次房间检查：抽屉、保险箱、插座、浴室、床下、衣柜与充电配件",
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "luggage-pickup",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "service",
+                "question": "14:30 是更早的规划目标，不是酒店服务承诺；取件办理与接车另需余量"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "luggage-pickup"
+            },
+            "title": "返回取箱",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 20,
+              "max_minutes": 30,
+              "protected": true
+            },
+            "target": {
+              "boundary": "start",
+              "preferred": "14:30"
+            },
+            "at": {
+              "type": "operation",
+              "id": "europe-2026-paris-wallace-stay"
+            }
+          },
+          {
+            "id": "airport-buffer",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "constraint",
+                "id": "europe-2026-paris-city-departure"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "buffer"
+            },
+            "title": "取件办理与接车余量"
+          },
+          {
+            "id": "transport-cdg",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              },
+              {
+                "type": "constraint",
+                "id": "europe-2026-paris-city-departure"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "transport/2026-10-03-paris-cdg"
+          },
+          {
+            "id": "departure-chain",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "decision",
+                "id": "europe-2026-approved-day-rhythm"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "flight-facts",
+                "question": "航班号、起飞时刻、航站楼、值机托运截止与登机截止均缺可靠来源；取得订单后据实倒推，必要时更早出发"
+              },
+              {
+                "id": "no-makeup",
+                "question": "本日不新增摄影，不回收前几日漏项"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "closing"
+            },
+            "title": "按真实航班倒推值机、安检与登机；机场餐食不侵占这条链"
+          }
+        ]
+      },
       "id": "europe-2026--2026-10-03",
       "trip": "europe-2026",
       "date": "2026-10-03",
@@ -1887,6 +5679,26 @@
       "body_markdown": "Bruges 市政厅、Basilica of the Holy Blood 与多时期立面围合的公共广场。清晨适合观察完整立面，夜间照明提供对称建筑构图；活动与通行优先于固定站位。"
     },
     {
+      "id": "butte-aux-cailles",
+      "name": "Butte-aux-Cailles",
+      "kind": "district",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8277,
+        "longitude": 2.3506
+      },
+      "aliases": [
+        "鹌鹑丘"
+      ],
+      "tags": [
+        "paris",
+        "left-bank",
+        "neighbourhood",
+        "nightlife"
+      ],
+      "body_markdown": "巴黎十三区的小丘街区，鹅卵石街道、低矮房屋与街头艺术构成与奥斯曼式巴黎完全不同的尺度。街区内有一整条价格友好的小酒馆与酒吧，以本地客为主。\n\n从十四区 Boulevard Saint-Jacques 一带步行约十二到十五分钟可达，全程地面步行，不需要地铁。具体店铺、营业时间与是否需要等位属于执行时的现场决定，不在此记录。"
+    },
+    {
       "id": "cafe-de-flore",
       "name": "Café de Flore",
       "kind": "venue",
@@ -1948,6 +5760,25 @@
         "gothic"
       ],
       "body_markdown": "Grote Markt 附近的哥特式城市地标，Handschoenmarkt 沿建筑外立面展开。具体外部构图属于对应 PhotographySpot；室内开放和拍摄规则不在本 Place 中推测。"
+    },
+    {
+      "id": "champs-elysees",
+      "name": "Avenue des Champs-Élysées",
+      "kind": "district",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8698,
+        "longitude": 2.3075
+      },
+      "aliases": [
+        "香榭丽舍大道"
+      ],
+      "tags": [
+        "paris",
+        "avenue",
+        "shopping"
+      ],
+      "body_markdown": "从凯旋门到协和广场的大道，长约一点九公里。上半段以旗舰店为主，时装周期间是品牌活动最集中的区域之一。\n\n**本记录只提供路线身份。** 行程中它是凯旋门屋顶收工后步行前往 Avenue George V 的那八百米 —— 顺路经过，不需要为它安排时间块，也不构成购物或打卡任务。"
     },
     {
       "id": "charles-de-gaulle-airport",
@@ -2050,6 +5881,26 @@
         "film-location"
       ],
       "body_markdown": "建在旧高架铁路之上的线性公园，自 Bastille 一侧向东延伸数公里。抬升的视角提供与街面不同的立面观察高度，植栽在不同季节改变通道的封闭感，是它区别于普通街道步行的主要特征。\n\n它是一条完整走完需要可观时间的长动线，进出点分散；开放时段会随季节变化，未经核实不写成永久事实。"
+    },
+    {
+      "id": "crazy-horse-paris",
+      "name": "Crazy Horse Paris",
+      "kind": "venue",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8672,
+        "longitude": 2.3009
+      },
+      "address": "12 Avenue George V, 75008 Paris",
+      "aliases": [
+        "疯马秀"
+      ],
+      "tags": [
+        "paris",
+        "performance",
+        "nightlife"
+      ],
+      "body_markdown": "八区 Avenue George V 的小型剧场，以光影与剪影为主的现代舞台秀。演出约九十分钟，全程坐着；演出期间禁止拍照与录像，因此它是这类行程中少见的、只能用眼睛完成的体验。\n\n距凯旋门步行约八到十分钟，沿香榭丽舍向下再转入 Avenue George V。场次、票档、着装要求与年龄限制属于 ResearchFact；场馆存在不等于已购票。"
     },
     {
       "id": "de-negen-straatjes",
@@ -2762,6 +6613,27 @@
       "body_markdown": "与 La Coupole 同处 Boulevard du Montparnasse 的历史咖啡馆，红色遮阳篷与街角露台是它最稳定的外部视觉标识。它与 La Coupole 步行数分钟可达，构成同一条 Montparnasse 文化街轴。\n\n营业与拍摄规则会变化，未经核实不写成永久事实。作为文化参考保留，不构成行程承诺。"
     },
     {
+      "id": "lanxess-arena",
+      "name": "LANXESS arena",
+      "kind": "venue",
+      "parent": "cologne",
+      "coords": {
+        "latitude": 50.9384,
+        "longitude": 6.9832
+      },
+      "address": "Willy-Brandt-Platz 3, 50679 Köln",
+      "aliases": [
+        "Kölnarena",
+        "科隆兰克赛斯竞技场"
+      ],
+      "tags": [
+        "cologne",
+        "arena",
+        "sport"
+      ],
+      "body_markdown": "科隆右岸 Deutz 的大型室内场馆，是 Kölner Haie 冰球队的主场。距 Köln Messe/Deutz 车站步行约十分钟，与莱茵河右岸机位在同一侧河岸，从大教堂一侧经霍亨索伦桥步行可达。\n\n本 Place 只记录场馆身份与位置。任何一场具体比赛的日期、开球时刻、入场时间与票务都属于 ResearchFact 或 Trip 的执行记录，不由这里拥有；场馆存在不等于当日有比赛，也不等于已购票。\n\n散场时段桥面与车站人流集中，单人携带全套器材的夜间安排按既有城市安全知识处理。"
+    },
+    {
       "id": "latin-quarter",
       "name": "Quartier Latin",
       "kind": "district",
@@ -2820,6 +6692,27 @@
         "literary-history"
       ],
       "body_markdown": "正对 Saint-Germain-des-Prés 教堂广场的历史咖啡馆，与 Café de Flore 相隔数十米，两者共同定义了这个路口的街区气质。广场一侧的露台在正面光下与教堂塔楼形成自然的前后景关系。\n\n营业时间与拍摄政策会变化，未经核实不写成永久事实。它属于顺路参考，不构成行程承诺。"
+    },
+    {
+      "id": "les-invalides",
+      "name": "Hôtel national des Invalides",
+      "kind": "venue",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8566,
+        "longitude": 2.3125
+      },
+      "address": "129 Rue de Grenelle, 75007 Paris",
+      "aliases": [
+        "Les Invalides",
+        "荣军院"
+      ],
+      "tags": [
+        "paris",
+        "left-bank",
+        "monument"
+      ],
+      "body_markdown": "七区塞纳河左岸的军事建筑群与金顶教堂，前方是一片开阔的长草坪 Esplanade des Invalides，北侧隔河即 Pont Alexandre III。\n\n**本记录只提供路线身份。** 它位于既有左岸动线上（Rue de l'Université 机位往东约 500 m），是沿途会经过的城市地标，不是一项需要单独安排时间或购票的活动。内部博物馆的开放时间与票务属于 ResearchFact，本次行程未安排入内。"
     },
     {
       "id": "linkeroever-antwerp",
@@ -2922,6 +6815,47 @@
         "street"
       ],
       "body_markdown": "Le Marais 连接 Place des Vosges、Hôtel de Sully、历史街道、庭院与小型博物馆。永久 Place 只拥有街区结构和可复用访问知识，不记录某次 Fashion Week 的 pop-up 或当前 Trip 选择。"
+    },
+    {
+      "id": "marche-des-enfants-rouges",
+      "name": "Marché des Enfants Rouges",
+      "kind": "venue",
+      "parent": "marais",
+      "coords": {
+        "latitude": 48.8629,
+        "longitude": 2.3625
+      },
+      "address": "39 Rue de Bretagne, 75003 Paris",
+      "aliases": [
+        "红孩儿市场"
+      ],
+      "tags": [
+        "paris",
+        "marais",
+        "market",
+        "food"
+      ],
+      "body_markdown": "巴黎现存最古老的有顶市场，位于马莱区北部 Rue de Bretagne。生鲜摊位与数个熟食档口混合，午间以现做餐食为主。\n\n营业时段随星期变化，周一闭市，周日只开上午；具体当日时段与摊位可用性属于 ResearchFact，不由本 Place 拥有。本记录不指定任何摊位，也不构成某一餐已经落实。"
+    },
+    {
+      "id": "marche-saxe-breteuil",
+      "name": "Marché Saxe-Breteuil",
+      "kind": "venue",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8484,
+        "longitude": 2.3095
+      },
+      "address": "Avenue de Saxe, 75007 Paris",
+      "aliases": [
+        "萨克斯集市"
+      ],
+      "tags": [
+        "paris",
+        "market",
+        "food"
+      ],
+      "body_markdown": "七区 Avenue de Saxe 中央绿带上的露天街市，摊位沿林荫道排开，轴线正对埃菲尔铁塔。周四与周六上午开市，规模约八十家商户。\n\n当日实际开市时段与铁塔轴线的可见条件属于 ResearchFact。本记录不表示任何一次到访已经排定；离境日的任何停留都从实际航班链倒推，不由市场时段决定。"
     },
     {
       "id": "markthal-rotterdam",
@@ -3165,6 +7099,26 @@
       "body_markdown": "Palais-Royal 的 Cour d'Honneur、拱廊与花园形成从严格几何到安静城市庭院的连续空间。临时活动和开放边界属于可变访问条件，不写入永久身份。"
     },
     {
+      "id": "pantheon-paris",
+      "name": "Panthéon",
+      "kind": "venue",
+      "parent": "latin-quarter",
+      "coords": {
+        "latitude": 48.8462,
+        "longitude": 2.3464
+      },
+      "address": "Place du Panthéon, 75005 Paris",
+      "aliases": [
+        "先贤祠"
+      ],
+      "tags": [
+        "paris",
+        "left-bank",
+        "monument"
+      ],
+      "body_markdown": "拉丁区高处的新古典主义建筑，前方广场可俯瞰 rue Soufflot 一直到卢森堡公园的轴线。\n\n**本记录只提供路线身份。** 它在既有左岸下午步行线的南侧约 700 m（上坡），属于**可选绕行**：看外立面与广场约二十分钟，不看也不算漏项。内部参观的开放与票务属于 ResearchFact，本次行程未安排入内。"
+    },
+    {
       "id": "paris",
       "name": "Paris",
       "kind": "city",
@@ -3256,6 +7210,25 @@
         "palace"
       ],
       "body_markdown": "Petit Trianon is a separate architectural and garden identity within the Trianon estate. Its current opening conditions remain outside permanent Place knowledge."
+    },
+    {
+      "id": "place-de-la-concorde",
+      "name": "Place de la Concorde",
+      "kind": "viewpoint",
+      "parent": "paris",
+      "coords": {
+        "latitude": 48.8656,
+        "longitude": 2.3212
+      },
+      "aliases": [
+        "协和广场"
+      ],
+      "tags": [
+        "paris",
+        "viewpoint",
+        "monument"
+      ],
+      "body_markdown": "巴黎最大的广场，中央为卢克索方尖碑。它是两条轴线的交点：向西是香榭丽舍直到凯旋门，向东穿过杜伊勒里花园到卢浮宫；南侧隔 Pont de la Concorde 即左岸与奥赛一带。\n\n**本记录只提供路线身份。** 它出现在两处既有动线上：左岸上午轴线的东端，以及凯旋门屋顶望下去那条大道的另一头。不是一项需要单独安排时间的活动，也没有票务。"
     },
     {
       "id": "place-des-vosges",
@@ -5765,7 +9738,7 @@
       "id": "europe-2026-2026-09-22-linkeroever-golden",
       "trip": "europe-2026",
       "date": "2026-09-22",
-      "time": "17:30",
+      "time": "18:40",
       "spot": "linkeroever-antwerp-skyline",
       "purpose": "golden-cityscape",
       "status": "planned",
@@ -5787,7 +9760,7 @@
       "id": "europe-2026-2026-09-22-sint-annatunnel",
       "trip": "europe-2026",
       "date": "2026-09-22",
-      "time": "17:00",
+      "time": "18:15",
       "spot": "sint-annatunnel",
       "purpose": "tunnel-architecture",
       "status": "planned",
@@ -6351,6 +10324,23 @@
   ],
   "researchFacts": [
     {
+      "id": "amsterdam-sunday-market-and-retail",
+      "claim": "2026-09-20 为周日：Albert Cuyp Markt 周日闭市，Noordermarkt 周日没有常规集市，阿姆斯特丹多数商店约 12:00 之后才进入正常营业状态。",
+      "status": "pending",
+      "source": {
+        "title": "Amsterdam city information — markets and opening hours",
+        "url": "https://www.iamsterdam.com/en/see-and-do/shopping/markets"
+      },
+      "recheck_by": "2026-09-18",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-20"
+      ],
+      "impact_if_wrong": "若周日营业状态与记录不同，09-20 上午「长早餐 + 运河慢走」的理由减弱，但清晨与蓝调两端摄影核心、午间恢复与晚餐安排都不因此改变。",
+      "blocks": [],
+      "body_markdown": "这条 Fact 只解释**为什么把街区生活段落放到 12:00 之后**，不产生任何必去清单。\n\n`verified_at` 留空：本轮只恢复了来源与说法，未逐家核对 09-20 当日的实际营业。\n出发前复查一次即可；即便个别店铺提前开门，上午放慢的安排仍然成立。"
+    },
+    {
       "id": "anne-frank-same-day-ticket-release",
       "claim": "一个 legacy booking source 声称 Anne Frank House 会在参观当日 09:00 放出剩余 20% 门票；该规则可能已经过时。",
       "status": "pending",
@@ -6422,6 +10412,23 @@
       "body_markdown": "这条服务的价值不在于更快，而在于它绕开布鲁塞尔市区车站。因此它被记录为 fallback 路线的依据，而不是首选路线。\n\nconfidence 设为 low 有两个原因：该服务在本次旅行时仅运行约十八天，没有稳定性历史；且每方向每日仅两班，错过接续的代价极高。因此若要启用该退路，必须在 2026-09-24 晚就查好当日两个发车时刻，而不是次日临时切换。\n\n`verified_at` 有意留空。未选中的 fallback 不创建 active Operation。"
     },
     {
+      "id": "belgian-beer-venues-wednesday-closures",
+      "claim": "2026-09-23 为周三：布鲁日的 't Brugs Beertje 与 Le Trappiste 当日闭店；布鲁塞尔 Brasserie Cantillon 周三与周日闭馆；De Halve Maan 的导览每日 11:00–16:00。De Garre 与 Café Rose Red 的周三营业情况本轮未核实。",
+      "status": "pending",
+      "source": {
+        "title": "Visit Bruges / Cantillon / De Halve Maan official pages",
+        "url": "https://www.visitbruges.be/"
+      },
+      "recheck_by": "2026-09-18",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-23"
+      ],
+      "impact_if_wrong": "若某一家当日实际营业，09-23 仍然只保留「一杯、21:30 前结束」的候选上限，不因此新增夜间安排；次日 07:05 的清晨保护不变。",
+      "blocks": [],
+      "body_markdown": "这条 Fact 的价值不是「哪家店有名」，而是**你去的那一天它开不开**。\n\nCantillon 在这趟行程里是结构性不可达：09-21 周一 21:00 才到布鲁塞尔（已闭），\n09-22 周二全天在安特卫普，09-23 周三是它的闭馆日。记录下来，是为了以后规划比利时时\n把它当成先于路线的约束，不是为了遗憾。\n\nDe Halve Maan 的导览时段与 09-23 到店后的恢复窗口、09-24 上午 11:00 的发车都冲突，\n因此在本次行程中已收口为不做，不再作为待研究候选。\n\n`verified_at` 留空：本轮未逐家向店方确认当日营业。"
+    },
+    {
       "id": "belgian-rail-strike-notice-rule",
       "claim": "比利时铁路人员罢工须至少提前 8 个工作日申报并经 HR Rail 认可；关键岗位人员须在罢工日前 72 小时申明是否参与，替代运行方案提前约 24 小时向乘客公布。",
       "status": "pending",
@@ -6479,6 +10486,41 @@
       "body_markdown": "本条只记录现行服务模式，不等于 2026-09-25 当日的确定班次。班次密度是选择\"经布鲁塞尔\"而非\"经安特卫普直达 ICE\"路线的主要理由：前者的接续失败成本远低于后者。\n\n`verified_at` 有意留空。本轮检索只建立 provenance，未在官方订票系统中确认当日实际班次；出发前一周必须在运营方系统复核具体车次、换乘站与接续余量。"
     },
     {
+      "id": "butte-aux-cailles-sunday-evening",
+      "claim": "巴黎十三区 Butte-aux-Cailles 街区在周日晚间有营业中的小酒馆与酒吧，价格友好、以本地客为主；距十四区 Boulevard Saint-Jacques 一带步行约十二至十五分钟，全程地面步行。具体店铺的周日营业与是否需要等位仍需现场判断。",
+      "status": "pending",
+      "source": {
+        "title": "Paris je t'aime — Butte-aux-Cailles neighbourhood",
+        "url": "https://parisjetaime.com/eng/"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-27",
+        "butte-aux-cailles"
+      ],
+      "impact_if_wrong": "若当晚街区营业不足，抵达日晚餐改为住宿附近就近解决，仍在 21:30 前结束；首夜不因此新增摄影或跨城活动。",
+      "blocks": [],
+      "body_markdown": "抵达日晚餐的价值不在餐厅评分，而在**第一晚吃了什么会成为整趟旅行的记忆锚点**。\n\n选择 Butte-aux-Cailles 的全部理由是：步行可达、不需要地铁、不需要预约、\n可以随时缩短。它解决的是「巴黎的街区生活」，代价是零。\n\n`verified_at` 留空：本轮未逐家核实周日营业。"
+    },
+    {
+      "id": "cologne-brauhaus-kolsch-service",
+      "claim": "科隆传统 Brauhaus 以 0.2 L 直筒杯 Stange 供应 Kölsch，由称为 Köbes 的侍者不经点单持续续杯并在杯垫上计数，把杯垫盖在杯口表示停止；Päffgen 等原址酿造的老店为常见代表。具体营业时段、是否接受预订与当日供应仍需出发前复查。",
+      "status": "pending",
+      "source": {
+        "title": "Kölner Brauhaus Kultur — koeln.de",
+        "url": "https://www.koeln.de/koeln/gastronomie/brauhaeuser/"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-26"
+      ],
+      "impact_if_wrong": "若服务方式或营业时段与记录不同，2026-09-26 的早晚餐仍然成立，只是「Köbes 服务文化本身就是体验」这一判断需要调整；不影响当日大教堂参观、恢复预算或右岸蓝调。",
+      "blocks": [],
+      "body_markdown": "这条 Fact 记录的是**服务方式**，不是某一家餐厅的预订事实。当日的具名 Brauhaus 仍是候选文本，\n不生成指向具体商户的 Place，也不构成已确认的营业时间或预约。\n\n`verified_at` 有意留空：本轮只恢复了来源与说法，未直接向店家确认 2026-09-26 当日的营业与供应。\n出发前一周复查营业时段即可；即便 Päffgen 当日不可用，同类传统 Brauhaus 可直接替换，\n体验判断不变。"
+    },
+    {
       "id": "cologne-ostend-ice-summer-only",
       "claim": "Köln 与 Ostend 之间经布鲁塞尔、根特、布鲁日的 ICE 直达服务只在夏季周末运行，九月不可用。",
       "status": "pending",
@@ -6494,6 +10536,24 @@
       "impact_if_wrong": "若该服务实际在九月仍然运行，则存在一条从根特直达科隆、无需换乘的路线，2026-09-25 的路线选择需要重做。",
       "blocks": [],
       "body_markdown": "这是一条**否定事实**：记录一条看似理想但在本次旅行日期不可用的路线，以免后续复核时重复评估。\n\n若它成立，根特到科隆本可以零换乘完成，这会消除 2026-09-25 唯一的换乘风险点。正因为影响这么大，本条被单独记录并保留复核窗口，而不是默默排除。"
+    },
+    {
+      "id": "crazy-horse-show-schedule-2026",
+      "claim": "Crazy Horse Paris 官方页面显示演出时长约 90 分钟，建议提前 45 分钟到场，座位由领位提前分配，演出期间禁止拍照与录像，着装要求为 tenue correcte ou élégante，年龄限制 16 岁以上；场次聚合来源一致显示周日至周五 20:00 与 22:30、周六 19:00 / 21:30 / 23:45，仍需向官方复核。票档自 CRAZY SHOW EUR 119 起，CHAMPAGNE 自 EUR 139 起。",
+      "status": "pending",
+      "source": {
+        "title": "Crazy Horse Paris — official site",
+        "url": "https://www.lecrazyhorseparis.com/"
+      },
+      "recheck_by": "2026-09-26",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-10-02",
+        "crazy-horse-paris"
+      ],
+      "impact_if_wrong": "若 10-02 当日没有 22:30 场或票档与记录不同，当晚回到「Arc 蓝调后直接返回酒店」；不改变 Arc 的摄影安排，也不为演出压缩离境前夜的睡眠。",
+      "blocks": [],
+      "body_markdown": "它在这份行程里的核心价值不是演出本身，而是**一个明确禁止拍照的 90 分钟** ——\n在一份有三十多条摄影安排的旅行里，一次只能用眼睛完成的体验是最稀缺的。\n\n周五只有 22:30 场与 Arc 的蓝调兼容。座位既然提前分配且厅内视线普遍良好，\n为位置多付并不成立；更高票档买到的是酒水与偏好。\n\n`verified_at` 留空：场次与票档须在购票前向官方复核。**当前未购票。**"
     },
     {
       "id": "ees-first-entry-biometrics",
@@ -6565,6 +10625,40 @@
       "body_markdown": "Handbook citation `62-1` 的 original URL 已恢复。本次 pass 只恢复 provenance，不把 recovery 视为事实重新核实，`verified_at` 有意留空。\n\n`recheck_by` 设为出发前一周；此时若 gate closing 或推荐到站时间变化，仍能调整衔接计划、下载更新后的车票并预留更多站内缓冲。\n\n**2026-09-04**：claim 是 Eurostar 的通用检票规则，不是 Bruxelles-Midi 专属，因此随 3A Cologne baseline 重定向到 2026-09-27 的 Köln → Paris 直达班次。⚠️ 但存在一项未解决的不确定性：Köln → Paris 属申根内部行程，现行做法与伦敦方向的边检/安检流程不同，登车截止规则是否同样适用尚未核实。这正是本事实继续保持 `pending` 而不是直接沿用的原因。"
     },
     {
+      "id": "france-italy-2026-10-02-fixture",
+      "claim": "法国足协与 Stade de France 官方页面显示 2026-10-02 20:45 France – Italy 于 Stade de France 进行；2026-09-14 查询时面向公众的各价格档位全部售罄，官方转售页面同样显示售罄并提供到货订阅，转售价格上限为票面价。",
+      "status": "pending",
+      "source": {
+        "title": "Fédération Française de Football / Stade de France",
+        "url": "https://www.fff.fr/"
+      },
+      "recheck_by": "2026-09-26",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-10-02"
+      ],
+      "impact_if_wrong": "若官方渠道重新出现票，10-02 晚间需要在 Arc 蓝调与比赛之间重新选择；若始终无票，当前的 Arc 加 Crazy Horse 方向不受影响。",
+      "blocks": [],
+      "body_markdown": "**当前的默认方向不是足球。** 这条分支只有在通过官方渠道或官方转售取得票时才重新比较。\n\n若选中：放弃 Arc 的 19:30–20:01 蓝调，并退出 Crazy Horse（两者不叠加），\n当晚不带全套器材。**不追非官方溢价票。**\n\n`verified_at` 留空：库存随时变化。"
+    },
+    {
+      "id": "ghent-beer-venues-thursday",
+      "claim": "根特 Waterhuis aan de Bierkant（Groentenmarkt 9）供应约 165 种啤酒含三款自酿；De Dulle Griet（Vrijdagmarkt 50）酒单约 500 种，招牌 Max 需押一只鞋。两处距 Korenlei 步行数分钟；2026-09-24 当日营业时段与是否需要排队仍需复查。",
+      "status": "pending",
+      "source": {
+        "title": "Visit Gent — official tourist information",
+        "url": "https://visit.gent.be/en"
+      },
+      "recheck_by": "2026-09-18",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-24"
+      ],
+      "impact_if_wrong": "若某一家当晚不营业或需长时间排队，啤酒之夜改为就近一家、上限仍为两杯并在 22:00 结束；双摄影窗口与 15:00–16:30 的完整恢复不因此变动。",
+      "blocks": [],
+      "body_markdown": "住宿就在 Korenlei 10，正对 Graslei，也就是当晚两个摄影机位所在地。**这是全程唯一一个\n零行程代价的晚上** —— 啤酒之夜不需要从任何地方拿走时间。\n\n22:00 的收口与两杯上限不是营业事实，而是为了保护次日 Ghent → Köln 的跨国转场链。\n\n`verified_at` 留空：本轮未向店方确认当日营业。"
+    },
+    {
       "id": "ghent-cologne-routing-via-brussels",
       "claim": "Gent-Sint-Pieters 到 Köln Hbf 经布鲁塞尔换乘一次的最快行程约为 2 小时 33 分，全程每日约十五个班次组合。",
       "status": "pending",
@@ -6597,6 +10691,24 @@
       "impact_if_wrong": "若周日时段与记录不同，2026-09-26 作为大教堂内部唯一窗口的排期理由会失效；反之若周六时段更短，当日主要内部体验需要重排；塔楼已默认跳过。",
       "blocks": [],
       "body_markdown": "本条只保存待核实的访问规则，不拥有本次必去清单。批准的内部文化体验由 `europe-2026--2026-09-26` 拥有；塔楼 optional、默认跳过，不再由本 Fact 推导为必须完成。\n\n旧排期依据周日内部游客时段与次日离城的关系，但外部规则仍 pending；不能把这个推理当成当日已确认开放或已购票。若规则变化，复查内部体验的执行余量，不自动恢复塔楼。\n\n`verified_at` 有意留空：本轮未直接访问官方开放时间页面确认，只建立了 provenance。出发前一周必须复核，并同时确认是否有临时活动导致时段调整。"
+    },
+    {
+      "id": "koelner-haie-2026-09-25-fixture",
+      "claim": "Kölner Haie 官方赛程与 LANXESS arena 场馆日历显示 2026-09-25 19:30 主场对阵 Eisbären Berlin，入场 18:00，票价自 EUR 18 起；主场常有一万五千名以上观众，须提前购票。",
+      "status": "pending",
+      "source": {
+        "title": "Kölner Haie / LANXESS arena official schedule",
+        "url": "https://www.haie.de/"
+      },
+      "recheck_by": "2026-09-18",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-25",
+        "lanxess-arena"
+      ],
+      "impact_if_wrong": "若赛事时间变更或售罄，09-25 晚间回到「入住 → 完整恢复 → 正式早晚餐 → 回酒店」的既有结构；三条已撤回的夜拍不因此重新激活。",
+      "blocks": [],
+      "body_markdown": "这是本次行程窗口内唯一可行的一场：09-20 与 10-02 的主场比赛当日不在科隆，09-27 为客场。\n\n**赛事存在不等于已购票，更不等于当晚一定去。** 是否执行由当日的转场、入住、\n90 分钟恢复是否真正完成，以及前一晚的实际就寝时间共同决定；晚餐与休息永远优先。\n\n`verified_at` 留空：本轮只恢复了官方来源与说法，未完成购票。德国场馆内多为无现金支付。"
     },
     {
       "id": "koln-paris-eurostar-direct",
@@ -6632,6 +10744,95 @@
       "impact_if_wrong": "Louvre 室内建筑路线需要跳过 Galerie d'Apollon，但不影响 Cour Napoléon 外部摄影主线。",
       "blocks": [],
       "body_markdown": "Handbook citation `12-1` 的 official press source identity 已恢复。Recovery 不等于确认 2026-09-30 当天展厅一定开放，因此 `verified_at` 留空且 Fact 保持 `pending`。\n\n`recheck_by` 为到访前一周，仍来得及调整馆内优先级而无需改变 Trip Structure。"
+    },
+    {
+      "id": "louvre-wednesday-late-opening-2026",
+      "claim": "卢浮宫官方开放时间显示周三与周五延长开放至 21:00，末次入场为闭馆前一小时，即 20:00；有效观看时间到约 20:30。2026-09-30 为周三。",
+      "status": "pending",
+      "source": {
+        "title": "Musée du Louvre — opening hours",
+        "url": "https://www.louvre.fr/en/visit"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "ticket/2026-09-30-louvre",
+        "europe-2026--2026-09-30"
+      ],
+      "impact_if_wrong": "若周三夜场当日不成立，09-30 的 16:00 入馆与 120–150 分钟实际观看预算将无法成立，需要先回到票务与当日开放的复核，而不是压缩观看时间或改为只拍建筑。",
+      "blocks": [],
+      "body_markdown": "**当前 16:00 入馆的整个安排只有在这一事实成立时才可行** —— 而仓库此前并未记录它。\n\n观看预算是约两到两个半小时的**实际看展时间**，不包含交通、排队、安检与金字塔外拍，\n也不是已确认时长。21:00 是缓冲，不是目标时长。\n\n`verified_at` 留空：出发前须复核当日开放、临时闭厅与票务窗口。"
+    },
+    {
+      "id": "manon-palais-garnier-2026-autumn",
+      "claim": "巴黎歌剧院官方场次页显示 2026-09-29 19:30 Palais Garnier 上演巴黎歌剧院芭蕾舞团的 L'Histoire de Manon，时长约 2 小时 45 分；票价按档位自 EUR 10 至 175，含视线受限席。2026-09-14 查询时官方 resale 页显示 0 张，秋季场次不在当时的开售批次内。",
+      "status": "pending",
+      "source": {
+        "title": "Opéra national de Paris — L'Histoire de Manon",
+        "url": "https://www.operadeparis.fr/"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-29"
+      ],
+      "impact_if_wrong": "若最终取不到合理价位的官方票，09-29 晚间回到正式晚餐加短步行；不追高于官方价格的二手票，也不把演出顺延到 10-01。",
+      "blocks": [],
+      "body_markdown": "这条 Fact 记录的是**场次存在与票务观察**，不是已购票，也不是库存承诺。\n\n目标价位为官方 EUR 35–71 档。默认不买极端视线受限席；**明确不追高价二手票** ——\n取不到票不产生行程债务。\n\n`verified_at` 留空：官方库存随时变化，出发前需重新查询。"
+    },
+    {
+      "id": "marche-enfants-rouges-hours",
+      "claim": "巴黎市官方场所信息显示 Marché des Enfants Rouges 位于 39 Rue de Bretagne, 75003，周一闭市，周二至周六上午至下午早段营业，周日只开上午；熟食档口的实际供应时段短于市场整体时段。",
+      "status": "pending",
+      "source": {
+        "title": "Ville de Paris — Marché des Enfants Rouges",
+        "url": "https://www.paris.fr/"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-30",
+        "marche-des-enfants-rouges"
+      ],
+      "impact_if_wrong": "若当日市场或熟食档口不可用，09-30 午餐改为马莱区内就近解决，60 分钟预算不变；不指定摊位也就不会产生落空。",
+      "blocks": [],
+      "body_markdown": "这一餐是 09-30 的**主餐**（当天晚餐在金字塔蓝调之后，会很晚而且要轻）。\n\n**不锁定任何摊位** —— 到了看什么好吃就吃什么。这样也就不存在「那一家没开」的失败模式。\n\n`verified_at` 留空：出发前复核当日时段。"
+    },
+    {
+      "id": "marche-saxe-breteuil-hours",
+      "claim": "巴黎市官方场所信息显示 Marché Saxe-Breteuil 位于七区 Avenue de Saxe，周四与周六开市，周六时段约 07:00 至 14:30，规模约八十家商户，摊位沿中央绿带排开并正对埃菲尔铁塔轴线。",
+      "status": "pending",
+      "source": {
+        "title": "Ville de Paris — Marché Saxe-Breteuil",
+        "url": "https://www.paris.fr/"
+      },
+      "recheck_by": "2026-09-26",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-10-03",
+        "marche-saxe-breteuil"
+      ],
+      "impact_if_wrong": "若当日不开市或时段不同，10-03 上午直接进入打包与离境链路；本项可无条件取消，不安排任何补偿。",
+      "blocks": [],
+      "body_markdown": "离境日的优先级顺序是固定的：**航班安全 > 睡眠 > 打包 > 市场**。\n\n市场之所以是一个好的收尾，正是因为它可以在任何一个条件不成立时被整体放弃，\n而且完全不影响 14:30 的取箱目标与市区出发上界。\n\n`verified_at` 留空：出发前复核当日开市。"
+    },
+    {
+      "id": "moriyama-fondation-hcb-2026",
+      "claim": "Fondation Henri Cartier-Bresson 官方展期显示 Daido Moriyama 展览自 2026-05-20 至 2026-10-04；展馆位于 79 Rue des Archives, 75003 Paris，周一闭馆，开门 11:00，末次入场 18:20。",
+      "status": "pending",
+      "source": {
+        "title": "Fondation Henri Cartier-Bresson",
+        "url": "https://www.henricartierbresson.org/en/"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "europe-2026--2026-09-30",
+        "fondation-henri-cartier-bresson"
+      ],
+      "impact_if_wrong": "若展览提前撤展或当日闭馆，09-30 下午回到原本的马莱街区慢走，时间不外流；本项是替换而不是叠加，取消不产生空缺。",
+      "blocks": [],
+      "body_markdown": "展期到 10-04，这趟行程**刚好赶上**。\n\n11:00 开门与 18:20 末次入场是当天顺序的硬约束：\nBuren 10:00 → Vosges 11:30 → 市场午餐 → HCB → 卢浮宫 16:00 是唯一可行顺序。\n\n它是**替换**：从原本泛泛的马莱慢走里扣掉等量时间，不叠加。\n\n`verified_at` 留空：出发前复核当日开放与展览是否仍在展。"
     },
     {
       "id": "notre-dame-free-reservation-window",
@@ -6686,6 +10887,24 @@
       "impact_if_wrong": "The optional evening visit may be unavailable or require different access, but no active Operation or ShootSession needs cancellation while the option remains unselected.",
       "blocks": [],
       "body_markdown": "Handbook citation `103-1` official visit source identity is recovered, but the Handbook's blanket “mandatory timed reservation / no on-site admission” wording is not promoted to confirmed truth. `verified_at` remains empty and the option stays unselected pending final access review."
+    },
+    {
+      "id": "palais-garnier-auditorium-access",
+      "claim": "巴黎歌剧院官方参观规则说明 Palais Garnier 日间参观时段为 10:00–17:00，但排除有日间演出的时段，且观众厅可能因排练或技术工作临时关闭，参观票不保证进入观众厅。",
+      "status": "pending",
+      "source": {
+        "title": "Opéra national de Paris — visit Palais Garnier",
+        "url": "https://www.operadeparis.fr/en/visits/palais-garnier"
+      },
+      "recheck_by": "2026-09-20",
+      "confidence": "medium",
+      "affects": [
+        "ticket/2026-09-29-palais-garnier",
+        "europe-2026--2026-09-29"
+      ],
+      "impact_if_wrong": "若 2026-09-29 当日观众厅不开放参观，14:30 的参观仍然成立（建筑、大楼梯与公共空间），但「先看空的房间」这一半体验落空；晚间演出分支不因此改变。",
+      "blocks": [],
+      "body_markdown": "`ticket/2026-09-29-palais-garnier` 里那句「订票时确认观众厅访问」现在有了确切的风险来源：\n**当晚这个厅里有演出。**\n\n因此订票时必须逐字确认当日观众厅是否开放参观，并接受它可能是 BEST_EFFORT。\n\n`verified_at` 留空：本轮未向票务确认 09-29 当日的具体安排。"
     },
     {
       "id": "paris-cdg-fixed-taxi-fare-2026",
@@ -7535,9 +11754,9 @@
       "type": "reference",
       "trip": "europe-2026",
       "date": "2026-10-01",
-      "status": "planned",
-      "ref": "Versailles Passport timed entry — confirm full-estate coverage and 2026 price",
-      "booking_status": "unbooked",
+      "status": "confirmed",
+      "ref": "Versailles Passport — purchased by the traveller; Palace timed entry 09:00; EUR 35; non-refundable and non-exchangeable. The Passport covers Palace, Gardens, Musical Gardens on applicable days, the Estate of Trianon and applicable temporary exhibitions. Coverage is not an execution list: Trianon stays a same-day choice under time, energy and recovery, and the VR experience and equestrian show were not purchased.",
+      "booking_status": "booked",
       "opens_at": "2026-08-20",
       "act_by": "2026-08-31"
     },
