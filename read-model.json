@@ -1,8 +1,8 @@
 {
   "readModelVersion": "2.0",
-  "contentHash": "391cddb60399ba14710f3f681ea940751c388d64150ab38f4d8a989b33dea2f9",
+  "contentHash": "f9854b664ec91b123730694fa07b7d6481038a9831c503934dd5428e4435d788",
   "meta": {
-    "generatedAt": "2026-09-21T05:12:55.550Z"
+    "generatedAt": "2026-09-27T16:23:52.592Z"
   },
   "trips": [
     {
@@ -4834,19 +4834,18 @@
           "id": "europe-2026--2026-09-23",
           "trip": "europe-2026",
           "date": "2026-09-23",
-          "title": "布鲁塞尔较晚开始与布鲁日单一晚间核心",
+          "title": "布鲁日已到达：老城步行、运河游船与晚间摄影",
           "priorities": [
-            "先正常早餐，Grand-Place 较晚开始，不默认清晨闹钟",
-            "退房、寄存、午餐与取箱必须先于转场",
-            "抵达 Bruges 后使用酒店、恢复并吃晚餐，只保留 Rozenhoedkaai 晚间核心"
+            "已于 9/23 到达 Bruges，并实际入住当晚住宿",
+            "已完成历史中心步行、运河游船及老城步行摄影",
+            "已完成晚间／蓝调摄影；确切机位与时刻未记录"
           ],
           "trade_offs": [
-            "不追求大广场空场，廊街允许有人生活的画面",
-            "下午固定踩点与 Burg、Markt 深夜尾段退出默认",
-            "不为新增场馆压缩次晨状态"
+            "布鲁塞尔上午原计划的实际执行细节未记录，不据计划推断已完成",
+            "原定 Rozenhoedkaai 摄影机位是否到访未确认，不将具体 Session 擅自标为完成"
           ],
-          "pacing": "早餐与中心短线→退房寄存→午餐取箱→转场→酒店与恢复→晚餐→单一晚间核心→酒店。",
-          "risk": "两端酒店的寄存、房间可用时间均需确认；抵达延误时摄影让位于基本恢复。",
+          "pacing": "9/23 已到达 Bruges 并入住；当天完成历史中心步行、运河游船、老城摄影及晚间／蓝调摄影，现场细节未记录。",
+          "risk": "布鲁塞尔上午实际执行、布鲁日各活动的确切时刻与晚间摄影机位未记录。",
           "sessions": [
             {
               "id": "europe-2026-2026-09-23-grand-place-morning",
@@ -5069,30 +5068,6 @@
                 "prerequisiteIds": [
                   "europe-2026--2026-09-23/breakfast"
                 ]
-              },
-              {
-                "anchorId": "europe-2026--2026-09-23/train-bruges",
-                "minutes": 825,
-                "prerequisiteIds": [
-                  "europe-2026--2026-09-23/breakfast",
-                  "europe-2026--2026-09-23/checkout",
-                  "europe-2026--2026-09-23/lunch",
-                  "europe-2026--2026-09-23/luggage-pickup"
-                ]
-              },
-              {
-                "anchorId": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour",
-                "minutes": 1186,
-                "prerequisiteIds": [
-                  "europe-2026--2026-09-23/breakfast",
-                  "europe-2026--2026-09-23/checkout",
-                  "europe-2026--2026-09-23/lunch",
-                  "europe-2026--2026-09-23/luggage-pickup",
-                  "europe-2026--2026-09-23/checkin",
-                  "europe-2026--2026-09-23/recovery",
-                  "europe-2026--2026-09-23/slow-walk",
-                  "europe-2026--2026-09-23/dinner"
-                ]
               }
             ],
             "untimedEntryIds": [
@@ -5100,10 +5075,14 @@
               "europe-2026--2026-09-23/checkout",
               "europe-2026--2026-09-23/lunch",
               "europe-2026--2026-09-23/luggage-pickup",
+              "europe-2026--2026-09-23/train-bruges",
               "europe-2026--2026-09-23/checkin",
+              "europe-2026--2026-09-23/bruges-historic-centre-and-canal-cruise",
+              "europe-2026--2026-09-23/bruges-old-town-photography",
               "europe-2026--2026-09-23/recovery",
               "europe-2026--2026-09-23/slow-walk",
               "europe-2026--2026-09-23/dinner",
+              "europe-2026--2026-09-23/bruges-evening-blue-hour-actual",
               "europe-2026--2026-09-23/day-close"
             ],
             "dayId": "europe-2026--2026-09-23",
@@ -5484,7 +5463,7 @@
                 "stepId": "train-bruges",
                 "sourceOrder": 7,
                 "kind": "operation",
-                "title": "Bruxelles-Central → Brugge railway station",
+                "title": "Brussels → Bruges",
                 "selection": {
                   "mode": "default"
                 },
@@ -5510,50 +5489,25 @@
                   "nextId": "europe-2026--2026-09-23/checkin"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "transport/2026-09-23-brussels-bruges/booking",
-                    "message": "尚未预订",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "transport/2026-09-23-brussels-bruges"
-                    }
-                  },
-                  {
-                    "id": "fact/belgian-rail-strike-notice-rule",
-                    "message": "比利时铁路人员罢工须至少提前 8 个工作日申报并经 HR Rail 认可；关键岗位人员须在罢工日前 72 小时申明是否参与，替代运行方案提前约 24 小时向乘客公布。",
-                    "ownerRef": {
-                      "type": "fact",
-                      "id": "belgian-rail-strike-notice-rule"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "operation": {
                   "id": "transport/2026-09-23-brussels-bruges",
                   "type": "transport",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruxelles-Central → Brugge after the Brussels morning; planning envelope, exact service bought on the day",
-                  "start_time": "13:45",
-                  "end_time": "14:45",
-                  "from": "bruxelles-central",
-                  "to": "brugge-station",
-                  "booking_status": "unbooked"
+                  "status": "completed",
+                  "ref": "Brussels → Bruges 转场已完成，2026-09-23 已到达并入住；实际出发车站、列车班次、时刻及购票方式未记录。",
+                  "from": "brussels",
+                  "to": "bruges"
                 },
-                "ownerLifecycle": "planned",
-                "ownerTime": {
-                  "start": "13:45",
-                  "end": "14:45",
-                  "status": "planned"
-                }
+                "ownerLifecycle": "completed"
               },
               {
                 "id": "europe-2026--2026-09-23/checkin",
                 "stepId": "checkin",
                 "sourceOrder": 8,
                 "kind": "intent",
-                "title": "抵达布鲁日，确认行李接收并办理入住",
+                "title": "已到达 Bruges，实际办理入住",
                 "selection": {
                   "mode": "default"
                 },
@@ -5572,23 +5526,10 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-23/train-bruges",
-                  "nextId": "europe-2026--2026-09-23/recovery"
+                  "nextId": "europe-2026--2026-09-23/bruges-historic-centre-and-canal-cruise"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/checkin/open",
-                    "message": "布鲁日酒店仍未选定；寄存与入住条件待落实"
-                  },
-                  {
-                    "id": "europe-2026-bruges-stay/booking",
-                    "message": "预订待落实",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "europe-2026-bruges-stay"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "logistics",
                   "action": "checkin"
@@ -5598,21 +5539,72 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-23/bruges-historic-centre-and-canal-cruise",
+                "stepId": "bruges-historic-centre-and-canal-cruise",
+                "sourceOrder": 9,
+                "kind": "intent",
+                "title": "已完成：Bruges 历史中心步行与运河游船",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "bruges"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-23/checkin",
+                  "nextId": "europe-2026--2026-09-23/bruges-old-town-photography"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-23/bruges-old-town-photography",
+                "stepId": "bruges-old-town-photography",
+                "sourceOrder": 10,
+                "kind": "intent",
+                "title": "已完成：Bruges 老城主要步行与摄影",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "bruges"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-23/bruges-historic-centre-and-canal-cruise",
+                  "nextId": "europe-2026--2026-09-23/recovery"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
                 }
               },
               {
                 "id": "europe-2026--2026-09-23/recovery",
                 "stepId": "recovery",
-                "sourceOrder": 9,
+                "sourceOrder": 11,
                 "kind": "intent",
-                "title": "到店后恢复；拖箱踩点不算休息",
+                "title": "原计划到店后恢复；实际执行未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -5630,24 +5622,11 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-23/checkin",
+                  "previousId": "europe-2026--2026-09-23/bruges-old-town-photography",
                   "nextId": "europe-2026--2026-09-23/slow-walk"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/recovery/substitute",
-                    "message": "房间不可用时先找一个可以真正坐下的稳定停留点"
-                  },
-                  {
-                    "id": "europe-2026-bruges-stay/booking",
-                    "message": "预订待落实",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "europe-2026-bruges-stay"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "recovery"
                 },
@@ -5662,21 +5641,18 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               },
               {
                 "id": "europe-2026--2026-09-23/slow-walk",
                 "stepId": "slow-walk",
-                "sourceOrder": 10,
+                "sourceOrder": 12,
                 "kind": "intent",
-                "title": "一段没有 landmark 目标的慢行或坐下",
+                "title": "原计划留白慢行或坐下；实际执行未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -5693,12 +5669,7 @@
                   "nextId": "europe-2026--2026-09-23/dinner"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/slow-walk/why",
-                    "message": "这是今天刻意保留的留白，不用来补拍"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "experience"
                 }
@@ -5706,9 +5677,9 @@
               {
                 "id": "europe-2026--2026-09-23/dinner",
                 "stepId": "dinner",
-                "sourceOrder": 11,
+                "sourceOrder": 13,
                 "kind": "intent",
-                "title": "正式晚餐，在晚间摄影之前完成",
+                "title": "原计划在晚间摄影前用餐；实际执行未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -5722,15 +5693,10 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-23/slow-walk",
-                  "nextId": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour"
+                  "nextId": "europe-2026--2026-09-23/bruges-evening-blue-hour-actual"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/dinner/local",
-                    "message": "青口薯条或啤酒炖菜是最不会出错的组合；避开 Markt 广场正面的旅游餐厅"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "meal",
                   "slot": "dinner"
@@ -5743,15 +5709,86 @@
                 }
               },
               {
-                "id": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour",
-                "stepId": "rozenhoedkaai-blue-hour",
-                "sourceOrder": 12,
-                "kind": "session",
-                "title": "Rozenhoedkaai 运河经典机位",
+                "id": "europe-2026--2026-09-23/bruges-evening-blue-hour-actual",
+                "stepId": "bruges-evening-blue-hour-actual",
+                "sourceOrder": 14,
+                "kind": "intent",
+                "title": "已完成：Bruges 晚间／蓝调摄影，具体机位未记录",
                 "selection": {
                   "mode": "default"
                 },
-                "protected": true,
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "bruges"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-23/dinner",
+                  "nextId": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-23/day-close",
+                "stepId": "day-close",
+                "sourceOrder": 17,
+                "kind": "intent",
+                "title": "原计划回酒店休息；实际返店时刻未记录",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "operation",
+                    "id": "europe-2026-bruges-stay"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "decision",
+                    "id": "europe-2026-approved-day-rhythm"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-23/wednesday-beer"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "closing"
+                },
+                "lodging": {
+                  "id": "europe-2026-bruges-stay",
+                  "type": "accommodation",
+                  "trip": "europe-2026",
+                  "date": "2026-09-23",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
+                  "check_in_date": "2026-09-23",
+                  "check_out_date": "2026-09-24"
+                }
+              }
+            ],
+            "candidates": [
+              {
+                "id": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour",
+                "stepId": "rozenhoedkaai-blue-hour",
+                "sourceOrder": 15,
+                "kind": "session",
+                "title": "Rozenhoedkaai 运河经典机位",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "原定 Rozenhoedkaai 机位；晚间摄影虽已发生，但该机位和原定时刻是否实际使用未记录"
+                },
+                "protected": false,
                 "ownerRefs": [
                   {
                     "type": "session",
@@ -5765,7 +5802,7 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-23/dinner",
+                  "previousId": "europe-2026--2026-09-23/bruges-evening-blue-hour-actual",
                   "nextId": "europe-2026--2026-09-23/wednesday-beer"
                 },
                 "photography": [
@@ -5793,12 +5830,7 @@
                     "indoor": false
                   }
                 ],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour/only-core",
-                    "message": "今天唯一的晚间核心；收工即回酒店，不接 Burg 或 Markt 夜间尾段"
-                  }
-                ],
+                "openItems": [],
                 "ownerLifecycle": "planned",
                 "ownerTime": {
                   "start": "19:46",
@@ -5806,69 +5838,14 @@
                 }
               },
               {
-                "id": "europe-2026--2026-09-23/day-close",
-                "stepId": "day-close",
-                "sourceOrder": 14,
-                "kind": "intent",
-                "title": "回酒店，为次日最早的清晨留足睡眠",
-                "selection": {
-                  "mode": "default"
-                },
-                "protected": false,
-                "ownerRefs": [
-                  {
-                    "type": "operation",
-                    "id": "europe-2026-bruges-stay"
-                  }
-                ],
-                "contextRefs": [
-                  {
-                    "type": "decision",
-                    "id": "europe-2026-approved-day-rhythm"
-                  }
-                ],
-                "relative": {
-                  "previousId": "europe-2026--2026-09-23/wednesday-beer"
-                },
-                "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026-bruges-stay/booking",
-                    "message": "预订待落实",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "europe-2026-bruges-stay"
-                    }
-                  }
-                ],
-                "activity": {
-                  "kind": "closing"
-                },
-                "lodging": {
-                  "id": "europe-2026-bruges-stay",
-                  "type": "accommodation",
-                  "trip": "europe-2026",
-                  "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
-                  "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
-                }
-              }
-            ],
-            "candidates": [
-              {
                 "id": "europe-2026--2026-09-23/wednesday-beer",
                 "stepId": "wednesday-beer",
-                "sourceOrder": 13,
+                "sourceOrder": 16,
                 "kind": "intent",
-                "title": "一杯周三营业的就近啤酒（一杯，21:30 前结束）",
+                "title": "原计划一杯就近啤酒；实际饮用未记录",
                 "selection": {
                   "mode": "candidate",
-                  "when": "蓝调收工后体力允许且就在回酒店的路上；上限一杯并在 21:30 前结束"
+                  "when": "原计划的条件是一杯就近啤酒；实际饮用未记录"
                 },
                 "protected": false,
                 "ownerRefs": [],
@@ -5888,18 +5865,6 @@
                 },
                 "photography": [],
                 "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-23/wednesday-beer/closed",
-                    "message": "’t Brugs Beertje 与 Le Trappiste 周三闭店；Cantillon 周三闭馆；De Halve Maan 导览 11:00–16:00 与今明两天都不兼容"
-                  },
-                  {
-                    "id": "europe-2026--2026-09-23/wednesday-beer/no-third",
-                    "message": "不为「必须完成布鲁日啤酒」去找第三家 —— 重心本来就在根特"
-                  },
-                  {
-                    "id": "europe-2026--2026-09-23/wednesday-beer/next-morning",
-                    "message": "次日 07:05 的日出是全程最早，这是全程最不该动的一晚"
-                  },
                   {
                     "id": "fact/belgian-beer-venues-wednesday-closures",
                     "message": "2026-09-23 为周三：布鲁日的 't Brugs Beertje 与 Le Trappiste 当日闭店；布鲁塞尔 Brasserie Cantillon 周三与周日闭馆；De Halve Maan 的导览每日 11:00–16:00。De Garre 与 Café Rose Red 的周三营业情况本轮未核实。",
@@ -5971,13 +5936,10 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               ],
               "tonight": [
@@ -5986,13 +5948,10 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               ]
             },
@@ -6066,29 +6025,6 @@
                   "70-200mm equivalent"
                 ],
                 "tripod": "unnecessary",
-                "indoor": false
-              },
-              {
-                "session": {
-                  "id": "europe-2026-2026-09-23-rozenhoedkaai-blue-hour",
-                  "trip": "europe-2026",
-                  "date": "2026-09-23",
-                  "time": "19:46",
-                  "spot": "rozenhoedkaai",
-                  "purpose": "blue-hour",
-                  "status": "planned",
-                  "priority": "high",
-                  "notes": "同一永久摄影机位的前一晚蓝调尝试。"
-                },
-                "spotId": "rozenhoedkaai",
-                "spotName": "Rozenhoedkaai 运河经典机位",
-                "placeId": "rozenhoedkaai",
-                "placeName": "Rozenhoedkaai",
-                "lens": [
-                  "24–70 mm",
-                  "16–35 mm"
-                ],
-                "tripod": "recommended",
                 "indoor": false
               }
             ],
@@ -6170,66 +6106,6 @@
               {
                 "id": "europe-2026--2026-09-23/checkout/storage",
                 "message": "只在住宿已确认接收时寄存；否则带箱直接衔接车站并相应减少中心游览"
-              },
-              {
-                "id": "transport/2026-09-23-brussels-bruges/booking",
-                "message": "尚未预订",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "transport/2026-09-23-brussels-bruges"
-                }
-              },
-              {
-                "id": "fact/belgian-rail-strike-notice-rule",
-                "message": "比利时铁路人员罢工须至少提前 8 个工作日申报并经 HR Rail 认可；关键岗位人员须在罢工日前 72 小时申明是否参与，替代运行方案提前约 24 小时向乘客公布。",
-                "ownerRef": {
-                  "type": "fact",
-                  "id": "belgian-rail-strike-notice-rule"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-23/checkin/open",
-                "message": "布鲁日酒店仍未选定；寄存与入住条件待落实"
-              },
-              {
-                "id": "europe-2026-bruges-stay/booking",
-                "message": "预订待落实",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "europe-2026-bruges-stay"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-23/recovery/substitute",
-                "message": "房间不可用时先找一个可以真正坐下的稳定停留点"
-              },
-              {
-                "id": "europe-2026-bruges-stay/booking",
-                "message": "预订待落实",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "europe-2026-bruges-stay"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-23/slow-walk/why",
-                "message": "这是今天刻意保留的留白，不用来补拍"
-              },
-              {
-                "id": "europe-2026--2026-09-23/dinner/local",
-                "message": "青口薯条或啤酒炖菜是最不会出错的组合；避开 Markt 广场正面的旅游餐厅"
-              },
-              {
-                "id": "europe-2026--2026-09-23/rozenhoedkaai-blue-hour/only-core",
-                "message": "今天唯一的晚间核心；收工即回酒店，不接 Burg 或 Markt 夜间尾段"
-              },
-              {
-                "id": "europe-2026-bruges-stay/booking",
-                "message": "预订待落实",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "europe-2026-bruges-stay"
-                }
               }
             ],
             "endingEntryId": "europe-2026--2026-09-23/day-close",
@@ -6240,19 +6116,19 @@
           "id": "europe-2026--2026-09-24",
           "trip": "europe-2026",
           "date": "2026-09-24",
-          "title": "布鲁日与根特：保护双摄影窗口及中段恢复",
+          "title": "布鲁日上午实绩与根特晚间摄影计划",
           "priorities": [
-            "保护布鲁日清晨与根特晚间这一真正的双摄影窗口日",
-            "缩短清晨尾段，为早餐、退房与行李腾出空间",
-            "15:00–16:30 保护完整恢复，正式晚餐在晚间核心前完成"
+            "上午已参观 O.L.V.-kerk Museum，并现场观看米开朗基罗《圣母子》",
+            "已由 Bruges 抵达根特酒店并办理入住，酒店是今天行动中心",
+            "16:15–18:15 保留约两小时休息；晚间优先 Korenlei 对岸与 Saint Michael's Bridge 三塔摄影"
           ],
           "trade_offs": [
-            "Jan van Eyckplein、Markt 清晨尾段退出默认，不追求五点集齐",
-            "不新增大型 museum，室内扩展首先让位",
-            "双窗口是重点而非安全例外；真实交通与身体状况仍优先"
+            "布鲁日清晨原定摄影是否执行未报告，不推断完成",
+            "不安排 Ghent University 专门行程或高强度景点清单",
+            "夜间酒吧与 23:30 摄影均可选，实际是否发生待事后记录"
           ],
-          "pacing": "清晨核心→早餐打包退房→带箱转场→寄存午餐→回房恢复→早晚餐→根特水岸核心→早收口。",
-          "risk": "短铁路段不等于低负荷；Ghent 早到寄存、房间可用性及末段交通仍待确认。",
+          "pacing": "布鲁日上午参观→实际抵达根特并入住→轻踩点与午饭→酒店休息→简餐→水岸与三塔摄影→夜走→Patershol 晚餐→可选酒吧和夜景。",
+          "risk": "晚间天气与摄影结果待事后记录；Patershol 具体餐厅和可选酒吧未确认预订；不据计划推断实际发生。",
           "sessions": [
             {
               "id": "europe-2026-2026-09-24-rozenhoedkaai-sunrise",
@@ -6369,10 +6245,11 @@
             {
               "id": "europe-2026-2026-09-24-graslei-evening",
               "date": "2026-09-24",
-              "time": "18:58",
+              "time": "19:00",
               "purpose": "facade-evening",
               "status": "planned",
               "priority": "high",
+              "notes": "从 Korenlei / Ghent Marriott 一侧拍对岸 Graslei 行会建筑与河面倒影；实际拍摄结果未记录，黄金时段边界由 astronomy 派生。",
               "spotId": "graslei-korenlei",
               "spotName": "Graslei Facades from Korenlei",
               "placeId": "graslei-korenlei",
@@ -6391,11 +6268,11 @@
             {
               "id": "europe-2026-2026-09-24-sint-michielsbrug-blue-hour",
               "date": "2026-09-24",
-              "time": "19:41",
+              "time": "19:50",
               "purpose": "three-towers",
               "status": "planned",
               "priority": "critical",
-              "notes": "保护双摄影窗口日的晚间核心；完成恢复与正式晚餐后执行，光线窗口由 astronomy 派生，不持久化实算值。",
+              "notes": "今晚核心：Saint Michael's Bridge 的 Three Towers skyline；酒店休息与简餐后执行，正式晚餐安排在摄影及夜间步行之后。实际蓝调窗口由 astronomy 派生，不持久化实算值；拍摄结果未记录。",
               "spotId": "sint-michielsbrug",
               "spotName": "Sint-Michielsbrug Three Towers View",
               "placeId": "sint-michielsbrug",
@@ -6445,49 +6322,48 @@
                 "prerequisiteIds": []
               },
               {
-                "anchorId": "europe-2026--2026-09-24/train-ghent",
-                "minutes": 660,
-                "prerequisiteIds": [
-                  "europe-2026--2026-09-24/breakfast",
-                  "europe-2026--2026-09-24/checkout"
-                ]
-              },
-              {
                 "anchorId": "europe-2026--2026-09-24/graslei-evening",
-                "minutes": 1138,
+                "minutes": 1140,
                 "prerequisiteIds": [
                   "europe-2026--2026-09-24/breakfast",
+                  "europe-2026--2026-09-24/church-of-our-lady-museum",
                   "europe-2026--2026-09-24/checkout",
-                  "europe-2026--2026-09-24/luggage-drop",
-                  "europe-2026--2026-09-24/lunch",
+                  "europe-2026--2026-09-24/train-ghent",
                   "europe-2026--2026-09-24/checkin",
+                  "europe-2026--2026-09-24/ghent-afternoon-scout",
+                  "europe-2026--2026-09-24/lunch",
                   "europe-2026--2026-09-24/recovery",
-                  "europe-2026--2026-09-24/early-dinner"
+                  "europe-2026--2026-09-24/pre-photo-snack"
                 ]
               },
               {
                 "anchorId": "europe-2026--2026-09-24/sint-michielsbrug-blue-hour",
-                "minutes": 1181,
+                "minutes": 1190,
                 "prerequisiteIds": [
                   "europe-2026--2026-09-24/breakfast",
+                  "europe-2026--2026-09-24/church-of-our-lady-museum",
                   "europe-2026--2026-09-24/checkout",
-                  "europe-2026--2026-09-24/luggage-drop",
-                  "europe-2026--2026-09-24/lunch",
+                  "europe-2026--2026-09-24/train-ghent",
                   "europe-2026--2026-09-24/checkin",
+                  "europe-2026--2026-09-24/ghent-afternoon-scout",
+                  "europe-2026--2026-09-24/lunch",
                   "europe-2026--2026-09-24/recovery",
-                  "europe-2026--2026-09-24/early-dinner"
+                  "europe-2026--2026-09-24/pre-photo-snack"
                 ]
               }
             ],
             "untimedEntryIds": [
               "europe-2026--2026-09-24/breakfast",
+              "europe-2026--2026-09-24/church-of-our-lady-museum",
               "europe-2026--2026-09-24/checkout",
-              "europe-2026--2026-09-24/luggage-drop",
-              "europe-2026--2026-09-24/lunch",
+              "europe-2026--2026-09-24/train-ghent",
               "europe-2026--2026-09-24/checkin",
+              "europe-2026--2026-09-24/ghent-afternoon-scout",
+              "europe-2026--2026-09-24/lunch",
               "europe-2026--2026-09-24/recovery",
-              "europe-2026--2026-09-24/early-dinner",
-              "europe-2026--2026-09-24/ghent-beer-evening",
+              "europe-2026--2026-09-24/pre-photo-snack",
+              "europe-2026--2026-09-24/ghent-night-walk",
+              "europe-2026--2026-09-24/patershol-dinner",
               "europe-2026--2026-09-24/day-close"
             ],
             "dayId": "europe-2026--2026-09-24",
@@ -6556,7 +6432,7 @@
                 "openItems": [
                   {
                     "id": "europe-2026--2026-09-24/rozenhoedkaai-sunrise/earliest",
-                    "message": "全程最早的一个摄影时刻，也是布鲁日过夜的主要收益"
+                    "message": "原定清晨摄影是否实际执行未报告，不据计划标为完成"
                   }
                 ],
                 "ownerLifecycle": "planned",
@@ -6674,7 +6550,7 @@
                 "openItems": [
                   {
                     "id": "europe-2026--2026-09-24/burg-morning/tail",
-                    "message": "Jan van Eyckplein 与 Markt 的清晨尾段保持撤回，不追求五点集齐"
+                    "message": "该清晨 Session 的实际执行结果未报告"
                   }
                 ],
                 "ownerLifecycle": "planned",
@@ -6688,7 +6564,7 @@
                 "stepId": "breakfast",
                 "sourceOrder": 3,
                 "kind": "intent",
-                "title": "清晨收工后坐下早餐",
+                "title": "原定清晨摄影后早餐；实际执行未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -6702,7 +6578,7 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/burg-morning",
-                  "nextId": "europe-2026--2026-09-24/checkout"
+                  "nextId": "europe-2026--2026-09-24/church-of-our-lady-museum"
                 },
                 "photography": [],
                 "openItems": [],
@@ -6718,9 +6594,36 @@
                 }
               },
               {
+                "id": "europe-2026--2026-09-24/church-of-our-lady-museum",
+                "stepId": "church-of-our-lady-museum",
+                "sourceOrder": 4,
+                "kind": "intent",
+                "title": "已完成：O.L.V.-kerk Museum，€10 门票，现场观看米开朗基罗《圣母子》",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "bruges"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-24/breakfast",
+                  "nextId": "europe-2026--2026-09-24/checkout"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
                 "id": "europe-2026--2026-09-24/checkout",
                 "stepId": "checkout",
-                "sourceOrder": 4,
+                "sourceOrder": 5,
                 "kind": "intent",
                 "title": "打包、退房并带箱赴站",
                 "selection": {
@@ -6740,20 +6643,11 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-24/breakfast",
+                  "previousId": "europe-2026--2026-09-24/church-of-our-lady-museum",
                   "nextId": "europe-2026--2026-09-24/train-ghent"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026-bruges-stay/booking",
-                    "message": "预订待落实",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "europe-2026-bruges-stay"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "logistics",
                   "action": "checkout"
@@ -6763,19 +6657,16 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               },
               {
                 "id": "europe-2026--2026-09-24/train-ghent",
                 "stepId": "train-ghent",
-                "sourceOrder": 5,
+                "sourceOrder": 6,
                 "kind": "operation",
                 "title": "Brugge railway station → Gent-Sint-Pieters",
                 "selection": {
@@ -6796,57 +6687,28 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/checkout",
-                  "nextId": "europe-2026--2026-09-24/luggage-drop"
+                  "nextId": "europe-2026--2026-09-24/checkin"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/train-ghent/tram",
-                    "message": "带箱从 Gent-Sint-Pieters 到老城需要乘电车；短铁路段不等于低负荷"
-                  },
-                  {
-                    "id": "transport/2026-09-24-bruges-ghent/booking",
-                    "message": "尚未预订",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "transport/2026-09-24-bruges-ghent"
-                    }
-                  },
-                  {
-                    "id": "fact/belgian-rail-strike-notice-rule",
-                    "message": "比利时铁路人员罢工须至少提前 8 个工作日申报并经 HR Rail 认可；关键岗位人员须在罢工日前 72 小时申明是否参与，替代运行方案提前约 24 小时向乘客公布。",
-                    "ownerRef": {
-                      "type": "fact",
-                      "id": "belgian-rail-strike-notice-rule"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "operation": {
                   "id": "transport/2026-09-24-bruges-ghent",
                   "type": "transport",
                   "trip": "europe-2026",
                   "date": "2026-09-24",
-                  "status": "planned",
-                  "ref": "Brugge → Gent-Sint-Pieters after the Bruges sunrise route; the shortest transfer of the trip; tram from Gent-Sint-Pieters to the old town is required with luggage",
-                  "start_time": "11:00",
-                  "end_time": "11:30",
+                  "status": "completed",
+                  "ref": "2026-09-24 已从 Brugge Station 到 Gent-Sint-Pieters；再乘 De Lijn bus 60 到 Gent Beneluxplein，转 bus 11 至 Gent Poel，步行抵达 Ghent Marriott。实际列车班次与时刻未记录。",
                   "from": "brugge-station",
-                  "to": "gent-sint-pieters",
-                  "booking_status": "unbooked"
+                  "to": "gent-sint-pieters"
                 },
-                "ownerLifecycle": "planned",
-                "ownerTime": {
-                  "start": "11:00",
-                  "end": "11:30",
-                  "status": "planned"
-                }
+                "ownerLifecycle": "completed"
               },
               {
-                "id": "europe-2026--2026-09-24/luggage-drop",
-                "stepId": "luggage-drop",
-                "sourceOrder": 6,
+                "id": "europe-2026--2026-09-24/checkin",
+                "stepId": "checkin",
+                "sourceOrder": 7,
                 "kind": "intent",
-                "title": "抵达后先确认酒店接箱",
+                "title": "已抵达根特酒店并办理入住；以酒店为今日行动中心",
                 "selection": {
                   "mode": "default"
                 },
@@ -6865,18 +6727,13 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/train-ghent",
-                  "nextId": "europe-2026--2026-09-24/lunch"
+                  "nextId": "europe-2026--2026-09-24/ghent-afternoon-scout"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/luggage-drop/storage",
-                    "message": "寄存不可用时先解决箱子，不拖箱执行摄影"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "logistics",
-                  "action": "luggage-drop"
+                  "action": "checkin"
                 },
                 "lodging": {
                   "id": "europe-2026-ghent-stay-placeholder",
@@ -6884,18 +6741,53 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
                 }
               },
               {
+                "id": "europe-2026--2026-09-24/ghent-afternoon-scout",
+                "stepId": "ghent-afternoon-scout",
+                "sourceOrder": 8,
+                "kind": "intent",
+                "title": "14:00–16:15 安顿、轻踩点 Saint Michael's Bridge 与 Graslei / Korenlei，不加高强度游览",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "sint-michielsbrug"
+                  },
+                  {
+                    "type": "place",
+                    "id": "graslei-korenlei"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-24/checkin",
+                  "nextId": "europe-2026--2026-09-24/lunch"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                },
+                "target": {
+                  "boundary": "start",
+                  "preferred": "14:00"
+                }
+              },
+              {
                 "id": "europe-2026--2026-09-24/lunch",
                 "stepId": "lunch",
-                "sourceOrder": 7,
+                "sourceOrder": 9,
                 "kind": "intent",
-                "title": "正式午餐",
+                "title": "14:00–16:15 之间午饭",
                 "selection": {
                   "mode": "default"
                 },
@@ -6908,8 +6800,8 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-24/luggage-drop",
-                  "nextId": "europe-2026--2026-09-24/checkin"
+                  "previousId": "europe-2026--2026-09-24/ghent-afternoon-scout",
+                  "nextId": "europe-2026--2026-09-24/recovery"
                 },
                 "photography": [],
                 "openItems": [],
@@ -6925,15 +6817,15 @@
                 }
               },
               {
-                "id": "europe-2026--2026-09-24/checkin",
-                "stepId": "checkin",
-                "sourceOrder": 8,
+                "id": "europe-2026--2026-09-24/recovery",
+                "stepId": "recovery",
+                "sourceOrder": 10,
                 "kind": "intent",
-                "title": "办理入住",
+                "title": "16:15–18:15 回酒店休息约两小时",
                 "selection": {
                   "mode": "default"
                 },
-                "protected": false,
+                "protected": true,
                 "ownerRefs": [
                   {
                     "type": "operation",
@@ -6948,76 +6840,22 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/lunch",
-                  "nextId": "europe-2026--2026-09-24/recovery"
+                  "nextId": "europe-2026--2026-09-24/pre-photo-snack"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/checkin/room",
-                    "message": "预订不等于提前入房承诺；房间不可用时明确寻找可坐下恢复的替代"
-                  }
-                ],
-                "activity": {
-                  "kind": "logistics",
-                  "action": "checkin"
-                },
-                "lodging": {
-                  "id": "europe-2026-ghent-stay-placeholder",
-                  "type": "accommodation",
-                  "trip": "europe-2026",
-                  "date": "2026-09-24",
-                  "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
-                  "booking_status": "booked",
-                  "check_in_date": "2026-09-24",
-                  "check_out_date": "2026-09-25"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-24/recovery",
-                "stepId": "recovery",
-                "sourceOrder": 9,
-                "kind": "intent",
-                "title": "15:00–16:30 完整恢复",
-                "selection": {
-                  "mode": "default"
-                },
-                "protected": true,
-                "ownerRefs": [
-                  {
-                    "type": "operation",
-                    "id": "europe-2026-ghent-stay-placeholder"
-                  }
-                ],
-                "contextRefs": [
-                  {
-                    "type": "decision",
-                    "id": "europe-2026-approved-day-rhythm"
-                  }
-                ],
-                "relative": {
-                  "previousId": "europe-2026--2026-09-24/checkin",
-                  "nextId": "europe-2026--2026-09-24/early-dinner"
-                },
-                "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/recovery/protect",
-                    "message": "这是全程最需要被保护的一段休息；不与吃饭、充电整理或通勤混算"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "recovery"
                 },
                 "budget": {
                   "kind": "minutes",
-                  "min_minutes": 90,
-                  "max_minutes": 90,
+                  "min_minutes": 120,
+                  "max_minutes": 120,
                   "protected": true
                 },
                 "target": {
                   "boundary": "start",
-                  "preferred": "15:00"
+                  "preferred": "16:15"
                 },
                 "lodging": {
                   "id": "europe-2026-ghent-stay-placeholder",
@@ -7025,22 +6863,22 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
                 }
               },
               {
-                "id": "europe-2026--2026-09-24/early-dinner",
-                "stepId": "early-dinner",
-                "sourceOrder": 10,
+                "id": "europe-2026--2026-09-24/pre-photo-snack",
+                "stepId": "pre-photo-snack",
+                "sourceOrder": 11,
                 "kind": "intent",
-                "title": "正式早晚餐，必须在 18:58 之前完成",
+                "title": "18:15–18:45 只吃简餐；炸薯条或华夫饼均可，不安排正式早晚餐",
                 "selection": {
                   "mode": "default"
                 },
-                "protected": true,
+                "protected": false,
                 "ownerRefs": [],
                 "contextRefs": [
                   {
@@ -7053,21 +6891,16 @@
                   "nextId": "europe-2026--2026-09-24/graslei-evening"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/early-dinner/identity",
-                    "message": "今晚的身份是啤酒，不是餐厅；早晚餐就近解决即可"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "meal",
-                  "slot": "dinner"
+                  "slot": "refreshment"
                 },
                 "budget": {
                   "kind": "minutes",
-                  "min_minutes": 60,
-                  "max_minutes": 60,
-                  "protected": true
+                  "min_minutes": 30,
+                  "max_minutes": 30,
+                  "protected": false
                 },
                 "target": {
                   "boundary": "end",
@@ -7077,7 +6910,7 @@
               {
                 "id": "europe-2026--2026-09-24/graslei-evening",
                 "stepId": "graslei-evening",
-                "sourceOrder": 11,
+                "sourceOrder": 12,
                 "kind": "session",
                 "title": "Graslei Facades from Korenlei",
                 "selection": {
@@ -7097,7 +6930,7 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-24/early-dinner",
+                  "previousId": "europe-2026--2026-09-24/pre-photo-snack",
                   "nextId": "europe-2026--2026-09-24/sint-michielsbrug-blue-hour"
                 },
                 "photography": [
@@ -7106,11 +6939,12 @@
                       "id": "europe-2026-2026-09-24-graslei-evening",
                       "trip": "europe-2026",
                       "date": "2026-09-24",
-                      "time": "18:58",
+                      "time": "19:00",
                       "spot": "graslei-korenlei",
                       "purpose": "facade-evening",
                       "status": "planned",
-                      "priority": "high"
+                      "priority": "high",
+                      "notes": "从 Korenlei / Ghent Marriott 一侧拍对岸 Graslei 行会建筑与河面倒影；实际拍摄结果未记录，黄金时段边界由 astronomy 派生。"
                     },
                     "spotId": "graslei-korenlei",
                     "spotName": "Graslei Facades from Korenlei",
@@ -7127,14 +6961,14 @@
                 "openItems": [],
                 "ownerLifecycle": "planned",
                 "ownerTime": {
-                  "start": "18:58",
+                  "start": "19:00",
                   "status": "planned"
                 }
               },
               {
                 "id": "europe-2026--2026-09-24/sint-michielsbrug-blue-hour",
                 "stepId": "sint-michielsbrug-blue-hour",
-                "sourceOrder": 12,
+                "sourceOrder": 13,
                 "kind": "session",
                 "title": "Sint-Michielsbrug Three Towers View",
                 "selection": {
@@ -7155,7 +6989,7 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/graslei-evening",
-                  "nextId": "europe-2026--2026-09-24/ghent-beer-evening"
+                  "nextId": "europe-2026--2026-09-24/ghent-night-walk"
                 },
                 "photography": [
                   {
@@ -7163,12 +6997,12 @@
                       "id": "europe-2026-2026-09-24-sint-michielsbrug-blue-hour",
                       "trip": "europe-2026",
                       "date": "2026-09-24",
-                      "time": "19:41",
+                      "time": "19:50",
                       "spot": "sint-michielsbrug",
                       "purpose": "three-towers",
                       "status": "planned",
                       "priority": "critical",
-                      "notes": "保护双摄影窗口日的晚间核心；完成恢复与正式晚餐后执行，光线窗口由 astronomy 派生，不持久化实算值。"
+                      "notes": "今晚核心：Saint Michael's Bridge 的 Three Towers skyline；酒店休息与简餐后执行，正式晚餐安排在摄影及夜间步行之后。实际蓝调窗口由 astronomy 派生，不持久化实算值；拍摄结果未记录。"
                     },
                     "spotId": "sint-michielsbrug",
                     "spotName": "Sint-Michielsbrug Three Towers View",
@@ -7185,91 +7019,103 @@
                 "openItems": [],
                 "ownerLifecycle": "planned",
                 "ownerTime": {
-                  "start": "19:41",
+                  "start": "19:50",
                   "status": "planned"
                 }
               },
               {
-                "id": "europe-2026--2026-09-24/ghent-beer-evening",
-                "stepId": "ghent-beer-evening",
-                "sourceOrder": 13,
+                "id": "europe-2026--2026-09-24/ghent-night-walk",
+                "stepId": "ghent-night-walk",
+                "sourceOrder": 14,
                 "kind": "intent",
-                "title": "Ghent 啤酒之夜：一家为主，1–2 杯，22:00 结束",
+                "title": "20:20–20:55 夜走：Saint Michael's Bridge → Graslei → Grasbrug → 回望水岸 → Gravensteen 外观 → Patershol",
                 "selection": {
                   "mode": "default"
                 },
                 "protected": false,
-                "ownerRefs": [
-                  {
-                    "type": "place",
-                    "id": "graslei-korenlei"
-                  }
-                ],
+                "ownerRefs": [],
                 "contextRefs": [
                   {
-                    "type": "decision",
-                    "id": "europe-2026-approved-day-rhythm"
+                    "type": "place",
+                    "id": "sint-michielsbrug"
                   },
                   {
                     "type": "place",
                     "id": "graslei-korenlei"
+                  },
+                  {
+                    "type": "place",
+                    "id": "gravensteen"
                   },
                   {
                     "type": "place",
                     "id": "patershol"
-                  },
-                  {
-                    "type": "fact",
-                    "id": "ghent-beer-venues-thursday"
                   }
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-24/sint-michielsbrug-blue-hour",
-                  "nextId": "europe-2026--2026-09-24/day-close"
+                  "nextId": "europe-2026--2026-09-24/patershol-dinner"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/ghent-beer-evening/venue",
-                    "message": "Waterhuis aan de Bierkant 与 De Dulle Griet 为候选，当日营业与是否需要排队待确认"
-                  },
-                  {
-                    "id": "europe-2026--2026-09-24/ghent-beer-evening/cutoff",
-                    "message": "22:00 与两杯上限是规划上界，不是营业事实；理由是保护次日 Ghent → Köln 的跨国转场链"
-                  },
-                  {
-                    "id": "europe-2026--2026-09-24/ghent-beer-evening/zero-cost",
-                    "message": "住宿在 Korenlei 10，正对当晚两个机位 —— 这一晚不需要从任何地方拿走时间"
-                  },
-                  {
-                    "id": "fact/ghent-beer-venues-thursday",
-                    "message": "根特 Waterhuis aan de Bierkant（Groentenmarkt 9）供应约 165 种啤酒含三款自酿；De Dulle Griet（Vrijdagmarkt 50）酒单约 500 种，招牌 Max 需押一只鞋。两处距 Korenlei 步行数分钟；2026-09-24 当日营业时段与是否需要排队仍需复查。",
-                    "ownerRef": {
-                      "type": "fact",
-                      "id": "ghent-beer-venues-thursday"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "experience"
                 },
                 "budget": {
                   "kind": "minutes",
-                  "min_minutes": 60,
-                  "max_minutes": 100,
+                  "min_minutes": 35,
+                  "max_minutes": 35,
                   "protected": false
                 },
                 "target": {
-                  "boundary": "end",
-                  "latest": "22:00"
+                  "boundary": "start",
+                  "preferred": "20:20"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-24/patershol-dinner",
+                "stepId": "patershol-dinner",
+                "sourceOrder": 15,
+                "kind": "intent",
+                "title": "21:00–22:15 Patershol 晚餐，优先 Gentse waterzooi；餐厅未确认",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": true,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "patershol"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-24/ghent-night-walk",
+                  "nextId": "europe-2026--2026-09-24/optional-ghent-night-drink"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "meal",
+                  "slot": "dinner"
+                },
+                "budget": {
+                  "kind": "minutes",
+                  "min_minutes": 75,
+                  "max_minutes": 75,
+                  "protected": true
+                },
+                "target": {
+                  "boundary": "start",
+                  "preferred": "21:00"
                 }
               },
               {
                 "id": "europe-2026--2026-09-24/day-close",
                 "stepId": "day-close",
-                "sourceOrder": 14,
+                "sourceOrder": 18,
                 "kind": "intent",
-                "title": "步行回酒店；就寝目标不晚于 22:30",
+                "title": "返回酒店；实际返店与就寝时间待事后记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -7287,15 +7133,10 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-24/ghent-beer-evening"
+                  "previousId": "europe-2026--2026-09-24/optional-late-night-photography"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-24/day-close/bedtime",
-                    "message": "今晚的实际就寝时间是次日冰球分支的前置条件之一"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "closing"
                 },
@@ -7305,14 +7146,81 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
                 }
               }
             ],
-            "candidates": [],
+            "candidates": [
+              {
+                "id": "europe-2026--2026-09-24/optional-ghent-night-drink",
+                "stepId": "optional-ghent-night-drink",
+                "sourceOrder": 16,
+                "kind": "intent",
+                "title": "可选 22:15–23:30：Waterhuis aan de Bierkant 或 't Dreupelkot，体验比利时啤酒与河岸夜景",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "晚餐后仍想停留且体力允许；可选一小杯 jenever，具体酒吧未预订"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "graslei-korenlei"
+                  },
+                  {
+                    "type": "place",
+                    "id": "patershol"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-24/patershol-dinner",
+                  "nextId": "europe-2026--2026-09-24/optional-late-night-photography"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                },
+                "budget": {
+                  "kind": "minutes",
+                  "min_minutes": 75,
+                  "max_minutes": 75,
+                  "protected": false
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-24/optional-late-night-photography",
+                "stepId": "optional-late-night-photography",
+                "sourceOrder": 17,
+                "kind": "intent",
+                "title": "可选约 23:30：Grasbrug / Graslei / Korenlei 夜景与水面倒影",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "想拍游客减少后的灯光与行会屋时再前往；可使用三脚架，实际是否发生待事后记录"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "graslei-korenlei"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-24/optional-ghent-night-drink",
+                  "nextId": "europe-2026--2026-09-24/day-close"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              }
+            ],
             "historyRefs": [
               {
                 "type": "session",
@@ -7334,13 +7242,10 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               ],
               "checkout": [
@@ -7349,13 +7254,10 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-23",
-                  "status": "planned",
-                  "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
-                  "booking_status": "placeholder",
+                  "status": "completed",
+                  "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
                   "check_in_date": "2026-09-23",
-                  "check_out_date": "2026-09-24",
-                  "opens_at": "2026-08-01",
-                  "act_by": "2026-09-01"
+                  "check_out_date": "2026-09-24"
                 }
               ],
               "checkin": [
@@ -7365,7 +7267,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -7378,7 +7280,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -7459,11 +7361,12 @@
                   "id": "europe-2026-2026-09-24-graslei-evening",
                   "trip": "europe-2026",
                   "date": "2026-09-24",
-                  "time": "18:58",
+                  "time": "19:00",
                   "spot": "graslei-korenlei",
                   "purpose": "facade-evening",
                   "status": "planned",
-                  "priority": "high"
+                  "priority": "high",
+                  "notes": "从 Korenlei / Ghent Marriott 一侧拍对岸 Graslei 行会建筑与河面倒影；实际拍摄结果未记录，黄金时段边界由 astronomy 派生。"
                 },
                 "spotId": "graslei-korenlei",
                 "spotName": "Graslei Facades from Korenlei",
@@ -7481,12 +7384,12 @@
                   "id": "europe-2026-2026-09-24-sint-michielsbrug-blue-hour",
                   "trip": "europe-2026",
                   "date": "2026-09-24",
-                  "time": "19:41",
+                  "time": "19:50",
                   "spot": "sint-michielsbrug",
                   "purpose": "three-towers",
                   "status": "planned",
                   "priority": "critical",
-                  "notes": "保护双摄影窗口日的晚间核心；完成恢复与正式晚餐后执行，光线窗口由 astronomy 派生，不持久化实算值。"
+                  "notes": "今晚核心：Saint Michael's Bridge 的 Three Towers skyline；酒店休息与简餐后执行，正式晚餐安排在摄影及夜间步行之后。实际蓝调窗口由 astronomy 派生，不持久化实算值；拍摄结果未记录。"
                 },
                 "spotId": "sint-michielsbrug",
                 "spotName": "Sint-Michielsbrug Three Towers View",
@@ -7569,79 +7472,11 @@
             "openItems": [
               {
                 "id": "europe-2026--2026-09-24/rozenhoedkaai-sunrise/earliest",
-                "message": "全程最早的一个摄影时刻，也是布鲁日过夜的主要收益"
+                "message": "原定清晨摄影是否实际执行未报告，不据计划标为完成"
               },
               {
                 "id": "europe-2026--2026-09-24/burg-morning/tail",
-                "message": "Jan van Eyckplein 与 Markt 的清晨尾段保持撤回，不追求五点集齐"
-              },
-              {
-                "id": "europe-2026-bruges-stay/booking",
-                "message": "预订待落实",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "europe-2026-bruges-stay"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-24/train-ghent/tram",
-                "message": "带箱从 Gent-Sint-Pieters 到老城需要乘电车；短铁路段不等于低负荷"
-              },
-              {
-                "id": "transport/2026-09-24-bruges-ghent/booking",
-                "message": "尚未预订",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "transport/2026-09-24-bruges-ghent"
-                }
-              },
-              {
-                "id": "fact/belgian-rail-strike-notice-rule",
-                "message": "比利时铁路人员罢工须至少提前 8 个工作日申报并经 HR Rail 认可；关键岗位人员须在罢工日前 72 小时申明是否参与，替代运行方案提前约 24 小时向乘客公布。",
-                "ownerRef": {
-                  "type": "fact",
-                  "id": "belgian-rail-strike-notice-rule"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-24/luggage-drop/storage",
-                "message": "寄存不可用时先解决箱子，不拖箱执行摄影"
-              },
-              {
-                "id": "europe-2026--2026-09-24/checkin/room",
-                "message": "预订不等于提前入房承诺；房间不可用时明确寻找可坐下恢复的替代"
-              },
-              {
-                "id": "europe-2026--2026-09-24/recovery/protect",
-                "message": "这是全程最需要被保护的一段休息；不与吃饭、充电整理或通勤混算"
-              },
-              {
-                "id": "europe-2026--2026-09-24/early-dinner/identity",
-                "message": "今晚的身份是啤酒，不是餐厅；早晚餐就近解决即可"
-              },
-              {
-                "id": "europe-2026--2026-09-24/ghent-beer-evening/venue",
-                "message": "Waterhuis aan de Bierkant 与 De Dulle Griet 为候选，当日营业与是否需要排队待确认"
-              },
-              {
-                "id": "europe-2026--2026-09-24/ghent-beer-evening/cutoff",
-                "message": "22:00 与两杯上限是规划上界，不是营业事实；理由是保护次日 Ghent → Köln 的跨国转场链"
-              },
-              {
-                "id": "europe-2026--2026-09-24/ghent-beer-evening/zero-cost",
-                "message": "住宿在 Korenlei 10，正对当晚两个机位 —— 这一晚不需要从任何地方拿走时间"
-              },
-              {
-                "id": "fact/ghent-beer-venues-thursday",
-                "message": "根特 Waterhuis aan de Bierkant（Groentenmarkt 9）供应约 165 种啤酒含三款自酿；De Dulle Griet（Vrijdagmarkt 50）酒单约 500 种，招牌 Max 需押一只鞋。两处距 Korenlei 步行数分钟；2026-09-24 当日营业时段与是否需要排队仍需复查。",
-                "ownerRef": {
-                  "type": "fact",
-                  "id": "ghent-beer-venues-thursday"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-24/day-close/bedtime",
-                "message": "今晚的实际就寝时间是次日冰球分支的前置条件之一"
+                "message": "该清晨 Session 的实际执行结果未报告"
               },
               {
                 "id": "europe-2026--2026-09-24/target-feasibility",
@@ -7661,19 +7496,19 @@
           "id": "europe-2026--2026-09-25",
           "trip": "europe-2026",
           "date": "2026-09-25",
-          "title": "根特到科隆：入住、完整恢复与正式早晚餐优先",
+          "title": "根特条件上午到科隆：交通余量、入住与恢复优先",
           "priorities": [
-            "早餐、退房、车站与跨国接续优先，Graslei morning 仅 conditional",
-            "ARRIVAL → HOTEL / LUGGAGE → FULL REST → EARLY FORMAL DINNER",
-            "完成以上链路后才考虑 Cologne 首晚摄影，之后回酒店"
+            "昨晚三塔蓝调满意则可睡至约 08:30；失败或天气不佳才考虑清晨补拍",
+            "早餐、收箱、退房、车站与跨国接续优先",
+            "科隆到达后先酒店／行李、完整恢复和正式早晚餐"
           ],
           "trade_offs": [
-            "Graslei 仅在睡眠、天气、交通同时支持且重新激活后执行",
-            "入住延迟、疲劳或交通异常时 DINNER + REST 优先于摄影",
-            "Gross St Martin night 退出默认；snack 不等于 dinner"
+            "三塔及 Graslei / Korenlei 清晨补拍仅为条件备选，不设强制早起",
+            "Belfry 与 Groentenmarkt / Tierenteyn mustard 仅顺路可选，不挤占赴站余量",
+            "入住延迟、疲劳或交通异常时 DINNER + REST 优先于科隆摄影；Gross St Martin night 退出默认"
           ],
-          "pacing": "条件清晨候选→早餐退房→车站与国际转场→午餐方案→QVEST／行李→完整恢复→正式早晚餐→条件摄影→酒店。",
-          "risk": "两段实际车次、换乘站与 QVEST 提前寄存未确认；不可退住宿终点不变。",
+          "pacing": "昨晚满意则可晚起，天气不佳或未拍成才考虑清晨补拍→早餐→轻松根特／回酒店收箱→退房赴站→国际转场→午餐方案→QVEST／行李→完整恢复→正式早晚餐→条件摄影→酒店。",
+          "risk": "9/25 具体车次与订票尚未确认，必须为赴站及经布鲁塞尔接续保留余量；QVEST 提前寄存未确认，不可退住宿终点不变。",
           "sessions": [
             {
               "id": "europe-2026-2026-09-25-graslei-morning",
@@ -7789,19 +7624,12 @@
             "europe-2026-brussels-cologne-transfer-buffer-minimum"
           ],
           "execution": {
-            "planSections": [
-              {
-                "anchorId": "europe-2026--2026-09-25/train-cologne",
-                "minutes": 630,
-                "prerequisiteIds": [
-                  "europe-2026--2026-09-25/breakfast",
-                  "europe-2026--2026-09-25/checkout"
-                ]
-              }
-            ],
+            "planSections": [],
             "untimedEntryIds": [
               "europe-2026--2026-09-25/breakfast",
+              "europe-2026--2026-09-25/pack-and-buffer",
               "europe-2026--2026-09-25/checkout",
+              "europe-2026--2026-09-25/train-cologne",
               "europe-2026--2026-09-25/lunch",
               "europe-2026--2026-09-25/checkin",
               "europe-2026--2026-09-25/recovery",
@@ -7824,9 +7652,9 @@
               {
                 "id": "europe-2026--2026-09-25/breakfast",
                 "stepId": "breakfast",
-                "sourceOrder": 0,
+                "sourceOrder": 1,
                 "kind": "intent",
-                "title": "早餐，不设默认清晨摄影闹钟",
+                "title": "早餐；昨晚三塔蓝调满意时可睡至约 08:30 后开始",
                 "selection": {
                   "mode": "default"
                 },
@@ -7844,7 +7672,8 @@
                   }
                 ],
                 "relative": {
-                  "nextId": "europe-2026--2026-09-25/checkout"
+                  "previousId": "europe-2026--2026-09-25/ghent-morning-photo-retry",
+                  "nextId": "europe-2026--2026-09-25/easy-ghent-morning"
                 },
                 "photography": [],
                 "openItems": [],
@@ -7864,7 +7693,84 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
+                  "booking_status": "booked",
+                  "check_in_date": "2026-09-24",
+                  "check_out_date": "2026-09-25"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-25/easy-ghent-morning",
+                "stepId": "easy-ghent-morning",
+                "sourceOrder": 2,
+                "kind": "intent",
+                "title": "轻松步行游览 Ghent 老城",
+                "selection": {
+                  "mode": "conditional",
+                  "when": "9/24 晚 Saint Michael's Bridge 蓝调／三塔已拍满意，且早餐后仍有充足收箱和赴站时间；否则优先休息及交通"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "place",
+                    "id": "ghent"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "ghent"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-25/breakfast",
+                  "nextId": "europe-2026--2026-09-25/belfry-optional"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-25/pack-and-buffer",
+                "stepId": "pack-and-buffer",
+                "sourceOrder": 5,
+                "kind": "intent",
+                "title": "回酒店休息、收拾行李并核对赴站交通余量",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": true,
+                "ownerRefs": [
+                  {
+                    "type": "operation",
+                    "id": "europe-2026-ghent-stay-placeholder"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "decision",
+                    "id": "europe-2026-approved-day-rhythm"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-25/groentenmarkt-tierenteyn",
+                  "nextId": "europe-2026--2026-09-25/checkout"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "logistics",
+                  "action": "prepare"
+                },
+                "lodging": {
+                  "id": "europe-2026-ghent-stay-placeholder",
+                  "type": "accommodation",
+                  "trip": "europe-2026",
+                  "date": "2026-09-24",
+                  "status": "confirmed",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -7873,9 +7779,9 @@
               {
                 "id": "europe-2026--2026-09-25/checkout",
                 "stepId": "checkout",
-                "sourceOrder": 1,
+                "sourceOrder": 6,
                 "kind": "intent",
-                "title": "退房并带箱赴站",
+                "title": "退房并带箱赴站，保留跨国接续余量",
                 "selection": {
                   "mode": "default"
                 },
@@ -7893,7 +7799,7 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-25/breakfast",
+                  "previousId": "europe-2026--2026-09-25/pack-and-buffer",
                   "nextId": "europe-2026--2026-09-25/train-cologne"
                 },
                 "photography": [],
@@ -7913,7 +7819,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -7922,7 +7828,7 @@
               {
                 "id": "europe-2026--2026-09-25/train-cologne",
                 "stepId": "train-cologne",
-                "sourceOrder": 2,
+                "sourceOrder": 7,
                 "kind": "operation",
                 "title": "Gent-Sint-Pieters → Köln Hauptbahnhof",
                 "selection": {
@@ -7955,6 +7861,14 @@
                 },
                 "photography": [],
                 "openItems": [
+                  {
+                    "id": "transport/2026-09-25-ghent-cologne/time",
+                    "message": "交通时刻待定；必要行程仍须执行",
+                    "ownerRef": {
+                      "type": "operation",
+                      "id": "transport/2026-09-25-ghent-cologne"
+                    }
+                  },
                   {
                     "id": "transport/2026-09-25-ghent-cologne/booking",
                     "message": "尚未预订",
@@ -8010,9 +7924,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-25",
                   "status": "planned",
-                  "ref": "Gent-Sint-Pieters → Köln Hbf via Brussels, one interchange; selected routing of the two reviewed options; the Antwerp direct-ICE routing stays an unselected fallback and gets no active Operation; specific services on both legs remain unconfirmed and must be checked before departure",
-                  "start_time": "10:30",
-                  "end_time": "13:20",
+                  "ref": "2026-09-25 Gent-Sint-Pieters → Köln Hbf via Brussels, one interchange；此路线已选，但具体列车未选、未订。约 13:25 与 14:25 出发只讨论过，均非已选车次；Antwerp direct-ICE 仍为未选 fallback。订票前须核实列车与接续。",
                   "from": "gent-sint-pieters",
                   "to": "koln-hbf",
                   "booking_status": "unbooked",
@@ -8020,17 +7932,12 @@
                   "act_by": "2026-09-18",
                   "buffer_minutes": 30
                 },
-                "ownerLifecycle": "planned",
-                "ownerTime": {
-                  "start": "10:30",
-                  "end": "13:20",
-                  "status": "planned"
-                }
+                "ownerLifecycle": "planned"
               },
               {
                 "id": "europe-2026--2026-09-25/lunch",
                 "stepId": "lunch",
-                "sourceOrder": 3,
+                "sourceOrder": 8,
                 "kind": "intent",
                 "title": "上车前用餐或自带足量食物在途中吃",
                 "selection": {
@@ -8069,7 +7976,7 @@
               {
                 "id": "europe-2026--2026-09-25/checkin",
                 "stepId": "checkin",
-                "sourceOrder": 4,
+                "sourceOrder": 9,
                 "kind": "intent",
                 "title": "抵达科隆，办理入住",
                 "selection": {
@@ -8096,7 +8003,7 @@
                 "openItems": [
                   {
                     "id": "europe-2026--2026-09-25/checkin/early-arrival",
-                    "message": "13:20 到站早于 15:00 可入住时间；先联系酒店落实接箱，不能接收时先解决行李并坐下等候"
+                    "message": "具体到站时刻未确认；若早于可入住时间，先联系酒店落实接箱，不能接收时先解决行李并坐下等候"
                   }
                 ],
                 "activity": {
@@ -8108,7 +8015,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8118,7 +8025,7 @@
               {
                 "id": "europe-2026--2026-09-25/recovery",
                 "stepId": "recovery",
-                "sourceOrder": 5,
+                "sourceOrder": 10,
                 "kind": "intent",
                 "title": "进房后完整恢复，办理入住与找餐厅不计入",
                 "selection": {
@@ -8157,7 +8064,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8167,9 +8074,9 @@
               {
                 "id": "europe-2026--2026-09-25/early-dinner",
                 "stepId": "early-dinner",
-                "sourceOrder": 6,
+                "sourceOrder": 11,
                 "kind": "intent",
-                "title": "正式早晚餐",
+                "title": "抵达入住和完整恢复后正式晚餐，时间随实际车次调整",
                 "selection": {
                   "mode": "default"
                 },
@@ -8189,7 +8096,7 @@
                 "openItems": [
                   {
                     "id": "europe-2026--2026-09-25/early-dinner/planning-target",
-                    "message": "17:00–17:45 是规划目标，不是餐厅营业事实、预约或确认的服务时间"
+                    "message": "具体车次及到站时间未定，正式晚餐时间待排；不表示已有餐厅预约"
                   },
                   {
                     "id": "europe-2026--2026-09-25/early-dinner/no-drink",
@@ -8205,16 +8112,12 @@
                   "min_minutes": 45,
                   "max_minutes": 60,
                   "protected": true
-                },
-                "target": {
-                  "boundary": "start",
-                  "preferred": "17:00"
                 }
               },
               {
                 "id": "europe-2026--2026-09-25/day-close",
                 "stepId": "day-close",
-                "sourceOrder": 8,
+                "sourceOrder": 13,
                 "kind": "intent",
                 "title": "回酒店，结束一天",
                 "selection": {
@@ -8251,7 +8154,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8261,9 +8164,110 @@
             ],
             "candidates": [
               {
+                "id": "europe-2026--2026-09-25/ghent-morning-photo-retry",
+                "stepId": "ghent-morning-photo-retry",
+                "sourceOrder": 0,
+                "kind": "intent",
+                "title": "清晨补拍 Three Towers 与 Graslei / Korenlei",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "仅当 9/24 晚 Saint Michael's Bridge 蓝调／三塔因天气或其他原因未拍满意，且睡眠、天气与赴站余量均允许时选择；否则睡觉，不设默认早起闹钟"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "place",
+                    "id": "sint-michielsbrug"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "sint-michielsbrug"
+                  },
+                  {
+                    "type": "place",
+                    "id": "graslei-korenlei"
+                  }
+                ],
+                "relative": {
+                  "nextId": "europe-2026--2026-09-25/breakfast"
+                },
+                "photography": [],
+                "openItems": [
+                  {
+                    "id": "europe-2026--2026-09-25/ghent-morning-photo-retry/outcome",
+                    "message": "9/24 晚蓝调拍摄结果未记录；原 Graslei 清晨 Session 仍为撤回状态，只有现场决定补拍才重新选择"
+                  },
+                  {
+                    "id": "europe-2026--2026-09-25/ghent-morning-photo-retry/return",
+                    "message": "补拍后回 Ghent Marriott 吃早餐、休息和收拾行李"
+                  }
+                ],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-25/belfry-optional",
+                "stepId": "belfry-optional",
+                "sourceOrder": 3,
+                "kind": "intent",
+                "title": "Belfry 可选，视开放情况与时间决定",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "9/24 晚三塔蓝调已拍满意，轻松上午有余量且不影响酒店收箱、退房和赴站"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "ghent"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-25/easy-ghent-morning",
+                  "nextId": "europe-2026--2026-09-25/groentenmarkt-tierenteyn"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-25/groentenmarkt-tierenteyn",
+                "stepId": "groentenmarkt-tierenteyn",
+                "sourceOrder": 4,
+                "kind": "intent",
+                "title": "顺路经过 Groentenmarkt / Tierenteyn mustard",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "9/24 晚三塔蓝调已拍满意，恰好顺路且不影响酒店收箱、退房和赴站；不专程折返"
+                },
+                "protected": false,
+                "ownerRefs": [],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "ghent"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-25/belfry-optional",
+                  "nextId": "europe-2026--2026-09-25/pack-and-buffer"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
                 "id": "europe-2026--2026-09-25/koelner-haie-match",
                 "stepId": "koelner-haie-match",
-                "sourceOrder": 7,
+                "sourceOrder": 12,
                 "kind": "intent",
                 "title": "Kölner Haie – Eisbären Berlin（19:30 开球，18:00 入场，LANXESS arena）",
                 "selection": {
@@ -8349,7 +8353,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -8362,7 +8366,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-24",
                   "status": "confirmed",
-                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-24",
                   "check_out_date": "2026-09-25"
@@ -8374,7 +8378,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8387,7 +8391,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8407,76 +8411,19 @@
               }
             ],
             "photography": [],
-            "lightContexts": [
-              {
-                "placeId": "ghent",
-                "placeName": "Ghent",
-                "events": [
-                  {
-                    "kind": "civil-dawn",
-                    "instant": "2026-09-25T05:03:49.069Z",
-                    "placeId": "ghent",
-                    "placeName": "Ghent"
-                  },
-                  {
-                    "kind": "sunrise",
-                    "instant": "2026-09-25T05:36:45.589Z",
-                    "placeId": "ghent",
-                    "placeName": "Ghent"
-                  },
-                  {
-                    "kind": "golden-hour-morning-end",
-                    "instant": "2026-09-25T06:20:24.848Z",
-                    "placeId": "ghent",
-                    "placeName": "Ghent"
-                  }
-                ],
-                "blueHour": {
-                  "morning": {
-                    "start": "2026-09-25T05:03:49.069Z",
-                    "end": "2026-09-25T05:36:45.589Z",
-                    "placeId": "ghent",
-                    "placeName": "Ghent"
-                  }
-                }
-              },
-              {
-                "placeId": "cologne",
-                "placeName": "Cologne",
-                "events": [
-                  {
-                    "kind": "golden-hour-evening-start",
-                    "instant": "2026-09-25T16:43:07.801Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  },
-                  {
-                    "kind": "sunset",
-                    "instant": "2026-09-25T17:26:40.403Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  },
-                  {
-                    "kind": "civil-dusk",
-                    "instant": "2026-09-25T17:59:31.949Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  }
-                ],
-                "blueHour": {
-                  "evening": {
-                    "start": "2026-09-25T17:26:40.403Z",
-                    "end": "2026-09-25T17:59:31.949Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  }
-                }
-              }
-            ],
+            "lightContexts": [],
             "openItems": [
               {
                 "id": "europe-2026--2026-09-25/checkout/last-mile",
                 "message": "从酒店取箱赴站的末段仍待核实"
+              },
+              {
+                "id": "transport/2026-09-25-ghent-cologne/time",
+                "message": "交通时刻待定；必要行程仍须执行",
+                "ownerRef": {
+                  "type": "operation",
+                  "id": "transport/2026-09-25-ghent-cologne"
+                }
               },
               {
                 "id": "transport/2026-09-25-ghent-cologne/booking",
@@ -8532,11 +8479,11 @@
               },
               {
                 "id": "europe-2026--2026-09-25/checkin/early-arrival",
-                "message": "13:20 到站早于 15:00 可入住时间；先联系酒店落实接箱，不能接收时先解决行李并坐下等候"
+                "message": "具体到站时刻未确认；若早于可入住时间，先联系酒店落实接箱，不能接收时先解决行李并坐下等候"
               },
               {
                 "id": "europe-2026--2026-09-25/early-dinner/planning-target",
-                "message": "17:00–17:45 是规划目标，不是餐厅营业事实、预约或确认的服务时间"
+                "message": "具体车次及到站时间未定，正式晚餐时间待排；不表示已有餐厅预约"
               },
               {
                 "id": "europe-2026--2026-09-25/early-dinner/no-drink",
@@ -8545,19 +8492,10 @@
               {
                 "id": "europe-2026--2026-09-25/day-close/cancelled",
                 "message": "三条已撤回的夜间摄影保持撤回，不因为晚上空着而重新激活"
-              },
-              {
-                "id": "europe-2026--2026-09-25/target-feasibility",
-                "message": "规划目标尚未证明可达；按真实班次与服务核对，不是 confirmed timetable 或硬截止。"
               }
             ],
             "endingEntryId": "europe-2026--2026-09-25/day-close",
-            "diagnostics": [
-              {
-                "id": "europe-2026--2026-09-25/target-feasibility",
-                "message": "规划目标尚未证明可达；按真实班次与服务核对，不是 confirmed timetable 或硬截止。"
-              }
-            ]
+            "diagnostics": []
           }
         },
         {
@@ -8809,7 +8747,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -8971,7 +8909,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9171,7 +9109,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9243,7 +9181,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9258,7 +9196,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9433,19 +9371,19 @@
           "id": "europe-2026--2026-09-27",
           "trip": "europe-2026",
           "date": "2026-09-27",
-          "title": "科隆到巴黎：抵达缓冲、恢复与条件首夜",
+          "title": "科隆已抵巴黎：酒店晚餐后简短进入巴黎，保护 Pont Neuf 摄影",
           "priorities": [
-            "早餐、打包退房与直达列车优先",
-            "Gare du Nord 实际抵达后保留出站、接驳、入住余量",
-            "进房后恢复 60–90 分钟，再决定是否摄影；晚餐与早收口受保护"
+            "科隆至巴黎转场已完成，约 15:00 已到 Paris Marriott Rive Gauche 并在酒店休息",
+            "17:30–18:30 在酒店酒廊吃晚餐，约 19:00 才出发",
+            "简短经过 Notre-Dame 后，以 Pont Neuf / Vert-Galant 的 Seine 蓝调至夜景摄影为今晚核心"
           ],
           "trade_offs": [
-            "首个巴黎摄影与河岸晚段均 conditional，不是不可让位 commitment",
-            "取消接驳与列车到站同时开始的假确定性",
-            "首夜不追加游船或室内馆，不把延误转嫁给恢复"
+            "Butte-aux-Cailles 和 Saint-Germain 正式晚餐退出今晚默认安排",
+            "Notre-Dame 仅外观与短走，不入内、不占主要摄影窗口",
+            "Saint-Germain 夜走或小酌可选；疲劳时摄影后直接回酒店，保护 9/28 清晨 Trocadéro"
           ],
-          "pacing": "早餐退房→车站列车→途中午餐→实际到站出站→酒店接驳入住→完整恢复→条件短摄影与晚餐→早睡。",
-          "risk": "直达票、实际到达与酒店末段路线仍未落实；不能保证旧摄影开始包络可用。",
+          "pacing": "已完成科隆退房与巴黎转场→约 15:00 到店入住及下午休息→酒店酒廊晚餐→约 19:00 出发→Notre-Dame 短停→Place Dauphine / Pont Neuf / Vert-Galant→Seine 摄影→可选 Saint-Germain 夜走→回酒店。",
+          "risk": "实际列车班次与精确时刻、酒店接驳方式未记录；晚间摄影、散步与饮品仍是计划，尚未发生。",
           "sessions": [
             {
               "id": "europe-2026-2026-09-27-ile-de-la-cite-afternoon",
@@ -9472,11 +9410,11 @@
             {
               "id": "europe-2026-2026-09-27-pont-neuf-evening",
               "date": "2026-09-27",
-              "time": "18:59",
+              "time": "20:00",
               "purpose": "bridge-evening",
-              "status": "cancelled",
-              "priority": "low",
-              "notes": "2026-09-08 用户批准后撤回默认排程（并非现场未遂或服务取消）。批准的 9/27 节奏：首夜河岸 conditional，只有恢复、晚餐与天气余量支持才选择一组。 保留原 id、日期、摄影意图与历史规划时刻；未重新选择前不参与 active timeline。依据 decision/europe-2026-approved-day-rhythm。",
+              "status": "planned",
+              "priority": "high",
+              "notes": "2026-09-08 曾为保护到达日恢复而撤回；2026-09-27 已约 15:00 入住并在酒店休息，用户明确选择今晚的 Pont Neuf / Vert-Galant，依 decision/europe-2026-approved-day-rhythm 重新激活。20:00 是 19:00 从酒店出发、简短经过 Notre-Dame 后的规划目标，不是实绩或派生蓝调时刻；拍 Seine、Pont Neuf、倒影及亮灯巴黎，构图允许时以远处 Eiffel Tower 为背景。实际拍摄结果待记录。",
               "spotId": "pont-neuf-vert-galant",
               "spotName": "Pont Neuf from Vert-Galant",
               "placeId": "square-du-vert-galant",
@@ -9503,9 +9441,6 @@
           ],
           "factIds": [
             "brugge-sunday-timetable",
-            "butte-aux-cailles-sunday-evening",
-            "eurostar-gate-closing-window",
-            "koln-paris-eurostar-direct",
             "paris-fashion-week-ss27-calendar"
           ],
           "decisionIds": [
@@ -9519,23 +9454,37 @@
           "execution": {
             "planSections": [
               {
-                "anchorId": "europe-2026--2026-09-27/train-paris",
-                "minutes": 630,
+                "anchorId": "europe-2026--2026-09-27/pont-neuf-evening",
+                "minutes": 1200,
                 "prerequisiteIds": [
                   "europe-2026--2026-09-27/breakfast",
-                  "europe-2026--2026-09-27/checkout"
+                  "europe-2026--2026-09-27/checkout",
+                  "europe-2026--2026-09-27/train-paris",
+                  "europe-2026--2026-09-27/lunch",
+                  "europe-2026--2026-09-27/station-exit",
+                  "europe-2026--2026-09-27/hotel-transfer",
+                  "europe-2026--2026-09-27/checkin",
+                  "europe-2026--2026-09-27/recovery",
+                  "europe-2026--2026-09-27/hotel-lounge-dinner",
+                  "europe-2026--2026-09-27/leave-hotel",
+                  "europe-2026--2026-09-27/notre-dame-short-walk",
+                  "europe-2026--2026-09-27/westward-walk"
                 ]
               }
             ],
             "untimedEntryIds": [
               "europe-2026--2026-09-27/breakfast",
               "europe-2026--2026-09-27/checkout",
+              "europe-2026--2026-09-27/train-paris",
               "europe-2026--2026-09-27/lunch",
               "europe-2026--2026-09-27/station-exit",
               "europe-2026--2026-09-27/hotel-transfer",
               "europe-2026--2026-09-27/checkin",
               "europe-2026--2026-09-27/recovery",
-              "europe-2026--2026-09-27/butte-aux-cailles-dinner",
+              "europe-2026--2026-09-27/hotel-lounge-dinner",
+              "europe-2026--2026-09-27/leave-hotel",
+              "europe-2026--2026-09-27/notre-dame-short-walk",
+              "europe-2026--2026-09-27/westward-walk",
               "europe-2026--2026-09-27/day-close"
             ],
             "dayId": "europe-2026--2026-09-27",
@@ -9556,7 +9505,7 @@
                 "stepId": "breakfast",
                 "sourceOrder": 0,
                 "kind": "intent",
-                "title": "早餐，并准备途中午餐",
+                "title": "原计划早餐及途中午餐准备；实际用餐未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -9593,7 +9542,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9605,7 +9554,7 @@
                 "stepId": "checkout",
                 "sourceOrder": 1,
                 "kind": "intent",
-                "title": "打包退房，带箱进站",
+                "title": "已从 THE QVEST 退房，离开科隆",
                 "selection": {
                   "mode": "default"
                 },
@@ -9637,7 +9586,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -9668,10 +9617,6 @@
                   {
                     "type": "decision",
                     "id": "cologne-paris-direct"
-                  },
-                  {
-                    "type": "fact",
-                    "id": "koln-paris-eurostar-direct"
                   }
                 ],
                 "relative": {
@@ -9679,64 +9624,25 @@
                   "nextId": "europe-2026--2026-09-27/lunch"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-27/train-paris/sunday",
-                    "message": "直达服务的周日运行须在购票前确认"
-                  },
-                  {
-                    "id": "transport/2026-09-27-cologne-paris/booking",
-                    "message": "尚未预订",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "transport/2026-09-27-cologne-paris"
-                    }
-                  },
-                  {
-                    "id": "fact/eurostar-gate-closing-window",
-                    "message": "Eurostar Standard 与 Plus 旅客的 ticket gates 在计划发车前 30 分钟关闭。",
-                    "ownerRef": {
-                      "type": "fact",
-                      "id": "eurostar-gate-closing-window"
-                    }
-                  },
-                  {
-                    "id": "fact/koln-paris-eurostar-direct",
-                    "message": "Köln Hbf 与 Paris Gare du Nord 之间每日约有三班直达 Eurostar，行程约 3 小时 26 分到 3 小时 53 分，强制对号预订。",
-                    "ownerRef": {
-                      "type": "fact",
-                      "id": "koln-paris-eurostar-direct"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "operation": {
                   "id": "transport/2026-09-27-cologne-paris",
                   "type": "transport",
                   "trip": "europe-2026",
                   "date": "2026-09-27",
-                  "status": "planned",
-                  "ref": "Köln Hbf → Paris Gare du Nord direct international service, replacing the retired Bruges to Bruxelles-Midi to Paris interchange; planning envelope only, the specific service remains a candidate and is not booked; Sunday operation must be confirmed before purchase",
-                  "start_time": "10:30",
-                  "end_time": "14:30",
+                  "status": "completed",
+                  "ref": "Köln Hbf → Paris Gare du Nord 转场已于 2026-09-27 完成；实际车次、出发与到站时刻及票据细节未记录，不能把原规划包络写成实绩。",
                   "from": "koln-hbf",
-                  "to": "gare-du-nord",
-                  "booking_status": "unbooked",
-                  "opens_at": "2026-09-04",
-                  "act_by": "2026-09-08"
+                  "to": "gare-du-nord"
                 },
-                "ownerLifecycle": "planned",
-                "ownerTime": {
-                  "start": "10:30",
-                  "end": "14:30",
-                  "status": "planned"
-                }
+                "ownerLifecycle": "completed"
               },
               {
                 "id": "europe-2026--2026-09-27/lunch",
                 "stepId": "lunch",
                 "sourceOrder": 3,
                 "kind": "intent",
-                "title": "途中午餐：自带食物或上车前用餐",
+                "title": "原计划途中午餐；实际用餐未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -9753,12 +9659,7 @@
                   "nextId": "europe-2026--2026-09-27/station-exit"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-27/lunch/catering",
-                    "message": "不默认列车供应"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "meal",
                   "slot": "lunch"
@@ -9775,7 +9676,7 @@
                 "stepId": "station-exit",
                 "sourceOrder": 4,
                 "kind": "intent",
-                "title": "到站后下车、出站与寻找接驳位置",
+                "title": "已抵达 Paris Gare du Nord 并出站；实际耗时未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -9796,20 +9697,9 @@
                   "nextId": "europe-2026--2026-09-27/hotel-transfer"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "europe-2026--2026-09-27/station-exit/crowding",
-                    "message": "拥挤或晚点须追加；不是车门打开就开始下一段交通"
-                  }
-                ],
+                "openItems": [],
                 "activity": {
                   "kind": "buffer"
-                },
-                "budget": {
-                  "kind": "minutes",
-                  "min_minutes": 30,
-                  "max_minutes": 30,
-                  "protected": true
                 }
               },
               {
@@ -9839,43 +9729,25 @@
                   "nextId": "europe-2026--2026-09-27/checkin"
                 },
                 "photography": [],
-                "openItems": [
-                  {
-                    "id": "transport/2026-09-27-gare-du-nord-paris-stay/time",
-                    "message": "交通时刻待定；必要行程仍须执行",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "transport/2026-09-27-gare-du-nord-paris-stay"
-                    }
-                  },
-                  {
-                    "id": "transport/2026-09-27-gare-du-nord-paris-stay/booking",
-                    "message": "尚未预订",
-                    "ownerRef": {
-                      "type": "operation",
-                      "id": "transport/2026-09-27-gare-du-nord-paris-stay"
-                    }
-                  }
-                ],
+                "openItems": [],
                 "operation": {
                   "id": "transport/2026-09-27-gare-du-nord-paris-stay",
                   "type": "transport",
                   "trip": "europe-2026",
                   "date": "2026-09-27",
-                  "status": "planned",
-                  "ref": "Gare du Nord → europe-2026-paris-stay-placeholder；实际到站、下车与出站之后再接驳。住宿身份和日期见 accommodation Operation；路线、移动时间及房间可用条件未核实，抵达恢复由 TripDay 拥有。",
+                  "status": "completed",
+                  "ref": "Gare du Nord → Paris Marriott Rive Gauche 接驳已完成，约 15:00 到店；实际交通方式、出站及移动时刻未记录。",
                   "from": "gare-du-nord",
-                  "to": "paris",
-                  "booking_status": "unbooked"
+                  "to": "paris"
                 },
-                "ownerLifecycle": "planned"
+                "ownerLifecycle": "completed"
               },
               {
                 "id": "europe-2026--2026-09-27/checkin",
                 "stepId": "checkin",
                 "sourceOrder": 6,
                 "kind": "intent",
-                "title": "到店办理入住，安置行李",
+                "title": "约 15:00 已到 Paris Marriott Rive Gauche，办理入住并安顿",
                 "selection": {
                   "mode": "default"
                 },
@@ -9899,10 +9771,6 @@
                 "photography": [],
                 "openItems": [
                   {
-                    "id": "europe-2026--2026-09-27/checkin/last-mile",
-                    "message": "实际移动、接箱与入房时间仍未核实"
-                  },
-                  {
                     "id": "fact/paris-fashion-week-ss27-calendar",
                     "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
                     "ownerRef": {
@@ -9921,7 +9789,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -9932,7 +9800,7 @@
                 "stepId": "recovery",
                 "sourceOrder": 7,
                 "kind": "intent",
-                "title": "进房后完整恢复；通勤与办理不计入",
+                "title": "下午已在酒店休息；确切休息时长未记录",
                 "selection": {
                   "mode": "default"
                 },
@@ -9951,7 +9819,7 @@
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-27/checkin",
-                  "nextId": "europe-2026--2026-09-27/butte-aux-cailles-dinner"
+                  "nextId": "europe-2026--2026-09-27/hotel-lounge-dinner"
                 },
                 "photography": [],
                 "openItems": [
@@ -9979,66 +9847,50 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
                 }
               },
               {
-                "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner",
-                "stepId": "butte-aux-cailles-dinner",
+                "id": "europe-2026--2026-09-27/hotel-lounge-dinner",
+                "stepId": "hotel-lounge-dinner",
                 "sourceOrder": 8,
                 "kind": "intent",
-                "title": "Butte-aux-Cailles 街区晚餐：步行往返，不预约，不跨城",
+                "title": "17:30–18:30 在 Paris Marriott Rive Gauche 酒店酒廊吃晚餐",
                 "selection": {
                   "mode": "default"
                 },
                 "protected": true,
                 "ownerRefs": [
                   {
-                    "type": "place",
-                    "id": "butte-aux-cailles"
+                    "type": "operation",
+                    "id": "europe-2026-paris-stay-placeholder"
                   }
                 ],
                 "contextRefs": [
                   {
                     "type": "decision",
                     "id": "europe-2026-approved-day-rhythm"
-                  },
-                  {
-                    "type": "place",
-                    "id": "butte-aux-cailles"
-                  },
-                  {
-                    "type": "fact",
-                    "id": "butte-aux-cailles-sunday-evening"
                   }
                 ],
                 "relative": {
                   "previousId": "europe-2026--2026-09-27/recovery",
-                  "nextId": "europe-2026--2026-09-27/day-close"
+                  "nextId": "europe-2026--2026-09-27/leave-hotel"
                 },
                 "photography": [],
                 "openItems": [
                   {
-                    "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/walk",
-                    "message": "距住宿步行约十二至十五分钟，全程地面步行，不需要地铁；吃完沿原路走回"
+                    "id": "europe-2026--2026-09-27/hotel-lounge-dinner/outcome",
+                    "message": "已决定在酒店酒廊用晚餐；实际用餐与结束时刻待事后记录"
                   },
                   {
-                    "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/camera",
-                    "message": "今晚摄影降级为一机一镜或手机，也可以完全不拍"
-                  },
-                  {
-                    "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/next-morning",
-                    "message": "次日 07:00 要到 Trocadéro，所以今晚 21:30 前结束"
-                  },
-                  {
-                    "id": "fact/butte-aux-cailles-sunday-evening",
-                    "message": "巴黎十三区 Butte-aux-Cailles 街区在周日晚间有营业中的小酒馆与酒吧，价格友好、以本地客为主；距十四区 Boulevard Saint-Jacques 一带步行约十二至十五分钟，全程地面步行。具体店铺的周日营业与是否需要等位仍需现场判断。",
+                    "id": "fact/paris-fashion-week-ss27-calendar",
+                    "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
                     "ownerRef": {
                       "type": "fact",
-                      "id": "butte-aux-cailles-sunday-evening"
+                      "id": "paris-fashion-week-ss27-calendar"
                     }
                   }
                 ],
@@ -10053,16 +9905,27 @@
                   "protected": true
                 },
                 "target": {
-                  "boundary": "end",
-                  "latest": "21:30"
+                  "boundary": "start",
+                  "preferred": "17:30"
+                },
+                "lodging": {
+                  "id": "europe-2026-paris-stay-placeholder",
+                  "type": "accommodation",
+                  "trip": "europe-2026",
+                  "date": "2026-09-27",
+                  "status": "confirmed",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
+                  "booking_status": "booked",
+                  "check_in_date": "2026-09-27",
+                  "check_out_date": "2026-10-02"
                 }
               },
               {
-                "id": "europe-2026--2026-09-27/day-close",
-                "stepId": "day-close",
+                "id": "europe-2026--2026-09-27/leave-hotel",
+                "stepId": "leave-hotel",
                 "sourceOrder": 9,
                 "kind": "intent",
-                "title": "回酒店，早收口",
+                "title": "约 19:00 从酒店出发前往巴黎中心",
                 "selection": {
                   "mode": "default"
                 },
@@ -10080,14 +9943,206 @@
                   }
                 ],
                 "relative": {
-                  "previousId": "europe-2026--2026-09-27/butte-aux-cailles-dinner"
+                  "previousId": "europe-2026--2026-09-27/hotel-lounge-dinner",
+                  "nextId": "europe-2026--2026-09-27/notre-dame-short-walk"
                 },
                 "photography": [],
                 "openItems": [
                   {
-                    "id": "europe-2026--2026-09-27/day-close/cancelled",
-                    "message": "Île de la Cité 与 Pont Neuf 的首夜摄影保持撤回，不追赶旧时刻"
+                    "id": "fact/paris-fashion-week-ss27-calendar",
+                    "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
+                    "ownerRef": {
+                      "type": "fact",
+                      "id": "paris-fashion-week-ss27-calendar"
+                    }
+                  }
+                ],
+                "activity": {
+                  "kind": "logistics",
+                  "action": "move"
+                },
+                "target": {
+                  "boundary": "start",
+                  "preferred": "19:00"
+                },
+                "lodging": {
+                  "id": "europe-2026-paris-stay-placeholder",
+                  "type": "accommodation",
+                  "trip": "europe-2026",
+                  "date": "2026-09-27",
+                  "status": "confirmed",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
+                  "booking_status": "booked",
+                  "check_in_date": "2026-09-27",
+                  "check_out_date": "2026-10-02"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-27/notre-dame-short-walk",
+                "stepId": "notre-dame-short-walk",
+                "sourceOrder": 10,
+                "kind": "intent",
+                "title": "Notre-Dame 外观与 Île de la Cité 简短步行，不进入教堂",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "place",
+                    "id": "notre-dame-paris"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "notre-dame-paris"
                   },
+                  {
+                    "type": "place",
+                    "id": "ile-de-la-cite"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-27/leave-hotel",
+                  "nextId": "europe-2026--2026-09-27/westward-walk"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-27/westward-walk",
+                "stepId": "westward-walk",
+                "sourceOrder": 11,
+                "kind": "intent",
+                "title": "沿 Île de la Cité → Place Dauphine → Pont Neuf → Square du Vert-Galant 向西步行",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "place",
+                    "id": "pont-neuf"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "ile-de-la-cite"
+                  },
+                  {
+                    "type": "place",
+                    "id": "pont-neuf"
+                  },
+                  {
+                    "type": "place",
+                    "id": "square-du-vert-galant"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-27/notre-dame-short-walk",
+                  "nextId": "europe-2026--2026-09-27/pont-neuf-evening"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-27/pont-neuf-evening",
+                "stepId": "pont-neuf-evening",
+                "sourceOrder": 12,
+                "kind": "session",
+                "title": "Pont Neuf from Vert-Galant",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": true,
+                "ownerRefs": [
+                  {
+                    "type": "session",
+                    "id": "europe-2026-2026-09-27-pont-neuf-evening"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "square-du-vert-galant"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-27/westward-walk",
+                  "nextId": "europe-2026--2026-09-27/saint-germain-night"
+                },
+                "photography": [
+                  {
+                    "session": {
+                      "id": "europe-2026-2026-09-27-pont-neuf-evening",
+                      "trip": "europe-2026",
+                      "date": "2026-09-27",
+                      "time": "20:00",
+                      "spot": "pont-neuf-vert-galant",
+                      "purpose": "bridge-evening",
+                      "status": "planned",
+                      "priority": "high",
+                      "notes": "2026-09-08 曾为保护到达日恢复而撤回；2026-09-27 已约 15:00 入住并在酒店休息，用户明确选择今晚的 Pont Neuf / Vert-Galant，依 decision/europe-2026-approved-day-rhythm 重新激活。20:00 是 19:00 从酒店出发、简短经过 Notre-Dame 后的规划目标，不是实绩或派生蓝调时刻；拍 Seine、Pont Neuf、倒影及亮灯巴黎，构图允许时以远处 Eiffel Tower 为背景。实际拍摄结果待记录。"
+                    },
+                    "spotId": "pont-neuf-vert-galant",
+                    "spotName": "Pont Neuf from Vert-Galant",
+                    "placeId": "square-du-vert-galant",
+                    "placeName": "Square du Vert-Galant",
+                    "lens": [
+                      "24-70mm equivalent",
+                      "70-200mm equivalent"
+                    ],
+                    "tripod": "recommended",
+                    "indoor": false
+                  }
+                ],
+                "openItems": [
+                  {
+                    "id": "europe-2026--2026-09-27/pont-neuf-evening/outcome",
+                    "message": "蓝调至夜景摄影尚未发生；现场视天气与体力执行，不预写完成"
+                  }
+                ],
+                "ownerLifecycle": "planned",
+                "ownerTime": {
+                  "start": "20:00",
+                  "status": "planned"
+                }
+              },
+              {
+                "id": "europe-2026--2026-09-27/day-close",
+                "stepId": "day-close",
+                "sourceOrder": 14,
+                "kind": "intent",
+                "title": "摄影后可直接回酒店，保护次日清晨摄影",
+                "selection": {
+                  "mode": "default"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "operation",
+                    "id": "europe-2026-paris-stay-placeholder"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "decision",
+                    "id": "europe-2026-approved-day-rhythm"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-27/saint-germain-night"
+                },
+                "photography": [],
+                "openItems": [
                   {
                     "id": "fact/paris-fashion-week-ss27-calendar",
                     "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
@@ -10106,22 +10161,52 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
                 }
               }
             ],
-            "candidates": [],
+            "candidates": [
+              {
+                "id": "europe-2026--2026-09-27/saint-germain-night",
+                "stepId": "saint-germain-night",
+                "sourceOrder": 13,
+                "kind": "intent",
+                "title": "可选经 Quai de Conti、Pont des Arts 到 Saint-Germain 夜走或小酌",
+                "selection": {
+                  "mode": "candidate",
+                  "when": "Pont Neuf 摄影之后仍有体力，且不影响 9/28 清晨 Trocadéro；否则直接回酒店"
+                },
+                "protected": false,
+                "ownerRefs": [
+                  {
+                    "type": "place",
+                    "id": "saint-germain-des-pres"
+                  }
+                ],
+                "contextRefs": [
+                  {
+                    "type": "place",
+                    "id": "saint-germain-des-pres"
+                  }
+                ],
+                "relative": {
+                  "previousId": "europe-2026--2026-09-27/pont-neuf-evening",
+                  "nextId": "europe-2026--2026-09-27/day-close"
+                },
+                "photography": [],
+                "openItems": [],
+                "activity": {
+                  "kind": "experience"
+                }
+              }
+            ],
             "historyRefs": [
               {
                 "type": "session",
                 "id": "europe-2026-2026-09-27-ile-de-la-cite-afternoon"
-              },
-              {
-                "type": "session",
-                "id": "europe-2026-2026-09-27-pont-neuf-evening"
               },
               {
                 "type": "operation",
@@ -10139,7 +10224,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -10152,7 +10237,7 @@
                   "type": "accommodation",
                   "trip": "europe-2026",
                   "date": "2026-09-25",
-                  "status": "confirmed",
+                  "status": "completed",
                   "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-25",
@@ -10166,7 +10251,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -10179,7 +10264,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -10188,40 +10273,32 @@
             },
             "hardCutoffs": [],
             "requirements": [],
-            "photography": [],
-            "lightContexts": [
+            "photography": [
               {
-                "placeId": "cologne",
-                "placeName": "Cologne",
-                "events": [
-                  {
-                    "kind": "civil-dawn",
-                    "instant": "2026-09-27T04:54:05.906Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  },
-                  {
-                    "kind": "sunrise",
-                    "instant": "2026-09-27T05:26:55.689Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  },
-                  {
-                    "kind": "golden-hour-morning-end",
-                    "instant": "2026-09-27T06:10:33.352Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  }
+                "session": {
+                  "id": "europe-2026-2026-09-27-pont-neuf-evening",
+                  "trip": "europe-2026",
+                  "date": "2026-09-27",
+                  "time": "20:00",
+                  "spot": "pont-neuf-vert-galant",
+                  "purpose": "bridge-evening",
+                  "status": "planned",
+                  "priority": "high",
+                  "notes": "2026-09-08 曾为保护到达日恢复而撤回；2026-09-27 已约 15:00 入住并在酒店休息，用户明确选择今晚的 Pont Neuf / Vert-Galant，依 decision/europe-2026-approved-day-rhythm 重新激活。20:00 是 19:00 从酒店出发、简短经过 Notre-Dame 后的规划目标，不是实绩或派生蓝调时刻；拍 Seine、Pont Neuf、倒影及亮灯巴黎，构图允许时以远处 Eiffel Tower 为背景。实际拍摄结果待记录。"
+                },
+                "spotId": "pont-neuf-vert-galant",
+                "spotName": "Pont Neuf from Vert-Galant",
+                "placeId": "square-du-vert-galant",
+                "placeName": "Square du Vert-Galant",
+                "lens": [
+                  "24-70mm equivalent",
+                  "70-200mm equivalent"
                 ],
-                "blueHour": {
-                  "morning": {
-                    "start": "2026-09-27T04:54:05.906Z",
-                    "end": "2026-09-27T05:26:55.689Z",
-                    "placeId": "cologne",
-                    "placeName": "Cologne"
-                  }
-                }
-              },
+                "tripod": "recommended",
+                "indoor": false
+              }
+            ],
+            "lightContexts": [
               {
                 "placeId": "paris",
                 "placeName": "Paris",
@@ -10257,60 +10334,24 @@
             ],
             "openItems": [
               {
-                "id": "europe-2026--2026-09-27/train-paris/sunday",
-                "message": "直达服务的周日运行须在购票前确认"
-              },
-              {
-                "id": "transport/2026-09-27-cologne-paris/booking",
-                "message": "尚未预订",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "transport/2026-09-27-cologne-paris"
-                }
-              },
-              {
-                "id": "fact/eurostar-gate-closing-window",
-                "message": "Eurostar Standard 与 Plus 旅客的 ticket gates 在计划发车前 30 分钟关闭。",
+                "id": "fact/paris-fashion-week-ss27-calendar",
+                "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
                 "ownerRef": {
                   "type": "fact",
-                  "id": "eurostar-gate-closing-window"
+                  "id": "paris-fashion-week-ss27-calendar"
                 }
               },
               {
-                "id": "fact/koln-paris-eurostar-direct",
-                "message": "Köln Hbf 与 Paris Gare du Nord 之间每日约有三班直达 Eurostar，行程约 3 小时 26 分到 3 小时 53 分，强制对号预订。",
+                "id": "fact/paris-fashion-week-ss27-calendar",
+                "message": "FHCM 当前页面列出 Womenswear Spring/Summer 2027 Paris Fashion Week 为 2026-09-28 至 2026-10-06；每日场次、地址与交通影响仍需临近日期复查。",
                 "ownerRef": {
                   "type": "fact",
-                  "id": "koln-paris-eurostar-direct"
+                  "id": "paris-fashion-week-ss27-calendar"
                 }
               },
               {
-                "id": "europe-2026--2026-09-27/lunch/catering",
-                "message": "不默认列车供应"
-              },
-              {
-                "id": "europe-2026--2026-09-27/station-exit/crowding",
-                "message": "拥挤或晚点须追加；不是车门打开就开始下一段交通"
-              },
-              {
-                "id": "transport/2026-09-27-gare-du-nord-paris-stay/time",
-                "message": "交通时刻待定；必要行程仍须执行",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "transport/2026-09-27-gare-du-nord-paris-stay"
-                }
-              },
-              {
-                "id": "transport/2026-09-27-gare-du-nord-paris-stay/booking",
-                "message": "尚未预订",
-                "ownerRef": {
-                  "type": "operation",
-                  "id": "transport/2026-09-27-gare-du-nord-paris-stay"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-27/checkin/last-mile",
-                "message": "实际移动、接箱与入房时间仍未核实"
+                "id": "europe-2026--2026-09-27/hotel-lounge-dinner/outcome",
+                "message": "已决定在酒店酒廊用晚餐；实际用餐与结束时刻待事后记录"
               },
               {
                 "id": "fact/paris-fashion-week-ss27-calendar",
@@ -10329,28 +10370,8 @@
                 }
               },
               {
-                "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/walk",
-                "message": "距住宿步行约十二至十五分钟，全程地面步行，不需要地铁；吃完沿原路走回"
-              },
-              {
-                "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/camera",
-                "message": "今晚摄影降级为一机一镜或手机，也可以完全不拍"
-              },
-              {
-                "id": "europe-2026--2026-09-27/butte-aux-cailles-dinner/next-morning",
-                "message": "次日 07:00 要到 Trocadéro，所以今晚 21:30 前结束"
-              },
-              {
-                "id": "fact/butte-aux-cailles-sunday-evening",
-                "message": "巴黎十三区 Butte-aux-Cailles 街区在周日晚间有营业中的小酒馆与酒吧，价格友好、以本地客为主；距十四区 Boulevard Saint-Jacques 一带步行约十二至十五分钟，全程地面步行。具体店铺的周日营业与是否需要等位仍需现场判断。",
-                "ownerRef": {
-                  "type": "fact",
-                  "id": "butte-aux-cailles-sunday-evening"
-                }
-              },
-              {
-                "id": "europe-2026--2026-09-27/day-close/cancelled",
-                "message": "Île de la Cité 与 Pont Neuf 的首夜摄影保持撤回，不追赶旧时刻"
+                "id": "europe-2026--2026-09-27/pont-neuf-evening/outcome",
+                "message": "蓝调至夜景摄影尚未发生；现场视天气与体力执行，不预写完成"
               },
               {
                 "id": "fact/paris-fashion-week-ss27-calendar",
@@ -10781,7 +10802,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -10839,7 +10860,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -11003,7 +11024,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -11054,7 +11075,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -11084,7 +11105,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -11099,7 +11120,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -11876,7 +11897,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -12020,7 +12041,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -12035,7 +12056,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -12510,7 +12531,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -13086,7 +13107,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -13112,7 +13133,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -13127,7 +13148,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -13634,7 +13655,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14071,7 +14092,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14126,7 +14147,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14249,7 +14270,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14264,7 +14285,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14642,7 +14663,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -14699,7 +14720,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -15458,7 +15479,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -15471,7 +15492,7 @@
                   "trip": "europe-2026",
                   "date": "2026-09-27",
                   "status": "confirmed",
-                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+                  "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
                   "booking_status": "booked",
                   "check_in_date": "2026-09-27",
                   "check_out_date": "2026-10-02"
@@ -16756,12 +16777,9 @@
           "id": "europe-2026-bruges-stay",
           "trip": "europe-2026",
           "type": "accommodation",
-          "ref": "Bruges overnight 为 flexible current plan；酒店 OPEN。前段明显疲劳时用户保留重新决策权；尚未选择替代路线，仍按当前过夜规划。",
+          "ref": "ibis budget Brugge Centrum Station — 2026-09-23 已实际入住，2026-09-24 已离开 Bruges；原预订方式未记录。",
           "date": "2026-09-23",
-          "status": "planned",
-          "booking_status": "placeholder",
-          "opens_at": "2026-08-01",
-          "act_by": "2026-09-01",
+          "status": "completed",
           "check_in_date": "2026-09-23",
           "check_out_date": "2026-09-24"
         },
@@ -16793,7 +16811,7 @@
           "type": "accommodation",
           "ref": "THE QVEST Hideaway, Gereonskloster 12, 50670 Köln — confirmed, non-refundable and final; check-in 15:00, check-out 11:00; the booking reference, monetary amounts and deposit are private and are not held in canonical; see decision/cologne-two-night-baseline and the 2026-09-25 TripDay",
           "date": "2026-09-25",
-          "status": "confirmed",
+          "status": "completed",
           "booking_status": "booked",
           "check_in_date": "2026-09-25",
           "check_out_date": "2026-09-27"
@@ -16802,7 +16820,7 @@
           "id": "europe-2026-ghent-stay-placeholder",
           "trip": "europe-2026",
           "type": "accommodation",
-          "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+          "ref": "Ghent Marriott Hotel — 用户于 2026-09-09 明确报告有效预订；2026-09-24 已实际到达并办理入住，酒店位于 Korenlei / Graslei 老城核心；2026-09-25 退房尚未发生。",
           "date": "2026-09-24",
           "status": "confirmed",
           "booking_status": "booked",
@@ -16813,7 +16831,7 @@
           "id": "europe-2026-paris-stay-placeholder",
           "trip": "europe-2026",
           "type": "accommodation",
-          "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；酒店寄存、房间可用时间及晚到流程未核实。",
+          "ref": "Paris Marriott Rive Gauche Hotel & Conference Center — 用户于 2026-09-09 明确报告有效预订；2026-09-27 约 15:00 已实际到店、入住并安顿，下午在酒店休息；2026-10-02 退房尚未发生。",
           "date": "2026-09-27",
           "status": "confirmed",
           "booking_status": "booked",
@@ -17050,14 +17068,11 @@
           "id": "transport/2026-09-23-brussels-bruges",
           "trip": "europe-2026",
           "type": "transport",
-          "ref": "Bruxelles-Central → Brugge after the Brussels morning; planning envelope, exact service bought on the day",
+          "ref": "Brussels → Bruges 转场已完成，2026-09-23 已到达并入住；实际出发车站、列车班次、时刻及购票方式未记录。",
           "date": "2026-09-23",
-          "status": "planned",
-          "booking_status": "unbooked",
-          "start_time": "13:45",
-          "end_time": "14:45",
-          "from": "bruxelles-central",
-          "to": "brugge-station"
+          "status": "completed",
+          "from": "brussels",
+          "to": "bruges"
         },
         {
           "id": "transport/2026-09-24-antwerp-ghent",
@@ -17076,12 +17091,9 @@
           "id": "transport/2026-09-24-bruges-ghent",
           "trip": "europe-2026",
           "type": "transport",
-          "ref": "Brugge → Gent-Sint-Pieters after the Bruges sunrise route; the shortest transfer of the trip; tram from Gent-Sint-Pieters to the old town is required with luggage",
+          "ref": "2026-09-24 已从 Brugge Station 到 Gent-Sint-Pieters；再乘 De Lijn bus 60 到 Gent Beneluxplein，转 bus 11 至 Gent Poel，步行抵达 Ghent Marriott。实际列车班次与时刻未记录。",
           "date": "2026-09-24",
-          "status": "planned",
-          "booking_status": "unbooked",
-          "start_time": "11:00",
-          "end_time": "11:30",
+          "status": "completed",
           "from": "brugge-station",
           "to": "gent-sint-pieters"
         },
@@ -17089,14 +17101,12 @@
           "id": "transport/2026-09-25-ghent-cologne",
           "trip": "europe-2026",
           "type": "transport",
-          "ref": "Gent-Sint-Pieters → Köln Hbf via Brussels, one interchange; selected routing of the two reviewed options; the Antwerp direct-ICE routing stays an unselected fallback and gets no active Operation; specific services on both legs remain unconfirmed and must be checked before departure",
+          "ref": "2026-09-25 Gent-Sint-Pieters → Köln Hbf via Brussels, one interchange；此路线已选，但具体列车未选、未订。约 13:25 与 14:25 出发只讨论过，均非已选车次；Antwerp direct-ICE 仍为未选 fallback。订票前须核实列车与接续。",
           "date": "2026-09-25",
           "status": "planned",
           "booking_status": "unbooked",
           "opens_at": "2026-09-04",
           "act_by": "2026-09-18",
-          "start_time": "10:30",
-          "end_time": "13:20",
           "from": "gent-sint-pieters",
           "to": "koln-hbf",
           "buffer_minutes": 30
@@ -17149,14 +17159,9 @@
           "id": "transport/2026-09-27-cologne-paris",
           "trip": "europe-2026",
           "type": "transport",
-          "ref": "Köln Hbf → Paris Gare du Nord direct international service, replacing the retired Bruges to Bruxelles-Midi to Paris interchange; planning envelope only, the specific service remains a candidate and is not booked; Sunday operation must be confirmed before purchase",
+          "ref": "Köln Hbf → Paris Gare du Nord 转场已于 2026-09-27 完成；实际车次、出发与到站时刻及票据细节未记录，不能把原规划包络写成实绩。",
           "date": "2026-09-27",
-          "status": "planned",
-          "booking_status": "unbooked",
-          "opens_at": "2026-09-04",
-          "act_by": "2026-09-08",
-          "start_time": "10:30",
-          "end_time": "14:30",
+          "status": "completed",
           "from": "koln-hbf",
           "to": "gare-du-nord"
         },
@@ -17164,10 +17169,9 @@
           "id": "transport/2026-09-27-gare-du-nord-paris-stay",
           "trip": "europe-2026",
           "type": "transport",
-          "ref": "Gare du Nord → europe-2026-paris-stay-placeholder；实际到站、下车与出站之后再接驳。住宿身份和日期见 accommodation Operation；路线、移动时间及房间可用条件未核实，抵达恢复由 TripDay 拥有。",
+          "ref": "Gare du Nord → Paris Marriott Rive Gauche 接驳已完成，约 15:00 到店；实际交通方式、出站及移动时刻未记录。",
           "date": "2026-09-27",
-          "status": "planned",
-          "booking_status": "unbooked",
+          "status": "completed",
           "from": "gare-du-nord",
           "to": "paris"
         },
@@ -17368,23 +17372,6 @@
           }
         },
         {
-          "id": "butte-aux-cailles-sunday-evening",
-          "status": "pending",
-          "claim": "巴黎十三区 Butte-aux-Cailles 街区在周日晚间有营业中的小酒馆与酒吧，价格友好、以本地客为主；距十四区 Boulevard Saint-Jacques 一带步行约十二至十五分钟，全程地面步行。具体店铺的周日营业与是否需要等位仍需现场判断。",
-          "recheck_by": "2026-09-20",
-          "confidence": "medium",
-          "blocks": [],
-          "affects": [
-            "europe-2026--2026-09-27",
-            "butte-aux-cailles"
-          ],
-          "impact_if_wrong": "若当晚街区营业不足，抵达日晚餐改为住宿附近就近解决，仍在 21:30 前结束；首夜不因此新增摄影或跨城活动。",
-          "source": {
-            "title": "Paris je t'aime — Butte-aux-Cailles neighbourhood",
-            "url": "https://parisjetaime.com/eng/"
-          }
-        },
-        {
           "id": "cologne-brauhaus-kolsch-service",
           "status": "pending",
           "claim": "科隆传统 Brauhaus 以 0.2 L 直筒杯 Stange 供应 Kölsch，由称为 Köbes 的侍者不经点单持续续杯并在杯垫上计数，把杯垫盖在杯口表示停止；Päffgen 等原址酿造的老店为常见代表。具体营业时段、是否接受预订与当日供应仍需出发前复查。",
@@ -17483,22 +17470,6 @@
           }
         },
         {
-          "id": "eurostar-gate-closing-window",
-          "status": "pending",
-          "claim": "Eurostar Standard 与 Plus 旅客的 ticket gates 在计划发车前 30 分钟关闭。",
-          "recheck_by": "2026-09-20",
-          "confidence": "medium",
-          "blocks": [],
-          "affects": [
-            "transport/2026-09-27-cologne-paris"
-          ],
-          "impact_if_wrong": "Köln Hbf 的到站与登车缓冲可能不足，必须按车票和运营方最新指引重新安排站内动作。",
-          "source": {
-            "title": "Eurostar — When to arrive at the station",
-            "url": "https://www.eurostar.com/travel-info/your-trip/check-in"
-          }
-        },
-        {
           "id": "france-italy-2026-10-02-fixture",
           "status": "pending",
           "claim": "法国足协与 Stade de France 官方页面显示 2026-10-02 20:45 France – Italy 于 Stade de France 进行；2026-09-14 查询时面向公众的各价格档位全部售罄，官方转售页面同样显示售罄并提供到货订阅，转售价格上限为票面价。",
@@ -17577,22 +17548,6 @@
           "source": {
             "title": "Kölner Haie / LANXESS arena official schedule",
             "url": "https://www.haie.de/"
-          }
-        },
-        {
-          "id": "koln-paris-eurostar-direct",
-          "status": "pending",
-          "claim": "Köln Hbf 与 Paris Gare du Nord 之间每日约有三班直达 Eurostar，行程约 3 小时 26 分到 3 小时 53 分，强制对号预订。",
-          "recheck_by": "2026-09-08",
-          "confidence": "medium",
-          "blocks": [],
-          "affects": [
-            "transport/2026-09-27-cologne-paris"
-          ],
-          "impact_if_wrong": "2026-09-27 是全程唯一的长途跨国段；若直达不存在或当日不运行，必须退回经 Bruxelles-Midi 换乘的旧模式并重新安排整日时间轴。",
-          "source": {
-            "title": "Eurostar",
-            "url": "https://www.eurostar.com/"
           }
         },
         {
