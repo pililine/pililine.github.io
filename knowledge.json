@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-09-27T16:23:44.429Z",
+  "generatedAt": "2026-09-28T21:42:13.673Z",
   "trips": [
     {
       "id": "europe-2026",
@@ -115,6 +115,34 @@
           },
           "severity": "hard",
           "target": "transport/2026-10-03-paris-cdg",
+          "status": "active"
+        },
+        {
+          "id": "europe-2026-louvre-reservation-protection",
+          "description": "P0：保护 Louvre 已确认预约，不能因上午候选推迟入馆；严格上界按分钟精度保护预约时刻。",
+          "assert": {
+            "family": "time_before",
+            "subject": "ticket/2026-09-30-louvre",
+            "metric": "start_time",
+            "value": "14:31"
+          },
+          "severity": "hard",
+          "target": "ticket/2026-09-30-louvre",
+          "status": "active"
+        },
+        {
+          "id": "europe-2026-louvre-security-buffer",
+          "description": "P0：Louvre 预约前至少保留 30 分钟排队与安检余量；另行预留交通，约 14:00 到馆附近。",
+          "assert": {
+            "family": "numeric_compare",
+            "subject": "ticket/2026-09-30-louvre",
+            "metric": "buffer_minutes",
+            "operator": "gte",
+            "value": 30,
+            "unit": "minutes"
+          },
+          "severity": "hard",
+          "target": "ticket/2026-09-30-louvre",
           "status": "active"
         }
       ],
@@ -3606,7 +3634,8 @@
           {
             "id": "left-bank",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "已有实际到访之外仍有体力和短距离余量才慢走，不挤压塔楼预约"
             },
             "protected": true,
             "context_refs": [
@@ -3630,6 +3659,45 @@
             }
           },
           {
+            "id": "invalides-actual",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "les-invalides"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "operation/2026-09-28-invalides-actual"
+          },
+          {
+            "id": "pass-activation",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "kind": "operation",
+            "operation_id": "operation/europe-2026-paris-museum-pass"
+          },
+          {
+            "id": "hotel-de-la-marine",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "context_refs": [
+              {
+                "type": "operation",
+                "id": "operation/europe-2026-paris-museum-pass"
+              }
+            ],
+            "kind": "operation",
+            "operation_id": "ticket/2026-09-28-hotel-de-la-marine"
+          },
+          {
             "id": "early-dinner",
             "selection": {
               "mode": "default"
@@ -3651,7 +3719,8 @@
           {
             "id": "cruise",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "仅在塔楼预约、餐食与返店余量均满足，且服务已另行落实时考虑；未预订、不顺延到次日"
             },
             "protected": true,
             "context_refs": [
@@ -3681,6 +3750,15 @@
               "type": "place",
               "id": "paris"
             }
+          },
+          {
+            "id": "notre-dame-towers",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "kind": "operation",
+            "operation_id": "ticket/2026-09-28-notre-dame-towers"
           },
           {
             "id": "hotel-return",
@@ -3736,59 +3814,52 @@
       "id": "europe-2026--2026-09-28",
       "trip": "europe-2026",
       "date": "2026-09-28",
-      "title": "巴黎铁塔清晨、左岸慢生活与游船方向",
+      "title": "巴黎铁塔清晨与 Museum Pass 首日到访",
       "priorities": [
-        "Trocadéro 清晨加 Rue de l’Université 一个额外街景视角",
-        "保护三餐、独立酒店恢复与 Left Bank 慢走／café",
-        "Seine cruise 首选本日晚间，未选具体船班"
+        "已到访：Hôtel de la Marine 首次使用 Museum Pass；Invalides 为额外弹性到访",
+        "Tours de Notre-Dame 塔楼预约已确认，区别于圣母院教堂",
+        "其余清晨摄影、三餐与酒店恢复保留规划，不据此声称已完成"
       ],
       "trade_offs": [
-        "Avenue de Camoëns 与 Pont Alexandre III 固定链退出默认",
-        "游船只允许 9/29 晚作为预设 fallback，两晚均不合适即可放弃",
-        "不承诺 Eiffel sparkle 或 blue hour，不把游船建立为摄影 Session"
+        "游船退出默认晚间，未预订、未报告完成，不顺延到 9/29",
+        "Invalides 实际到访时刻及与 Hôtel de la Marine 的先后未记录",
+        "不公开票号、二维码或其他私密票务信息"
       ],
-      "pacing": "清晨核心→坐下早餐→一个街景视角→午餐→酒店恢复→左岸慢走与咖啡→早晚餐→待落实游船体验。",
-      "risk": "游船 operator、具体 departure、ticket 和天气条件均 TBD；Notre-Dame 入内仍受访问条件制约。",
-      "body_markdown": "摄影时刻由当日 Sessions 拥有。清晨后早餐预算见执行步骤，铁塔额外街景只保留 Rue de l’Université；不再串 Camoëns 和 Alexandre III。按执行步骤完成午餐后回酒店完成恢复，通勤不算恢复。\n\n下午选择 Left Bank 的短距离慢走与坐 café，允许完全不拍照；Notre-Dame 外拍不是固定打卡，已退出默认，入内也须另核实条件。正式早晚餐在船前完成，不假定普通观光船提供正餐。\n\n## Approved experience，尚非已订班次\n\n本日为 Seine cruise 首选晚间，总 planning budget 见执行步骤，包含赴码头、候船、乘坐与离船；最终按所选服务调整。具体 operator、码头、departure、ticket、可接受天气及临时运行状态均为 OPEN FACT / future booking gap，不写不存在的船班，不制造 booked Operation。选择具体 departure 时，以 hotel-return 执行步骤的返店 planning target 选班，并为离船与返店留余量；这不是 confirmed timetable、confirmed return、booking、hard Constraint 或 Eiffel sparkle 保证。该目标同样适用于次日 fallback。\n\n唯一预设 fallback 引用次日 TripDay；若两晚都不合适则放弃，不挤入 10/2。船上以观看城市为目的，可手持记录，不承诺命中铁塔闪灯或任何计算光窗。"
+      "pacing": "保留清晨与餐食规划；下午已到访 Invalides（时刻与先后未记录）、Hôtel de la Marine 并启用 Museum Pass；晚间保护圣母院塔楼预约，之后回酒店。实际与规划明确分开。",
+      "risk": "Museum Pass 首次使用为用户报告的约时刻，非机器扫码日志；塔楼预约不等于已登塔。圣母院教堂免费入内与塔楼为不同安排。",
+      "body_markdown": "## 已发生与已确认\n\n实际到访与预约由对应 Operation 拥有；Museum Pass 的时长、用户报告的约首次使用与约到期范围统一引用 `operation/europe-2026-paris-museum-pass`。不把约时刻写成精确扫码 timestamp。Invalides 为额外弹性到访，具体时间与先后未知。Tours de Notre-Dame 是塔楼，预约已确认但尚未报告实际登塔；不与 Notre-Dame Cathedral 混为一项。\n\n## 保留但未声称完成的规划\n\n摄影时刻由当日 Sessions 拥有。清晨摄影、早餐、午餐和独立酒店恢复仍是规划，没有用户实际报告就不标 completed。游船 operator、码头、departure、ticket 均未落实，现仅保留候选，不占据默认晚间，也不设次日晚间 fallback。返店目标不是 confirmed timetable、booking 或到店保证。"
     },
     {
       "execution": {
         "steps": [
           {
-            "id": "montmartre-streets",
+            "id": "strike-opening-check",
             "selection": {
               "mode": "default"
             },
             "protected": true,
             "context_refs": [
               {
-                "type": "place",
-                "id": "montmartre"
-              }
-            ],
-            "kind": "session",
-            "session_id": "europe-2026-2026-09-29-montmartre-streets"
-          },
-          {
-            "id": "sacre-coeur-steps",
-            "selection": {
-              "mode": "default"
-            },
-            "protected": true,
-            "context_refs": [
-              {
-                "type": "place",
-                "id": "sacre-coeur-paris"
+                "type": "operation",
+                "id": "operation/europe-2026-paris-museum-pass"
               }
             ],
             "open_questions": [
               {
-                "id": "dome",
-                "question": "只保留台阶与街区视角，不默认登穹顶"
+                "id": "actual-opening",
+                "question": "查看当天官方罢工／开放公告；常规营业时间不是今日开放证明"
+              },
+              {
+                "id": "no-monitor",
+                "question": "预约由用户另行落实，本系统不监控或代订"
               }
             ],
-            "kind": "session",
-            "session_id": "europe-2026-2026-09-29-sacre-coeur-steps"
+            "kind": "intent",
+            "activity": {
+              "kind": "logistics",
+              "action": "prepare"
+            },
+            "title": "P0 · 罢工风险：出发前核实实际开放"
           },
           {
             "id": "breakfast",
@@ -3807,13 +3878,83 @@
               "kind": "meal",
               "slot": "breakfast"
             },
-            "title": "坡道之后坐下早餐",
+            "title": "出发前坐下早餐",
             "budget": {
               "kind": "minutes",
               "min_minutes": 30,
               "max_minutes": 45,
               "protected": true
             }
+          },
+          {
+            "id": "adaptive-morning",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": false,
+            "open_questions": [
+              {
+                "id": "choose-one",
+                "question": "Orsay／Sainte-Chapelle 必须有真实预约且官方确认开放；否则选择 Panthéon／Cluny／Rodin／Picasso 之一；Conciergerie 另需合适的 EUR 0 预约"
+              },
+              {
+                "id": "fallback",
+                "question": "仍未确认开放就街区散步或休息，不堆叠场馆；Orangerie 周二关闭，不在本日候选"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "弹性上午：有真实预约才定时参观；否则只选一项 Pass 场馆",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 120,
+              "protected": false
+            },
+            "at": {
+              "type": "place",
+              "id": "paris"
+            }
+          },
+          {
+            "id": "montmartre-streets",
+            "selection": {
+              "mode": "candidate",
+              "when": "实际开放、体力与移动允许且主动选定时才执行，不与上午博物馆计划叠加"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "montmartre"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-29-montmartre-streets"
+          },
+          {
+            "id": "sacre-coeur-steps",
+            "selection": {
+              "mode": "candidate",
+              "when": "实际开放、体力与移动允许且主动选定时才执行，不与上午博物馆计划叠加"
+            },
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "place",
+                "id": "sacre-coeur-paris"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "dome",
+                "question": "只保留台阶与街区视角，不默认登穹顶"
+              }
+            ],
+            "kind": "session",
+            "session_id": "europe-2026-2026-09-29-sacre-coeur-steps"
           },
           {
             "id": "fashion-week-exhibition",
@@ -3871,7 +4012,7 @@
               "kind": "meal",
               "slot": "lunch"
             },
-            "title": "正式午餐，在歌剧院一带解决",
+            "title": "按选中场馆就近正式午餐",
             "budget": {
               "kind": "minutes",
               "min_minutes": 45,
@@ -3916,9 +4057,10 @@
           {
             "id": "palais-garnier-interior",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "实际开放、体力与移动允许且主动选定时才执行，不与上午博物馆计划叠加"
             },
-            "protected": true,
+            "protected": false,
             "context_refs": [
               {
                 "type": "place",
@@ -3973,23 +4115,19 @@
               "kind": "meal",
               "slot": "dinner"
             },
-            "title": "正式晚餐前移，在 Garnier 周边解决",
+            "title": "正常晚餐；仅选择演出时才在 Garnier 周边前移",
             "budget": {
               "kind": "minutes",
               "min_minutes": 60,
               "max_minutes": 60,
               "protected": true
-            },
-            "target": {
-              "boundary": "end",
-              "latest": "18:30"
             }
           },
           {
             "id": "manon-palais-garnier",
             "selection": {
               "mode": "candidate",
-              "when": "官方票务确有 EUR 35–71 档库存并已购票；不追明显高于官方价格的二手票"
+              "when": "真实购票且官方确认演出正常才启用；当前仅候选，未确认票"
             },
             "protected": false,
             "context_refs": [
@@ -4005,15 +4143,11 @@
             "open_questions": [
               {
                 "id": "inventory",
-                "question": "官方 resale 近期显示 0 张，秋季场次不在当时开售批次内；需持续关注官方渠道"
+                "question": "尚无已购票证据；本轮不监控库存、不创建 watcher、不代订"
               },
               {
                 "id": "fallback",
                 "question": "取不到票则回到正式晚餐加短步行，不产生行程债务，也不顺延到 10-01"
-              },
-              {
-                "id": "same-room",
-                "question": "白天看空的大厅、晚上看它活起来 —— 这是本日体验的全部理由"
               }
             ],
             "kind": "intent",
@@ -4025,6 +4159,109 @@
               "type": "place",
               "id": "palais-garnier"
             }
+          },
+          {
+            "id": "orsay-timed",
+            "selection": {
+              "mode": "candidate",
+              "when": "取得有效预约且官方确认实际开放后才启用"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée d’Orsay · 未预约的定时候选",
+            "at": {
+              "type": "place",
+              "id": "musee-dorsay"
+            }
+          },
+          {
+            "id": "sainte-chapelle-timed",
+            "selection": {
+              "mode": "candidate",
+              "when": "取得有效预约且官方确认实际开放后才启用"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Sainte-Chapelle · 未预约的定时候选",
+            "at": {
+              "type": "place",
+              "id": "sainte-chapelle"
+            }
+          },
+          {
+            "id": "pantheon-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "未取得稀缺预约时、确认实际开放后；只选一项"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Panthéon · 弹性 Pass 备选",
+            "at": {
+              "type": "place",
+              "id": "pantheon-paris"
+            }
+          },
+          {
+            "id": "cluny-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "未取得稀缺预约时、确认实际开放后；只选一项"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée de Cluny · 弹性 Pass 备选"
+          },
+          {
+            "id": "rodin-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "确认实际开放、交通合理时；只选一项"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée Rodin · 弹性 Pass 备选"
+          },
+          {
+            "id": "picasso-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "确认实际开放、交通合理时；只选一项"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée Picasso · 弹性 Pass 备选"
+          },
+          {
+            "id": "conciergerie-conditional",
+            "selection": {
+              "mode": "candidate",
+              "when": "取得合适的 EUR 0 预约且官方确认实际开放；当前未预约"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Conciergerie · EUR 0 预约后候选"
           },
           {
             "id": "day-close",
@@ -4040,8 +4277,8 @@
             ],
             "open_questions": [
               {
-                "id": "cruise",
-                "question": "游船备选已从本晚移除；游船只在 09-28 尝试一次"
+                "id": "fallback",
+                "question": "未取得真实演出票就短步行或回酒店，不产生补漏义务"
               }
             ],
             "kind": "intent",
@@ -4059,20 +4296,20 @@
       "id": "europe-2026--2026-09-29",
       "trip": "europe-2026",
       "date": "2026-09-29",
-      "title": "蒙马特街区与 Garnier 真正参观",
+      "title": "巴黎罢工风险日：弹性 Museum Pass 选择",
       "priorities": [
-        "Montmartre 后坐下早餐，不默认登穹顶",
-        "午餐、恢复与 Garnier 内部文化体验受保护",
-        "晚餐后只留短晚间，游船仅承接前一日 fallback"
+        "P0：出发前核实罢工与实际开放；常规营业时间不能证明今日开门",
+        "上午只选一项；有真实预约且官方确认开放才启用定时参观",
+        "Manon 只是未购票候选；保护午餐、坐下恢复与正常晚餐"
       ],
       "trade_offs": [
-        "Sacre-Cœur dome、百货串点和完整 passages 链退出默认",
-        "游船 fallback 与短长廊散步互斥，不同时默认执行",
-        "不加 Orsay 或其他大型馆"
+        "Orangerie 周二关闭，不作为今天选项",
+        "蒙马特、Garnier 与鞋履展保留候选，不与博物馆自动叠加",
+        "没有稀缺预约就选合适的弹性 Pass 场馆；未开放则街区散步或休息"
       ],
-      "pacing": "蒙马特短线→坐下早餐→午餐→恢复→Garnier 内部→晚餐→短晚间或已落实的游船 fallback→回店。",
-      "risk": "Garnier 门票与观众厅访问未确认；坡道之后必须真实坐下恢复。",
-      "body_markdown": "摄影开始由 Sessions 拥有，街巷与台阶之后早餐 30–45 分钟，不接穹顶登高。午餐保护 45–60 分钟，午间坐下或回房恢复 60 分钟。\n\nGarnier 以参观剧院空间、理解建筑与文化为主，摄影不能替代参观；`ticket/2026-09-29-palais-garnier` 仍 unbooked，观众厅条件待复查，不能承诺进入。\n\n晚餐约 60 分钟，之后最多短步行。若前一日游船未能落实，本日晚间是唯一预设 fallback，具体条件和预算由 `europe-2026--2026-09-28` 拥有；启用时放弃长廊尾段。两晚都不合适即可放弃。百货、完整 passages 摄影链及未公布秀场均不进入默认。"
+      "pacing": "先核实实际罢工／开放→早餐→按已取得的真实预约选择一项定时参观，或只选一项弹性 Pass 场馆→午餐→坐下恢复→按开放与体力决定下午→晚餐→仅已购票才看 Manon，否则短步行／回店。",
+      "risk": "罢工风险：不得以常规公布营业时间推断实际开放；Orsay、Sainte-Chapelle 均未确认预约。Museum Pass 不替代预约，未核实开放就切换街区散步／休息。",
+      "body_markdown": "P0 是出发前确认真实罢工／开放状态，不是查询正常营业时间后假定开放。上午只选一个项目，确认开放与真实预约均满足才使用 Orsay 或 Sainte-Chapelle 定时候选；本轮没有新预约证据。\n\n没有稀缺预约时，Panthéon、Musée de Cluny、Musée Rodin 或 Musée Picasso 是弹性候选；Conciergerie 需要合适的 EUR 0 预约。Orangerie 周二关闭，不在本日选项。未能确认开放就街区散步／休息。午餐与独立坐下恢复仍受保护。\n\n`operation/europe-2026-paris-museum-pass` 统一拥有约有效窗口的用户报告，Pass 不替代预约或开放确认。Manon / Palais Garnier 19:30 仅是 candidate，未购票、不承诺演出；无票就正常晚餐与短步行／回店。游船不再是唯一预设 fallback，也不从前日自动顺延。"
     },
     {
       "execution": {
@@ -4107,11 +4344,50 @@
             }
           },
           {
-            "id": "colonnes-de-buren",
+            "id": "adaptive-morning",
             "selection": {
               "mode": "default"
             },
-            "protected": true,
+            "protected": false,
+            "context_refs": [
+              {
+                "type": "operation",
+                "id": "operation/europe-2026-paris-museum-pass"
+              }
+            ],
+            "open_questions": [
+              {
+                "id": "choose-one",
+                "question": "Orsay／Orangerie／Sainte-Chapelle 需真实预约才启用；否则 Cluny／Panthéon 等就近 Pass 场馆。交通不合理或余量不足就跳过"
+              },
+              {
+                "id": "fallback",
+                "question": "上午不叠加多个博物馆；常规营业时间不是实际开放证明"
+              }
+            ],
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "弹性上午：只选一项，保护 Louvre 预约",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 60,
+              "max_minutes": 90,
+              "protected": false
+            },
+            "at": {
+              "type": "place",
+              "id": "paris"
+            }
+          },
+          {
+            "id": "colonnes-de-buren",
+            "selection": {
+              "mode": "candidate",
+              "when": "仅在主动选定、实际开放且不挤压 Louvre 预约及餐食缓冲时考虑；不叠加默认上午"
+            },
+            "protected": false,
             "context_refs": [
               {
                 "type": "place",
@@ -4124,9 +4400,10 @@
           {
             "id": "place-des-vosges",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "仅在主动选定、实际开放且不挤压 Louvre 预约及餐食缓冲时考虑；不叠加默认上午"
             },
-            "protected": true,
+            "protected": false,
             "context_refs": [
               {
                 "type": "place",
@@ -4152,24 +4429,12 @@
               {
                 "type": "decision",
                 "id": "europe-2026-approved-day-rhythm"
-              },
-              {
-                "type": "place",
-                "id": "marche-des-enfants-rouges"
-              },
-              {
-                "type": "fact",
-                "id": "marche-enfants-rouges-hours"
               }
             ],
             "open_questions": [
               {
-                "id": "main-meal",
-                "question": "这是今天的主餐；晚餐在金字塔蓝调之后，会很晚而且要轻"
-              },
-              {
-                "id": "no-stall",
-                "question": "不指定摊位，到了看什么好吃就吃什么"
+                "id": "protect",
+                "question": "不为市场横穿巴黎；上午活动过长就缩短或跳过，保护午餐、移动与预约"
               }
             ],
             "kind": "intent",
@@ -4177,16 +4442,16 @@
               "kind": "meal",
               "slot": "lunch"
             },
-            "title": "Marché des Enfants Rouges 市场午餐（不锁定摊位）",
+            "title": "所选上午场馆就近午餐，完成后赴 Louvre",
             "budget": {
               "kind": "minutes",
               "min_minutes": 60,
               "max_minutes": 60,
               "protected": true
             },
-            "at": {
-              "type": "place",
-              "id": "marche-des-enfants-rouges"
+            "target": {
+              "boundary": "end",
+              "latest": "13:00"
             }
           },
           {
@@ -4216,7 +4481,8 @@
           {
             "id": "fondation-hcb",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "仅在主动选定、实际开放且不挤压 Louvre 预约及餐食缓冲时考虑；不叠加默认上午"
             },
             "protected": false,
             "context_refs": [
@@ -4268,7 +4534,7 @@
             "selection": {
               "mode": "default"
             },
-            "protected": false,
+            "protected": true,
             "context_refs": [
               {
                 "type": "decision",
@@ -4277,19 +4543,42 @@
               {
                 "type": "place",
                 "id": "musee-du-louvre"
+              },
+              {
+                "type": "operation",
+                "id": "ticket/2026-09-30-louvre"
               }
             ],
             "open_questions": [
               {
-                "id": "not-a-booking",
-                "question": "摄影时刻的开始是规划目标，不是预约证明"
+                "id": "buffer",
+                "question": "约 14:00 到馆附近是 planning target，非到达事实；另留出从午餐／休息地点赴馆的交通时间，提前排队安检"
               }
             ],
             "kind": "intent",
             "activity": {
               "kind": "buffer"
             },
-            "title": "赴卢浮宫、排队与安检余量"
+            "title": "赴卢浮宫、排队与安检余量",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 30,
+              "max_minutes": 45,
+              "protected": true
+            },
+            "target": {
+              "boundary": "start",
+              "preferred": "14:00"
+            }
+          },
+          {
+            "id": "louvre-reservation",
+            "selection": {
+              "mode": "default"
+            },
+            "protected": true,
+            "kind": "operation",
+            "operation_id": "ticket/2026-09-30-louvre"
           },
           {
             "id": "louvre-interior",
@@ -4314,26 +4603,39 @@
             "open_questions": [
               {
                 "id": "viewing",
-                "question": "实际观看预算约 120–150 分钟，不含交通、排队与金字塔外拍；以少量作品和主题认真观看"
+                "question": "观看预算不包含交通、排队与金字塔外拍；少量作品与主题，不以集齐全馆为目标"
               },
               {
-                "id": "ticket",
-                "question": "官方定时票尚未开放到这一天，不是售罄；放票后须落实一张能支持该观看预算的时段"
-              },
-              {
-                "id": "wednesday",
-                "question": "周三开至 21:00、末次入场 20:00；若该事实不成立，16:00 入馆的整个安排需要重新复核"
+                "id": "disruption",
+                "question": "展厅与临时中断仍需现场核实；预约确认不保证所有展厅开放"
               }
             ],
-            "kind": "session",
-            "session_id": "europe-2026-2026-09-30-louvre-interior"
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Louvre · 认真看展，120–150 分钟实际观看",
+            "budget": {
+              "kind": "minutes",
+              "min_minutes": 120,
+              "max_minutes": 150,
+              "protected": true
+            },
+            "at": {
+              "type": "place",
+              "id": "musee-du-louvre"
+            },
+            "photography_refs": [
+              "europe-2026-2026-09-30-louvre-interior"
+            ]
           },
           {
             "id": "louvre-pyramid",
             "selection": {
-              "mode": "default"
+              "mode": "candidate",
+              "when": "仅在主动选定、实际开放且不挤压 Louvre 预约及餐食缓冲时考虑；不叠加默认上午"
             },
-            "protected": true,
+            "protected": false,
             "context_refs": [
               {
                 "type": "place",
@@ -4372,12 +4674,89 @@
               "kind": "meal",
               "slot": "dinner"
             },
-            "title": "一区 / 二区轻食晚餐",
+            "title": "正常晚餐，不为候选蓝调拖晚",
             "budget": {
               "kind": "minutes",
               "min_minutes": 45,
               "max_minutes": 60,
               "protected": false
+            }
+          },
+          {
+            "id": "orsay-timed",
+            "selection": {
+              "mode": "candidate",
+              "when": "有效预约、实际开放且午餐／赴馆／安检余量均满足才选"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée d’Orsay · 未预约的定时候选",
+            "at": {
+              "type": "place",
+              "id": "musee-dorsay"
+            }
+          },
+          {
+            "id": "orangerie-timed",
+            "selection": {
+              "mode": "candidate",
+              "when": "有效预约、实际开放且不挤压 Louvre 才选"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Orangerie · 未预约的定时候选"
+          },
+          {
+            "id": "sainte-chapelle-timed",
+            "selection": {
+              "mode": "candidate",
+              "when": "有效预约、实际开放且交通合理才选"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Sainte-Chapelle · 未预约的定时候选",
+            "at": {
+              "type": "place",
+              "id": "sainte-chapelle"
+            }
+          },
+          {
+            "id": "cluny-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "确认实际开放与 Pass 入场条件，只选一项，提前结束"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Musée de Cluny · 无稀缺预约时的弹性备选"
+          },
+          {
+            "id": "pantheon-fallback",
+            "selection": {
+              "mode": "candidate",
+              "when": "确认实际开放与 Pass 入场条件，只选一项，提前结束"
+            },
+            "protected": false,
+            "kind": "intent",
+            "activity": {
+              "kind": "experience"
+            },
+            "title": "Panthéon · 无稀缺预约时的弹性备选",
+            "at": {
+              "type": "place",
+              "id": "pantheon-paris"
             }
           },
           {
@@ -4407,20 +4786,20 @@
       "id": "europe-2026--2026-09-30",
       "trip": "europe-2026",
       "date": "2026-09-30",
-      "title": "巴黎较晚开始与 Louvre 主要艺术体验",
+      "title": "巴黎弹性上午与已确认 Louvre 预约",
       "priorities": [
-        "较晚开始，以 Buren 与精简 Marais 街区为主",
-        "市场区域午餐、café 坐下恢复与入馆余量受保护",
-        "Louvre 是主要 art museum experience，保护 120–150 分钟实际观看"
+        "P0：保护 Louvre 已确认预约，约 14:00 到馆附近，提前完成午餐与交通",
+        "上午只选一项；Orsay／Orangerie／Sainte-Chapelle 未预约时不伪装定时承诺",
+        "Louvre 保护 120–150 分钟实际观看；Museum Pass 约有效窗口见共享记录"
       ],
       "trade_offs": [
-        "Carnavalet 退出默认；Marais 不集齐广场、庭院与街巷",
-        "金字塔只作短摄影，不让建筑成片挤压真实观看",
-        "Louvre 票仍 unbooked；10/2 不自动接收未完成清单"
+        "Buren、Marais、HCB 和金字塔不再组成默认满日链",
+        "无稀缺预约则选 Cluny／Panthéon 等交通合理的单一 Pass 场馆",
+        "上午宁可缩短或跳过，也不压缩 Louvre 接驳与安检"
       ],
-      "pacing": "早餐与较晚开始→Buren→精简 Marais→市场区域午餐→café 恢复→赴馆与安检→真正看展→短金字塔摄影→晚餐。",
-      "risk": "票务、C-003 closing time、展厅状态与临时中断仍 OPEN；未核实前不保证观看窗口成立。",
-      "body_markdown": "先早餐，不追求补早起。Buren 后仅保留一个 Marais 广场摄影节点，街区慢走随行，不额外激活整条摄影链。市场区域午餐 60 分钟，具体市场与摊位当日可用性待确认；café 另坐下休息 30–45 分钟。\n\n入馆前为移动、队列和安检保留余量，摄影 Session 的开始是规划目标，不是预约证明。票务由 `ticket/2026-09-30-louvre` 拥有，当前 **unbooked，尚未预约**。先落实能支持实际观看预算的票；这是约 2–2.5 hours 的 actual viewing planning budget，不是 confirmed duration；预算不包含交通、排队与金字塔外拍。以少量作品和主题认真观看，不只拍建筑，也不以集齐全馆为目标。\n\n金字塔只作收尾短摄影，之后正式晚餐约 60 分钟。C-003 不在本轮选择关闭时刻；若票务或临时中断使观看预算不成立，保留 P0 待办并减少摄影，不声称已完成 art experience。\n\n`europe-2026-approved-day-rhythm` 记录 U06 对本次体验排序的批准；旧 `paris-museum-distribution` 已 superseded，保留历史判断，不自动安排 Orsay 或占用 10/2 的半天 FLEX。"
+      "pacing": "早餐→弹性上午只选一项（无真实预约则 Cluny／Panthéon 或短步行）→就近午餐→坐下恢复→约 14:00 到 Louvre 附近，保护交通与安检余量→按已确认预约入馆→认真看展→可选短摄影→晚餐→回酒店。",
+      "risk": "Pass 预计可覆盖 Louvre 预约入场，但首次使用是用户报告的约时刻，非精确扫码日志；以现场校验为准。上午候选尚未预约，不以常规营业时间保证实际开放。",
+      "body_markdown": "已确认 Louvre 定时预约由 `ticket/2026-09-30-louvre` 拥有；旧 16 点入馆假设已撤回。P0 保护预约、午餐、移动与安检余量，约 14:00 到馆附近是规划目标而非实际到达。\n\n上午保持弹性，只选一项且可以跳过。Orsay、Orangerie、Sainte-Chapelle 尚未预约，只有真实预约与实际开放确认后才启用；否则选 Cluny／Panthéon 等交通合理的单一 Pass 场馆，不叠加 Buren、Marais 与 HCB。\n\n`operation/europe-2026-paris-museum-pass` 是用户报告的约有效窗口唯一来源，预计覆盖 Louvre 预约；不能当作精确扫码或保证现场验票成功。实际观看规划预算约 2–2.5 hours，不包含交通、排队与金字塔外拍。金字塔只是候选，不能压缩真正看展或拖晚正常晚餐；次日 Versailles 主计划不变。"
     },
     {
       "execution": {
@@ -10458,12 +10837,12 @@
       "id": "europe-2026-2026-09-30-louvre-interior",
       "trip": "europe-2026",
       "date": "2026-09-30",
-      "time": "16:00",
+      "time": "14:30",
       "spot": "louvre-interior-architecture",
       "purpose": "museum-architecture",
       "status": "planned",
       "priority": "normal",
-      "notes": "仅记录真正参观中的建筑摄影意图，不用本 Session 代替艺术观看。观看预算由 TripDay 拥有，ticket/2026-09-30-louvre 仍 unbooked，开始时刻只是待票务落实的规划；C-003 及 Galerie d’Apollon 状态仍待复查。"
+      "notes": "仅记录真正参观中的建筑摄影意图，不用本 Session 代替艺术观看。观看预算由 TripDay 拥有，ticket/2026-09-30-louvre 为用户确认预约，摄影时刻随参观开始规划，不是实际扫码记录；C-003 及 Galerie d’Apollon 状态仍待复查。"
     },
     {
       "id": "europe-2026-2026-09-30-louvre-pyramid",
@@ -10997,9 +11376,9 @@
         "ticket/2026-09-30-louvre",
         "europe-2026--2026-09-30"
       ],
-      "impact_if_wrong": "若周三夜场当日不成立，09-30 的 16:00 入馆与 120–150 分钟实际观看预算将无法成立，需要先回到票务与当日开放的复核，而不是压缩观看时间或改为只拍建筑。",
+      "impact_if_wrong": "已确认入馆预约以 ticket/2026-09-30-louvre 为准。夜场或展厅安排若当日不成立，只影响可延长观看的余量；实际开放仍须核实，不能以常规营业时间保证开门，也不退回旧入馆假设。",
       "blocks": [],
-      "body_markdown": "**当前 16:00 入馆的整个安排只有在这一事实成立时才可行** —— 而仓库此前并未记录它。\n\n观看预算是约两到两个半小时的**实际看展时间**，不包含交通、排队、安检与金字塔外拍，\n也不是已确认时长。21:00 是缓冲，不是目标时长。\n\n`verified_at` 留空：出发前须复核当日开放、临时闭厅与票务窗口。"
+      "body_markdown": "用户已确认较早的 Louvre 预约，由对应 Operation 唯一拥有。旧入馆假设已撤回；本 Fact 只保留常规周三夜场资料，不能作为罢工或临时中断期间实际开门的证明。\n\n观看预算是约两到两个半小时的**实际看展时间**，不包含交通、排队、安检与金字塔外拍，\n也不是已确认时长。21:00 是缓冲，不是目标时长。\n\n`verified_at` 留空：出发前须复核当日开放、临时闭厅与票务窗口。"
     },
     {
       "id": "manon-palais-garnier-2026-autumn",
@@ -11775,6 +12154,36 @@
       "severity": "hard",
       "target": "transport/2026-10-03-paris-cdg",
       "status": "active"
+    },
+    {
+      "trip": "europe-2026",
+      "id": "europe-2026-louvre-reservation-protection",
+      "description": "P0：保护 Louvre 已确认预约，不能因上午候选推迟入馆；严格上界按分钟精度保护预约时刻。",
+      "assert": {
+        "family": "time_before",
+        "subject": "ticket/2026-09-30-louvre",
+        "metric": "start_time",
+        "value": "14:31"
+      },
+      "severity": "hard",
+      "target": "ticket/2026-09-30-louvre",
+      "status": "active"
+    },
+    {
+      "trip": "europe-2026",
+      "id": "europe-2026-louvre-security-buffer",
+      "description": "P0：Louvre 预约前至少保留 30 分钟排队与安检余量；另行预留交通，约 14:00 到馆附近。",
+      "assert": {
+        "family": "numeric_compare",
+        "subject": "ticket/2026-09-30-louvre",
+        "metric": "buffer_minutes",
+        "operator": "gte",
+        "value": 30,
+        "unit": "minutes"
+      },
+      "severity": "hard",
+      "target": "ticket/2026-09-30-louvre",
+      "status": "active"
     }
   ],
   "operations": [
@@ -11942,6 +12351,14 @@
       "end_time": "19:35"
     },
     {
+      "id": "operation/2026-09-28-invalides-actual",
+      "type": "reference",
+      "trip": "europe-2026",
+      "date": "2026-09-28",
+      "status": "completed",
+      "ref": "Musée de l’Armée / Invalides · 用户报告已到访，额外弹性参观；实际时刻及与 Hôtel de la Marine 的先后未记录"
+    },
+    {
       "id": "operation/2026-10-02-bir-hakeim-departure",
       "type": "reference",
       "trip": "europe-2026",
@@ -11950,6 +12367,24 @@
       "ref": "Default execution withdrawn with the conditional Bir-Hakeim session under decision/europe-2026-approved-day-rhythm; historical start/end preserve the safety envelope. Reactivate only together with that session after selection; the existing hard Constraint remains the safety bound, not a reason to visit.",
       "start_time": "20:50",
       "end_time": "21:00"
+    },
+    {
+      "id": "operation/europe-2026-paris-museum-pass",
+      "type": "reference",
+      "trip": "europe-2026",
+      "date": "2026-09-28",
+      "status": "confirmed",
+      "ref": "Paris Museum Pass · 48 小时 · USER-REPORTED / APPROXIMATE：用户报告于 Hôtel de la Marine 首次实际使用，约 2026-09-28 15:45 Europe/Paris → 预计约 2026-09-30 15:45 Europe/Paris 到期。不是精确机器扫码 timestamp；预计覆盖 9/30 Louvre 预约，现场校验为准。"
+    },
+    {
+      "id": "ticket/2026-09-28-hotel-de-la-marine",
+      "type": "reference",
+      "trip": "europe-2026",
+      "date": "2026-09-28",
+      "status": "completed",
+      "ref": "Hôtel de la Marine · 已到访，使用 Paris Museum Pass；时钟为预约时刻，实际首次使用约时刻见共享 Pass 记录",
+      "start_time": "15:45",
+      "booking_status": "booked"
     },
     {
       "id": "ticket/2026-09-28-notre-dame",
@@ -11961,6 +12396,16 @@
       "booking_status": "unbooked",
       "opens_at": "2026-09-26",
       "act_by": "2026-09-28"
+    },
+    {
+      "id": "ticket/2026-09-28-notre-dame-towers",
+      "type": "reference",
+      "trip": "europe-2026",
+      "date": "2026-09-28",
+      "status": "confirmed",
+      "ref": "Tours de Notre-Dame · 圣母院塔楼预约，Paris Museum Pass；区别于 Cathedral 教堂，尚未报告实际登塔",
+      "start_time": "19:15",
+      "booking_status": "booked"
     },
     {
       "id": "ticket/2026-09-29-palais-garnier",
@@ -11978,11 +12423,11 @@
       "type": "reference",
       "trip": "europe-2026",
       "date": "2026-09-30",
-      "status": "planned",
-      "ref": "Louvre timed entry — verify official closing time and disruption status before visit",
-      "booking_status": "unbooked",
-      "opens_at": "2026-08-20",
-      "act_by": "2026-08-31"
+      "status": "confirmed",
+      "ref": "Louvre 定时预约 — 用户确认已预约；Paris Museum Pass，开放／展厅及现场验票仍需核实",
+      "start_time": "14:30",
+      "booking_status": "booked",
+      "buffer_minutes": 30
     },
     {
       "id": "ticket/2026-10-01-versailles",
