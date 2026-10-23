@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<title>Japan 2026 行程</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: Travel OS 的单列手机版式：顶栏 → 内容卡片 → 底部四键导航。颜色和字体沿用 personal-travel-os 的 BaseLayout。 */
+:root{
+  --ink:#17211b; --muted:#647069; --paper:#f5f2ea; --paper-2:#e9efe8;
+  --card:#ffffffc2; --card-solid:#fdfcf8; --line:#17211b24;
+  --green:#215c45; --green-deep:#185a46; --green-soft:#dbe8df; --green-wash:#eef4ef;
+  --amber:#a6631d; --amber-soft:#f6e8d6; --red:#a13c31; --red-soft:#f6dedb; --blue:#315d7d;
+  --shadow:0 18px 48px #272f2814;
+  --serif:Georgia,"Times New Roman","Songti SC",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#e6ece7; --muted:#9aa79f; --paper:#121815; --paper-2:#17211c;
+  --card:#1b2420e6; --card-solid:#1b2420; --line:#e6ece724;
+  --green:#7fbf9f; --green-deep:#8fd0ae; --green-soft:#24392f; --green-wash:#1a2a22;
+  --amber:#e0a464; --amber-soft:#3a2b1a; --red:#e88a7f; --red-soft:#3d2220; --blue:#8db4d3;
+  --shadow:0 18px 48px #0006; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#e6ece7; --muted:#9aa79f; --paper:#121815; --paper-2:#17211c;
+  --card:#1b2420e6; --card-solid:#1b2420; --line:#e6ece724;
+  --green:#7fbf9f; --green-deep:#8fd0ae; --green-soft:#24392f; --green-wash:#1a2a22;
+  --amber:#e0a464; --amber-soft:#3a2b1a; --red:#e88a7f; --red-soft:#3d2220; --blue:#8db4d3;
+  --shadow:0 18px 48px #0006; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--paper-2),var(--paper) 420px) var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper-2)}
+a{color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 120px}
+.site-header{display:flex;align-items:center;gap:12px;padding-block:12px 14px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.brand-mark{width:42px;height:42px;border-radius:12px;background:var(--green-deep);color:#f5f2ea;display:grid;place-items:center;font-family:var(--serif);font-size:17px;letter-spacing:.04em}
+.brand-name{font-weight:650;font-size:17px}
+.brand-sub{margin-left:auto;font-size:12px;color:var(--muted)}
+h1,h2,h3{text-wrap:balance;margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.amber{color:var(--amber)}
+.red{color:var(--red)}
+.tnum{font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:16px}
+
+/* Today */
+.hero{padding:20px 22px}
+.hero .city{font-family:var(--serif);font-size:32px;line-height:1.2}
+.hero .date{color:var(--muted);margin-top:4px}
+.hero .clock{font-family:var(--serif);font-size:28px;margin-top:6px}
+.hero .clock small{font-family:var(--sans);font-size:13px;color:var(--muted);margin-left:6px}
+.next{padding:18px 20px;border:1.5px solid var(--green)}
+.next h2{font-size:18px}
+.next .hint{font-size:13px;color:var(--muted);margin:6px 0 10px}
+.next ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.next li{display:grid;grid-template-columns:78px 1fr;gap:10px}
+.next li .t{font-weight:650;color:var(--green)}
+.next li .s{font-size:13px;color:var(--muted)}
+.link-arrow{display:inline-block;font-weight:650;text-decoration:underline;text-underline-offset:4px;margin-top:4px}
+.countdown{font-family:var(--serif);font-size:56px;line-height:1;color:var(--green-deep)}
+.preview{padding:14px 16px;font-size:13px}
+.preview select{font:inherit;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--card-solid);color:var(--ink);max-width:100%}
+.preview .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+
+/* Trip overview */
+.trip-hero{padding:22px 22px 24px;background:linear-gradient(135deg,var(--card-solid),var(--green-wash));border:1px solid var(--line);border-radius:22px}
+.trip-hero .eyebrow{font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.trip-hero h1{font-family:var(--serif);font-weight:400;font-size:42px;line-height:1.1;margin:10px 0 12px;color:var(--green-deep)}
+.trip-hero .meta{font-size:14px;letter-spacing:.04em}
+.trip-hero .route{font-size:15px;color:var(--muted);margin-top:4px}
+.trip-hero p{font-size:14px;margin:14px 0 0;max-width:30em}
+.region{display:flex;align-items:baseline;gap:10px;margin:30px 0 10px}
+.region .flag{font-size:20px}
+.region h2{font-size:19px}
+.region .en{font-family:var(--serif);font-size:13px;color:var(--muted)}
+.region .n{margin-left:auto;font-size:13px;color:var(--muted)}
+.days{list-style:none;margin:0;padding:0;border-radius:18px;overflow:hidden}
+.days li+li{border-top:1px solid var(--line)}
+.days a{display:grid;grid-template-columns:62px 26px 1fr 14px;gap:8px;padding:16px 16px 16px 20px;text-decoration:none;position:relative}
+.days a::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:1px;background:var(--line)}
+.days a::after{content:"";position:absolute;left:5px;top:24px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+.days .d{font-weight:700;font-size:17px;line-height:1.2}
+.days .w{font-size:12px;color:var(--muted)}
+.days .ic{font-size:18px;line-height:1.3}
+.days .ttl{font-weight:650;line-height:1.35;min-width:0}
+.days .sum{font-weight:400;font-size:13px;color:var(--muted);margin-top:4px}
+.days .chev{color:var(--muted);align-self:center}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.badge{font-size:12px;padding:2px 8px;border-radius:7px;background:var(--amber-soft);color:var(--amber);font-weight:600}
+.badge.red{background:var(--red-soft);color:var(--red);border:1px solid color-mix(in srgb,var(--red) 40%,transparent)}
+.badge.green{background:var(--green-soft);color:var(--green)}
+
+/* Day */
+.daynav{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;margin-bottom:22px}
+.daynav a,.daynav span{border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-decoration:none;background:var(--card);font-size:14px;color:var(--muted);min-height:44px;display:flex;align-items:center}
+.daynav .mid{border-color:var(--green);color:var(--green);font-weight:650;justify-content:center}
+.daynav .nx{justify-content:flex-end}
+.daynav span{opacity:.45}
+.day-eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--green)}
+.day-city{font-size:15px;font-weight:700;color:var(--green);margin-top:10px}
+.day-title{font-size:26px;line-height:1.3;margin-top:6px}
+.note{padding:18px 18px 16px;border-left:3px solid var(--green);background:var(--green-wash);border-radius:4px 16px 16px 4px}
+.note h3{font-size:16px;margin-bottom:8px}
+.note p{margin:0;font-size:14px}
+.note ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.note li.w{color:var(--amber)}
+.note li.r{color:var(--red);font-weight:600}
+details{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+details summary{cursor:pointer;font-weight:650;font-size:15px;list-style-position:outside}
+details[open] summary{margin-bottom:8px}
+.sched-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-top:10px}
+.sched-head h2{font-size:18px}
+.sched-head span{font-size:12px;color:var(--muted)}
+.period{margin-top:20px}
+.period h3{font-size:15px}
+.period h3 b{color:var(--green)}
+.tl{list-style:none;margin:12px 0 0;padding:0 0 0 52px;position:relative}
+.tl::before{content:"";position:absolute;left:70px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.tl li{position:relative;padding:0 0 16px 32px}
+.tl .ico{position:absolute;left:0;top:0;width:24px;text-align:center;font-size:17px;line-height:1.4;background:var(--paper)}
+.tl .tm{font-size:13px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;position:absolute;left:-52px;top:2px;width:48px;text-align:right;line-height:1.2}
+.tl .ti{font-weight:650;color:var(--green-deep);line-height:1.4}
+.tl .ti.plain{color:var(--ink);font-weight:500}
+.tl .sb{font-size:13.5px;margin-top:2px}
+.tl .wn{font-size:13px;color:var(--amber);margin-top:2px}
+.tl .mp{display:flex;gap:10px;margin-top:4px;font-size:12.5px}
+.tl .mp a{color:var(--blue);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--blue) 40%,transparent)}
+.branch{padding:14px 16px;border-radius:14px;background:var(--amber-soft);font-size:14px;margin-top:6px}
+.branch b{color:var(--amber)}
+.branch p{margin:6px 0 0}
+.more{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.more details{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:16px 16px;margin:0}
+.more summary{display:flex;align-items:center;gap:14px;list-style:none}
+.more summary::-webkit-details-marker{display:none}
+.more summary .e{font-size:26px}
+.more summary .tx{flex:1;min-width:0}
+.more summary .tx b{display:block;font-size:16px}
+.more summary .tx small{display:block;font-size:12.5px;color:var(--muted);font-weight:400}
+.more summary .ch{color:var(--muted);transition:transform .2s}
+.more details[open] .ch{transform:rotate(90deg)}
+.more .body{font-size:14px;margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.more .body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.kv{display:grid;grid-template-columns:5.5em 1fr;gap:4px 10px;font-size:14px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;min-width:0}
+
+/* Actions / notes */
+.sec-title{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--green-deep);margin-bottom:6px}
+.act{list-style:none;margin:0;padding:0}
+.act li{padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 12px}
+.act li+li{border-top:1px solid var(--line)}
+.act .a{font-weight:650;min-width:0}
+.act .b{font-size:13px;color:var(--muted);grid-column:1/-1}
+.act .due{font-size:12.5px;font-weight:700;white-space:nowrap;align-self:start}
+.group-label{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:24px 0 8px;font-weight:600}
+.tbl{overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;font-size:13.5px}
+.tbl th,.tbl td{text-align:left;padding:8px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:12px;color:var(--muted);font-weight:600}
+.plain-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.box{padding:16px 18px}
+
+.foot{border-top:1px solid var(--line);margin-top:40px;padding-top:16px;font-size:12.5px;color:var(--muted)}
+.foot p{margin:0 0 6px}
+
+/* Bottom nav */
+.global-nav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+.global-nav ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:560px}
+.global-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 0 6px;border-radius:12px;text-decoration:none;font-size:12px;color:var(--muted)}
+.global-nav a[aria-current="page"]{background:var(--green-soft);color:var(--green-deep);font-weight:700}
+.global-nav svg{width:22px;height:22px}
+a:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="site-header">
+    <div class="brand-mark">PT</div>
+    <div class="brand-name">Personal Travel OS</div>
+    <div class="brand-sub">japan-2026</div>
+  </header>
+  <main id="app"></main>
+  <footer class="foot">
+    <p>Personal Travel OS · Japan 2026</p>
+    <p>行程来自 2026-10-16 当前草案和 10-22 名古屋细化，不是 canonical；全部未预订。日出日落为研究计算值，只作排程参考。</p>
+  </footer>
+</div>
+
+<nav class="global-nav" aria-label="主导航">
+  <ul>
+    <li><a href="#today" data-nav="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-12 5 3 3 5-5"/></svg>今天</a></li>
+    <li><a href="#trip" data-nav="trip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M9 6V3h6v3M8 6v14m8-14v14M7 20v2m10-2v2"/></svg>行程</a></li>
+    <li><a href="#actions" data-nav="actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg>待办</a></li>
+    <li><a href="#notes" data-nav="notes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 5C8 2 5 3 2 4v16c3-1 6-2 10 1 4-3 7-2 10-1V4c-3-1-6-2-10 1Zm0 0v16"/></svg>备忘</a></li>
+  </ul>
+</nav>
+
+<script>
+const TZ = "Asia/Tokyo";
+const g = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const ap = q => "https://maps.apple.com/?q=" + encodeURIComponent(q);
+
+// 每天的内容。warn = 未核 / 待确认（琥珀色）；map = 地图搜索词。
+const DAYS = [
+{
+  date:"2026-11-05", wd:"周四", region:"aichi", icon:"✈️", city:"名古屋",
+  title:"抵达名古屋 · 名站夜景",
+  summary:"中部机场落地，μSKY 进城，鳗鱼饭三吃，荣与名站两处夜景",
+  badges:[["red","航班冬季时刻未确认"],["","住宿未预订"]],
+  plan:"落地后不在机场吃饭，μSKY 直接进城入住，当场跟前台约好明早寄大行李。18:00 前吃鳗鱼饭避开排队，然后荣的 Oasis 21 / MIRAI TOWER，最后回名站上 Sky Promenade（最后入场 21:30），手羽先收尾。",
+  remind:[
+    ["r","MU719 冬季时刻（10/25 起）仍未确认，免费改退只到 10/24。时刻一变，今天所有时间都要跟着挪。"],
+    ["w","μSKY 票价两个来源不一致（1,340 / 1,430 日元），按 1,430 准备。"],
+    ["","最早约 17:35 到站，名古屋日落约 16:54、蓝调到约 17:20，今晚只有纯夜景。"],
+    ["w","名站冬季灯饰 2026 年日期未公布；按 2025 年，11/5 可能只有广小路通亮着。"],
+  ],
+  periods:[
+    {label:"下午",title:"抵达与进城",items:[
+      {t:"16:00",i:"✈️",ti:"MU719 落地中部国际机场",sb:"浦东 T1 12:20 起飞 · 入境 + 取行李约 45 分钟",wn:"冬季时刻待确认",map:"Chubu Centrair International Airport"},
+      {t:"17:05",i:"🚆",ti:"名铁 μSKY → 名铁名古屋",sb:"最快约 28 分钟 · 基本运费 + μ チケット，车上补票多 50 日元",wn:"票价待核"},
+      {t:"17:45",i:"🏨",ti:"入住 Nagoya Marriott Associa",sb:"JR Central Towers 15F 大堂。告诉前台明早用宅急便寄一件行李到 Yokohama Bay Sheraton",map:"Nagoya Marriott Associa Hotel"},
+    ]},
+    {label:"晚上",title:"名古屋饭 + 夜景",items:[
+      {t:"18:00",i:"🍴",ti:"鳗鱼饭三吃 · まるや本店 JR 名古屋站店",sb:"11:00–22:00，有中文菜单，18:30 后排队。备选：あつた蓬莱軒本店（不接受预约）、味噌猪排 矢場とん",map:"まるや本店 JR名古屋駅店"},
+      {t:"19:15",i:"🚇",ti:"地铁东山线 名古屋 → 荣",sb:"约 5 分钟",plain:true},
+      {t:"19:20",i:"📷",ti:"Oasis 21「水之宇宙船」+ MIRAI TOWER",sb:"屋顶水面倒映塔身，低机位，16–35。20:00–20:03 Oasis 21 灯光秀。上塔看俯拍要 1,300 日元，最后入场 20:40（可不上）",map:"Oasis 21 Nagoya"},
+      {t:"20:45",i:"🚇",ti:"地铁回名古屋",plain:true},
+    ]},
+    {label:"夜间",title:"站场俯瞰与收尾",items:[
+      {t:"21:00",i:"🌃",ti:"Midland Square Sky Promenade",sb:"44–46F，220 m 露天回廊，1,000 日元，营业到 22:00，最后入场 21:30。16–35 主力，70–200 压缩站场和列车光轨",wn:"三脚架规定未查到，默认手持靠栏杆",map:"Midland Square Sky Promenade"},
+      {t:"21:50",i:"🚉",ti:"名铁名古屋「迷宫月台」",sb:"2 线 8 方向的月台纵深和彩色标识；需入场券；不用三脚架，不拍正面人脸特写"},
+      {t:"22:00",i:"🍺",ti:"手羽先 · 世界の山ちゃん 名駅东店",sb:"营业到 00:15",map:"世界の山ちゃん 名駅東店"},
+    ]},
+  ],
+  branches:[["累了的轻松版（约 1.5 小时）","晚饭 → Sky Promenade → 名铁月台 → 手羽先，全程不出名站。"]],
+  photo:["名站超高层夜景与站场：Sky Promenade 露天，无玻璃反光但有风","Oasis 21 水面倒影 + MIRAI TOWER：风大时水面不平","名铁月台：16–35，人流与标识"],
+  stay:{name:"Nagoya Marriott Associa",st:"未预订",need:["订可免费取消的房价，备注名站方向高层","邮件确认：11/6 早上能否代寄宅急便到横滨 Bay Sheraton"],addr:"JR 名古屋站 JR Central Towers 楼上"},
+  why:"名古屋只住一晚，选站上酒店是为了 11/6 寄行李、上新干线都零步行。大箱子在这里寄走，后面两晚只背相机包。",
+},
+{
+  date:"2026-11-06", wd:"周五", region:"shizuoka", icon:"🚄", city:"名古屋 → 新富士",
+  title:"丰田纪念馆 → 新干线 → 富士川铁桥 → 田子之浦日落",
+  summary:"寄走大行李，上午产业馆，こだま直达新富士，下午铁桥 + 港口富士 W1",
+  badges:[["","住宿未预订"],["green","富士 W1"]],
+  plan:"07:30 先寄行李，名古屋式早餐后去丰田产业技术纪念馆（2026 特展）。坐 12:38 こだま直达新富士（想多留铁桥时间就坐 12:08），下午打车拍富士川铁桥，日落前到田子之浦港。晚上看第二天富士天气、约好 05:40 的出租车。",
+  remind:[
+    ["","新富士只停こだま，名古屋直达约 1 小时 28 分，每小时 :08 / :38。要保留铁桥最晚 13:08 那班；只要田子之浦日落最晚 14:08。"],
+    ["","订 E 座（北侧），静冈 → 新富士段可见富士。"],
+    ["w","田子之浦港公园 8:00–17:00 关门，蓝调要在园外港边拍；园外站位未核。"],
+    ["w","铁桥、港口打车时间是推断值（10–15 分钟）。"],
+    ["","电池、充电宝全部留在相机包，不进宅急便。"],
+  ],
+  periods:[
+    {label:"上午",title:"寄行李 · 名古屋早餐 · 产业馆",items:[
+      {t:"07:30",i:"🧳",ti:"前台寄大行李 → 横滨 Bay Sheraton",sb:"收件人写与预订一致的英文名，备注「11/8 宿泊予定」和预订号。退房，背包寄存前台",wn:"运费、到达日（预计 11/7）待核"},
+      {t:"08:00",i:"☕",ti:"喫茶まつば 名古屋式 Morning",sb:"1933 年老店，8:00 开门，周三休。吃完沿四间道仓库街走",map:"喫茶まつば 名古屋"},
+      {t:"09:30",i:"🏭",ti:"丰田产业技术纪念馆",sb:"9:30–17:00，周一休，1,000 日元；名铁栄生站步行 3 分钟。2026 特展「華ひらくジャポニスム」10/3–12/13",map:"Toyota Commemorative Museum of Industry and Technology"},
+      {t:"11:15",i:"🧱",ti:"Noritake 之森 红砖厂房",sb:"约 15 分钟",map:"Noritake Garden"},
+    ]},
+    {label:"中午",title:"东行新富士",items:[
+      {t:"11:45",i:"🚶",ti:"回名站取背包",sb:"步行约 20 分钟或名铁 1 站",plain:true},
+      {t:"12:00",i:"🍜",ti:"住よし 扁面（14・15 号站台）",sb:"或买矢場とん 味噌猪排便当 / 千寿 天むす 上车吃"},
+      {t:"12:38",i:"🚄",ti:"こだま 822 名古屋 → 新富士 14:07",sb:"E 座。备选 12:08 こだま 820（13:36 到）",wn:"11/6 当天时刻出发前再看一次"},
+    ]},
+    {label:"下午",title:"富士川铁桥 + 田子之浦 W1",items:[
+      {t:"14:15",i:"🏨",ti:"东横 INN 新富士站南口 寄存背包",sb:"站前步行约 1 分钟",map:"東横INN 新富士駅南口"},
+      {t:"14:45",i:"📷",ti:"富士川新干线铁桥 右岸河滩",sb:"打车约 10–15 分钟。下午顺光，N700S + 铁桥 + 富士，70–200 压缩",map:"富士川橋梁 新幹線"},
+      {t:"16:00",i:"🚕",ti:"打车到田子之浦港",sb:"约 15 分钟",plain:true},
+      {t:"16:15",i:"🗻",ti:"富士 W1 · 田子之浦港",sb:"港口与工业前景 + 富士，日落约 16:47。富士山 Dragon Tower 37.76 m 可 360° 看富士和骏河湾（公园 17:00 关）",map:"ふじのくに田子の浦みなと公園"},
+    ]},
+    {label:"晚上",title:"富士市晚餐与明早准备",items:[
+      {t:"18:00",i:"🍴",ti:"吉原商店街一带本地小店",sb:"岳南电车吉原本町附近",wn:"具体店未核",map:"吉原商店街 富士市"},
+      {t:"20:00",i:"☁️",ti:"看 11/7 富士天气，请前台约 05:40 出租车",sb:"看低云量、北西风、湿度和实况相机；用持牌出租车"},
+    ]},
+  ],
+  branches:[
+    ["下午阴","铁桥和田子之浦改拍铁路与港口题材，不追富士。"],
+    ["11/6 下午是三天里唯一的晴窗","放弃纪念馆，早餐后坐 09:38 或 10:08 的こだま（11:07 / 11:36 到），把铁桥和田子之浦做足。"],
+  ],
+  photo:["富士川铁桥：右岸河滩，下午顺光，70–200","田子之浦：工业前景 + 富士，日落 16:47 前后；蓝调在园外港边","新干线车窗：E 座，静冈 → 新富士段"],
+  stay:{name:"东横 INN 新富士站南口",st:"未预订",need:["订可免费取消的房价（天气调换时可能改到 11/7）","问能否 05:30 外出、08:30 前后回来吃早餐再退房","请前台代约 11/7 05:40 出租车"],addr:"新富士站南口步行约 1 分钟"},
+  why:"住新富士是为了 11/7 日出只需打车 15–20 分钟。上午 A 方案丰田纪念馆是名古屋“城市观察”分数最高的一项；也可换 B 有松老街（买「有松おさんぽきっぷ」1,900 日元）或 C 名古屋城（西南隅櫓特别公开到 11/8，门票 1,000 日元）。",
+},
+{
+  date:"2026-11-07", wd:"周六", region:"shizuoka", icon:"🗻", city:"富士市 → 修善寺",
+  title:"茶园富士日出 → 由比樱花虾 → 三岛 → 修善寺温泉街",
+  summary:"全程最重要的富士早晨 W2，然后一路往东进伊豆，竹林小径点灯",
+  badges:[["","住宿未预订"],["green","富士 W2 主窗口"]],
+  plan:"05:40 打车去大渊笹场茶园拍日出（约 06:13），回酒店早餐退房。打车到 JR 富士站（新富士没有在来线），去由比吃樱花虾，三岛走源兵卫川，坐骏豆线到修善寺。下午温泉街和竹林小径，18:03 巴士 + 18:45 接驳车回伊豆万豪吃晚餐。",
+  remind:[
+    ["","大渊笹场是私人茶园：只在公共道路 / 停车区拍，不进茶垄。三脚架可用。"],
+    ["","新富士站只有新干线，去由比要先打车到 JR 富士站。"],
+    ["w","樱花虾 2026 秋渔开渔日截至 10/16 未公布（往年 11/4）；没开渔就吃樱花虾炸什锦。"],
+    ["w","修善寺温泉 → 车站巴士按 2024 年时刻表：周六日 17:18、18:03、18:23、19:01、19:38 末班，现行是否相同未核。"],
+    ["","接驳车：修善寺站 8 号站台，周六 18:45 和末班 20:15，约 25 分钟。错过只能打车约 20 分钟。"],
+    ["","七五三旺季周末，神社人多。"],
+  ],
+  periods:[
+    {label:"清晨",title:"富士 W2 主窗口",items:[
+      {t:"05:40",i:"🚕",ti:"出租车 新富士 → 大渊笹场茶园",sb:"15–20 分钟",map:"大淵笹場 茶畑"},
+      {t:"06:00",i:"🗻",ti:"大渊笹场茶园 日出",sb:"日出约 06:13。茶垄 + 富士，16–35 与 70–200 都成立；三脚架。凌晨体感可能 5–8°C",map:"大淵笹場"},
+      {t:"08:05",i:"🚕",ti:"出租车回酒店",sb:"让司机等候或回程再叫",plain:true},
+    ]},
+    {label:"上午",title:"由比",items:[
+      {t:"08:30",i:"🍳",ti:"酒店早餐，退房",plain:true},
+      {t:"09:10",i:"🚕",ti:"出租车到 JR 富士站",sb:"约 10 分钟",plain:true},
+      {t:"09:30",i:"🚆",ti:"JR 东海道线 富士 → 由比",sb:"约 12 分钟，步行到由比渔港"},
+      {t:"10:00",i:"🦐",ti:"しずまえ食堂 早午餐",sb:"9:00–19:00，周三休。今天是唯一可能吃到生樱花虾的一天",wn:"开渔日未定",map:"しずまえ食堂 由比"},
+    ]},
+    {label:"中午",title:"三岛",items:[
+      {t:"11:15",i:"🚆",ti:"JR 由比 → 三岛",sb:"约 45 分钟，可能在沼津换车"},
+      {t:"12:00",i:"⛩️",ti:"源兵卫川 → 三岛大社",sb:"富士山涌泉水边步道。还吃得下就去桜家鳗鱼（11:00–20:00，周三休，周六排队）",map:"源兵衛川 三島"},
+      {t:"13:10",i:"🚆",ti:"伊豆箱根铁道骏豆线 三岛 → 修善寺",sb:"约 35 分钟，550 日元"},
+    ]},
+    {label:"下午",title:"修善寺温泉街",items:[
+      {t:"13:45",i:"🧳",ti:"修善寺站投币柜存背包，或背着走",wn:"大柜数量未核",plain:true},
+      {t:"14:00",i:"🚌",ti:"东海巴士 修善寺站 1 号站台 → 修善寺温泉",sb:"约 8 分钟"},
+      {t:"14:10",i:"🎋",ti:"修禅寺 → 独钴之汤 → 桂桥 → 竹林小径",sb:"日落约 16:45，之后竹林点灯到 23:00。16–35 + 高感光，不必三脚架。下午点心可选禅风亭なゝ番“禅寺そば”（10:00–16:00，周四休）",map:"竹林の小径 修善寺"},
+    ]},
+    {label:"晚上",title:"回伊豆万豪",items:[
+      {t:"18:03",i:"🚌",ti:"巴士 修善寺温泉 → 修善寺站",sb:"约 7 分钟。末班 19:38",wn:"时刻按 2024 年版"},
+      {t:"18:45",i:"🚐",ti:"接驳车 修善寺站 8 号站台 → 伊豆万豪",sb:"免费，约 25 分钟。末班 20:15"},
+      {t:"19:15",i:"♨️",ti:"入住 · 酒店晚餐（2 食付）· 客房露天温泉",sb:"附近没有便利店和餐馆",wn:"晚餐时段订房时约 19:30",map:"Izu Marriott Hotel Shuzenji"},
+    ]},
+  ],
+  branches:[
+    ["想在温泉街吃晚餐","吃到约 19:20 → 19:38 末班巴士 → 20:15 末班接驳车。任何一环错过只能打车（约 20 分钟），所以默认回酒店吃。"],
+    ["早晨看不到富士","不追，照常往东走；11/8 只有远景备份（订到富士景观房时）。"],
+    ["全天雨","由比改由比本阵公园 / 东海道广重美术馆（未核），修善寺照常，雨中竹林也好拍。"],
+  ],
+  photo:["大渊笹场茶园：日出约 06:13，三脚架，16–35 + 70–200","修善寺竹林小径：日落后点灯，高感光手持","三岛源兵卫川：水边步道"],
+  stay:{name:"伊豆万豪修善寺（2 食付，带露天温泉 Deluxe）",st:"未预订",need:["订“2 食付”可取消房价","问晚餐时间和餐厅（2025 年是 Grill & Dining G，17:30–21:00，2 人以上需 3 天前预约）","问接驳车要不要预约","入住 15:00、退房 11:00"],addr:"山上度假村，离修善寺站接驳车约 25 分钟，不在温泉街"},
+  why:"这是新路线最大的加分：日出点从静冈方案的约 1 小时车程缩到 15–20 分钟。之后一路往东，不走回头路，晚上住温泉酒店。",
+},
+{
+  date:"2026-11-08", wd:"周日", region:"kanagawa", icon:"🚆", city:"修善寺 → 热海 → 横滨",
+  title:"热海 MOA 美术馆 → 横滨 · 大栈桥蓝调",
+  summary:"温泉早晨，热海看相模湾与昭和商店街，下午到横滨，大栈桥送飞鸟III",
+  badges:[["","住宿未预订"],["","萬珍樓需订位"]],
+  plan:"早上泡客房露天温泉，08:05 接驳车下山，经三岛到热海。上午 MOA 美术馆俯瞰相模湾，中午热海银座吃海鲜和布丁，13:45 去横滨入住、领大行李。16:15 上大栈桥屋顶看飞鸟III 17:00 离港和蓝调，晚上中华街萬珍樓。",
+  remind:[
+    ["","萬珍樓周一休，只剩今晚；先网上订。备选华正楼、广东饭店。"],
+    ["w","MOA 美术馆上山巴士、换展日、热海站投币柜未核。"],
+    ["","热海海上花火 20:20–20:40 默认不看（看的话约 22:00 才到横滨）。"],
+    ["","吉村家周日排队长，跳过。"],
+  ],
+  periods:[
+    {label:"清晨",title:"温泉早晨",items:[
+      {t:"06:00",i:"♨️",ti:"客房露天温泉",sb:"订到富士景观房可看约 50 km 外的远景富士（低概率）",plain:true},
+      {t:"07:15",i:"🍳",ti:"酒店早餐",plain:true},
+    ]},
+    {label:"上午",title:"下山去热海",items:[
+      {t:"08:05",i:"🚐",ti:"接驳车 → 修善寺站 08:30",sb:"周日首班 07:05 也可"},
+      {t:"08:40",i:"🚆",ti:"骏豆线 → 三岛 → JR 东海道线 → 热海",sb:"约 35 + 15 分钟；也可三岛 → 热海坐こだま一站"},
+      {t:"09:45",i:"🧳",ti:"热海站投币柜存背包",wn:"未核",plain:true},
+      {t:"10:00",i:"🏛️",ti:"MOA 美术馆",sb:"9:30–16:30，周四休。俯瞰相模湾；展览「伊豆の仏像 PART 1」10/23–2027-01-03",wn:"上山巴士未核",map:"MOA Museum of Art"},
+    ]},
+    {label:"中午",title:"热海街区 → 横滨",items:[
+      {t:"12:00",i:"🍮",ti:"热海银座 / 平和通商店街",sb:"昭和风街景、海鲜午餐、热海布丁。周日人多。或改去来宫神社大楠（JR 伊东线一站）",map:"熱海銀座"},
+      {t:"13:45",i:"🚆",ti:"热海 → 横滨",sb:"JR 东海道线约 1 小时 15 分钟；或こだま到新横滨约 25 分钟 + 换车约 15 分钟"},
+    ]},
+    {label:"下午",title:"横滨港",items:[
+      {t:"15:15",i:"🏨",ti:"入住 Yokohama Bay Sheraton，领大行李",map:"Yokohama Bay Sheraton Hotel & Towers"},
+      {t:"16:15",i:"🛳️",ti:"大栈桥屋顶 · 蓝调",sb:"日落约 16:41；邮轮飞鸟III 17:00 离港。公园全面禁烟",map:"Osanbashi Yokohama International Passenger Terminal"},
+    ]},
+    {label:"晚上",title:"港未来夜 + 中华街",items:[
+      {t:"17:15",i:"🌃",ti:"汽车道 / 运河公园 / 港未来夜景",sb:"16–35 为主",map:"汽車道 横浜"},
+      {t:"19:00",i:"🥟",ti:"萬珍樓（中华街）",sb:"周日 11:00–22:00，先网上订",map:"萬珍樓 横浜中華街"},
+    ]},
+  ],
+  branches:[["改看热海花火（N3）","留热海看 20:20–20:40 花火，约 22:00 到横滨；萬珍樓吃不到，中华街晚餐改 11/9 华正楼，横滨夜景移到 11/9 晚。"]],
+  photo:["MOA 美术馆：俯瞰相模湾","大栈桥屋顶：飞鸟III 离港 + 蓝调","港未来夜景：汽车道、运河公园"],
+  stay:{name:"Yokohama Bay Sheraton（2 晚）",st:"未预订",need:["订 11/8–11/9 两晚","确认能否 11/7 起代收大行李、保管到 11/8 入住"],addr:"横滨站西口"},
+  why:"从伊豆回横滨经过热海，用一个上午看海景美术馆和昭和街区。最后两晚都住同一家横滨酒店，大行李寄到这里。",
+},
+{
+  date:"2026-11-09", wd:"周一", region:"kanagawa", icon:"🎞️", city:"镰仓 · 湘南",
+  title:"北镰仓寺院 → 江之电 → 镰仓高校前 → 湘南日落",
+  summary:"只背相机包的镰仓·湘南全天，SLAM DUNK 道口，七里滨日落，晚上回同一家酒店",
+  badges:[["","周一多处休馆"]],
+  plan:"08:00 横须贺线到北镰仓，圆觉寺、建长寺走到鹤冈八幡宫，再坐江之电到长谷寺和大佛。下午镰仓高校前道口、七里滨和腰越，16:40 前后在稻村崎看湘南日落，江之岛蓝调后经藤泽回横滨，周一晚餐去华正楼或野毛。",
+  remind:[
+    ["","周一休：镰仓国宝馆、鶴岡ミュージアム、川喜多电影纪念馆、点心庵、萬珍樓、吉村家。"],
+    ["","镰仓高校前：在指定区域，不站道口内或车道，不拍学生正脸，不用三脚架。"],
+    ["w","江之岛生吻仔鱼目前停售；想吃先打 しらすや腰越渔港前店 0467-33-0363（11/8 晚问）。"],
+    ["","七五三旺季：拍参拜儿童先问家长。"],
+  ],
+  periods:[
+    {label:"上午",title:"北镰仓 → 鹤冈八幡宫",items:[
+      {t:"07:30",i:"🍳",ti:"酒店早餐或崎阳轩烧卖",sb:"只带相机包",plain:true},
+      {t:"08:00",i:"🚆",ti:"横须贺线 横滨 → 北镰仓",sb:"约 20 分钟"},
+      {t:"08:30",i:"⛩️",ti:"圆觉寺 → 建长寺 → 巨福吕坂",sb:"晨光进山门",map:"円覚寺 鎌倉"},
+      {t:"10:15",i:"⛩️",ti:"鹤冈八幡宫",sb:"七五三季",map:"鶴岡八幡宮"},
+    ]},
+    {label:"中午",title:"江之电 · 长谷",items:[
+      {t:"11:00",i:"🚃",ti:"江之电 镰仓 → 长谷",sb:"一日券「のりおりくん」800 日元"},
+      {t:"11:15",i:"🍛",ti:"长谷寺 + 海光庵「お寺のカレー」→ 高德院大佛",map:"長谷寺 鎌倉"},
+      {t:"13:00",i:"🚃",ti:"极乐寺站",plain:true},
+    ]},
+    {label:"下午",title:"SLAM DUNK 与湘南海岸",items:[
+      {t:"13:30",i:"🏀",ti:"镰仓高校前道口",sb:"指定区域，70–200，停 20–30 分钟",map:"鎌倉高校前1号踏切"},
+      {t:"14:00",i:"🌊",ti:"七里滨海岸 · 腰越路面电车",sb:"青ブタ湘南联动立牌 10/16–11/30",map:"七里ヶ浜"},
+      {t:"16:10",i:"🌅",ti:"稻村崎 / 七里滨 湘南日落 W6",sb:"日落约 16:40，富士剪影（低概率）",map:"稲村ヶ崎"},
+    ]},
+    {label:"晚上",title:"江之岛 → 回横滨",items:[
+      {t:"17:00",i:"🐙",ti:"江之岛 / 片濑海岸蓝调",sb:"あさひ本店整只章鱼仙贝（18:00 关门）",map:"江の島"},
+      {t:"18:00",i:"🚆",ti:"江之电 → 藤泽 → JR 东海道线 → 横滨",sb:"约 45 分钟"},
+      {t:"19:15",i:"🥟",ti:"华正楼 / 广东饭店，或野毛居酒屋街",map:"野毛 横浜"},
+      {t:"21:00",i:"🌃",ti:"可选：港未来夜景第二轮",sb:"11/8 天气差时",plain:true},
+    ]},
+  ],
+  branches:[["雨天","以寺院和古都街道为主，缩短海岸段；晚上横滨照常。"]],
+  photo:["镰仓高校前道口：70–200，指定区域","稻村崎：日落 16:40 前后，富士剪影","江之岛 / 片濑海岸：蓝调"],
+  stay:{name:"Yokohama Bay Sheraton（第 2 晚）",st:"未预订",need:["同一家酒店，不用搬行李"],addr:"横滨站西口"},
+  why:"镰仓日不背过夜包、晚上回同一家酒店，是新路线相对原方案的第二个好处。",
+},
+{
+  date:"2026-11-10", wd:"周二", region:"tokyo", icon:"🛫", city:"横滨 → 东京 → 羽田",
+  title:"羽田存行李 → 御茶之水 → 新宿御苑 → 都厅日落 → 回国",
+  summary:"大行李先放羽田 T3，空手进东京，都厅看太阳落在富士山顶，直接回机场",
+  badges:[["red","航班冬季时刻未确认"],["green","都厅 W7"]],
+  plan:"退房后坐京急带大行李去羽田 T3 存柜，空手进东京：御茶之水圣桥、神田まつや、丸之内、新宿御苑菊花展，15:50 上都厅南展望室看 16:24 太阳落在富士山顶，然后直接回羽田。先做退税的海关确认再托运。",
+  remind:[
+    ["r","MU540 票面 20:15，7 月公开汇总写 20:00，冬季时刻未确认。提前到 20:00 也不改到机场时间，只是出关后少 15 分钟。"],
+    ["","2026-11-01 起免税改为出境退税：在 T3 托运前先去海关确认，多留 30 分钟。出境税 3,000 日元。"],
+    ["","都厅南展望室免费，11/10 开放（第 1・3 周二休），禁止三脚架。"],
+    ["w","都厅舍点检日未核；T3 储物柜只收非现金，柜满用行李寄存柜台（未核）。"],
+    ["","东京买的东西随身带到机场再装箱。"],
+  ],
+  periods:[
+    {label:"上午",title:"行李进机场，人进东京",items:[
+      {t:"08:45",i:"🧳",ti:"退房，带大行李",plain:true},
+      {t:"09:00",i:"🚆",ti:"京急 横滨 → 羽田机场第 3 航站楼",sb:"约 25–30 分钟"},
+      {t:"09:30",i:"🔒",ti:"T3 储物柜存大行李",sb:"大号 900 日元 / 24 小时；3F 南侧有特大号；只收非现金",map:"Haneda Airport Terminal 3"},
+      {t:"09:50",i:"🚆",ti:"京急 → 品川 → JR → 御茶之水",sb:"约 45 分钟"},
+      {t:"10:40",i:"📷",ti:"御茶之水 圣桥 三线立体交叉",sb:"70–200",map:"聖橋 御茶ノ水"},
+    ]},
+    {label:"中午",title:"神田 · 丸之内",items:[
+      {t:"11:00",i:"🍜",ti:"神田まつや → 竹むら",sb:"开门即入，只收现金",map:"神田まつや"},
+      {t:"12:30",i:"🏙️",ti:"东京站丸之内",map:"Tokyo Station Marunouchi"},
+    ]},
+    {label:"下午",title:"新宿御苑 + 都厅 W7",items:[
+      {t:"14:00",i:"🌼",ti:"新宿御苑 菊花坛展",sb:"11/1–11/15，16:00 停止入园，禁止三脚架",map:"新宿御苑"},
+      {t:"15:50",i:"🗻",ti:"东京都厅南展望室",sb:"约 16:24 太阳落在富士山顶，日落约 16:38。16:30 前上不去就放弃",map:"Tokyo Metropolitan Government Building South Observatory"},
+      {t:"16:45",i:"🚆",ti:"都厅前 → 新宿 → 品川 → 京急 → T3",sb:"约 55 分钟，不回横滨"},
+    ]},
+    {label:"晚上",title:"回国",items:[
+      {t:"17:45",i:"🛃",ti:"T3 取行李 → 值机 → 退税海关确认 → 托运 → 安检",sb:"先确认退税再托运"},
+      {t:"18:30",i:"🍴",ti:"江户小路 人形町今半 / 银座天一；伴手礼",plain:true},
+      {t:"20:15",i:"🛫",ti:"MU540 羽田 T3 → 浦东 T1 22:40",wn:"冬季时刻待确认（汇总写 20:00）"},
+    ]},
+  ],
+  branches:[["西南方向不通透","都厅仍拍新宿蓝调天际线；排队过长、16:30 前上不去就放弃，按时回机场。"]],
+  photo:["御茶之水圣桥：三线立体交叉，70–200","都厅南展望室：太阳落在富士山顶约 16:24，禁止三脚架"],
+  stay:{name:"不住宿（当晚回国）",st:"",need:["大行李放羽田 T3 储物柜，只收非现金"],addr:""},
+  why:"最后一天不回横滨：早上就把行李放进机场，东京段空手走，最后从都厅直接去羽田。",
+},
+];
+
+const REGIONS = {
+  aichi:{flag:"🏯",name:"爱知",en:"Aichi"},
+  shizuoka:{flag:"🗻",name:"静冈",en:"Shizuoka"},
+  kanagawa:{flag:"🌊",name:"神奈川",en:"Kanagawa"},
+  tokyo:{flag:"🗼",name:"东京",en:"Tokyo"},
+};
+
+const ACTIONS = [
+  {g:"马上",items:[
+    {a:"确认 MU719 / MU540 冬季时刻",b:"在东航 App 或订单里看 10/25 后两段航班。7 月公开汇总只列 MU540 且写 20:00（票面 20:15），没列 MU719。被取消或改时就在免费改退窗口内处理。",due:"10/24 前",lv:"red"},
+    {a:"签证",b:"护照国籍和签证状态都没有记录。如果是中国大陆护照且没有有效日本签证，现在通过代办申请 eVISA。",due:"现在",lv:"red"},
+  ]},
+  {g:"订房（都订可免费取消）",items:[
+    {a:"Nagoya Marriott Associa · 11/5",b:"备注名站方向高层；邮件问 11/6 早上能否代寄宅急便到横滨。",due:"现在",lv:"amber"},
+    {a:"东横 INN 新富士站南口 · 11/6",b:"问能否 05:30 外出、08:30 回来吃早餐再退房；请前台代约 05:40 出租车。",due:"现在",lv:"amber"},
+    {a:"伊豆万豪修善寺 · 11/7 · 2 食付",b:"默认带露天温泉 Deluxe；问晚餐时间和餐厅、接驳车要不要预约。",due:"现在",lv:"amber"},
+    {a:"Yokohama Bay Sheraton · 11/8–11/9",b:"确认能否 11/7 起代收大行李、保管到 11/8。",due:"现在",lv:"amber"},
+  ]},
+  {g:"出发前",items:[
+    {a:"萬珍樓 11/8 晚网上订位",b:"周日；周一休，只有这一晚。",due:"出发前",lv:""},
+    {a:"Smart EX 注册，买 11/6 こだま 822（或 820）E 座",b:"大箱已寄走，不需要大件行李座位。",due:"出发前",lv:""},
+    {a:"樱花虾秋渔开渔日",b:"看 at-s、由比港渔协。",due:"10 月底",lv:""},
+    {a:"天气调换判断",b:"约 10/29 起每天看气象厅周间预报；约 11/3 比较 11/7 和 11/8 早上，11/8 明显更好就把富士和伊豆两晚对调。",due:"约 11/3",lv:""},
+    {a:"复查一批时刻",b:"富士雪顶（实况相机）、都厅舍点检日、修善寺温泉 ↔ 车站巴士现行时刻、伊豆万豪接驳车（官网 access 页）。",due:"11/2 前后",lv:""},
+    {a:"复查现场规则",b:"镰仓高校前道口规则、MOA 换展日和上山巴士、热海站和修善寺站投币柜、名站灯饰开始日、μSKY 票价。",due:"11 月初",lv:""},
+    {a:"中国海关对日本水产品、肉制品的现行规定",b:"樱花虾、吻仔鱼、鲣节、热海干物、烧卖、肉包先按“不带”处理。",due:"出发前",lv:""},
+  ]},
+  {g:"路上",items:[
+    {a:"看 11/7 富士天气 → 约出租车",b:"请东横 INN 前台代约 05:40。",due:"11/6 晚",lv:""},
+    {a:"电话问腰越 しらすや 有没有生吻仔鱼",b:"0467-33-0363",due:"11/8 晚",lv:""},
+    {a:"保留每张收据 + 护照",b:"11/10 在 T3 托运前做退税海关确认。",due:"全程",lv:""},
+  ]},
+  {g:"新路线不用了（如已订就取消）",items:[
+    {a:"静冈两晚酒店、久能山 IRODORI 门票、三河屋、东京酒店",b:"这些只属于 10/9 的旧路线。",due:"现在",lv:""},
+  ]},
+];
+
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function md(d){const [,m,dd]=d.split("-");return `${+m}月${+dd}日`}
+function mdShort(d){const [,m,dd]=d.split("-");return `${m}/${dd}`}
+function dayId(d){return "d"+d.slice(5).replace("-","")}
+function badgeHtml(b){return `<div class="badges">${b.map(([c,t])=>`<span class="badge ${c}">${esc(t)}</span>`).join("")}</div>`}
+
+// 东京当地时间
+let previewAt = null; // {date,time}
+function tokyoNow(){
+  if(previewAt) return previewAt;
+  const p = new Intl.DateTimeFormat("en-CA",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+  const v={}; p.forEach(x=>v[x.type]=x.value);
+  return {date:`${v.year}-${v.month}-${v.day}`,time:`${v.hour}:${v.minute}`};
+}
+function daysBetween(a,b){return Math.round((Date.parse(b)-Date.parse(a))/864e5)}
+
+function renderToday(){
+  const now = tokyoNow();
+  const first = DAYS[0].date, last = DAYS[DAYS.length-1].date;
+  let html = "";
+  if(now.date < first){
+    const n = daysBetween(now.date, first);
+    const urgent = ACTIONS[0].items;
+    html += `<section class="card hero">
+      <div class="muted" style="font-size:13px">距出发</div>
+      <div class="countdown tnum">${n}<span style="font-size:20px;font-family:var(--sans);margin-left:6px;color:var(--muted)">天</span></div>
+      <div class="date" style="margin-top:10px">${md(first)} ${DAYS[0].wd} · 浦东 T1 12:20 → 中部 16:00</div>
+      <div class="date">现在东京 ${md(now.date)} ${now.time}</div>
+    </section>
+    <section class="card next">
+      <h2>出发前最急的事</h2>
+      <p class="hint">完整清单在“待办”。</p>
+      <ol>${urgent.map(x=>`<li><span class="t red">${esc(x.due)}</span><div><div>${esc(x.a)}</div><div class="s">${esc(x.b)}</div></div></li>`).join("")}</ol>
+      <a class="link-arrow" href="#actions">查看全部待办 →</a>
+    </section>
+    <a class="link-arrow" href="#${dayId(first)}">查看第一天完整行程 →</a>`;
+  } else if(now.date > last){
+    html += `<section class="card hero"><div class="city" style="font-size:26px">行程已经结束</div><div class="date">${last} 返回 · 共 ${DAYS.length} 天</div><div class="muted" style="font-size:13px;margin-top:8px">目的地时间 Asia/Tokyo</div></section>`;
+  } else {
+    const d = DAYS.find(x=>x.date===now.date);
+    const items = d.periods.flatMap(p=>p.items);
+    const upcoming = items.filter(it=>it.t>=now.time).slice(0,4);
+    const cur = [...items].reverse().find(it=>it.t<now.time);
+    html += `<section class="card hero">
+      <div class="city">${esc(d.city)}</div>
+      <div class="date">${md(d.date)} · ${d.wd}</div>
+      <div class="clock tnum">${now.time}<small>当地时间</small></div>
+    </section>
+    <section class="card next">
+      <h2>下个定时节点</h2>
+      <p class="hint">${cur?`刚才：${esc(cur.t)} ${esc(cur.ti)}`:"今天的安排还没开始。"}</p>
+      ${upcoming.length?`<ol>${upcoming.map(it=>`<li><span class="t tnum">${esc(it.t)}</span><div><div>${esc(it.ti)}</div>${it.sb?`<div class="s">${esc(it.sb)}</div>`:""}${it.wn?`<div class="s amber">${esc(it.wn)}</div>`:""}</div></li>`).join("")}</ol>`:`<p>今天的定时安排都结束了。</p>`}
+    </section>
+    <a class="link-arrow" href="#${dayId(d.date)}">查看今天完整行程 →</a>`;
+  }
+  html += `<section class="card preview">
+    <label for="pv">预览旅途中某一刻的“今天”页</label>
+    <div class="row">
+      <select id="pv">
+        <option value="">现在（东京时间）</option>
+        ${DAYS.map(d=>["08:00","13:00","17:30"].map(t=>`<option value="${d.date}|${t}" ${previewAt&&previewAt.date===d.date&&previewAt.time===t?"selected":""}>${mdShort(d.date)} ${d.wd} ${t}</option>`).join("")).join("")}
+      </select>
+    </div>
+  </section>`;
+  return `<div class="stack">${html}</div>`;
+}
+
+function renderTrip(){
+  let html = `<section class="trip-hero">
+    <div class="eyebrow">沿途，慢慢看</div>
+    <h1>Japan 2026</h1>
+    <div class="meta tnum">2026-11-05 → 2026-11-10 &nbsp;|&nbsp; 6 天 5 晚</div>
+    <div class="route">名古屋 → 富士 → 修善寺 → 热海 → 横滨 → 羽田</div>
+    <p>大城市观察、富士山、湘南与镰仓、传统日本和当代城市生活。不是一趟泛泛的红叶之旅。</p>
+    <div class="badges"><span class="badge red">航班冬季时刻待确认 · 10/24 前</span><span class="badge">全部住宿未预订</span></div>
+  </section>`;
+  const order = ["aichi","shizuoka","kanagawa","tokyo"];
+  for(const r of order){
+    const ds = DAYS.filter(d=>d.region===r);
+    const R = REGIONS[r];
+    html += `<div class="region"><span class="flag">${R.flag}</span><h2>${R.name}</h2><span class="en">${R.en}</span><span class="n">${ds.length} 天</span></div>
+    <ul class="days card">${ds.map(d=>`<li><a href="#${dayId(d.date)}">
+      <div><div class="d tnum">${mdShort(d.date)}</div><div class="w">${d.wd}</div></div>
+      <div class="ic">${d.icon}</div>
+      <div class="ttl">${esc(d.city)}<div class="sum">${esc(d.summary)}</div>${badgeHtml(d.badges)}</div>
+      <div class="chev">›</div></a></li>`).join("")}</ul>`;
+  }
+  return html;
+}
+
+function renderDay(i){
+  const d = DAYS[i], prev = DAYS[i-1], next = DAYS[i+1];
+  const nav = `<nav class="daynav">
+    ${prev?`<a href="#${dayId(prev.date)}">← ${mdShort(prev.date)}</a>`:`<span>← 出发前</span>`}
+    <a class="mid" href="#trip">总行程</a>
+    ${next?`<a class="nx" href="#${dayId(next.date)}">${mdShort(next.date)} →</a>`:`<span class="nx">回国 →</span>`}
+  </nav>`;
+  const head = `<div class="day-eyebrow tnum">${d.date} · ${d.wd}</div>
+    <div class="day-city">${esc(d.city)}</div>
+    <h1 class="day-title">${esc(d.title)}</h1>`;
+  const plan = `<section class="note"><h3>今日规划说明</h3><p>${esc(d.plan)}</p></section>`;
+  const remind = `<section class="note"><h3>当前确认与提醒</h3><ul>${d.remind.map(([c,t])=>`<li class="${c}">${esc(t)}</li>`).join("")}</ul>
+    ${d.branches.length?`<details><summary>备选与天气分支（${d.branches.length}）</summary>${d.branches.map(([h,p])=>`<div class="branch"><b>${esc(h)}</b><p>${esc(p)}</p></div>`).join("")}</details>`:""}
+  </section>`;
+  const sched = `<div class="sched-head"><h2>当天行程</h2><span>按计划顺序</span></div>
+    ${d.periods.map(p=>`<section class="period"><h3><b>${p.label}</b> · ${esc(p.title)}</h3>
+      <ul class="tl">${p.items.map(it=>`<li>
+        <span class="tm">${esc(it.t)}</span><span class="ico" aria-hidden="true">${it.i}</span>
+        <div class="ti ${it.plain?"plain":""}">${esc(it.ti)}</div>
+        ${it.sb?`<div class="sb">${esc(it.sb)}</div>`:""}
+        ${it.wn?`<div class="wn">${esc(it.wn)}</div>`:""}
+        ${it.map?`<div class="mp"><a href="${ap(it.map)}" target="_blank" rel="noopener">苹果地图</a><a href="${g(it.map)}" target="_blank" rel="noopener">谷歌地图</a></div>`:""}
+      </li>`).join("")}</ul></section>`).join("")}`;
+  const s = d.stay;
+  const more = `<div class="more">
+    <details><summary><span class="e">📷</span><span class="tx"><b>摄影详情</b><small>${d.photo.length} 个拍摄节点 · 构图、焦段与光线</small></span><span class="ch">›</span></summary>
+      <div class="body"><ul>${d.photo.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></details>
+    <details><summary><span class="e">🏨</span><span class="tx"><b>住宿详情</b><small>今晚：${esc(s.name)}</small></span><span class="ch">›</span></summary>
+      <div class="body"><dl class="kv">
+        <dt>酒店</dt><dd>${esc(s.name)}</dd>
+        ${s.addr?`<dt>位置</dt><dd>${esc(s.addr)}</dd>`:""}
+        ${s.st?`<dt>状态</dt><dd><span class="badge">${esc(s.st)}</span></dd>`:""}
+        <dt>要确认</dt><dd><ul style="padding-left:18px;margin:0">${s.need.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></dd>
+      </dl></div></details>
+    <details><summary><span class="e">📖</span><span class="tx"><b>这一天的完整说明</b><small>为什么这样排</small></span><span class="ch">›</span></summary>
+      <div class="body"><p style="margin:0">${esc(d.why)}</p></div></details>
+  </div>
+  <p style="margin-top:22px"><a class="link-arrow" href="#trip">← 返回总行程</a></p>`;
+  return `${nav}<div class="stack">${head}${plan}${remind}<div>${sched}</div></div>${more}`;
+}
+
+function renderActions(){
+  const col = {red:"red",amber:"amber","":"muted"};
+  return `<h1 class="sec-title">待办</h1>
+  <p class="muted" style="margin:0;font-size:14px">截至 2026-10-23 什么都还没订。截止日按出发前倒排。</p>
+  ${ACTIONS.map(gp=>`<div class="group-label">${esc(gp.g)}</div>
+    <ul class="act card">${gp.items.map(x=>`<li><div class="a">${esc(x.a)}</div><div class="due ${col[x.lv]}">${esc(x.due)}</div><div class="b">${esc(x.b)}</div></li>`).join("")}</ul>`).join("")}`;
+}
+
+function renderNotes(){
+  return `<h1 class="sec-title">备忘</h1>
+  <div class="stack">
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">行李怎么走</h2>
+    <ol class="plain-list">
+      <li>11/5 机场 → 名古屋：自己拖大行李（μSKY 有大件行李区）。</li>
+      <li>11/6 07:30 名古屋酒店前台把大行李寄到横滨 Bay Sheraton，预计 11/7 到。</li>
+      <li>11/6–11/7 两晚只背相机包：两套内衣、充电器、药、护照、三脚架。电池和充电宝不进宅急便。</li>
+      <li>11/8 横滨入住时领大行李；11/9 镰仓日只带相机包。</li>
+      <li>11/10 退房带大行李去羽田 T3 储物柜，空手进东京，从都厅直接回机场。</li>
+    </ol></section>
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">光线窗口</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>窗口</th><th>日期</th><th>地点</th><th>时刻</th></tr></thead>
+      <tbody class="tnum">
+        <tr><td>W1</td><td>11/6</td><td>田子之浦港</td><td>日落约 16:47</td></tr>
+        <tr><td><b>W2</b></td><td>11/7</td><td>大渊笹场茶园</td><td>日出约 06:13</td></tr>
+        <tr><td>—</td><td>11/7</td><td>修善寺竹林小径</td><td>日落约 16:45 后点灯</td></tr>
+        <tr><td>—</td><td>11/8</td><td>大栈桥屋顶</td><td>日落约 16:41</td></tr>
+        <tr><td>W6</td><td>11/9</td><td>稻村崎 / 七里滨</td><td>日落约 16:40</td></tr>
+        <tr><td><b>W7</b></td><td>11/10</td><td>都厅南展望室</td><td>约 16:24 落在富士山顶</td></tr>
+      </tbody></table></div>
+    <p class="muted" style="font-size:12.5px;margin:8px 0 0">研究计算值，只用于排程。</p></section>
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">不能错过的末班</h2>
+    <ul class="plain-list">
+      <li>11/5 Sky Promenade 最后入场 21:30</li>
+      <li>11/7 修善寺温泉 → 车站巴士末班 19:38（周六日，2024 年时刻）</li>
+      <li>11/7 修善寺站 → 伊豆万豪接驳车末班 20:15</li>
+      <li>11/10 新宿御苑 16:00 停止入园；都厅 16:30 前上不去就放弃</li>
+    </ul></section>
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">三脚架</h2>
+    <ul class="plain-list">
+      <li>能用：11/7 茶园日出（公共道路 / 停车区）。</li>
+      <li>不能用：站内月台、镰仓高校前道口、新宿御苑、都厅展望室。</li>
+      <li>未查到：Sky Promenade、大栈桥屋顶（人多时不铺开）。</li>
+    </ul></section>
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">还按默认在走的选择</h2>
+    <ul class="plain-list">
+      <li>N2：富士市 1 晚 + 伊豆万豪 1 晚（另一案：伊豆万豪 2 晚，放弃富士日出）。</li>
+      <li>N3：11/8 不留热海看花火。</li>
+      <li>N4：伊豆万豪带露天温泉 Deluxe（另一案：富士景观房，更贵更难订）。</li>
+      <li>天气调换：约 11/3 决定富士和伊豆两晚要不要对调。</li>
+    </ul></section>
+  <section class="card box"><h2 style="font-size:17px;margin-bottom:10px">衣服与礼仪</h2>
+    <ul class="plain-list">
+      <li>白天约 17–20°C，早晚约 9–12°C，11/7 凌晨茶园体感可能 5–8°C。分层穿，不带厚羽绒；薄手套和帽子留给 11/7 凌晨和海边傍晚。</li>
+      <li>温泉：进池前先冲洗，毛巾不进池；纹身在大浴场可能被拒，客房露天温泉不受影响。</li>
+      <li>七五三季：拍参拜儿童先问家长。</li>
+      <li>退税：2026-11-01 起先付税、出境时退。保留收据和护照，T3 托运前先去海关确认。</li>
+    </ul></section>
+  </div>`;
+}
+
+const app = document.getElementById("app");
+function route(){
+  const h = (location.hash||"#today").slice(1);
+  let view = "today", html;
+  const di = DAYS.findIndex(d=>dayId(d.date)===h);
+  if(di>=0){view="trip";html=renderDay(di)}
+  else if(h==="trip"){view="trip";html=renderTrip()}
+  else if(h==="actions"){view="actions";html=renderActions()}
+  else if(h==="notes"){view="notes";html=renderNotes()}
+  else {html=renderToday()}
+  app.innerHTML = html;
+  document.querySelectorAll(".global-nav a").forEach(a=>{ if(a.dataset.nav===view) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  const pv = document.getElementById("pv");
+  if(pv) pv.addEventListener("change",()=>{const v=pv.value; previewAt = v?{date:v.split("|")[0],time:v.split("|")[1]}:null; route();});
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+route();
+setInterval(()=>{ if(!previewAt && (location.hash||"#today")==="#today") { const y=scrollY; route(); scrollTo(0,y);} },60000);
+</script>
+
+</body>
+</html>
